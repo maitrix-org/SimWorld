@@ -1,0 +1,53 @@
+simworld:
+  seed: 42
+
+citygen:
+  input_layout: false
+  input_roads: input/roads.json
+  input_bounding_boxes: input/Bbox.json
+
+  road:
+    segment_length: 200
+    segment_count_limit: 10
+    road_snap_distance: 90
+    ignore_conflicts: false
+    only_highway: false
+    two_segment_init: true
+    time_delay_between_segments: 0.001
+    minimum_intersection_deviation: 30
+
+  building:
+    building_road_distance: 25  
+    building_intersection_distance: 0
+    building_building_distance: 0
+    building_side_distance: 27
+  
+  element:
+    generation: false
+    generation_thread_number: 16
+    element_building_distance: 10
+    element_element_distance: 10
+    add_building_attempts: 10
+
+    parking_offset: 10
+    furniture_offset: 15
+    tree_offset: 20
+
+    parking_density: 0.05
+    furniture_density: 0.05
+    tree_density: 0.1
+
+  quadtree:
+    max_levels: 10
+    max_objects: 10
+    bounds:
+      x: -2000
+      y: -2000
+      width: 4000
+      height: 4000
+
+  route:
+    generation: false
+    number: 2
+    min_points_per_route: 2
+    max_points_per_route: 5
