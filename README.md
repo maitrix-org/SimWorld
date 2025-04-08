@@ -12,6 +12,8 @@
 ## Introduction
 We introduce **SimWorld**, a state-of-the-art simulator built with Unreal Engine to generate unlimited, dynamic urban environments for **Embodied AI** tasks.
 
+![Overview](https://github.com/user-attachments/assets/6246ad14-2851-4a51-a534-70f59a40e460)
+
 ### What's New?
 Most existing embodied simulators focus on indoor environments. While there are urban simulators, many either lack realism or are limited to specific domains, such as autonomous driving. Moreover, these simulators often don't allow users to dynamically generate new scenes or define custom AI tasks.
 
@@ -23,10 +25,8 @@ In contrast, **SimWorld** offers a **user-friendly Python API** and a vast colle
 
 SimWorld leverages Unreal Engine 5's **photorealistic rendering** and **physics simulation** to provide an immersive and realistic experience.
 
-![Overview](https://github.com/user-attachments/assets/6246ad14-2851-4a51-a534-70f59a40e460)
-
 ## Architecture
 
 ![Architecture](https://github.com/user-attachments/assets/f5f43638-7583-483f-aadc-1ddf5d6ff27a)
 
-SimWorld's architecture is designed to be modular and flexible, supporting an array of functionalities such as dynamic world generation, agent control, and performance benchmarking. The components are seamlessly integrated to provide a robust platform for **Embodied AI** research and applications.
+SimWorld's architecture is designed to be modular and flexible, supporting an array of functionalities such as dynamic world generation, agent control, and performance benchmarking. The components are seamlessly integrated to provide a robust platform for **Embodied AI** and **Agents** research and applications.
