@@ -8,7 +8,7 @@ from io import BytesIO
 from threading import Lock
 
 class UnrealCV(object):
-    def __init__(self, port, ip, resolution):
+    def __init__(self, port = 9000, ip = '127.0.0.1', resolution = (320, 240)):
         self.ip = ip
         # build a client to connect to the env
         self.client = unrealcv.Client((ip, port))

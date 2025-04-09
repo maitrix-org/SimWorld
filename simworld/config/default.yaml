@@ -7,13 +7,15 @@ simworld:
 
 citygen:
   input_layout: false
-  input_roads: "/Users/prosperous/Desktop/Code/SimWorld/input/roadnet.json"
-  input_bounding_boxes: "/Users/prosperous/Desktop/Code/SimWorld/input/Bbox.json"
+  input_roads: "D:/Projects/SimWorld/input/roadnet.json"
+  input_bounding_boxes: "D:/Projects/SimWorld/input/Bbox.json"
   output_dir: "output"
+  world_json: "D:/Projects/SimWorld/output/progen_world.json"
+  ue_asset_path: "D:/Projects/SimWorld/input/ue_assets.json"
 
   road:
     segment_length: 200
-    segment_count_limit: 10
+    segment_count_limit: 5
     road_snap_distance: 90
     ignore_conflicts: false
     only_highway: false
