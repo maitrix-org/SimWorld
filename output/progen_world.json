@@ -1,0 +1,6604 @@
+{
+  "base_map": {
+    "name": "map_1",
+    "env_bin": "gym_citynav\\Binaries\\Win64\\gym_citynav.exe",
+    "width": 1000,
+    "height": 1000
+  },
+  "nodes": [
+    {
+      "id": "GEN_Road_0",
+      "instance_name": "BP_Road1_C",
+      "properties": {
+        "location": {
+          "x": 500.0,
+          "y": 500.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 45.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 0.0672,
+          "y": 0.9,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_Road_1",
+      "instance_name": "BP_Road1_C",
+      "properties": {
+        "location": {
+          "x": 30000.0,
+          "y": 0.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 0.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 0.95,
+          "y": 0.9,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_Road_2",
+      "instance_name": "BP_Road1_C",
+      "properties": {
+        "location": {
+          "x": 20000.0,
+          "y": -10000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 270.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 0.95,
+          "y": 0.9,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_Road_3",
+      "instance_name": "BP_Road1_C",
+      "properties": {
+        "location": {
+          "x": -20000.0,
+          "y": -10000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 270.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 0.95,
+          "y": 0.9,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_Road_4",
+      "instance_name": "BP_Road1_C",
+      "properties": {
+        "location": {
+          "x": 50000.0,
+          "y": 0.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 0.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 0.95,
+          "y": 0.9,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_Road_5",
+      "instance_name": "BP_Road1_C",
+      "properties": {
+        "location": {
+          "x": 40000.0,
+          "y": 10000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 90.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 0.95,
+          "y": 0.9,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_Road_6",
+      "instance_name": "BP_Road1_C",
+      "properties": {
+        "location": {
+          "x": -30000.0,
+          "y": -20000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 180.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 0.95,
+          "y": 0.9,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_Road_7",
+      "instance_name": "BP_Road1_C",
+      "properties": {
+        "location": {
+          "x": 70000.0,
+          "y": 0.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 0.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 0.95,
+          "y": 0.9,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_Road_8",
+      "instance_name": "BP_Road1_C",
+      "properties": {
+        "location": {
+          "x": 40000.0,
+          "y": 30000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 90.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 0.95,
+          "y": 0.9,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_Road_9",
+      "instance_name": "BP_Road1_C",
+      "properties": {
+        "location": {
+          "x": 100000.0,
+          "y": 50000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 90.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 4.75,
+          "y": 0.9,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Hospital_C_10",
+      "instance_name": "BP_Hospital_C",
+      "properties": {
+        "location": {
+          "x": 4820.004,
+          "y": -6066.8727,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 180.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_01_C_11",
+      "instance_name": "BP_Building_01_C",
+      "properties": {
+        "location": {
+          "x": 10859.4302,
+          "y": -3954.4655,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 180.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_01_C_12",
+      "instance_name": "BP_Building_01_C",
+      "properties": {
+        "location": {
+          "x": 13273.7478,
+          "y": -3954.4655,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 180.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_01_C_13",
+      "instance_name": "BP_Building_01_C",
+      "properties": {
+        "location": {
+          "x": 15678.5757,
+          "y": -3954.4655,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 180.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_School_C_14",
+      "instance_name": "BP_School_C",
+      "properties": {
+        "location": {
+          "x": 5515.2326,
+          "y": 8461.5913,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 0.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_05_C_15",
+      "instance_name": "BP_Building_05_C",
+      "properties": {
+        "location": {
+          "x": 12477.5957,
+          "y": 4072.2051,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 0.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_11_C_16",
+      "instance_name": "BP_Building_11_C",
+      "properties": {
+        "location": {
+          "x": 16856.1091,
+          "y": 4969.5137,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 0.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_01_C_17",
+      "instance_name": "BP_Building_01_C",
+      "properties": {
+        "location": {
+          "x": -3879.3158,
+          "y": 3954.4655,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 0.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_20_C_18",
+      "instance_name": "BP_Building_20_C",
+      "properties": {
+        "location": {
+          "x": -7200.3699,
+          "y": 4849.0869,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 0.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_01_C_19",
+      "instance_name": "BP_Building_01_C",
+      "properties": {
+        "location": {
+          "x": -10560.6363,
+          "y": 3954.4655,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 0.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_12_C_20",
+      "instance_name": "BP_Building_12_C",
+      "properties": {
+        "location": {
+          "x": -18021.0087,
+          "y": 3899.6152,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 0.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_01_C_21",
+      "instance_name": "BP_Building_01_C",
+      "properties": {
+        "location": {
+          "x": -3879.3158,
+          "y": -3954.4655,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 180.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_19_C_22",
+      "instance_name": "BP_Building_19_C",
+      "properties": {
+        "location": {
+          "x": -7781.4304,
+          "y": -6165.2985,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 180.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_01_C_23",
+      "instance_name": "BP_Building_01_C",
+      "properties": {
+        "location": {
+          "x": -11712.4052,
+          "y": -3954.4655,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 180.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_01_C_24",
+      "instance_name": "BP_Building_01_C",
+      "properties": {
+        "location": {
+          "x": -14146.7194,
+          "y": -3954.4655,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 180.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_03_C_25",
+      "instance_name": "BP_Building_03_C",
+      "properties": {
+        "location": {
+          "x": 23954.4639,
+          "y": -3879.3156,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 180.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_01_C_26",
+      "instance_name": "BP_Building_01_C",
+      "properties": {
+        "location": {
+          "x": 26388.2435,
+          "y": -3954.4655,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 180.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_01_C_27",
+      "instance_name": "BP_Building_01_C",
+      "properties": {
+        "location": {
+          "x": 28844.3456,
+          "y": -3954.4655,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 180.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_01_C_28",
+      "instance_name": "BP_Building_01_C",
+      "properties": {
+        "location": {
+          "x": 31202.9772,
+          "y": -3954.4655,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 180.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_01_C_29",
+      "instance_name": "BP_Building_01_C",
+      "properties": {
+        "location": {
+          "x": 33561.6088,
+          "y": -3954.4655,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 180.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_01_C_30",
+      "instance_name": "BP_Building_01_C",
+      "properties": {
+        "location": {
+          "x": 35992.6323,
+          "y": -3954.4655,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 180.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_03_C_31",
+      "instance_name": "BP_Building_03_C",
+      "properties": {
+        "location": {
+          "x": 38426.4119,
+          "y": -3879.3156,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 180.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_16_C_32",
+      "instance_name": "BP_Building_16_C",
+      "properties": {
+        "location": {
+          "x": 22567.1484,
+          "y": 5267.2773,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 0.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_01_C_33",
+      "instance_name": "BP_Building_01_C",
+      "properties": {
+        "location": {
+          "x": 26348.6017,
+          "y": 3954.4655,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 0.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_13_C_34",
+      "instance_name": "BP_Building_13_C",
+      "properties": {
+        "location": {
+          "x": 30453.7281,
+          "y": 4944.083,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 0.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_01_C_35",
+      "instance_name": "BP_Building_01_C",
+      "properties": {
+        "location": {
+          "x": 34602.0918,
+          "y": 3954.4655,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 0.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_01_C_36",
+      "instance_name": "BP_Building_01_C",
+      "properties": {
+        "location": {
+          "x": 16045.5345,
+          "y": -6429.2972,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 90.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_09_C_37",
+      "instance_name": "BP_Building_09_C",
+      "properties": {
+        "location": {
+          "x": 13486.8667,
+          "y": -13954.3278,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 90.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_01_C_38",
+      "instance_name": "BP_Building_01_C",
+      "properties": {
+        "location": {
+          "x": 23954.4655,
+          "y": -6435.2197,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 270.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_03_C_39",
+      "instance_name": "BP_Building_03_C",
+      "properties": {
+        "location": {
+          "x": 23879.3156,
+          "y": -8868.9994,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 270.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_01_C_40",
+      "instance_name": "BP_Building_01_C",
+      "properties": {
+        "location": {
+          "x": 23954.4655,
+          "y": -11319.0887,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 270.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_01_C_41",
+      "instance_name": "BP_Building_01_C",
+      "properties": {
+        "location": {
+          "x": 23954.4655,
+          "y": -13680.1541,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 270.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_11_C_42",
+      "instance_name": "BP_Building_11_C",
+      "properties": {
+        "location": {
+          "x": 24969.5137,
+          "y": -17790.8528,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 270.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_17_C_43",
+      "instance_name": "BP_Building_17_C",
+      "properties": {
+        "location": {
+          "x": -26047.6211,
+          "y": -3347.623,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 90.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_01_C_44",
+      "instance_name": "BP_Building_01_C",
+      "properties": {
+        "location": {
+          "x": -23954.4655,
+          "y": -7923.3476,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 90.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_10_C_45",
+      "instance_name": "BP_Building_10_C",
+      "properties": {
+        "location": {
+          "x": -25577.0708,
+          "y": -12579.7337,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 90.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_01_C_46",
+      "instance_name": "BP_Building_01_C",
+      "properties": {
+        "location": {
+          "x": -16045.5345,
+          "y": -6392.6858,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 270.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_01_C_47",
+      "instance_name": "BP_Building_01_C",
+      "properties": {
+        "location": {
+          "x": -16045.5345,
+          "y": -8826.2608,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 270.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_12_C_48",
+      "instance_name": "BP_Building_12_C",
+      "properties": {
+        "location": {
+          "x": -16100.3848,
+          "y": -16286.6333,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 270.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_17_C_49",
+      "instance_name": "BP_Building_17_C",
+      "properties": {
+        "location": {
+          "x": 43347.623,
+          "y": -6047.6211,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 180.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_01_C_50",
+      "instance_name": "BP_Building_01_C",
+      "properties": {
+        "location": {
+          "x": 47887.814,
+          "y": -3954.4655,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 180.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_10_C_51",
+      "instance_name": "BP_Building_10_C",
+      "properties": {
+        "location": {
+          "x": 52544.2001,
+          "y": -5577.0708,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 180.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_01_C_52",
+      "instance_name": "BP_Building_01_C",
+      "properties": {
+        "location": {
+          "x": 57277.9172,
+          "y": -3954.4655,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 180.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_17_C_53",
+      "instance_name": "BP_Building_17_C",
+      "properties": {
+        "location": {
+          "x": 46047.623,
+          "y": 6047.6211,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 0.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_01_C_54",
+      "instance_name": "BP_Building_01_C",
+      "properties": {
+        "location": {
+          "x": 50611.5873,
+          "y": 3954.4655,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 0.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_01_C_55",
+      "instance_name": "BP_Building_01_C",
+      "properties": {
+        "location": {
+          "x": 52985.2445,
+          "y": 3954.4655,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 0.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_04_C_56",
+      "instance_name": "BP_Building_04_C",
+      "properties": {
+        "location": {
+          "x": 55423.0666,
+          "y": 3958.5052,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 0.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_01_C_57",
+      "instance_name": "BP_Building_01_C",
+      "properties": {
+        "location": {
+          "x": 57864.6211,
+          "y": 3954.4655,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 0.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_01_C_58",
+      "instance_name": "BP_Building_01_C",
+      "properties": {
+        "location": {
+          "x": 43954.4655,
+          "y": 10582.4726,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 270.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_22_C_59",
+      "instance_name": "BP_Building_22_C",
+      "properties": {
+        "location": {
+          "x": 44900.6416,
+          "y": 13952.2279,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 270.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_18_C_60",
+      "instance_name": "BP_Building_18_C",
+      "properties": {
+        "location": {
+          "x": 44878.377,
+          "y": 18096.0423,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 270.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_01_C_61",
+      "instance_name": "BP_Building_01_C",
+      "properties": {
+        "location": {
+          "x": 36045.5345,
+          "y": 6424.5017,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 90.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_11_C_62",
+      "instance_name": "BP_Building_11_C",
+      "properties": {
+        "location": {
+          "x": 35030.4863,
+          "y": 10535.2003,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 90.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_22_C_63",
+      "instance_name": "BP_Building_22_C",
+      "properties": {
+        "location": {
+          "x": 35099.3584,
+          "y": 15657.0226,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 90.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_01_C_64",
+      "instance_name": "BP_Building_01_C",
+      "properties": {
+        "location": {
+          "x": -29650.7081,
+          "y": -16045.5345,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 0.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_01_C_65",
+      "instance_name": "BP_Building_01_C",
+      "properties": {
+        "location": {
+          "x": -32009.3397,
+          "y": -16045.5345,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 0.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_08_C_66",
+      "instance_name": "BP_Building_08_C",
+      "properties": {
+        "location": {
+          "x": -36587.6516,
+          "y": -13900.9961,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 0.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_05_C_67",
+      "instance_name": "BP_Building_05_C",
+      "properties": {
+        "location": {
+          "x": -21447.1306,
+          "y": -24072.2051,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 180.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_03_C_68",
+      "instance_name": "BP_Building_03_C",
+      "properties": {
+        "location": {
+          "x": -24148.7251,
+          "y": -23879.3156,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 180.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_06_C_69",
+      "instance_name": "BP_Building_06_C",
+      "properties": {
+        "location": {
+          "x": -26882.4778,
+          "y": -24044.4026,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 180.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_01_C_70",
+      "instance_name": "BP_Building_01_C",
+      "properties": {
+        "location": {
+          "x": -29546.7976,
+          "y": -23954.4655,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 180.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_13_C_71",
+      "instance_name": "BP_Building_13_C",
+      "properties": {
+        "location": {
+          "x": -33651.9239,
+          "y": -24944.083,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 180.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_01_C_72",
+      "instance_name": "BP_Building_01_C",
+      "properties": {
+        "location": {
+          "x": -37764.5526,
+          "y": -23954.4655,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 180.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_13_C_73",
+      "instance_name": "BP_Building_13_C",
+      "properties": {
+        "location": {
+          "x": 62925.8105,
+          "y": -4944.083,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 180.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_01_C_74",
+      "instance_name": "BP_Building_01_C",
+      "properties": {
+        "location": {
+          "x": 67044.2145,
+          "y": -3954.4655,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 180.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_10_C_75",
+      "instance_name": "BP_Building_10_C",
+      "properties": {
+        "location": {
+          "x": 71700.6006,
+          "y": -5577.0708,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 180.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_01_C_76",
+      "instance_name": "BP_Building_01_C",
+      "properties": {
+        "location": {
+          "x": 76412.3495,
+          "y": -3954.4655,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 180.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_06_C_77",
+      "instance_name": "BP_Building_06_C",
+      "properties": {
+        "location": {
+          "x": 79070.9541,
+          "y": -4044.4026,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 180.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_03_C_78",
+      "instance_name": "BP_Building_03_C",
+      "properties": {
+        "location": {
+          "x": 61254.4639,
+          "y": 3879.3156,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 0.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_11_C_79",
+      "instance_name": "BP_Building_11_C",
+      "properties": {
+        "location": {
+          "x": 65440.3105,
+          "y": 4969.5137,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 0.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_01_C_80",
+      "instance_name": "BP_Building_01_C",
+      "properties": {
+        "location": {
+          "x": 69553.2074,
+          "y": 3954.4655,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 0.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_06_C_81",
+      "instance_name": "BP_Building_06_C",
+      "properties": {
+        "location": {
+          "x": 72211.812,
+          "y": 4044.4026,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 0.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_01_C_82",
+      "instance_name": "BP_Building_01_C",
+      "properties": {
+        "location": {
+          "x": 74934.8785,
+          "y": 3954.4655,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 0.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_01_C_83",
+      "instance_name": "BP_Building_01_C",
+      "properties": {
+        "location": {
+          "x": 77309.968,
+          "y": 3954.4655,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 0.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_01_C_84",
+      "instance_name": "BP_Building_01_C",
+      "properties": {
+        "location": {
+          "x": 43954.4655,
+          "y": 23879.3158,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 270.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_04_C_85",
+      "instance_name": "BP_Building_04_C",
+      "properties": {
+        "location": {
+          "x": 43958.5052,
+          "y": 26317.1379,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 270.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_09_C_86",
+      "instance_name": "BP_Building_09_C",
+      "properties": {
+        "location": {
+          "x": 46513.1333,
+          "y": 33921.3591,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 270.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_10_C_87",
+      "instance_name": "BP_Building_10_C",
+      "properties": {
+        "location": {
+          "x": 34422.9292,
+          "y": 23477.0703,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 90.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_01_C_88",
+      "instance_name": "BP_Building_01_C",
+      "properties": {
+        "location": {
+          "x": 36045.5345,
+          "y": 28171.2579,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 90.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_21_C_89",
+      "instance_name": "BP_Building_21_C",
+      "properties": {
+        "location": {
+          "x": 34422.9297,
+          "y": 32827.644,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 90.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_01_C_90",
+      "instance_name": "BP_Building_01_C",
+      "properties": {
+        "location": {
+          "x": 36045.5345,
+          "y": 37491.5957,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 90.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_01_C_91",
+      "instance_name": "BP_Building_01_C",
+      "properties": {
+        "location": {
+          "x": -16045.5345,
+          "y": -11221.8935,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 270.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_01_C_92",
+      "instance_name": "BP_Building_01_C",
+      "properties": {
+        "location": {
+          "x": 79669.8014,
+          "y": 3954.4655,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 0.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_01_C_93",
+      "instance_name": "BP_Building_01_C",
+      "properties": {
+        "location": {
+          "x": 36045.5345,
+          "y": 39883.1328,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 90.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_20_C_94",
+      "instance_name": "BP_Building_20_C",
+      "properties": {
+        "location": {
+          "x": 104849.0869,
+          "y": 2141.7383,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 270.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_12_C_95",
+      "instance_name": "BP_Building_12_C",
+      "properties": {
+        "location": {
+          "x": 103899.6152,
+          "y": 10564.5332,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 270.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_17_C_96",
+      "instance_name": "BP_Building_17_C",
+      "properties": {
+        "location": {
+          "x": 106047.6211,
+          "y": 20193.2129,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 270.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_20_C_97",
+      "instance_name": "BP_Building_20_C",
+      "properties": {
+        "location": {
+          "x": 104849.0869,
+          "y": 25682.5742,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 270.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_02_C_98",
+      "instance_name": "BP_Building_02_C",
+      "properties": {
+        "location": {
+          "x": 103850.9407,
+          "y": 29133.2385,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 270.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_20_C_99",
+      "instance_name": "BP_Building_20_C",
+      "properties": {
+        "location": {
+          "x": 104849.0869,
+          "y": 32583.9028,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 270.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_06_C_100",
+      "instance_name": "BP_Building_06_C",
+      "properties": {
+        "location": {
+          "x": 104044.4026,
+          "y": 36204.9299,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 270.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_05_C_101",
+      "instance_name": "BP_Building_05_C",
+      "properties": {
+        "location": {
+          "x": 104072.2051,
+          "y": 39131.3494,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 270.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_23_C_102",
+      "instance_name": "BP_Building_23_C",
+      "properties": {
+        "location": {
+          "x": 107895.8516,
+          "y": 46236.8921,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 270.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_20_C_103",
+      "instance_name": "BP_Building_20_C",
+      "properties": {
+        "location": {
+          "x": 104849.0869,
+          "y": 54037.0425,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 270.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_03_C_104",
+      "instance_name": "BP_Building_03_C",
+      "properties": {
+        "location": {
+          "x": 103879.3156,
+          "y": 57433.2446,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 270.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_20_C_105",
+      "instance_name": "BP_Building_20_C",
+      "properties": {
+        "location": {
+          "x": 104849.0869,
+          "y": 60829.4468,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 270.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_03_C_106",
+      "instance_name": "BP_Building_03_C",
+      "properties": {
+        "location": {
+          "x": 103879.3156,
+          "y": 64225.6489,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 270.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_23_C_107",
+      "instance_name": "BP_Building_23_C",
+      "properties": {
+        "location": {
+          "x": 107895.8516,
+          "y": 71138.5249,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 270.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_17_C_108",
+      "instance_name": "BP_Building_17_C",
+      "properties": {
+        "location": {
+          "x": 106047.6211,
+          "y": 80144.5601,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 270.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_23_C_109",
+      "instance_name": "BP_Building_23_C",
+      "properties": {
+        "location": {
+          "x": 107895.8516,
+          "y": 89150.5952,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 270.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_20_C_110",
+      "instance_name": "BP_Building_20_C",
+      "properties": {
+        "location": {
+          "x": 104849.0869,
+          "y": 96950.7456,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 270.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_06_C_111",
+      "instance_name": "BP_Building_06_C",
+      "properties": {
+        "location": {
+          "x": 95955.5974,
+          "y": 1479.2888,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 90.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_06_C_112",
+      "instance_name": "BP_Building_06_C",
+      "properties": {
+        "location": {
+          "x": 95955.5974,
+          "y": 4437.8665,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 90.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_06_C_113",
+      "instance_name": "BP_Building_06_C",
+      "properties": {
+        "location": {
+          "x": 95955.5974,
+          "y": 7396.4441,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 90.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_21_C_114",
+      "instance_name": "BP_Building_21_C",
+      "properties": {
+        "location": {
+          "x": 94422.9297,
+          "y": 12352.8032,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 90.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_22_C_115",
+      "instance_name": "BP_Building_22_C",
+      "properties": {
+        "location": {
+          "x": 95099.3584,
+          "y": 18020.313,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 90.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_06_C_116",
+      "instance_name": "BP_Building_06_C",
+      "properties": {
+        "location": {
+          "x": 95955.5974,
+          "y": 21690.0413,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 90.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_12_C_117",
+      "instance_name": "BP_Building_12_C",
+      "properties": {
+        "location": {
+          "x": 96100.3848,
+          "y": 29450.3867,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 90.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_02_C_118",
+      "instance_name": "BP_Building_02_C",
+      "properties": {
+        "location": {
+          "x": 96149.0593,
+          "y": 37040.3694,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 90.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_15_C_119",
+      "instance_name": "BP_Building_15_C",
+      "properties": {
+        "location": {
+          "x": 95634.2793,
+          "y": 39725.6372,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 90.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_10_C_120",
+      "instance_name": "BP_Building_10_C",
+      "properties": {
+        "location": {
+          "x": 94422.9292,
+          "y": 44579.0493,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 90.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_11_C_121",
+      "instance_name": "BP_Building_11_C",
+      "properties": {
+        "location": {
+          "x": 95030.4863,
+          "y": 50987.5024,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 90.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_13_C_122",
+      "instance_name": "BP_Building_13_C",
+      "properties": {
+        "location": {
+          "x": 95055.917,
+          "y": 56844.6958,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 90.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_01_C_123",
+      "instance_name": "BP_Building_01_C",
+      "properties": {
+        "location": {
+          "x": 96045.5345,
+          "y": 61027.6525,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 90.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_01_C_124",
+      "instance_name": "BP_Building_01_C",
+      "properties": {
+        "location": {
+          "x": 96045.5345,
+          "y": 63406.2419,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 90.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_01_C_125",
+      "instance_name": "BP_Building_01_C",
+      "properties": {
+        "location": {
+          "x": 96045.5345,
+          "y": 65785.3733,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 90.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_01_C_126",
+      "instance_name": "BP_Building_01_C",
+      "properties": {
+        "location": {
+          "x": 96045.5345,
+          "y": 68177.9393,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 90.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_01_C_127",
+      "instance_name": "BP_Building_01_C",
+      "properties": {
+        "location": {
+          "x": 96045.5345,
+          "y": 70537.0698,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 90.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_01_C_128",
+      "instance_name": "BP_Building_01_C",
+      "properties": {
+        "location": {
+          "x": 96045.5345,
+          "y": 72902.4612,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 90.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_01_C_129",
+      "instance_name": "BP_Building_01_C",
+      "properties": {
+        "location": {
+          "x": 96045.5345,
+          "y": 75306.3952,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 90.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_01_C_130",
+      "instance_name": "BP_Building_01_C",
+      "properties": {
+        "location": {
+          "x": 96045.5345,
+          "y": 77685.2674,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 90.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_01_C_131",
+      "instance_name": "BP_Building_01_C",
+      "properties": {
+        "location": {
+          "x": 96045.5345,
+          "y": 80134.8245,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 90.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_01_C_132",
+      "instance_name": "BP_Building_01_C",
+      "properties": {
+        "location": {
+          "x": 96045.5345,
+          "y": 82586.3244,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 90.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_01_C_133",
+      "instance_name": "BP_Building_01_C",
+      "properties": {
+        "location": {
+          "x": 96045.5345,
+          "y": 84948.5671,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 90.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_01_C_134",
+      "instance_name": "BP_Building_01_C",
+      "properties": {
+        "location": {
+          "x": 96045.5345,
+          "y": 87341.2349,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 90.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_01_C_135",
+      "instance_name": "BP_Building_01_C",
+      "properties": {
+        "location": {
+          "x": 96045.5345,
+          "y": 89772.396,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 90.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_01_C_136",
+      "instance_name": "BP_Building_01_C",
+      "properties": {
+        "location": {
+          "x": 96045.5345,
+          "y": 92213.0868,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 90.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_01_C_137",
+      "instance_name": "BP_Building_01_C",
+      "properties": {
+        "location": {
+          "x": 96045.5345,
+          "y": 94630.275,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 90.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Building_01_C_138",
+      "instance_name": "BP_Building_01_C",
+      "properties": {
+        "location": {
+          "x": 96045.5345,
+          "y": 96991.1382,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 90.0,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Rabbish_4_139",
+      "instance_name": "BP_Rabbish_C",
+      "properties": {
+        "location": {
+          "x": 28000.0,
+          "y": -1500.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 105.4308,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Rabbish_3_140",
+      "instance_name": "BP_Rabbish_C",
+      "properties": {
+        "location": {
+          "x": 28000.0,
+          "y": 1500.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 105.4308,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Cart_1_141",
+      "instance_name": "BP_Cart_C",
+      "properties": {
+        "location": {
+          "x": 30000.0,
+          "y": -1500.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -14.1884,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Cart_2_142",
+      "instance_name": "BP_Cart_C",
+      "properties": {
+        "location": {
+          "x": 30000.0,
+          "y": 1500.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -14.1884,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Tree1_4_143",
+      "instance_name": "BP_Tree1_C",
+      "properties": {
+        "location": {
+          "x": 23000.0,
+          "y": -2000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -4.9898,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Tree1_3_144",
+      "instance_name": "BP_Tree1_C",
+      "properties": {
+        "location": {
+          "x": 23000.0,
+          "y": 2000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -4.9898,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Tree5_4_145",
+      "instance_name": "BP_Tree5_C",
+      "properties": {
+        "location": {
+          "x": 32000.0,
+          "y": -2000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -38.8176,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Tree5_2_146",
+      "instance_name": "BP_Tree5_C",
+      "properties": {
+        "location": {
+          "x": 32000.0,
+          "y": 2000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -38.8176,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Tree2_1_147",
+      "instance_name": "BP_Tree2_C",
+      "properties": {
+        "location": {
+          "x": 35000.0,
+          "y": -2000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -13.6036,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Tree2_1_148",
+      "instance_name": "BP_Tree2_C",
+      "properties": {
+        "location": {
+          "x": 35000.0,
+          "y": 2000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -13.6036,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Tree6_2_149",
+      "instance_name": "BP_Tree6_C",
+      "properties": {
+        "location": {
+          "x": 38000.0,
+          "y": -2000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -21.6496,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Tree6_3_150",
+      "instance_name": "BP_Tree6_C",
+      "properties": {
+        "location": {
+          "x": 38000.0,
+          "y": 2000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -21.6496,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Soda3_1_151",
+      "instance_name": "BP_Soda3_C",
+      "properties": {
+        "location": {
+          "x": 21500.0,
+          "y": -14000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -175.656,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Soda3_4_152",
+      "instance_name": "BP_Soda3_C",
+      "properties": {
+        "location": {
+          "x": 18500.0,
+          "y": -14000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -175.656,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_RoadCone_2_153",
+      "instance_name": "BP_RoadCone_C",
+      "properties": {
+        "location": {
+          "x": 21500.0,
+          "y": -10000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -0.4355,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_RoadCone_4_154",
+      "instance_name": "BP_RoadCone_C",
+      "properties": {
+        "location": {
+          "x": 18500.0,
+          "y": -10000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -0.4355,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Couch_3_155",
+      "instance_name": "BP_Couch_C",
+      "properties": {
+        "location": {
+          "x": 21500.0,
+          "y": -8000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 86.896,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Couch_2_156",
+      "instance_name": "BP_Couch_C",
+      "properties": {
+        "location": {
+          "x": 18500.0,
+          "y": -8000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 86.896,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Soda3_2_157",
+      "instance_name": "BP_Soda3_C",
+      "properties": {
+        "location": {
+          "x": 21500.0,
+          "y": -6000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 8.2616,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Soda3_2_158",
+      "instance_name": "BP_Soda3_C",
+      "properties": {
+        "location": {
+          "x": 18500.0,
+          "y": -6000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 8.2616,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Couch_4_159",
+      "instance_name": "BP_Couch_C",
+      "properties": {
+        "location": {
+          "x": 21500.0,
+          "y": -4000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -97.7976,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Couch_3_160",
+      "instance_name": "BP_Couch_C",
+      "properties": {
+        "location": {
+          "x": 18500.0,
+          "y": -4000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -97.7976,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Tree1_1_161",
+      "instance_name": "BP_Tree1_C",
+      "properties": {
+        "location": {
+          "x": 22000.0,
+          "y": -17000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -65.211,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Tree1_4_162",
+      "instance_name": "BP_Tree1_C",
+      "properties": {
+        "location": {
+          "x": 18000.0,
+          "y": -17000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -65.211,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Cart2_1_163",
+      "instance_name": "BP_Cart2_C",
+      "properties": {
+        "location": {
+          "x": -18500.0,
+          "y": -14000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -69.8167,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Cart2_3_164",
+      "instance_name": "BP_Cart2_C",
+      "properties": {
+        "location": {
+          "x": -21500.0,
+          "y": -14000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -69.8167,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Soda4_3_165",
+      "instance_name": "BP_Soda4_C",
+      "properties": {
+        "location": {
+          "x": -18500.0,
+          "y": -12000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 80.1082,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Soda4_3_166",
+      "instance_name": "BP_Soda4_C",
+      "properties": {
+        "location": {
+          "x": -21500.0,
+          "y": -12000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 80.1082,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Scooter_03_2_167",
+      "instance_name": "BP_Scooter_03_C",
+      "properties": {
+        "location": {
+          "x": -18500.0,
+          "y": -10000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -131.6141,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Scooter_03_1_168",
+      "instance_name": "BP_Scooter_03_C",
+      "properties": {
+        "location": {
+          "x": -21500.0,
+          "y": -10000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -131.6141,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Couch_3_169",
+      "instance_name": "BP_Couch_C",
+      "properties": {
+        "location": {
+          "x": -18500.0,
+          "y": -6000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -89.7585,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Couch_3_170",
+      "instance_name": "BP_Couch_C",
+      "properties": {
+        "location": {
+          "x": -21500.0,
+          "y": -6000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -89.7585,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Tree3_3_171",
+      "instance_name": "BP_Tree3_C",
+      "properties": {
+        "location": {
+          "x": -18000.0,
+          "y": -17000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 178.8069,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Tree3_4_172",
+      "instance_name": "BP_Tree3_C",
+      "properties": {
+        "location": {
+          "x": -22000.0,
+          "y": -17000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 178.8069,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Tree2_1_173",
+      "instance_name": "BP_Tree2_C",
+      "properties": {
+        "location": {
+          "x": -18000.0,
+          "y": -8000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -80.4123,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Tree2_3_174",
+      "instance_name": "BP_Tree2_C",
+      "properties": {
+        "location": {
+          "x": -22000.0,
+          "y": -8000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -80.4123,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Tree4_4_175",
+      "instance_name": "BP_Tree4_C",
+      "properties": {
+        "location": {
+          "x": -18000.0,
+          "y": -4000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -113.0191,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Tree4_2_176",
+      "instance_name": "BP_Tree4_C",
+      "properties": {
+        "location": {
+          "x": -22000.0,
+          "y": -4000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -113.0191,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Box3_1_177",
+      "instance_name": "BP_Box3_C",
+      "properties": {
+        "location": {
+          "x": 46000.0,
+          "y": -1500.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 163.7043,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Box3_2_178",
+      "instance_name": "BP_Box3_C",
+      "properties": {
+        "location": {
+          "x": 46000.0,
+          "y": 1500.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 163.7043,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Scooter_01_2_179",
+      "instance_name": "BP_Scooter_01_C",
+      "properties": {
+        "location": {
+          "x": 48000.0,
+          "y": -1500.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -102.5265,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Scooter_01_3_180",
+      "instance_name": "BP_Scooter_01_C",
+      "properties": {
+        "location": {
+          "x": 48000.0,
+          "y": 1500.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -102.5265,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Couch_4_181",
+      "instance_name": "BP_Couch_C",
+      "properties": {
+        "location": {
+          "x": 50000.0,
+          "y": -1500.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 25.1487,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Couch_1_182",
+      "instance_name": "BP_Couch_C",
+      "properties": {
+        "location": {
+          "x": 50000.0,
+          "y": 1500.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 25.1487,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Box_1_183",
+      "instance_name": "BP_Box_C",
+      "properties": {
+        "location": {
+          "x": 54000.0,
+          "y": -1500.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 53.7865,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Box_1_184",
+      "instance_name": "BP_Box_C",
+      "properties": {
+        "location": {
+          "x": 54000.0,
+          "y": 1500.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 53.7865,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Scooter_04_1_185",
+      "instance_name": "BP_Scooter_04_C",
+      "properties": {
+        "location": {
+          "x": 56000.0,
+          "y": -1500.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -130.1366,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Scooter_04_4_186",
+      "instance_name": "BP_Scooter_04_C",
+      "properties": {
+        "location": {
+          "x": 56000.0,
+          "y": 1500.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -130.1366,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Tree6_2_187",
+      "instance_name": "BP_Tree6_C",
+      "properties": {
+        "location": {
+          "x": 44000.0,
+          "y": -2000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 124.5503,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Hydrant_3_188",
+      "instance_name": "BP_Hydrant_C",
+      "properties": {
+        "location": {
+          "x": 41500.0,
+          "y": 6000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 174.1077,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Hydrant_4_189",
+      "instance_name": "BP_Hydrant_C",
+      "properties": {
+        "location": {
+          "x": 38500.0,
+          "y": 6000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 174.1077,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Box_3_190",
+      "instance_name": "BP_Box_C",
+      "properties": {
+        "location": {
+          "x": 41500.0,
+          "y": 10000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -176.8793,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Box_1_191",
+      "instance_name": "BP_Box_C",
+      "properties": {
+        "location": {
+          "x": 38500.0,
+          "y": 10000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -176.8793,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Box3_4_192",
+      "instance_name": "BP_Box3_C",
+      "properties": {
+        "location": {
+          "x": 41500.0,
+          "y": 12000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -67.2142,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Box3_2_193",
+      "instance_name": "BP_Box3_C",
+      "properties": {
+        "location": {
+          "x": 38500.0,
+          "y": 12000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -67.2142,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Scooter_04_2_194",
+      "instance_name": "BP_Scooter_04_C",
+      "properties": {
+        "location": {
+          "x": 41500.0,
+          "y": 16000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -43.4269,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Scooter_04_2_195",
+      "instance_name": "BP_Scooter_04_C",
+      "properties": {
+        "location": {
+          "x": 38500.0,
+          "y": 16000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -43.4269,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Tree1_3_196",
+      "instance_name": "BP_Tree1_C",
+      "properties": {
+        "location": {
+          "x": 42000.0,
+          "y": 3000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 177.4428,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Tree3_4_197",
+      "instance_name": "BP_Tree3_C",
+      "properties": {
+        "location": {
+          "x": 42000.0,
+          "y": 18000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -108.799,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Tree3_2_198",
+      "instance_name": "BP_Tree3_C",
+      "properties": {
+        "location": {
+          "x": 38000.0,
+          "y": 18000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -108.799,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_RoadBlocker_2_199",
+      "instance_name": "BP_RoadBlocker_C",
+      "properties": {
+        "location": {
+          "x": -34000.0,
+          "y": -21500.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 18.927,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_RoadBlocker_3_200",
+      "instance_name": "BP_RoadBlocker_C",
+      "properties": {
+        "location": {
+          "x": -34000.0,
+          "y": -18500.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 18.927,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_RoadBlocker_3_201",
+      "instance_name": "BP_RoadBlocker_C",
+      "properties": {
+        "location": {
+          "x": -32000.0,
+          "y": -21500.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -37.6064,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_RoadBlocker_1_202",
+      "instance_name": "BP_RoadBlocker_C",
+      "properties": {
+        "location": {
+          "x": -32000.0,
+          "y": -18500.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -37.6064,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Table_1_203",
+      "instance_name": "BP_Table_C",
+      "properties": {
+        "location": {
+          "x": -24000.0,
+          "y": -21500.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 87.9314,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Table_1_204",
+      "instance_name": "BP_Table_C",
+      "properties": {
+        "location": {
+          "x": -24000.0,
+          "y": -18500.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 87.9314,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Tree2_4_205",
+      "instance_name": "BP_Tree2_C",
+      "properties": {
+        "location": {
+          "x": -37000.0,
+          "y": -22000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -139.4303,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Tree2_2_206",
+      "instance_name": "BP_Tree2_C",
+      "properties": {
+        "location": {
+          "x": -37000.0,
+          "y": -18000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -139.4303,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Tree5_2_207",
+      "instance_name": "BP_Tree5_C",
+      "properties": {
+        "location": {
+          "x": -30000.0,
+          "y": -22000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -129.7723,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Tree5_3_208",
+      "instance_name": "BP_Tree5_C",
+      "properties": {
+        "location": {
+          "x": -27000.0,
+          "y": -22000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 33.601,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Tree5_4_209",
+      "instance_name": "BP_Tree5_C",
+      "properties": {
+        "location": {
+          "x": -27000.0,
+          "y": -18000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 33.601,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Tree1_2_210",
+      "instance_name": "BP_Tree1_C",
+      "properties": {
+        "location": {
+          "x": -22000.0,
+          "y": -22000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -121.6817,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Rabbish_1_211",
+      "instance_name": "BP_Rabbish_C",
+      "properties": {
+        "location": {
+          "x": 68000.0,
+          "y": -1500.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 136.9385,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Rabbish_2_212",
+      "instance_name": "BP_Rabbish_C",
+      "properties": {
+        "location": {
+          "x": 68000.0,
+          "y": 1500.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 136.9385,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Cart2_4_213",
+      "instance_name": "BP_Cart2_C",
+      "properties": {
+        "location": {
+          "x": 70000.0,
+          "y": -1500.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 59.0531,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Cart2_1_214",
+      "instance_name": "BP_Cart2_C",
+      "properties": {
+        "location": {
+          "x": 70000.0,
+          "y": 1500.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 59.0531,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Can_4_215",
+      "instance_name": "BP_Can_C",
+      "properties": {
+        "location": {
+          "x": 72000.0,
+          "y": -1500.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -117.9295,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Can_3_216",
+      "instance_name": "BP_Can_C",
+      "properties": {
+        "location": {
+          "x": 72000.0,
+          "y": 1500.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -117.9295,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Soda1_1_217",
+      "instance_name": "BP_Soda1_C",
+      "properties": {
+        "location": {
+          "x": 76000.0,
+          "y": -1500.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 139.9479,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Soda1_4_218",
+      "instance_name": "BP_Soda1_C",
+      "properties": {
+        "location": {
+          "x": 76000.0,
+          "y": 1500.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 139.9479,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Tree3_1_219",
+      "instance_name": "BP_Tree3_C",
+      "properties": {
+        "location": {
+          "x": 64000.0,
+          "y": -2000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 134.9105,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Tree3_1_220",
+      "instance_name": "BP_Tree3_C",
+      "properties": {
+        "location": {
+          "x": 64000.0,
+          "y": 2000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 134.9105,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Tree2_3_221",
+      "instance_name": "BP_Tree2_C",
+      "properties": {
+        "location": {
+          "x": 78000.0,
+          "y": -2000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -174.1039,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Tree2_1_222",
+      "instance_name": "BP_Tree2_C",
+      "properties": {
+        "location": {
+          "x": 78000.0,
+          "y": 2000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -174.1039,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Box2_1_223",
+      "instance_name": "BP_Box2_C",
+      "properties": {
+        "location": {
+          "x": 41500.0,
+          "y": 28000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 156.2318,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Box2_1_224",
+      "instance_name": "BP_Box2_C",
+      "properties": {
+        "location": {
+          "x": 38500.0,
+          "y": 28000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 156.2318,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Trash_bin_a_3_225",
+      "instance_name": "BP_Trash_bin_a_C",
+      "properties": {
+        "location": {
+          "x": 41500.0,
+          "y": 36000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -60.984,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Trash_bin_a_1_226",
+      "instance_name": "BP_Trash_bin_a_C",
+      "properties": {
+        "location": {
+          "x": 38500.0,
+          "y": 36000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -60.984,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Tree5_2_227",
+      "instance_name": "BP_Tree5_C",
+      "properties": {
+        "location": {
+          "x": 42000.0,
+          "y": 23000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -99.4949,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Tree5_4_228",
+      "instance_name": "BP_Tree5_C",
+      "properties": {
+        "location": {
+          "x": 38000.0,
+          "y": 23000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -99.4949,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Tree3_1_229",
+      "instance_name": "BP_Tree3_C",
+      "properties": {
+        "location": {
+          "x": 42000.0,
+          "y": 26000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -144.0103,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Tree1_1_230",
+      "instance_name": "BP_Tree1_C",
+      "properties": {
+        "location": {
+          "x": 42000.0,
+          "y": 31000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -142.345,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Tree1_3_231",
+      "instance_name": "BP_Tree1_C",
+      "properties": {
+        "location": {
+          "x": 38000.0,
+          "y": 31000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -142.345,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Tree3_2_232",
+      "instance_name": "BP_Tree3_C",
+      "properties": {
+        "location": {
+          "x": 38000.0,
+          "y": 34000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -116.1948,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Tree3_4_233",
+      "instance_name": "BP_Tree3_C",
+      "properties": {
+        "location": {
+          "x": 42000.0,
+          "y": 38000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -30.4079,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Box_1_234",
+      "instance_name": "BP_Box_C",
+      "properties": {
+        "location": {
+          "x": 101500.0,
+          "y": 6000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 169.0501,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Box_1_235",
+      "instance_name": "BP_Box_C",
+      "properties": {
+        "location": {
+          "x": 98500.0,
+          "y": 6000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 169.0501,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Can_3_236",
+      "instance_name": "BP_Can_C",
+      "properties": {
+        "location": {
+          "x": 101500.0,
+          "y": 8000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 34.0735,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Can_2_237",
+      "instance_name": "BP_Can_C",
+      "properties": {
+        "location": {
+          "x": 98500.0,
+          "y": 8000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 34.0735,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Can2_4_238",
+      "instance_name": "BP_Can2_C",
+      "properties": {
+        "location": {
+          "x": 101500.0,
+          "y": 10000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -9.5653,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Can2_1_239",
+      "instance_name": "BP_Can2_C",
+      "properties": {
+        "location": {
+          "x": 98500.0,
+          "y": 10000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -9.5653,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Table2_2_240",
+      "instance_name": "BP_Table2_C",
+      "properties": {
+        "location": {
+          "x": 101500.0,
+          "y": 12000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 167.0681,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Table2_2_241",
+      "instance_name": "BP_Table2_C",
+      "properties": {
+        "location": {
+          "x": 98500.0,
+          "y": 12000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 167.0681,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Can2_1_242",
+      "instance_name": "BP_Can2_C",
+      "properties": {
+        "location": {
+          "x": 101500.0,
+          "y": 14000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -78.9595,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Can2_1_243",
+      "instance_name": "BP_Can2_C",
+      "properties": {
+        "location": {
+          "x": 98500.0,
+          "y": 14000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -78.9595,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Soda4_4_244",
+      "instance_name": "BP_Soda4_C",
+      "properties": {
+        "location": {
+          "x": 101500.0,
+          "y": 16000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 35.8365,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Soda4_1_245",
+      "instance_name": "BP_Soda4_C",
+      "properties": {
+        "location": {
+          "x": 98500.0,
+          "y": 16000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 35.8365,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Can_4_246",
+      "instance_name": "BP_Can_C",
+      "properties": {
+        "location": {
+          "x": 101500.0,
+          "y": 18000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 170.8701,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Can_3_247",
+      "instance_name": "BP_Can_C",
+      "properties": {
+        "location": {
+          "x": 98500.0,
+          "y": 18000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 170.8701,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Can_1_248",
+      "instance_name": "BP_Can_C",
+      "properties": {
+        "location": {
+          "x": 101500.0,
+          "y": 20000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -114.2572,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Can_1_249",
+      "instance_name": "BP_Can_C",
+      "properties": {
+        "location": {
+          "x": 98500.0,
+          "y": 20000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -114.2572,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Table2_4_250",
+      "instance_name": "BP_Table2_C",
+      "properties": {
+        "location": {
+          "x": 101500.0,
+          "y": 22000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -72.8834,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Table2_3_251",
+      "instance_name": "BP_Table2_C",
+      "properties": {
+        "location": {
+          "x": 98500.0,
+          "y": 22000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -72.8834,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Hydrant_1_252",
+      "instance_name": "BP_Hydrant_C",
+      "properties": {
+        "location": {
+          "x": 101500.0,
+          "y": 24000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 86.794,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Hydrant_3_253",
+      "instance_name": "BP_Hydrant_C",
+      "properties": {
+        "location": {
+          "x": 98500.0,
+          "y": 24000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 86.794,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Soda2_3_254",
+      "instance_name": "BP_Soda2_C",
+      "properties": {
+        "location": {
+          "x": 101500.0,
+          "y": 26000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 142.2088,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Soda2_3_255",
+      "instance_name": "BP_Soda2_C",
+      "properties": {
+        "location": {
+          "x": 98500.0,
+          "y": 26000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 142.2088,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Table2_2_256",
+      "instance_name": "BP_Table2_C",
+      "properties": {
+        "location": {
+          "x": 101500.0,
+          "y": 34000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -80.9767,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Table2_2_257",
+      "instance_name": "BP_Table2_C",
+      "properties": {
+        "location": {
+          "x": 98500.0,
+          "y": 34000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -80.9767,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Cart2_4_258",
+      "instance_name": "BP_Cart2_C",
+      "properties": {
+        "location": {
+          "x": 101500.0,
+          "y": 44000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 46.3849,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Cart2_4_259",
+      "instance_name": "BP_Cart2_C",
+      "properties": {
+        "location": {
+          "x": 98500.0,
+          "y": 44000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 46.3849,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Scooter_04_2_260",
+      "instance_name": "BP_Scooter_04_C",
+      "properties": {
+        "location": {
+          "x": 101500.0,
+          "y": 46000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 93.2135,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Scooter_04_4_261",
+      "instance_name": "BP_Scooter_04_C",
+      "properties": {
+        "location": {
+          "x": 98500.0,
+          "y": 46000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 93.2135,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Scooter_02_3_262",
+      "instance_name": "BP_Scooter_02_C",
+      "properties": {
+        "location": {
+          "x": 101500.0,
+          "y": 48000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 131.9586,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Scooter_02_2_263",
+      "instance_name": "BP_Scooter_02_C",
+      "properties": {
+        "location": {
+          "x": 98500.0,
+          "y": 48000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 131.9586,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Box3_3_264",
+      "instance_name": "BP_Box3_C",
+      "properties": {
+        "location": {
+          "x": 101500.0,
+          "y": 52000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 109.9497,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Box3_3_265",
+      "instance_name": "BP_Box3_C",
+      "properties": {
+        "location": {
+          "x": 98500.0,
+          "y": 52000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 109.9497,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Can2_4_266",
+      "instance_name": "BP_Can2_C",
+      "properties": {
+        "location": {
+          "x": 101500.0,
+          "y": 60000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -30.581,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Can2_1_267",
+      "instance_name": "BP_Can2_C",
+      "properties": {
+        "location": {
+          "x": 98500.0,
+          "y": 60000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -30.581,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Scooter_03_4_268",
+      "instance_name": "BP_Scooter_03_C",
+      "properties": {
+        "location": {
+          "x": 101500.0,
+          "y": 62000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -123.337,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Scooter_03_1_269",
+      "instance_name": "BP_Scooter_03_C",
+      "properties": {
+        "location": {
+          "x": 98500.0,
+          "y": 62000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -123.337,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Trash_bin_b_2_270",
+      "instance_name": "BP_Trash_bin_b_C",
+      "properties": {
+        "location": {
+          "x": 101500.0,
+          "y": 64000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 12.7612,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Trash_bin_b_4_271",
+      "instance_name": "BP_Trash_bin_b_C",
+      "properties": {
+        "location": {
+          "x": 98500.0,
+          "y": 64000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 12.7612,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Couch_2_272",
+      "instance_name": "BP_Couch_C",
+      "properties": {
+        "location": {
+          "x": 101500.0,
+          "y": 66000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 85.3213,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Couch_3_273",
+      "instance_name": "BP_Couch_C",
+      "properties": {
+        "location": {
+          "x": 98500.0,
+          "y": 66000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 85.3213,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Soda1_1_274",
+      "instance_name": "BP_Soda1_C",
+      "properties": {
+        "location": {
+          "x": 101500.0,
+          "y": 70000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -126.784,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Soda1_2_275",
+      "instance_name": "BP_Soda1_C",
+      "properties": {
+        "location": {
+          "x": 98500.0,
+          "y": 70000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -126.784,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Trash_can_1_276",
+      "instance_name": "BP_Trash_can_C",
+      "properties": {
+        "location": {
+          "x": 101500.0,
+          "y": 72000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 80.3124,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Trash_can_1_277",
+      "instance_name": "BP_Trash_can_C",
+      "properties": {
+        "location": {
+          "x": 98500.0,
+          "y": 72000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 80.3124,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Soda2_3_278",
+      "instance_name": "BP_Soda2_C",
+      "properties": {
+        "location": {
+          "x": 101500.0,
+          "y": 74000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 53.1172,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Soda2_3_279",
+      "instance_name": "BP_Soda2_C",
+      "properties": {
+        "location": {
+          "x": 98500.0,
+          "y": 74000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 53.1172,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_RoadBlocker_1_280",
+      "instance_name": "BP_RoadBlocker_C",
+      "properties": {
+        "location": {
+          "x": 101500.0,
+          "y": 78000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -43.3997,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_RoadBlocker_2_281",
+      "instance_name": "BP_RoadBlocker_C",
+      "properties": {
+        "location": {
+          "x": 98500.0,
+          "y": 78000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -43.3997,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Scooter_01_3_282",
+      "instance_name": "BP_Scooter_01_C",
+      "properties": {
+        "location": {
+          "x": 101500.0,
+          "y": 80000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -55.6732,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Scooter_01_4_283",
+      "instance_name": "BP_Scooter_01_C",
+      "properties": {
+        "location": {
+          "x": 98500.0,
+          "y": 80000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -55.6732,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Scooter_02_2_284",
+      "instance_name": "BP_Scooter_02_C",
+      "properties": {
+        "location": {
+          "x": 101500.0,
+          "y": 82000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -126.2617,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Scooter_02_2_285",
+      "instance_name": "BP_Scooter_02_C",
+      "properties": {
+        "location": {
+          "x": 98500.0,
+          "y": 82000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -126.2617,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Scooter_01_1_286",
+      "instance_name": "BP_Scooter_01_C",
+      "properties": {
+        "location": {
+          "x": 101500.0,
+          "y": 84000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 82.6559,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Scooter_01_4_287",
+      "instance_name": "BP_Scooter_01_C",
+      "properties": {
+        "location": {
+          "x": 98500.0,
+          "y": 84000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 82.6559,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Soda4_3_288",
+      "instance_name": "BP_Soda4_C",
+      "properties": {
+        "location": {
+          "x": 101500.0,
+          "y": 86000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 100.301,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Soda4_2_289",
+      "instance_name": "BP_Soda4_C",
+      "properties": {
+        "location": {
+          "x": 98500.0,
+          "y": 86000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 100.301,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Scooter_01_3_290",
+      "instance_name": "BP_Scooter_01_C",
+      "properties": {
+        "location": {
+          "x": 101500.0,
+          "y": 90000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 42.8669,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Scooter_01_4_291",
+      "instance_name": "BP_Scooter_01_C",
+      "properties": {
+        "location": {
+          "x": 98500.0,
+          "y": 90000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 42.8669,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Rabbish_3_292",
+      "instance_name": "BP_Rabbish_C",
+      "properties": {
+        "location": {
+          "x": 101500.0,
+          "y": 92000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -33.2492,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Rabbish_2_293",
+      "instance_name": "BP_Rabbish_C",
+      "properties": {
+        "location": {
+          "x": 98500.0,
+          "y": 92000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -33.2492,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Tree2_3_294",
+      "instance_name": "BP_Tree2_C",
+      "properties": {
+        "location": {
+          "x": 102000.0,
+          "y": 3000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 169.1035,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Tree2_2_295",
+      "instance_name": "BP_Tree2_C",
+      "properties": {
+        "location": {
+          "x": 98000.0,
+          "y": 3000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 169.1035,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Tree1_4_296",
+      "instance_name": "BP_Tree1_C",
+      "properties": {
+        "location": {
+          "x": 102000.0,
+          "y": 28000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -77.9163,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Tree1_1_297",
+      "instance_name": "BP_Tree1_C",
+      "properties": {
+        "location": {
+          "x": 98000.0,
+          "y": 28000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -77.9163,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Tree3_4_298",
+      "instance_name": "BP_Tree3_C",
+      "properties": {
+        "location": {
+          "x": 102000.0,
+          "y": 31000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -83.4039,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Tree3_3_299",
+      "instance_name": "BP_Tree3_C",
+      "properties": {
+        "location": {
+          "x": 98000.0,
+          "y": 31000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -83.4039,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Tree1_4_300",
+      "instance_name": "BP_Tree1_C",
+      "properties": {
+        "location": {
+          "x": 102000.0,
+          "y": 36000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 70.5884,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Tree4_1_301",
+      "instance_name": "BP_Tree4_C",
+      "properties": {
+        "location": {
+          "x": 98000.0,
+          "y": 37000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 14.0094,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Tree6_4_302",
+      "instance_name": "BP_Tree6_C",
+      "properties": {
+        "location": {
+          "x": 102000.0,
+          "y": 39000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -26.7542,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Tree6_4_303",
+      "instance_name": "BP_Tree6_C",
+      "properties": {
+        "location": {
+          "x": 98000.0,
+          "y": 41000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -177.0787,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Tree3_2_304",
+      "instance_name": "BP_Tree3_C",
+      "properties": {
+        "location": {
+          "x": 102000.0,
+          "y": 42000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 88.8576,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Tree1_2_305",
+      "instance_name": "BP_Tree1_C",
+      "properties": {
+        "location": {
+          "x": 102000.0,
+          "y": 54000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -128.9236,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Tree1_3_306",
+      "instance_name": "BP_Tree1_C",
+      "properties": {
+        "location": {
+          "x": 98000.0,
+          "y": 56000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -100.1387,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Tree2_3_307",
+      "instance_name": "BP_Tree2_C",
+      "properties": {
+        "location": {
+          "x": 102000.0,
+          "y": 57000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 160.4773,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Tree5_2_308",
+      "instance_name": "BP_Tree5_C",
+      "properties": {
+        "location": {
+          "x": 102000.0,
+          "y": 68000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -82.6502,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Tree5_3_309",
+      "instance_name": "BP_Tree5_C",
+      "properties": {
+        "location": {
+          "x": 98000.0,
+          "y": 68000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -82.6502,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Tree5_2_310",
+      "instance_name": "BP_Tree5_C",
+      "properties": {
+        "location": {
+          "x": 102000.0,
+          "y": 95000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -11.0038,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Tree5_3_311",
+      "instance_name": "BP_Tree5_C",
+      "properties": {
+        "location": {
+          "x": 98000.0,
+          "y": 95000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -11.0038,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Tree1_2_312",
+      "instance_name": "BP_Tree1_C",
+      "properties": {
+        "location": {
+          "x": 102000.0,
+          "y": 98000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -14.1946,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Tree1_4_313",
+      "instance_name": "BP_Tree1_C",
+      "properties": {
+        "location": {
+          "x": 98000.0,
+          "y": 98000.0,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -14.1946,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      }
+    }
+  ]
+}
