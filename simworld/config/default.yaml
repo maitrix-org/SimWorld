@@ -7,8 +7,8 @@ simworld:
 
 citygen:
   input_layout: false
-  input_roads: "D:/Projects/SimWorld/input/roadnet.json"
-  input_bounding_boxes: "D:/Projects/SimWorld/input/Bbox.json"
+  input_roads: "/Users/prosperous/Desktop/Code/SimWorld/input/roadnet.json"
+  input_bounding_boxes: "/Users/prosperous/Desktop/Code/SimWorld/input/Bbox.json"
   output_dir: "output"
 
   road:
@@ -60,7 +60,7 @@ citygen:
 traffic:
   num_vehicles: 10
   num_pedestrians: 10
-  map_path: "D:/Projects/SimWorld/input/roads.json"
+  map_path: "/Users/prosperous/Desktop/Code/SimWorld/input/roads.json"
   distance_between_objects: 400
   detection_angle: 40
   gap_between_waypoints: 800
@@ -86,7 +86,7 @@ traffic:
     max_steering: 0.5
     lane_deviation: 70
     distance_to_end: 400
-    model_file_path: "D:/Projects/SimWorld/input/VehicleTypes.json"
+    model_file_path: "/Users/prosperous/Desktop/Code/SimWorld/input/VehicleTypes.json"
 
   traffic_signal:
     light_normal_offset: -1400

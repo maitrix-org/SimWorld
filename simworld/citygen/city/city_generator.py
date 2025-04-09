@@ -25,7 +25,7 @@ class CityGenerator:
 
         self.building_types, self.building_colors, self.element_types, \
             self.element_colors, self.element_offsets, self.map_element_offsets = self._load_bounding_boxes()
-        
+
         # Initialize generator
         self.road_generator = RoadGenerator(self.config)
         self.building_generator = BuildingGenerator(self.config, self.building_types)
@@ -119,7 +119,7 @@ class CityGenerator:
             else:
                 self.generation_state = GenerationState.GENERATING_ROUTES
                 return False
-            
+
         # generate routes
         elif self.generation_state == GenerationState.GENERATING_ROUTES:
             if not self.config['citygen.route.generation']:

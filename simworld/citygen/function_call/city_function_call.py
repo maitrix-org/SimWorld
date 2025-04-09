@@ -1,15 +1,16 @@
-from clpg.city.city_generator import CityGenerator
-from clpg.utils.data_exporter import DataExporter
-from clpg.custom_types.custom_types import Point, Segment, Bounds, BUILDING_TYPES, element_TYPES, Building, element
+from simworld.citygen.city.city_generator import CityGenerator
+from simworld.utils.data_exporter import DataExporter
+from simworld.citygen.dataclass import Point, Segment
 from typing import List
-from clpg.config import Config
+from simworld.config import Config
+import os
 
 class CityFunctionCall:
     """Function call for city"""
 
-    def __init__(self):
+    def __init__(self, config: Config):
         """Initialize function call"""
-        self.city_generator = CityGenerator()
+        self.city_generator = CityGenerator(config)
 
     def generate_city(self):
         """Generate city randomly with roads, buildings and elements"""
@@ -80,7 +81,7 @@ class CityFunctionCall:
             for element in elements:
                 if self.city_generator.element_manager.can_place_element(element.bounds):
                     self.city_generator.element_manager.add_element(element)
-    
+
     def generate_element_around_buildings(self):
         """Generate element around buildings"""
         for building in self.city_generator.building_manager.buildings:

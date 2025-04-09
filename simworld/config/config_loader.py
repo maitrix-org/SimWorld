@@ -1,5 +1,6 @@
 import yaml
 from pathlib import Path
+import os
 
 class Config:
     def __init__(self, path: str = None):

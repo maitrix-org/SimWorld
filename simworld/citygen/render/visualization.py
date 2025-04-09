@@ -4,7 +4,7 @@ from simworld.config import Config
 import random
 
 from simworld.citygen.dataclass import (
-    Bounds, Building, BuildingType, Detail, DetailType
+    Bounds, Building, BuildingType, Element, ElementType
 )
 
 from PyQt5.QtCore import Qt
@@ -16,13 +16,13 @@ class CityData:
     def __init__(self):
         self.roads: List[dict] = []  # Using dict for roads since no Road class in custom_types
         self.buildings: List[Building] = []
-        self.details: List[Detail] = []
+        self.elements: List[Element] = []
 
     def load_from_files(self, output_dir = "output"):
         """Load city data from JSON files"""
         roads_path = f"{output_dir}/roads.json"
         buildings_path = f"{output_dir}/buildings.json"
-        details_path = f"{output_dir}/details.json"
+        elements_path = f"{output_dir}/elements.json"
         try:
             # Load roads
             with open(roads_path, 'r') as f:
@@ -52,27 +52,27 @@ class CityData:
                         rotation=b['rotation']
                     ))
 
-            # Load details
-            with open(details_path, 'r') as f:
-                details_data = json.load(f)
-                self.details = []
-                for d in details_data['details']:
-                    detail_type = DetailType(
-                        name=d['type'],
-                        width=d['bounds']['width'],
-                        height=d['bounds']['height']
+            # Load elements
+            with open(elements_path, 'r') as f:
+                elements_data = json.load(f)
+                self.elements = []
+                for e in elements_data['elements']:
+                    element_type = ElementType(
+                        name=e['type'],
+                        width=e['bounds']['width'],
+                        height=e['bounds']['height']
                     )
                     bounds = Bounds(
-                        x=d['bounds']['x'],
-                        y=d['bounds']['y'],
-                        width=d['bounds']['width'],
-                        height=d['bounds']['height'],
-                        rotation=d['bounds']['rotation']
+                        x=e['bounds']['x'],
+                        y=e['bounds']['y'],
+                        width=e['bounds']['width'],
+                        height=e['bounds']['height'],
+                        rotation=e['bounds']['rotation']
                     )
-                    self.details.append(Detail(
-                        detail_type=detail_type,
+                    self.elements.append(Element(
+                        element_type=element_type,
                         bounds=bounds,
-                        rotation=d['rotation']
+                        rotation=e['rotation']
                     ))
 
             print("Successfully loaded city data")
@@ -108,9 +108,9 @@ class CityVisualizer(QMainWindow):
         self.plot_widget.setBackground("#F0F8FF")
         self.plot_widget.showGrid(True, True, alpha=0.3)
         self.plot_widget.setAspectLocked(True)
-        self.plot_widget.setXRange(config['citygen.quadtree_bounds.x'], config['citygen.quadtree_bounds.x'] + config['citygen.quadtree_bounds.width'])
-        self.plot_widget.setYRange(config['citygen.quadtree_bounds.y'], config['citygen.quadtree_bounds.y'] + config['citygen.quadtree_bounds.height'])
-        
+        self.plot_widget.setXRange(config['citygen.quadtree.bounds.x'], config['citygen.quadtree.bounds.x'] + config['citygen.quadtree.bounds.width'])
+        self.plot_widget.setYRange(config['citygen.quadtree.bounds.y'], config['citygen.quadtree.bounds.y'] + config['citygen.quadtree.bounds.height'])
+
         # 添加这一行来翻转 y 轴
         self.plot_widget.getViewBox().invertY(True)
 
@@ -196,25 +196,25 @@ class CityVisualizer(QMainWindow):
             rect.setBrush(pg.mkBrush(color))
             self.plot_widget.addItem(rect)
 
-        # Generate random colors for each detail type
-        detail_colors = {}
-        for detail in self.city.details:
-            detail_type = detail.detail_type.name
-            if detail_type not in detail_colors:
+        # Generate random colors for each element type
+        element_colors = {}
+        for element in self.city.elements:
+            element_type = element.element_type.name
+            if element_type not in element_colors:
                 # Generate random RGB values with good visibility
                 r = random.randint(100, 255)
                 g = random.randint(100, 255)
                 b = random.randint(100, 255)
-                detail_colors[detail_type] = f"#{r:02x}{g:02x}{b:02x}"
+                element_colors[element_type] = f"#{r:02x}{g:02x}{b:02x}"
 
-        # Draw details
-        for detail in self.city.details:
-            size = min(detail.bounds.width, detail.bounds.height) * 1
-            detail_type = detail.detail_type.name
-            color = detail_colors[detail_type]
+        # Draw elements
+        for element in self.city.elements:
+            size = min(element.bounds.width, element.bounds.height) * 1
+            element_type = element.element_type.name
+            color = element_colors[element_type]
             
             circle = pg.ScatterPlotItem(
-                pos=[(detail.center.x, detail.center.y)],
+                pos=[(element.center.x, element.center.y)],
                 size=size,
                 pen=pg.mkPen('w'),  # White border
                 brush=pg.mkBrush(color),
@@ -225,7 +225,7 @@ class CityVisualizer(QMainWindow):
             self.plot_widget.addItem(circle)
 
         # Update status bar information
-        stats_text = f"ROADS: {len(self.city.roads)} | BUILDINGS: {len(self.city.buildings)} | DETAILS: {len(self.city.details)}"
+        stats_text = f"ROADS: {len(self.city.roads)} | BUILDINGS: {len(self.city.buildings)} | ELEMENTS: {len(self.city.elements)}"
         self.title_label.setText(stats_text)
 
 def main(config: Config):
