@@ -19,10 +19,10 @@ class GenerationState(Enum):
 class CityGenerator:
     """Manages the complete city generation process including roads, buildings, and elements"""
 
-    def __init__(self, seed, config):
-        random.seed(seed)
-
+    def __init__(self, config):
         self.config = config
+        random.seed(self.config['simworld.seed'])
+
         self.building_types, self.building_colors, self.element_types, \
             self.element_colors, self.element_offsets, self.map_element_offsets = self._load_bounding_boxes()
         

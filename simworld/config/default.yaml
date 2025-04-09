@@ -1,10 +1,15 @@
 simworld:
   seed: 42
+  dt: 0.1
+  enable_logging: false
+  enable_console_logging: false
+
 
 citygen:
   input_layout: false
-  input_roads: input/roads.json
-  input_bounding_boxes: input/Bbox.json
+  input_roads: "D:/Projects/SimWorld/input/roadnet.json"
+  input_bounding_boxes: "D:/Projects/SimWorld/input/Bbox.json"
+  output_dir: "output"
 
   road:
     segment_length: 200
@@ -51,3 +56,44 @@ citygen:
     number: 2
     min_points_per_route: 2
     max_points_per_route: 5
+
+traffic:
+  num_vehicles: 10
+  num_pedestrians: 10
+  map_path: "D:/Projects/SimWorld/input/roads.json"
+  distance_between_objects: 400
+  detection_angle: 40
+  gap_between_waypoints: 800
+  num_lanes: 1
+  lane_offset: 200
+  intersection_offset: 3000
+  sidewalk_offset: 1700
+  crosswalk_offset: 1700
+  steering_point_num: 12
+  traffic_manager_path: "/Game/TrafficSystem/TrafficManager.TrafficManager_C"
+
+  pedestrian:
+    max_speed: 200
+    min_speed: 100
+    waypoint_distance_threshold: 200
+    model_path: "/Game/TrafficSystem/Pedestrian/Base_Pedestrian.Base_Pedestrian_C"
+
+  vehicle:
+    steering_pid:
+      kp: 0.15
+      ki: 0.005
+      kd: 0.12
+    max_steering: 0.5
+    lane_deviation: 70
+    distance_to_end: 400
+    model_file_path: "D:/Projects/SimWorld/input/VehicleTypes.json"
+
+  traffic_signal:
+    light_normal_offset: -1400
+    light_radial_offset: 1400
+    traffic_light_model_path: "/Game/city_props/BP/props/street_light/BP_street_light.BP_street_light_C"
+    pedestrian_light_model_path: "/Game/city_props/BP/props/street_light/BP_street_light_ped.BP_street_light_ped_C"
+    green_light_duration: 6
+    yellow_light_duration: 2
+    pedestrian_green_light_duration: 20
+

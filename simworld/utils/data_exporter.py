@@ -76,7 +76,7 @@ class DataExporter:
 
         return {"routes": routes_data}
 
-    def export_to_json(self, output_dir: str, input=False):
+    def export_to_json(self, output_dir: str):
         """Export all data to JSON files"""
         if not os.path.exists(output_dir):
             os.makedirs(output_dir)

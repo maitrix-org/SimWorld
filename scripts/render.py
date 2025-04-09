@@ -10,11 +10,11 @@ from simworld.config import Config
 class CityRenderer(QMainWindow):
     """Visualization renderer for city road network"""
 
-    def __init__(self, seed="seed", output_dir="output", input_path="input/roads.json", input=False):
+    def __init__(self, config: Config):
         """Initialize renderer"""
         super().__init__()
 
-        self.config = Config()
+        self.config = config
 
         self.setWindowTitle("City Road Network Generator")
 
@@ -36,7 +36,7 @@ class CityRenderer(QMainWindow):
         main_layout.addWidget(self.plot_widget)
 
         # Add a save button
-        self.output = output_dir
+        self.output = config['citygen.output_dir']
         self.save_button = QPushButton("Save")
         self.save_button.clicked.connect(self.save)
         main_layout.addWidget(self.save_button)
@@ -53,7 +53,7 @@ class CityRenderer(QMainWindow):
         self.plot_widget.setMenuEnabled(False)
 
         # Initialize city generator
-        self.city = CityGenerator(seed, self.config)
+        self.city = CityGenerator(self.config)
 
         # Set timer for animation
         self.timer = QTimer()
@@ -61,10 +61,8 @@ class CityRenderer(QMainWindow):
         self.timer.setInterval(1)  # 设置更长的间隔，比如10ms
 
         # Set window size
-        self.resize(1400, 1400)
+        self.resize(1280, 720)
 
-        self.input_path = input_path
-        self.input = input
 
     def draw_frame(self):
         """Draw current state of the city"""
@@ -187,9 +185,9 @@ class CityRenderer(QMainWindow):
 
     def start_generation(self):
         """Start generation process"""
-        print("Starting generation...")  # 添加调试信息
-        self.timer.start()  # 启动定时器
-        self.draw_frame()   # 立即绘制第一帧
+        print("Starting generation...") 
+        self.timer.start()
+        self.draw_frame()
 
     def save(self):
         """Save the current plot as an image"""
@@ -204,7 +202,7 @@ class CityRenderer(QMainWindow):
             print("Failed to save image")
 
         exporter = DataExporter(self.city)
-        exporter.export_to_json(self.output, self.input)
+        exporter.export_to_json(self.output)
         print(f"City generation completed. Data exported to {self.output} directory.")
 
 def main():
@@ -212,8 +210,7 @@ def main():
     app = QApplication([])
     app.setStyle("Fusion")
 
-    # renderer = CityRenderer(input=True, input_path="input/roads_copy.json")
-    renderer = CityRenderer(input=False, output_dir="output_test")
+    renderer = CityRenderer(config=Config())
     renderer.show()
     renderer.start_generation()
 
