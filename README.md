@@ -1,7 +1,7 @@
 # SimWorld: A World Simulator for Scaling Photorealistic Multi-Agent Interactions
 ![Overview](https://github.com/user-attachments/assets/6246ad14-2851-4a51-a534-70f59a40e460)
 
-We introduce **SimWorld**, a state-of-the-art simulator built with Unreal Engine to generate unlimited, dynamic urban environments for **Embodied AI** tasks.
+**SimWorld** is a state-of-the-art world simulator built with Unreal Engine 5 to generate unlimited, dynamic environments for various **RL + LLM + Agent** systems' benchmarking and training.
 
 <div align="center">
     <a href="http://simworld-cvpr2025.maitrix.org/"><img src="https://img.shields.io/badge/Website-SimWorld-blue" alt="Website" /></a>
