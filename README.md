@@ -1,7 +1,7 @@
 # SimWorld: A World Simulator for Scaling Photorealistic Multi-Agent Interactions
 
 <div align="center">
-    <img src="https://github.com/user-attachments/assets/07998690-69eb-427b-8746-c3bb17e3496a" alt="SimWorld Logo" width="400" />
+    <img src="https://github.com/user-attachments/assets/63c54687-f11a-48c4-a212-eefdac7dc175" width="400">
 </div>
 <div align="center">
     <a href="http://simworld-cvpr2025.maitrix.org/"><img src="https://img.shields.io/badge/Website-SimWorld-blue" alt="Website" /></a>
