@@ -24,11 +24,11 @@ citygen:
     minimum_intersection_deviation: 30
 
   building:
-    building_road_distance: 25  
+    building_road_distance: 25
     building_intersection_distance: 0
     building_building_distance: 0
     building_side_distance: 27
-  
+
   element:
     generation: false
     generation_thread_number: 16
@@ -98,4 +98,3 @@ traffic:
     green_light_duration: 6
     yellow_light_duration: 2
     pedestrian_green_light_duration: 20
-

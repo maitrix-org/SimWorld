@@ -1,29 +1,37 @@
+"""Building generator module for generating buildings along road segments."""
 import math
 import random
-from typing import List
 
-from simworld.citygen.dataclass import (
-    Bounds,
-    Building,
-    Point,
-    Segment,
-)
 from simworld.citygen.building.building_manager import BuildingManager
+from simworld.citygen.dataclass import Bounds, Building, Point, Segment
 from simworld.utils.math_utils import MathUtils
 from simworld.utils.quadtree import QuadTree
 
+
 class BuildingGenerator:
+    """Building generator class for placing buildings along road segments."""
+
     def __init__(self, config, building_types):
+        """Initialize the building generator.
+
+        Args:
+            config: Configuration dictionary with parameters for building generation.
+            building_types: List of available building types.
+        """
         self.config = config
 
         self.building_manager = BuildingManager(self.config)
-        self.required_buildings = [b for b in building_types if b.is_required]  
+        self.required_buildings = [b for b in building_types if b.is_required]
         self.normal_buildings = [b for b in building_types if not b.is_required]
         self.sorted_buildings = sorted(building_types, key=lambda b: b.width, reverse=True)
         self.required_buildings_count = {b: 0 for b in self.required_buildings}
 
     def get_next_building_type(self):
-        """Choose the next building type to generate"""
+        """Choose the next building type to generate.
+
+        Returns:
+            The next building type to be placed.
+        """
         # Prioritize generating ungenerated required buildings
         for building_type in self.required_buildings:
             if self.required_buildings_count[building_type] == 0:
@@ -32,9 +40,13 @@ class BuildingGenerator:
         return random.choice(self.normal_buildings)
 
     def generate_buildings_along_segment(self, segment: Segment, road_quadtree: QuadTree[Segment]):
-        """Generate buildings along both sides of a road segment"""
-        # Calculate road direction vector
+        """Generate buildings along both sides of a road segment.
 
+        Args:
+            segment: Road segment to place buildings along.
+            road_quadtree: Quadtree containing all road segments.
+        """
+        # Calculate road direction vector
         dx = segment.end.x - segment.start.x
         dy = segment.end.y - segment.start.y
 
@@ -42,31 +54,28 @@ class BuildingGenerator:
 
         if length < 1:
             return
-        # Unit vector
 
+        # Unit vector
         dx, dy = dx / length, dy / length
 
         # Perpendicular vector (left side)
-
         perpendicular_dx = -dy
         perpendicular_dy = dx
 
         # Building distance from road
-
         INTERSECTION_BUFFER = self.config['citygen.building.building_intersection_distance']
 
         # Generate buildings on both sides of road
-
-        for side in [-1, 1]:    # -1: left, 1: right
+        for side in [-1, 1]:  # -1: left, 1: right
             # current_pos is the distance from the start of the segment to the center of the building that is being placed
-            current_pos = INTERSECTION_BUFFER   
+            current_pos = INTERSECTION_BUFFER
             building_type = self.get_next_building_type()
             # current_pos += building_type.width / 2 + Config.BUILDING_SIDE_OFFSET
             current_pos += building_type.width / 2
             overlap_building_flag = False
             overlap_road_flag = False
-            while current_pos < length - INTERSECTION_BUFFER:   
-            # while True:
+            while current_pos < length - INTERSECTION_BUFFER:
+                # while True:
                 offset = self.config['citygen.building.building_side_distance'] + building_type.height / 2
                 # (x, y) is the center of the building
                 x = (
@@ -92,7 +101,6 @@ class BuildingGenerator:
                     self.building_manager.add_building(building)
                     if building_type.is_required:
                         self.required_buildings_count[building_type] += 1
-
 
                     next_building_type = self.get_next_building_type()
                     while True:
@@ -123,26 +131,30 @@ class BuildingGenerator:
                             if idx == len(self.sorted_buildings):
                                 next_building_type = self.get_next_building_type()
                                 break
-                
-                elif not self.building_manager.can_place_building(building_bounds): # overlap with other buildings
+
+                elif not self.building_manager.can_place_building(building_bounds):  # overlap with other buildings
                     if not overlap_building_flag:
                         building_type = self.sorted_buildings[-1]
                         current_pos = INTERSECTION_BUFFER + self.config['citygen.building.building_side_distance'] + building_type.width / 2
-                        overlap_building_flag = True 
+                        overlap_building_flag = True
                         overlap_road_flag = True
                     else:
                         building_type = self.sorted_buildings[-1]
                         current_pos += random.uniform(0, 1)
-                elif self.check_building_road_overlap(building_bounds, road_quadtree): # overlap with roads
+                elif self.check_building_road_overlap(building_bounds, road_quadtree):  # overlap with roads
                     if not overlap_road_flag:
-                        current_pos += self.config['citygen.building.building_side_distance']   
+                        current_pos += self.config['citygen.building.building_side_distance']
                         overlap_road_flag = True
                     else:
                         building_type = self.sorted_buildings[-1]
                         current_pos += random.uniform(0, 1)
 
     def filter_overlapping_buildings(self, segments_quadtree: QuadTree[Segment]):
-        """Filter out buildings that overlap with roads after building generation"""
+        """Filter out buildings that overlap with roads after building generation.
+
+        Args:
+            segments_quadtree: Quadtree containing all road segments.
+        """
         buildings_to_remove = []
         print('Generated buildings:', len(self.building_manager.buildings))
         for building in self.building_manager.buildings:
@@ -155,8 +167,16 @@ class BuildingGenerator:
     def check_building_road_overlap(
         self, building_bounds: Bounds, segments_quadtree: QuadTree[Segment]
     ) -> bool:
-        """Check if building overlaps with roads"""
-        ROAD_CLEARANCE = self.config['citygen.building.building_road_distance'] 
+        """Check if building overlaps with roads.
+
+        Args:
+            building_bounds: Bounds of the building to check.
+            segments_quadtree: Quadtree containing all road segments.
+
+        Returns:
+            True if the building overlaps with any road, False otherwise.
+        """
+        ROAD_CLEARANCE = self.config['citygen.building.building_road_distance']
 
         # Create a search bounds that includes margin around the building
         search_margin = max(ROAD_CLEARANCE, self.config['citygen.building.building_intersection_distance'])
@@ -184,7 +204,6 @@ class BuildingGenerator:
             MathUtils.rotate_point(center, Point(building_bounds.x, building_bounds.y + building_bounds.height), building_bounds.rotation),
             MathUtils.rotate_point(center, Point(building_bounds.x + building_bounds.width, building_bounds.y + building_bounds.height), building_bounds.rotation),
         ]
-        
 
         for segment in nearby_segments:
             for corner in corners:

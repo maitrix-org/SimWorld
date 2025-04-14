@@ -1,28 +1,40 @@
+"""City visualization module for rendering and visualizing generated city layouts.
+
+This module provides functionality for loading city data from JSON files and
+rendering a visualization of the city layout including roads, buildings, and elements.
+"""
 import json
-import pyqtgraph as pg
-from simworld.config import Config
 import random
-
-from simworld.citygen.dataclass import (
-    Bounds, Building, BuildingType, Element, ElementType
-)
-
-from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QApplication, QLabel, QMainWindow, QVBoxLayout, QWidget
 from typing import List
 
+import pyqtgraph as pg
+from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import (QApplication, QLabel, QMainWindow, QVBoxLayout,
+                             QWidget)
+
+from simworld.citygen.dataclass import (Bounds, Building, BuildingType,
+                                        Element, ElementType)
+from simworld.config import Config
+
+
 class CityData:
-    """Container for city visualization data"""
+    """Container for city visualization data."""
+
     def __init__(self):
+        """Initialize empty city data structures."""
         self.roads: List[dict] = []  # Using dict for roads since no Road class in custom_types
         self.buildings: List[Building] = []
         self.elements: List[Element] = []
 
-    def load_from_files(self, output_dir = "output"):
-        """Load city data from JSON files"""
-        roads_path = f"{output_dir}/roads.json"
-        buildings_path = f"{output_dir}/buildings.json"
-        elements_path = f"{output_dir}/elements.json"
+    def load_from_files(self, output_dir='output'):
+        """Load city data from JSON files.
+
+        Args:
+            output_dir: Directory containing the city data JSON files.
+        """
+        roads_path = f'{output_dir}/roads.json'
+        buildings_path = f'{output_dir}/buildings.json'
+        elements_path = f'{output_dir}/elements.json'
         try:
             # Load roads
             with open(roads_path, 'r') as f:
@@ -75,17 +87,23 @@ class CityData:
                         rotation=e['rotation']
                     ))
 
-            print("Successfully loaded city data")
+            print('Successfully loaded city data')
 
         except Exception as e:
-            print(f"Error loading city data: {e}")
+            print(f'Error loading city data: {e}')
+
 
 class CityVisualizer(QMainWindow):
-    """Visualization renderer for city data"""
+    """Visualization renderer for city data."""
+
     def __init__(self, config: Config):
-        """Initialize visualizer"""
+        """Initialize visualizer.
+
+        Args:
+            config: Configuration settings for the visualization.
+        """
         super().__init__()
-        self.setWindowTitle("City Visualization")
+        self.setWindowTitle('City Visualization')
 
         # Create main window widget and layout
         self.main_widget = QWidget()
@@ -96,7 +114,7 @@ class CityVisualizer(QMainWindow):
         self.title_label = QLabel()
         self.title_label.setAlignment(Qt.AlignCenter)
         self.title_label.setStyleSheet(
-            "QLabel {color: #34495E;font-size: 14px;font-weight: bold;padding: 5px;}"
+            'QLabel {color: #34495E;font-size: 14px;font-weight: bold;padding: 5px;}'
         )
         main_layout.addWidget(self.title_label)
 
@@ -105,7 +123,7 @@ class CityVisualizer(QMainWindow):
         main_layout.addWidget(self.plot_widget)
 
         # Set plot style
-        self.plot_widget.setBackground("#F0F8FF")
+        self.plot_widget.setBackground('#F0F8FF')
         self.plot_widget.showGrid(True, True, alpha=0.3)
         self.plot_widget.setAspectLocked(True)
         self.plot_widget.setXRange(config['citygen.quadtree.bounds.x'], config['citygen.quadtree.bounds.x'] + config['citygen.quadtree.bounds.width'])
@@ -126,7 +144,7 @@ class CityVisualizer(QMainWindow):
         self.resize(1280, 960)
 
     def draw_frame(self):
-        """Draw current state of the city"""
+        """Draw current state of the city."""
         self.plot_widget.clear()
 
         # Draw roads
@@ -148,7 +166,7 @@ class CityVisualizer(QMainWindow):
                 line = pg.PlotDataItem(
                     x=[normal_roads[i][0], normal_roads[i + 1][0]],
                     y=[normal_roads[i][1], normal_roads[i + 1][1]],
-                    pen=pg.mkPen("#2E5984", width=1.8),
+                    pen=pg.mkPen('#2E5984', width=1.8),
                     antialias=True,
                 )
                 self.plot_widget.addItem(line)
@@ -159,7 +177,7 @@ class CityVisualizer(QMainWindow):
                 line = pg.PlotDataItem(
                     x=[highways[i][0], highways[i + 1][0]],
                     y=[highways[i][1], highways[i + 1][1]],
-                    pen=pg.mkPen("#1E3F66", width=3.0),
+                    pen=pg.mkPen('#1E3F66', width=3.0),
                     antialias=True,
                 )
                 self.plot_widget.addItem(line)
@@ -173,7 +191,7 @@ class CityVisualizer(QMainWindow):
                 r = random.randint(100, 255)
                 g = random.randint(100, 255)
                 b = random.randint(100, 255)
-                building_colors[building_type] = f"#{r:02x}{g:02x}{b:02x}"
+                building_colors[building_type] = f'#{r:02x}{g:02x}{b:02x}'
 
         # Draw buildings
         for building in self.city.buildings:
@@ -205,14 +223,14 @@ class CityVisualizer(QMainWindow):
                 r = random.randint(100, 255)
                 g = random.randint(100, 255)
                 b = random.randint(100, 255)
-                element_colors[element_type] = f"#{r:02x}{g:02x}{b:02x}"
+                element_colors[element_type] = f'#{r:02x}{g:02x}{b:02x}'
 
         # Draw elements
         for element in self.city.elements:
             size = min(element.bounds.width, element.bounds.height) * 1
             element_type = element.element_type.name
             color = element_colors[element_type]
-            
+
             circle = pg.ScatterPlotItem(
                 pos=[(element.center.x, element.center.y)],
                 size=size,
@@ -225,13 +243,18 @@ class CityVisualizer(QMainWindow):
             self.plot_widget.addItem(circle)
 
         # Update status bar information
-        stats_text = f"ROADS: {len(self.city.roads)} | BUILDINGS: {len(self.city.buildings)} | ELEMENTS: {len(self.city.elements)}"
+        stats_text = f'ROADS: {len(self.city.roads)} | BUILDINGS: {len(self.city.buildings)} | ELEMENTS: {len(self.city.elements)}'
         self.title_label.setText(stats_text)
 
+
 def main(config: Config):
-    """Main function"""
+    """Main function.
+
+    Args:
+        config: Configuration settings for the visualization.
+    """
     app = QApplication([])
-    app.setStyle("Fusion")
+    app.setStyle('Fusion')
 
     visualizer = CityVisualizer(config=config)
     visualizer.show()
@@ -239,5 +262,6 @@ def main(config: Config):
 
     app.exec_()
 
-if __name__ == "__main__":
-    main(config=Config()) 
+
+if __name__ == '__main__':
+    main(config=Config())

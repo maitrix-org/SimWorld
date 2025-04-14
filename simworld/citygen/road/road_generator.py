@@ -1,28 +1,36 @@
+"""Road network generation module for the city simulation.
+
+This module handles the procedural generation of road networks, including the creation
+of road segments, intersections, and the overall structure of the city's transportation system.
+"""
+import json
 import math
 import random
-import json
 from typing import List
 
-from simworld.citygen.dataclass import Point, Segment, MetaInfo
+from simworld.citygen.dataclass import Intersection, MetaInfo, Point, Segment
 from simworld.citygen.road.road_manager import RoadManager
+from simworld.utils.math_utils import MathUtils
 from simworld.utils.priority_queue import PriorityQueue
 from simworld.utils.road_utils import RoadUtils
-from simworld.utils.math_utils import MathUtils
-from simworld.citygen.dataclass import Intersection
 
 
 class RoadGenerator:
-    """Handles procedural road network generation"""
+    """Handles procedural road network generation."""
 
     def __init__(self, config):
-        """Initialize the road generator"""
+        """Initialize the road generator."""
         # Store references
         self.config = config
         self.road_manager = RoadManager(config)
         self.queue = PriorityQueue()
 
     def generate_roads_from_file(self, input_path: str) -> None:
-        """Generate roads from a JSON file"""
+        """Generate roads from a JSON file.
+
+        Args:
+            input_path: Path to the JSON file containing road data.
+        """
         # Read and parse the JSON file
         with open(input_path, 'r') as f:
             data = json.load(f)
@@ -61,7 +69,7 @@ class RoadGenerator:
         self.find_intersections()
 
     def generate_initial_segments(self) -> None:
-        """Generate the initial road segments at the city center"""
+        """Generate the initial road segments at the city center."""
         start = Point(0, 0)
 
         if self.config['citygen.road.two_segment_init']:
@@ -79,8 +87,10 @@ class RoadGenerator:
             )
 
     def generate_step(self) -> bool:
-        """Process one step of road network generation
-        Returns True when generation should stop
+        """Process one step of road network generation.
+
+        Returns:
+            True when generation should stop, False otherwise.
         """
         if len(self.road_manager.roads) >= self.config['citygen.road.segment_count_limit']:
             return True
@@ -94,10 +104,10 @@ class RoadGenerator:
 
         # Try to merge segment endpoints with existing points
         RoadUtils.merge_point_if_close(
-            segment, "start", self.road_manager.roads, self.road_manager.merge_distance
+            segment, 'start', self.road_manager.roads, self.road_manager.merge_distance
         )
         RoadUtils.merge_point_if_close(
-            segment, "end", self.road_manager.roads, self.road_manager.merge_distance
+            segment, 'end', self.road_manager.roads, self.road_manager.merge_distance
         )
 
         # Skip if segment became too short after merging
@@ -114,7 +124,18 @@ class RoadGenerator:
     def create_segment(
         self, start: Point, angle: float, length: float, is_highway: bool, t: float = 0
     ) -> Segment:
-        """Create a new road segment with specified parameters"""
+        """Create a new road segment with specified parameters.
+
+        Args:
+            start: Starting point of the segment.
+            angle: Direction angle in degrees.
+            length: Length of the segment.
+            is_highway: Whether this is a highway segment.
+            t: Time parameter for generation sequencing.
+
+        Returns:
+            A new road segment.
+        """
         # Calculate end point using angle and length
         angle_rad = math.radians(angle)
         end = Point(
@@ -125,7 +146,11 @@ class RoadGenerator:
         return Segment(start, end, MetaInfo(highway=is_highway, t=t))
 
     def generate_next_segments(self, segment: Segment):
-        """Generate potential next segments from the current segment"""
+        """Generate potential next segments from the current segment.
+
+        Args:
+            segment: The current segment to generate branches from.
+        """
         is_highway = segment.q.highway
         current_t = segment.q.t
 
@@ -155,7 +180,14 @@ class RoadGenerator:
         current_t: float,
         potential_segments: List[Segment],
     ):
-        """Generate potential highway branches including straight continuation and side roads"""
+        """Generate potential highway branches including straight continuation and side roads.
+
+        Args:
+            segment: The current segment.
+            angle: Current segment angle.
+            current_t: Current time parameter.
+            potential_segments: List to store generated segments.
+        """
         # Try straight continuation
         # TODO: can add different angle for different road
         new_angle = angle
@@ -183,7 +215,14 @@ class RoadGenerator:
         current_t: float,
         potential_segments: List[Segment],
     ):
-        """Generate potential normal road branches"""
+        """Generate potential normal road branches.
+
+        Args:
+            segment: The current segment.
+            angle: Current segment angle.
+            current_t: Current time parameter.
+            potential_segments: List to store generated segments.
+        """
         # Try straight continuation
         # TODO: can add different angle for different road
         new_angle = angle
@@ -212,7 +251,15 @@ class RoadGenerator:
         potential_segments: List[Segment],
         is_highway: bool,
     ):
-        """Generate side branches for both highway and normal roads"""
+        """Generate side branches for both highway and normal roads.
+
+        Args:
+            segment: The current segment.
+            angle: Current segment angle.
+            current_t: Current time parameter.
+            potential_segments: List to store generated segments.
+            is_highway: Whether the parent segment is a highway.
+        """
         possible_directions = [-90, 90]
         random.shuffle(possible_directions)
 
@@ -231,7 +278,15 @@ class RoadGenerator:
                     potential_segments.append(new_segment)
 
     def _is_angle_valid(self, segment: Segment, new_angle: float) -> bool:
-        """Check if the new angle is valid considering existing road angles"""
+        """Check if the new angle is valid considering existing road angles.
+
+        Args:
+            segment: The current segment.
+            new_angle: The angle to validate.
+
+        Returns:
+            True if the angle is valid, False otherwise.
+        """
         current_angles = RoadUtils.get_current_angles(
             segment, self.road_manager.roads, self.queue.elements, self.road_manager.merge_distance
         )
@@ -243,7 +298,11 @@ class RoadGenerator:
         )
 
     def _select_and_queue_segments(self, potential_segments: List[Segment]):
-        """Select which potential segments to add to the generation queue"""
+        """Select which potential segments to add to the generation queue.
+
+        Args:
+            potential_segments: List of potential segments to select from.
+        """
         if not potential_segments:
             return
         # Prioritize highways (10% chance to keep at least one)
@@ -259,7 +318,7 @@ class RoadGenerator:
                 self.queue.enqueue(segment)
 
     def find_intersections(self) -> None:
-        """Find all road intersections in the network"""
+        """Find all road intersections in the network."""
         self.road_manager.intersections = []
         processed_points = set()
 

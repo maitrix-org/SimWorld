@@ -1,11 +1,14 @@
-from typing import List, Optional, Set
+"""Road utilities module, providing functions for handling road segments and points."""
+from typing import List, Optional
 
-from simworld.config import Config
 from simworld.citygen.dataclass import Bounds, Point, Segment
+from simworld.config import Config
 from simworld.utils.math_utils import MathUtils
 
 
 class RoadUtils:
+    """Provide static utility methods for handling road networks."""
+
     @staticmethod
     def find_nearby_endpoint(
         point: Point,
@@ -13,7 +16,17 @@ class RoadUtils:
         queue_elements: List[Segment],
         merge_distance: float,
     ) -> Optional[Point]:
-        """Find existing road endpoint near the given point"""
+        """Find existing road endpoint near the given point.
+
+        Args:
+            point: The point to check against
+            segments: List of existing road segments
+            queue_elements: Queue of segments being processed
+            merge_distance: Maximum distance to consider for merging
+
+        Returns:
+            The closest endpoint if found within merge distance, None otherwise
+        """
         closest_point = None
         min_distance = merge_distance
 
@@ -43,7 +56,14 @@ class RoadUtils:
 
     @staticmethod
     def create_bounds_for_segment(segment: Segment) -> Bounds:
-        """Create bounds object for a segment (used for quadtree)"""
+        """Create bounds object for a segment (used for quadtree).
+
+        Args:
+            segment: The road segment to create bounds for
+
+        Returns:
+            A Bounds object representing the area around the segment
+        """
         min_x = min(segment.start.x, segment.end.x) - Config.ROAD_SNAP_DISTANCE
         min_y = min(segment.start.y, segment.end.y) - Config.ROAD_SNAP_DISTANCE
         width = abs(segment.end.x - segment.start.x) + 2 * Config.ROAD_SNAP_DISTANCE
@@ -57,7 +77,17 @@ class RoadUtils:
         queue_elements: List[Segment],
         merge_distance: float,
     ) -> List[float]:
-        """Get all current angles at the segment end point"""
+        """Get all current angles at the segment end point.
+
+        Args:
+            segment: The segment to check angles from
+            segments: List of existing road segments
+            queue_elements: Queue of segments being processed
+            merge_distance: Maximum distance to consider for angle calculation
+
+        Returns:
+            List of angles in degrees from the segment end point
+        """
         angles = []
 
         # Check all generated segments
@@ -83,12 +113,18 @@ class RoadUtils:
         segments: List[Segment],
         merge_distance: float,
     ) -> bool:
+        """Merge a segment's endpoint with nearby existing points.
+
+        Args:
+            segment: The segment to check for merging
+            point_type: 'start' or 'end'
+            segments: List of existing road segments
+            merge_distance: Maximum distance to consider for merging
+
+        Returns:
+            True if merged, False otherwise
         """
-        Merge a segment's endpoint with nearby existing points
-        point_type: 'start' or 'end'
-        Returns: True if merged, False otherwise
-        """
-        point = segment.start if point_type == "start" else segment.end
+        point = segment.start if point_type == 'start' else segment.end
 
         # Find closest point
 
@@ -107,7 +143,7 @@ class RoadUtils:
                 min_distance = dist_to_end
                 closest_point = other_segment.end
         if closest_point is not None:
-            if point_type == "start":
+            if point_type == 'start':
                 segment.start = closest_point
             else:
                 segment.end = closest_point

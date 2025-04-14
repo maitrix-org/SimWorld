@@ -1,18 +1,23 @@
+"""Road network management module for the city simulation.
+
+This module provides functionality for managing road segments, including spatial indexing,
+conflict detection, and intersection identification.
+"""
 from typing import List
-from simworld.citygen.dataclass import Segment, Bounds, Intersection
-from simworld.utils.quadtree import QuadTree
+
+from simworld.citygen.dataclass import Bounds, Intersection, Segment
 from simworld.utils.math_utils import MathUtils
-from simworld.config import Config
+from simworld.utils.quadtree import QuadTree
+
 
 class RoadManager:
-    """Manages road segments and their spatial relationships"""
+    """Manages road segments and their spatial relationships."""
 
     def __init__(self, config):
-        """Initialize the road manager"""
+        """Initialize the road manager."""
         # Core data structures
         self.roads: List[Segment] = []
         self.intersections: List[Intersection] = []
-
 
         # Configuration
         self.config = config
@@ -27,13 +32,13 @@ class RoadManager:
         )
 
     def add_segment(self, segment: Segment) -> None:
-        """Add a road segment to the network"""
+        """Add a road segment to the network."""
         self.roads.append(segment)
         bounds = self._create_bounds_for_segment(segment)
         self.road_quadtree.insert(bounds, segment)
 
     def can_place_segment(self, segment: Segment) -> bool:
-        """Check if a segment can be placed without conflicts"""
+        """Check if a segment can be placed without conflicts."""
         if self.config['citygen.road.ignore_conflicts']:
             return True
 
@@ -55,11 +60,11 @@ class RoadManager:
         return True
 
     def get_nearby_segments(self, bounds: Bounds) -> List[Segment]:
-        """Get segments within the specified bounds"""
+        """Get segments within the specified bounds."""
         return self.road_quadtree.retrieve(bounds)
 
     def _create_bounds_for_segment(self, segment: Segment) -> Bounds:
-        """Create a bounding box for a road segment"""
+        """Create a bounding box for a road segment."""
         min_x = min(segment.start.x, segment.end.x)
         min_y = min(segment.start.y, segment.end.y)
         width = abs(segment.end.x - segment.start.x)
@@ -77,19 +82,19 @@ class RoadManager:
         )
 
     def remove_segment(self, segment: Segment) -> None:
-        """Remove a road segment from the network"""
+        """Remove a road segment from the network."""
         self.roads.remove(segment)
         bounds = self._create_bounds_for_segment(segment)
         self.road_quadtree.remove(bounds, segment)
 
     def get_segment_by_id(self, id: int) -> Segment:
-        """Get a road segment by its ID"""
+        """Get a road segment by its ID."""
         return self.roads[id]
 
     def update_segment(self, old_segment: Segment, new_segment: Segment) -> None:
-        """Update a road segment's position in the spatial index"""
+        """Update a road segment's position in the spatial index."""
         old_bounds = self._create_bounds_for_segment(old_segment)
         self.road_quadtree.remove(old_bounds, old_segment)
-        
+
         new_bounds = self._create_bounds_for_segment(new_segment)
         self.road_quadtree.insert(new_bounds, new_segment)

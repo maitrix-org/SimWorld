@@ -1,20 +1,40 @@
-import random
-import time
+"""Traffic controller module for coordinating all traffic-related components.
+
+This module provides the main controller for the traffic simulation, handling initialization,
+spawning, and coordination of all traffic elements including vehicles, pedestrians, and traffic signals.
+"""
 import json
-import sys
 import os
+import random
+import sys
+import time
 import traceback
 from collections import defaultdict
+
+from simworld.agent import Pedestrian, Vehicle
+from simworld.communicator import Communicator, UnrealCV
+from simworld.config import Config
+from simworld.traffic.base import (Crosswalk, Intersection, Road, Sidewalk,
+                                   TrafficLane, TrafficSignal,
+                                   TrafficSignalState)
+from simworld.traffic.manager import (IntersectionManager, PedestrianManager,
+                                      VehicleManager)
 from simworld.utils.logger import Logger
 from simworld.utils.vector import Vector
-from simworld.traffic.manager import IntersectionManager, VehicleManager, PedestrianManager
-from simworld.communicator import Communicator, UnrealCV
-from simworld.traffic.base import Road, Intersection, TrafficSignal, TrafficSignalState, TrafficLane, Sidewalk, Crosswalk
-from simworld.agent import Vehicle, Pedestrian
-from simworld.config import Config
+
 
 class TrafficController:
+    """Main controller class for the traffic simulation system.
+
+    Coordinates all aspects of the traffic simulation including road network, vehicles,
+    pedestrians, and traffic signals.
+    """
     def __init__(self, config: Config):
+        """Initialize the traffic controller with configuration.
+
+        Args:
+            config: Configuration object containing all simulation parameters.
+        """
         self.config = config
         self.num_vehicles = config['traffic.num_vehicles']
         self.num_pedestrians = config['traffic.num_pedestrians']
@@ -25,36 +45,48 @@ class TrafficController:
 
         # logger
         self.logger = Logger.get_logger('TrafficController')
-        self.logger.info(f"TrafficController initialized with {self.num_vehicles} vehicles and {self.num_pedestrians} pedestrians")
+        self.logger.info(f'TrafficController initialized with {self.num_vehicles} vehicles and {self.num_pedestrians} pedestrians')
 
-        # # set seed
+        # set seed
         random.seed(self.seed)
 
         # read map from file
         self.init_roadnet_from_file(self.map)
-
 
         # initialize controllers
         self.intersection_manager = IntersectionManager(self.intersections, self.config)
         self.vehicle_manager = VehicleManager(self.roads, self.num_vehicles, self.config)
         self.pedestrian_manager = PedestrianManager(self.roads, self.num_pedestrians, self.config)
 
+    # Initialization
+    def init_communicator(self, communicator=None):
+        """Initialize the communication interface with the simulation environment.
 
-    ##################Initialization#################
-    def init_communicator(self, communicator = None):
+        Args:
+            communicator: Optional communicator instance. If None, a new one is created.
+        """
         if communicator is None:
             self.communicator = Communicator(UnrealCV(port=9000, ip='127.0.0.1', resolution=(720, 600)))
         else:
             self.communicator = communicator
 
     def disconnect_communicator(self):
+        """Disconnect the communication interface from the simulation environment."""
         self.communicator.disconnect()
 
     def init_roadnet_from_file(self, file_path):
+        """Initialize the road network from a JSON file.
+
+        Args:
+            file_path: Path to the JSON file containing road network data.
+
+        Raises:
+            ValueError: If the file path is not absolute.
+        """
         if not os.path.isabs(file_path):
-            raise ValueError(f"Expected an absolute path, got: {file_path}")
-    
-        self.logger.info(f"Loading road network from file: {file_path}")
+            raise ValueError(f'Expected an absolute path, got: {file_path}')
+
+        self.logger.info(f'Loading road network from file: {file_path}')
 
         with open(file_path, 'r') as f:
             data = json.load(f)
@@ -63,19 +95,19 @@ class TrafficController:
         _intersections = defaultdict(list)
 
         # Log roads information
-        self.logger.info(f"Found {len(data['roads'])} roads in map file")
+        self.logger.info(f'Found {len(data["roads"])} roads in map file')
         for _, road_data in enumerate(data['roads']):
             start_point = Vector(round(road_data['start']['x'])*100, round(road_data['start']['y'])*100)
             end_point = Vector(round(road_data['end']['x'])*100, round(road_data['end']['y'])*100)
 
-            road = Road(start=start_point, end=end_point, num_lanes=self.config['traffic.num_lanes'], 
-                        lane_offset=self.config['traffic.lane_offset'], intersection_offset=self.config['traffic.intersection_offset'], 
+            road = Road(start=start_point, end=end_point, num_lanes=self.config['traffic.num_lanes'],
+                        lane_offset=self.config['traffic.lane_offset'], intersection_offset=self.config['traffic.intersection_offset'],
                         sidewalk_offset=self.config['traffic.sidewalk_offset'], crosswalk_offset=self.config['traffic.crosswalk_offset'])
             roads.append(road)
-            
+
             self.logger.info(
-                f"Road {road.id}: Start=({start_point.x}, {start_point.y}), "
-                f"End=({end_point.x}, {end_point.y})"
+                f'Road {road.id}: Start=({start_point.x}, {start_point.y}), '
+                f'End=({end_point.x}, {end_point.y})'
             )
 
             _intersections[Vector(start_point.x, start_point.y)].append(road)
@@ -86,64 +118,75 @@ class TrafficController:
 
         self.roads = roads
 
-        self.logger.info(f"Creating {len(roads)} lanes")
+        self.logger.info(f'Creating {len(roads)} lanes')
         for lane in self.lanes:
-            self.logger.info(f"Lane {lane.id}: Start=({lane.start.x}, {lane.start.y}), End=({lane.end.x}, {lane.end.y}), Road={lane.road_id}")
+            self.logger.info(f'Lane {lane.id}: Start=({lane.start.x}, {lane.start.y}), End=({lane.end.x}, {lane.end.y}), Road={lane.road_id}')
 
-        self.logger.info(f"Creating {len(self.sidewalks)} sidewalks")
+        self.logger.info(f'Creating {len(self.sidewalks)} sidewalks')
         for sidewalk in self.sidewalks:
-            self.logger.info(f"Sidewalk {sidewalk.id}: Start=({sidewalk.start.x}, {sidewalk.start.y}), End=({sidewalk.end.x}, {sidewalk.end.y}), Road={sidewalk.road_id}")
+            self.logger.info(f'Sidewalk {sidewalk.id}: Start=({sidewalk.start.x}, {sidewalk.start.y}), End=({sidewalk.end.x}, {sidewalk.end.y}), Road={sidewalk.road_id}')
 
-        self.logger.info(f"Creating {len(self.crosswalks)} crosswalks")
+        self.logger.info(f'Creating {len(self.crosswalks)} crosswalks')
         for crosswalk in self.crosswalks:
-            self.logger.info(f"Crosswalk {crosswalk.id}: Start=({crosswalk.start.x}, {crosswalk.start.y}), End=({crosswalk.end.x}, {crosswalk.end.y}), Road={crosswalk.road_id}")
-        
+            self.logger.info(f'Crosswalk {crosswalk.id}: Start=({crosswalk.start.x}, {crosswalk.start.y}), End=({crosswalk.end.x}, {crosswalk.end.y}), Road={crosswalk.road_id}')
 
         intersections = []
-        self.logger.info(f"Creating {len(_intersections)} intersections")
+        self.logger.info(f'Creating {len(_intersections)} intersections')
         for i, (intersection_point, connected_roads) in enumerate(_intersections.items()):
             intersection = Intersection(center=intersection_point, roads=connected_roads)
             intersections.append(intersection)
             self.logger.info(
-                f"Intersection {intersection.id}: Position=({intersection_point.x}, {intersection_point.y}), "
-                f"Connected roads={[road.id for road in connected_roads]}"
+                f'Intersection {intersection.id}: Position=({intersection_point.x}, {intersection_point.y}), '
+                f'Connected roads={[road.id for road in connected_roads]}'
             )
 
         self.intersections = intersections
 
-        self.logger.info("Road network initialization completed")
+        self.logger.info('Road network initialization completed')
 
     def spawn_objects_in_unreal_engine(self):
+        """Spawn all traffic-related objects in the Unreal Engine simulation."""
         try:
             self.spawn_vehicles()
             self.spawn_pedestrians()
             self.spawn_traffic_signals()
             self.spawn_traffic_manager()
         except Exception as e:
-            print(f"Error occurred in {__file__}:{e.__traceback__.tb_lineno}")
-            print(f"Error type: {type(e).__name__}")
-            print(f"Error message: {str(e)}")
-            print(f"Error traceback:")
+            print(f'Error occurred in {__file__}:{e.__traceback__.tb_lineno}')
+            print(f'Error type: {type(e).__name__}')
+            print(f'Error message: {str(e)}')
+            print('Error traceback:')
             traceback.print_exc()
 
     def spawn_vehicles(self):
+        """Spawn vehicles in the simulation environment."""
         self.vehicle_manager.spawn_vehicles(self.communicator)
-        print("Vehicles spawned")
+        print('Vehicles spawned')
 
     def spawn_pedestrians(self):
+        """Spawn pedestrians in the simulation environment."""
         self.pedestrian_manager.spawn_pedestrians(self.communicator)
-        print("Pedestrians spawned")
+        print('Pedestrians spawned')
 
     def spawn_traffic_signals(self):
+        """Spawn traffic signals in the simulation environment."""
         self.intersection_manager.spawn_traffic_signals(self.communicator)
-        print("Traffic signals spawned")
+        print('Traffic signals spawned')
 
     def spawn_traffic_manager(self):
+        """Spawn the traffic manager in the simulation environment."""
         self.communicator.spawn_traffic_manager(self.config['traffic.traffic_manager_path'])
-        print("Traffic manager spawned")
+        print('Traffic manager spawned')
 
-    ##################Reset#################
+    # Reset
     def reset(self, num_vehicles: int, num_pedestrians: int, map: str):
+        """Reset the simulation with new parameters.
+
+        Args:
+            num_vehicles: New number of vehicles to spawn.
+            num_pedestrians: New number of pedestrians to spawn.
+            map: Path to the new map file to use.
+        """
         self.num_vehicles = num_vehicles
         self.num_pedestrians = num_pedestrians
         self.map = map
@@ -165,17 +208,19 @@ class TrafficController:
         # read map from file
         self.init_roadnet_from_file(self.map)
 
-
         # initialize controllers
-        self.intersection_manager = IntersectionManager(self.intersections)
-        self.vehicle_manager = VehicleManager(self.roads, self.num_vehicles)
-        self.pedestrian_manager = PedestrianManager(self.roads, self.num_pedestrians)
+        self.intersection_manager = IntersectionManager(self.intersections, self.config)
+        self.vehicle_manager = VehicleManager(self.roads, self.num_vehicles, self.config)
+        self.pedestrian_manager = PedestrianManager(self.roads, self.num_pedestrians, self.config)
 
-
-    ##################Simulation#################
+    # Simulation
     def simulation(self):
+        """Run the traffic simulation continuously.
+
+        Continuously updates the state of all simulation components at fixed time intervals.
+        """
         try:
-            self.logger.info("Starting simulation")
+            self.logger.info('Starting simulation')
             self.pedestrian_manager.set_pedestrians_max_speed(self.communicator)
 
             while True:
@@ -185,31 +230,31 @@ class TrafficController:
                 self.intersection_manager.update_intersections(self.communicator)
                 time.sleep(self.dt)
         except KeyboardInterrupt:
-            print("Simulation interrupted")
+            print('Simulation interrupted')
             sys.exit(1)
         except Exception as e:
-            print(f"Error occurred in {__file__}:{e.__traceback__.tb_lineno}")
-            print(f"Error type: {type(e).__name__}")
-            print(f"Error message: {str(e)}")
-            print(f"Error traceback:")
+            print(f'Error occurred in {__file__}:{e.__traceback__.tb_lineno}')
+            print(f'Error type: {type(e).__name__}')
+            print(f'Error message: {str(e)}')
+            print('Error traceback:')
             traceback.print_exc()
-        
 
     def update_states(self):
+        """Update the states of all traffic components from the simulation."""
         vehicle_ids = [vehicle.id for vehicle in self.vehicles]
         pedestrian_ids = [pedestrian.id for pedestrian in self.pedestrians]
         traffic_signal_ids = [signal.id for signal in self.traffic_signals]
         result = self.communicator.get_position_and_direction(vehicle_ids, pedestrian_ids, traffic_signal_ids)
         for (type, object_id), values in result.items():
-            if type == "vehicle":
+            if type == 'vehicle':
                 position, direction = values
                 self.vehicles[object_id].position = position
                 self.vehicles[object_id].direction = direction
-            elif type == "pedestrian":
+            elif type == 'pedestrian':
                 position, direction = values
                 self.pedestrians[object_id].position = position
                 self.pedestrians[object_id].direction = direction
-            elif type == "traffic_signal":
+            elif type == 'traffic_signal':
                 is_vehicle_green, is_pedestrian_walk, left_time = values
                 for signal in self.traffic_signals:
                     if signal.id == object_id:
@@ -218,20 +263,35 @@ class TrafficController:
                         elif is_pedestrian_walk:
                             signal.set_state((TrafficSignalState.VEHICLE_RED, TrafficSignalState.PEDESTRIAN_GREEN))
                         else:
-                            signal.set_state((TrafficSignalState.VEHICLE_RED, TrafficSignalState.PEDESTRIAN_RED)) 
+                            signal.set_state((TrafficSignalState.VEHICLE_RED, TrafficSignalState.PEDESTRIAN_RED))
                         signal.set_left_time(left_time)
                         break
 
     @property
     def vehicles(self):
+        """Get all vehicles in the simulation.
+
+        Returns:
+            List of all vehicle objects.
+        """
         return self.vehicle_manager.vehicles
 
     @property
     def pedestrians(self):
+        """Get all pedestrians in the simulation.
+
+        Returns:
+            List of all pedestrian objects.
+        """
         return self.pedestrian_manager.pedestrians
 
     @property
     def lanes(self):
+        """Get all traffic lanes in the simulation.
+
+        Returns:
+            List of all traffic lane objects.
+        """
         lanes = []
         for road in self.roads:
             lanes.extend(road.lanes.values())
@@ -239,6 +299,11 @@ class TrafficController:
 
     @property
     def sidewalks(self):
+        """Get all sidewalks in the simulation.
+
+        Returns:
+            List of all sidewalk objects.
+        """
         sidewalks = []
         for road in self.roads:
             sidewalks.extend(road.sidewalks.values())
@@ -246,6 +311,11 @@ class TrafficController:
 
     @property
     def crosswalks(self):
+        """Get all crosswalks in the simulation.
+
+        Returns:
+            List of all crosswalk objects.
+        """
         crosswalks = []
         for road in self.roads:
             crosswalks.extend(road.crosswalks)
@@ -253,9 +323,13 @@ class TrafficController:
 
     @property
     def traffic_signals(self):
+        """Get all traffic signals in the simulation.
+
+        Returns:
+            List of all traffic signal objects.
+        """
         traffic_signals = []
         for intersection in self.intersections:
             traffic_signals.extend(intersection.traffic_lights)
             traffic_signals.extend(intersection.pedestrian_lights)
         return traffic_signals
-

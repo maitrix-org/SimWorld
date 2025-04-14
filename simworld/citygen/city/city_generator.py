@@ -1,25 +1,33 @@
+"""City generator module for generating cities with roads, buildings, and elements."""
 import json
 import random
 from enum import Enum, auto
 
-from simworld.citygen.road.road_generator import RoadGenerator
 from simworld.citygen.building.building_generator import BuildingGenerator
+from simworld.citygen.dataclass.dataclass import BuildingType, ElementType
 from simworld.citygen.element.element_generator import ElementGenerator
+from simworld.citygen.road.road_generator import RoadGenerator
 from simworld.citygen.route.route_generator import RouteGenerator
-from simworld.citygen.dataclass import *
+
 
 class GenerationState(Enum):
-    """Enum to track the generation state"""
+    """Enum to track the generation state."""
     GENERATING_ROADS = auto()
     GENERATING_BUILDINGS = auto()
     GENERATING_ELEMENTS = auto()
     GENERATING_ROUTES = auto()
     COMPLETED = auto()
 
+
 class CityGenerator:
-    """Manages the complete city generation process including roads, buildings, and elements"""
+    """Manages the complete city generation process including roads, buildings, and elements."""
 
     def __init__(self, config):
+        """Initialize the city generator with configuration.
+
+        Args:
+            config: Configuration dictionary for the city generation.
+        """
         self.config = config
         random.seed(self.config['simworld.seed'])
 
@@ -43,14 +51,17 @@ class CityGenerator:
         self.input_path = self.config['citygen.input_roads']
         self.input = self.config['citygen.input_layout']
 
-
     def generate(self):
-        """Generate the city"""
+        """Generate the city."""
         while not self.is_generation_complete():
             self.generate_step()
 
     def generate_step(self) -> bool:
-        """Generate one step of the city. Returns True if generation is complete."""
+        """Generate one step of the city.
+
+        Returns:
+            bool: True if generation is complete.
+        """
         # generate roads
         if self.generation_state == GenerationState.GENERATING_ROADS:
             # generate roads randomly
@@ -140,10 +151,20 @@ class CityGenerator:
         return True
 
     def is_generation_complete(self) -> bool:
-        """Check if city generation is complete"""
+        """Check if city generation is complete.
+
+        Returns:
+            bool: True if generation is complete.
+        """
         return self.generation_state == GenerationState.COMPLETED
 
     def _load_bounding_boxes(self):
+        """Load bounding boxes from configuration file.
+
+        Returns:
+            tuple: Building types, building colors, element types, element colors,
+                  element offsets, and mapped element offsets.
+        """
         with open(self.config['citygen.input_bounding_boxes'], 'r') as f:
             data = json.load(f)
         buildings = data['buildings']
@@ -162,18 +183,18 @@ class CityGenerator:
             y = building['bbox']['y'] / 100
 
             BUILDING_TYPES.append(BuildingType(name, x, y, is_required='Building' not in name))
-            BUILDING_COLORS[name] = "#{:06x}".format(random.randint(0, 0xFFFFFF))
+            BUILDING_COLORS[name] = '#{:06x}'.format(random.randint(0, 0xFFFFFF))
 
         for name, element in elements.items():
             x = element['bbox']['x'] / 100
             y = element['bbox']['y'] / 100
             ELEMENT_TYPES.append(ElementType(name, x, y))
-            ELEMENT_COLORS[name] = "#{:06x}".format(random.randint(0, 0xFFFFFF))
+            ELEMENT_COLORS[name] = '#{:06x}'.format(random.randint(0, 0xFFFFFF))
 
         ELEMENT_OFFSETS = {}
         for element_type in ELEMENT_TYPES:
             # TODO: add parking offset
-            if element_type.name.lower().startswith("bp_tree"):
+            if element_type.name.lower().startswith('bp_tree'):
                 ELEMENT_OFFSETS[element_type.name] = self.config['citygen.element.tree_offset']
             else:
                 ELEMENT_OFFSETS[element_type.name] = self.config['citygen.element.furniture_offset']
@@ -186,53 +207,117 @@ class CityGenerator:
 
     @property
     def city_quadtrees(self):
+        """Get all city quadtrees.
+
+        Returns:
+            list: List of road, building, and element quadtrees.
+        """
         return [self.road_quadtree, self.building_quadtree, self.element_quadtree]
 
     @property
     def roads(self):
+        """Get all roads.
+
+        Returns:
+            list: List of road segments.
+        """
         return self.road_generator.road_manager.roads
 
     @property
     def routes(self):
+        """Get all routes.
+
+        Returns:
+            list: List of routes.
+        """
         return self.route_generator.route_manager.routes
 
     @property
     def road_quadtree(self):
+        """Get the road quadtree.
+
+        Returns:
+            Quadtree: Quadtree for efficient road queries.
+        """
         return self.road_generator.road_manager.road_quadtree
 
     @property
     def building_quadtree(self):
+        """Get the building quadtree.
+
+        Returns:
+            Quadtree: Quadtree for efficient building queries.
+        """
         return self.building_generator.building_manager.building_quadtree
 
     @property
     def element_quadtree(self):
+        """Get the element quadtree.
+
+        Returns:
+            Quadtree: Quadtree for efficient element queries.
+        """
         return self.element_generator.element_manager.element_quadtree
 
     @property
     def intersections(self):
+        """Get all intersections.
+
+        Returns:
+            list: List of road intersections.
+        """
         return self.road_generator.road_manager.intersections
 
     @property
     def buildings(self):
+        """Get all buildings.
+
+        Returns:
+            list: List of buildings.
+        """
         return self.building_generator.building_manager.buildings
 
     @property
     def elements(self):
+        """Get all elements.
+
+        Returns:
+            list: List of elements.
+        """
         return self.element_generator.element_manager.elements
 
     @property
     def road_manager(self):
+        """Get the road manager.
+
+        Returns:
+            RoadManager: Manager for road operations.
+        """
         return self.road_generator.road_manager
 
     @property
     def building_manager(self):
+        """Get the building manager.
+
+        Returns:
+            BuildingManager: Manager for building operations.
+        """
         return self.building_generator.building_manager
-    
+
     @property
     def element_manager(self):
+        """Get the element manager.
+
+        Returns:
+            ElementManager: Manager for element operations.
+        """
         return self.element_generator.element_manager
-    
+
     @property
     def route_manager(self):
+        """Get the route manager.
+
+        Returns:
+            RouteManager: Manager for route operations.
+        """
         return self.route_generator.route_manager
-        
