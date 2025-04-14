@@ -39,3 +39,25 @@ pre-commit install
 ```
 
 The pre-commit hooks will run automatically when you try to commit changes to the repository.
+
+
+## Commit Message Guidelines
+All commit messages should be clear, concise, and follow this format:
+```
+<type>: <short summary>
+
+[optional body explaining the change]
+```
+Recommended types:
++ feat: A new feature
++ fix: A bug fix
++ docs: Documentation changes
++ refactor: Code restructuring without behavior changes
++ style: Code style changes (formatting, linting)
++ test: Adding or updating tests
++ chore: Non-code changes (e.g., updating dependencies)
+
+Example:
+```
+feat: add user login API
+```
