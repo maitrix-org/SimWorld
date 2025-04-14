@@ -148,7 +148,7 @@ class TrafficController:
         self.num_pedestrians = num_pedestrians
         self.map = map
 
-        self.communicator.clean_environment(self.vehicles, self.pedestrians, self.traffic_lights)
+        self.communicator.clean_traffic(self.vehicles, self.pedestrians, self.traffic_signals)
 
         Vehicle.reset_id_counter()
         Pedestrian.reset_id_counter()

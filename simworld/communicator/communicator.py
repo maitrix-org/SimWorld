@@ -1,6 +1,8 @@
 import math
 import re
 import json
+import pandas as pd
+import numpy as np
 from simworld.utils.vector import Vector
 from simworld.communicator.unrealcv import UnrealCV
 
@@ -205,6 +207,63 @@ class Communicator:
         self.traffic_manager_name = "GEN_TrafficManager"
         self.unrealcv.spawn_bp_asset(traffic_manager_path, self.traffic_manager_name)
 
+
+    ############city layout generation###########
+    def generate_world(self, world_json, ue_asset_path):
+        generated_ids = set()
+        # load world from json
+        with open(world_json, 'r') as f:
+            world_setting = json.load(f)
+        # use pandas data structure, convert json data into pandas data frame
+        nodes = world_setting['nodes']
+        node_df = pd.json_normalize(nodes, sep='_')
+        node_df.set_index('id', inplace=True)
+
+        # load asset library
+        with open(ue_asset_path, 'r') as f:
+            asset_library = json.load(f)
+
+        def process_node(row):
+            # spawn every node on the map
+            id = row.name  # name is the index of the row
+            try:
+                instance_ref = asset_library[node_df.loc[id, "instance_name"]]
+            except KeyError:
+                print("Can't find node {} in asset library".format(node_df.loc[id, "instance_name"]))
+                return
+            else:
+                self.unrealcv.spawn_bp_asset(instance_ref, id)
+                location = node_df.loc[id, ['properties_location_x', 'properties_location_y', 'properties_location_z']].to_list()
+                self.unrealcv.set_location(location, id)
+                orientation = node_df.loc[id, ['properties_orientation_pitch', 'properties_orientation_yaw', 'properties_orientation_roll']].to_list()
+                self.unrealcv.set_orientation(orientation, id)
+                scale = node_df.loc[id, ['properties_scale_x', 'properties_scale_y', 'properties_scale_z']].to_list()
+                self.unrealcv.set_scale(scale, id)
+                self.unrealcv.set_collision(id, True)
+                self.unrealcv.set_movable(id, False)
+                generated_ids.add(id)
+
+        node_df.apply(process_node, axis=1)
+
+        return generated_ids
+    
+    def clear_env(self):
+        # Get all the objects in the environment
+        objects = [obj.lower() for obj in self.unrealcv.get_objects()]  # Convert objects to lowercase
+        # Define unwanted objects
+        unwanted_terms = ['GEN_BP_']
+        unwanted_terms = [term.lower() for term in unwanted_terms]  # Convert unwanted terms to lowercase
+
+        # Get all the objects starting with the name in unwanted_terms
+        indexes = np.concatenate([np.flatnonzero(np.char.startswith(objects, term)) for term in unwanted_terms])
+        # Destroy them
+        if indexes is not None:
+            for index in indexes:
+                self.unrealcv.destroy(objects[index])
+
+        self.unrealcv.clean_garbage()
+
+
     ############utils###########
     def get_vehicle_name(self, vehicle_id):
         return f'GEN_Vehicle_{vehicle_id}'
@@ -215,7 +274,7 @@ class Communicator:
     def get_traffic_signal_name(self, traffic_signal_id):
         return f'GEN_TrafficSignal_{traffic_signal_id}'
     
-    def clean_environment(self, vehicles, pedestrians, traffic_signals):
+    def clean_traffic(self, vehicles, pedestrians, traffic_signals):
         # can't destroy pedestrians due to the issue in unrealcv
         for vehicle in vehicles:
             self.destroy(self.get_vehicle_name(vehicle.vehicle_id))
