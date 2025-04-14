@@ -29,3 +29,13 @@ SimWorld leverages Unreal Engine 5's **photorealistic rendering** and **physics 
 ![Architecture](https://github.com/user-attachments/assets/f5f43638-7583-483f-aadc-1ddf5d6ff27a)
 
 SimWorld's architecture is designed to be modular and flexible, supporting an array of functionalities such as dynamic world generation, agent control, and performance benchmarking. The components are seamlessly integrated to provide a robust platform for **Embodied AI** and **Agents** research and applications.
+
+## Precommit Setup (For Contributors)
+We use Google docstring format for our docstrings and the pre-commit library to check our code. To install pre-commit, run the following command:
+
+```bash
+conda install pre-commit  # or pip install pre-commit
+pre-commit install
+```
+
+The pre-commit hooks will run automatically when you try to commit changes to the repository.
