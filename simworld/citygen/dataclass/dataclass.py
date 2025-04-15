@@ -1,66 +1,78 @@
+"""Module for data classes defining various data structures for city generation."""
 import math
-import json
-import random
 from dataclasses import dataclass, field
 from typing import List
 
+
 @dataclass
 class Point:
+    """A point in a 2D plane."""
     x: float
     y: float
 
     def __hash__(self):
+        """Return the hash value of the point."""
         return hash((self.x, self.y))
-    
+
     def to_dict(self):
+        """Convert the point to dictionary representation."""
         return {
             'x': self.x,
             'y': self.y
         }
 
+
 @dataclass
 class MetaInfo:
-    """Metadata for road segments"""
-    highway: bool = False  
-    t: float = 0.0        
+    """Metadata for road segments."""
+    highway: bool = False
+    t: float = 0.0
+
 
 @dataclass
 class Segment:
-    """A road segment connecting two points"""
+    """A road segment connecting two points."""
     start: Point
     end: Point
-    q: MetaInfo = field(default_factory=MetaInfo)  
+    q: MetaInfo = field(default_factory=MetaInfo)
 
     def get_angle(self) -> float:
-        """Calculate the angle of the segment in degrees"""
+        """Calculate the angle of the segment in degrees."""
         dx = self.end.x - self.start.x
         dy = self.end.y - self.start.y
         return math.degrees(math.atan2(dy, dx))
-    
+
     def to_dict(self):
+        """Convert the segment to dictionary representation."""
         return {
             'start': self.start.to_dict(),
             'end': self.end.to_dict()
         }
 
+
 @dataclass
 class Intersection:
+    """A road intersection."""
     point: Point
     segments: List[Segment]
 
+
 @dataclass
 class Route:
+    """A route consisting of multiple points."""
     points: List[Point]
     start: Point
     end: Point
 
     def __hash__(self):
+        """Return the hash value of the route."""
         return hash((self.start, self.end))
+
 
 @dataclass(frozen=True, eq=True)
 class Bounds:
-    """
-    A bounding box with x, y, width, height, and rotation
+    """A bounding box with x, y, width, height, and rotation.
+
     (x, y) is the bottom-left corner of the bounding box
     width: width of the bounding box
     height: height of the bounding box
@@ -72,9 +84,11 @@ class Bounds:
     rotation: float = 0.0
 
     def __hash__(self):
+        """Return the hash value of the bounds."""
         return hash((self.x, self.y, self.width, self.height))
-    
+
     def to_dict(self):
+        """Convert the bounds to dictionary representation."""
         return {
             'x': self.x,
             'y': self.y,
@@ -83,20 +97,24 @@ class Bounds:
             'rotation': self.rotation
         }
 
+
 # Building types
 @dataclass(frozen=True, eq=True)
 class BuildingType:
+    """A building type."""
     name: str
     width: float
     height: float
     is_required: bool = False
 
     def __hash__(self):
+        """Return the hash value of the building type."""
         return hash(
             (self.name, self.width, self.height, self.is_required)
         )
 
     def to_dict(self):
+        """Convert the building type to dictionary representation."""
         return {
             'name': self.name,
             'width': self.width,
@@ -104,8 +122,10 @@ class BuildingType:
             'is_required': self.is_required
         }
 
+
 @dataclass(frozen=True, eq=True)
 class Building:
+    """A building."""
     building_type: BuildingType
     bounds: Bounds
     rotation: float = 0.0  # Building rotation angle (aligned with road)
@@ -114,7 +134,7 @@ class Building:
     height: float = field(init=False)
 
     def __post_init__(self):
-        """Calculate center point after initialization"""
+        """Calculate center point after initialization."""
         # Use object.__setattr__ to bypass the frozen restriction
         object.__setattr__(
             self,
@@ -124,12 +144,12 @@ class Building:
                 self.bounds.y + self.bounds.height / 2
             )
         )
-        object.__setattr__(self, "width", self.bounds.width)
-        object.__setattr__(self, "height", self.bounds.height)
-        object.__setattr__(self, "rotation", self.bounds.rotation)
+        object.__setattr__(self, 'width', self.bounds.width)
+        object.__setattr__(self, 'height', self.bounds.height)
+        object.__setattr__(self, 'rotation', self.bounds.rotation)
 
     def __hash__(self):
-        """Make Building hashable"""
+        """Make Building hashable."""
         return hash(
             (
                 self.building_type.name,
@@ -142,6 +162,7 @@ class Building:
         )
 
     def to_dict(self):
+        """Convert the building to dictionary representation."""
         return {
             'building_type': self.building_type.to_dict(),
             'bounds': self.bounds.to_dict(),
@@ -149,25 +170,30 @@ class Building:
             'center': self.center.to_dict()
         }
 
+
 @dataclass(frozen=True, eq=True)
 class ElementType:
+    """An element type."""
     name: str
     width: float
     height: float
 
     def __hash__(self):
+        """Return the hash value of the element type."""
         return hash((self.name, self.width, self.height))
-    
+
     def to_dict(self):
+        """Convert the element type to dictionary representation."""
         return {
             'name': self.name,
             'width': self.width,
             'height': self.height
         }
 
+
 @dataclass(frozen=True, eq=True)
 class Element:
-    """A element is a small object that can be placed in the city"""
+    """An element is a small object that can be placed in the city."""
     element_type: ElementType
     bounds: Bounds
     rotation: float = 0.0
@@ -175,7 +201,7 @@ class Element:
     building: Building = None
 
     def __post_init__(self):
-        """Calculate center point after initialization"""
+        """Calculate center point after initialization."""
         # Use object.__setattr__ to bypass the frozen restriction
         object.__setattr__(
             self,
@@ -187,14 +213,14 @@ class Element:
         )
 
     def __hash__(self):
+        """Return the hash value of the element."""
         return hash((self.element_type.name, self.bounds, self.rotation, self.center))
 
     def to_dict(self):
+        """Convert the element to dictionary representation."""
         return {
             'element_type': self.element_type.to_dict(),
             'bounds': self.bounds.to_dict(),
             'rotation': self.rotation,
             'center': self.center.to_dict()
         }
-
-
