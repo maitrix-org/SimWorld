@@ -9,6 +9,8 @@ import os
 import random
 from typing import Dict
 
+from simworld.citygen.dataclass import Building, Segment
+
 
 class DataExporter:
     """Manages the export of city data to various file formats.
@@ -63,6 +65,13 @@ class DataExporter:
                     'rotation': building.bounds.rotation
                 }
             }
+            segment = self.city_generator.building_generator.building_to_segment.get(building)
+            if segment:
+                building_data['segment_assignment'] = {
+                    'start': {'x': segment.start.x, 'y': segment.start.y},
+                    'end': {'x': segment.end.x, 'y': segment.end.y},
+                    'angle': segment.get_angle()
+                }
             buildings_data.append(building_data)
 
         return {'buildings': buildings_data}
@@ -88,6 +97,25 @@ class DataExporter:
                     'rotation': element.bounds.rotation
                 }
             }
+            owner = self.city_generator.element_generator.element_to_owner.get(element)
+            if isinstance(owner, Building):
+                element_data['building_assignment'] = {
+                    'building_type': owner.building_type.name,
+                    'center': {'x': owner.center.x, 'y': owner.center.y},
+                    'bounds': {
+                        'x': owner.bounds.x,
+                        'y': owner.bounds.y,
+                        'width': owner.bounds.width,
+                        'height': owner.bounds.height,
+                        'rotation': owner.bounds.rotation
+                    }
+                }
+            elif isinstance(owner, Segment):
+                element_data['segment_assignment'] = {
+                    'start': {'x': owner.start.x, 'y': owner.start.y},
+                    'end': {'x': owner.end.x, 'y': owner.end.y},
+                    'angle': owner.get_angle()
+                }
             elements_data.append(element_data)
         return {'elements': elements_data}
 
@@ -257,6 +285,7 @@ class DataExporter:
                     }
                 }
             }
+            obj['segment_assignment'] = building['segment_assignment']
             world_data['nodes'].append(obj)
 
         for element in elements_data['elements']:
@@ -282,6 +311,10 @@ class DataExporter:
                     }
                 }
             }
+            if 'building_assignment' in element:
+                obj['building_assignment'] = element['building_assignment']
+            if 'segment_assignment' in element:
+                obj['segment_assignment'] = element['segment_assignment']
             world_data['nodes'].append(obj)
 
         output_file = os.path.join(output_dir, 'progen_world.json')

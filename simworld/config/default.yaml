@@ -8,8 +8,8 @@ simworld:
 citygen:
   input_layout: false
   input_roads: "D:/Projects/SimWorld/input/roadnet.json"
-  input_bounding_boxes: "D:/Projects/SimWorld/input/Bbox.json"
-  output_dir: "output"
+  input_bounding_boxes: "/home/xuhong_he/SimWorld/input/Bbox.json"
+  output_dir: "/home/xuhong_he/SimWorld/output"
   world_json: "D:/Projects/SimWorld/output/progen_world.json"
   ue_asset_path: "D:/Projects/SimWorld/input/ue_assets.json"
 
@@ -30,7 +30,7 @@ citygen:
     building_side_distance: 27
 
   element:
-    generation: false
+    generation: true
     generation_thread_number: 16
     element_building_distance: 10
     element_element_distance: 10
@@ -58,6 +58,13 @@ citygen:
     number: 2
     min_points_per_route: 2
     max_points_per_route: 5
+
+assets_rp:
+  input_descrption_map: "/home/xuhong_he/SimWorld/input/DescriptionMap.json"
+  input_sample_dataset: "/home/xuhong_he/SimWorld/input/sample_dataset"
+  env_description_retrieval_model: "paraphrase-MiniLM-L6-v2"
+  assets_retrieval_model: "openai/clip-vit-large-patch14-336"
+  openai_api_key: "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"
 
 traffic:
   num_vehicles: 10

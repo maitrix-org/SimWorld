@@ -1,0 +1,25 @@
+{
+  "nodes": [
+    {
+      "id": "BP_GEN_SM_street_light_0",
+      "instance_name": "SM_street_light_C",
+      "properties": {
+        "location": {
+          "x": 125.49113363162239,
+          "y": 86.87103017859509,
+          "z": 0
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 94.82,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 0.87,
+          "z": 1.0
+        }
+      }
+    }
+  ]
+}

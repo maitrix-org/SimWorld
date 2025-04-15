@@ -15,7 +15,7 @@ class PriorityQueue:
         """Get segment with minimum t value"""
         if not self.elements:
             return None
-        min_t = float("inf")
+        min_t = float('inf')
         min_idx = 0
 
         for i, segment in enumerate(self.elements):

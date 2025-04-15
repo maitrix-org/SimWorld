@@ -142,6 +142,24 @@ class QuadTree(Generic[T]):
             result = self.items
         return result
 
+    def retrieve_exact(self, query_rect: Bounds) -> List[T]:
+        """Retrieve all items that have an exact intersection with the given rectangle.
+
+        Args:
+            query_rect: The bounding rectangle to query.
+
+        Returns:
+            List of items that intersect with the rectangle.
+        """
+        candidates = self.retrieve(query_rect)
+        candidate_rects = [candidate.bounds for candidate in candidates]
+        result = []
+        for item, item_rect in zip(candidates, candidate_rects):
+            if query_rect.intersects(item_rect):
+                result.append(item)
+        print('result', result)
+        return result
+
     def clear(self):
         """Clear the quadtree, removing all items and resetting to initial state."""
         self.objects = []

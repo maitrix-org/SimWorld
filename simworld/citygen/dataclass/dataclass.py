@@ -29,46 +29,6 @@ class MetaInfo:
     t: float = 0.0
 
 
-@dataclass
-class Segment:
-    """A road segment connecting two points."""
-    start: Point
-    end: Point
-    q: MetaInfo = field(default_factory=MetaInfo)
-
-    def get_angle(self) -> float:
-        """Calculate the angle of the segment in degrees."""
-        dx = self.end.x - self.start.x
-        dy = self.end.y - self.start.y
-        return math.degrees(math.atan2(dy, dx))
-
-    def to_dict(self):
-        """Convert the segment to dictionary representation."""
-        return {
-            'start': self.start.to_dict(),
-            'end': self.end.to_dict()
-        }
-
-
-@dataclass
-class Intersection:
-    """A road intersection."""
-    point: Point
-    segments: List[Segment]
-
-
-@dataclass
-class Route:
-    """A route consisting of multiple points."""
-    points: List[Point]
-    start: Point
-    end: Point
-
-    def __hash__(self):
-        """Return the hash value of the route."""
-        return hash((self.start, self.end))
-
-
 @dataclass(frozen=True, eq=True)
 class Bounds:
     """A bounding box with x, y, width, height, and rotation.
@@ -96,6 +56,76 @@ class Bounds:
             'height': self.height,
             'rotation': self.rotation
         }
+
+    def intersects(self, other: 'Bounds') -> bool:
+        """Checks if two Bounds objects' bounding boxes intersect."""
+        return not (self.x + self.width < other.x or
+                    self.x > other.x + other.width or
+                    self.y + self.height < other.y or
+                    self.y > other.y + other.height)
+
+
+@dataclass
+class Segment:
+    """A road segment connecting two points."""
+    start: Point
+    end: Point
+    q: MetaInfo = field(default_factory=MetaInfo)
+    bounds: Bounds = Bounds(0, 0, 0, 0)
+
+    def get_angle(self) -> float:
+        """Calculate the angle of the segment in degrees."""
+        dx = self.end.x - self.start.x
+        dy = self.end.y - self.start.y
+        return math.degrees(math.atan2(dy, dx))
+
+    def to_dict(self):
+        """Convert the segment to dictionary representation."""
+        return {
+            'start': self.start.to_dict(),
+            'end': self.end.to_dict()
+        }
+
+    def __post_init__(self):
+        """Calculates segment length, sets width, creates Bounds object after Segment initialization."""
+        width = 50
+        length = ((self.end.x - self.start.x) ** 2 + (self.end.y - self.start.y) ** 2) ** 0.5
+        object.__setattr__(self, 'bounds', Bounds(
+            self.start.x - width / 2,
+            self.start.y - length / 2,
+            width,
+            length,
+            self.get_angle()
+        ))
+
+
+@dataclass
+class Intersection:
+    """A road intersection."""
+    point: Point
+    segments: List[Segment]
+
+
+@dataclass
+class Route:
+    """A route consisting of multiple points."""
+    points: List[Point]
+    start: Point
+    end: Point
+    bounds: Bounds = Bounds(0, 0, 0, 0)
+
+    def __hash__(self):
+        """Return the hash value of the route."""
+        return hash((self.start, self.end))
+
+    def __post_init__(self):
+        """Sets the bounds attribute of centered around the start point."""
+        object.__setattr__(self, 'bounds', Bounds(
+            self.start.x - 1,
+            self.start.y - 1,
+            2,
+            2,
+        ))
 
 
 # Building types

@@ -98,3 +98,10 @@ class RoadManager:
 
         new_bounds = self._create_bounds_for_segment(new_segment)
         self.road_quadtree.insert(new_bounds, new_segment)
+
+    def rebuild_quadtree(self):
+        """Rebuild the quadtree."""
+        self.road_quadtree.clear()
+        for segment in self.roads:
+            bounds = self._create_bounds_for_segment(segment)
+            self.road_quadtree.insert(bounds, segment)
