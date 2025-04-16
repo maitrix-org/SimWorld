@@ -95,7 +95,7 @@ class TrafficController:
         _intersections = defaultdict(list)
 
         # Log roads information
-        self.logger.info(f'Found {len(data['roads'])} roads in map file')
+        self.logger.info(f'Found {len(data["roads"])} roads in map file')
         for _, road_data in enumerate(data['roads']):
             start_point = Vector(round(road_data['start']['x'])*100, round(road_data['start']['y'])*100)
             end_point = Vector(round(road_data['end']['x'])*100, round(road_data['end']['y'])*100)
