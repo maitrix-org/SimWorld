@@ -30,6 +30,36 @@ SimWorld leverages Unreal Engine 5's **photorealistic rendering** and **physics 
 
 SimWorld's architecture is designed to be modular and flexible, supporting an array of functionalities such as dynamic world generation, agent control, and performance benchmarking. The components are seamlessly integrated to provide a robust platform for **Embodied AI** and **Agents** research and applications.
 
+## Setup
+### Install
+TODO
+
+### Configuration
+
+SimWorld uses YAML-formatted configuration files for system settings. The configuration files are located in the `./simworld/config` directory, where:
+
+- `default.yaml` serves as the default configuration file
+- `example.yaml` is provided as a template for custom configurations
+
+Users can switch between different configurations by specifying a custom configuration file path through the `Config` class:
+
+To set up your own configuration:
+
+1. Create your custom configuration by copying the example template:
+   ```bash
+   cp ./simworld/config/example.yaml ./simworld/config/your_config.yaml
+   ```
+
+2. Modify the configuration values in `your_config.yaml` according to your needs
+
+3. Load your custom configuration in your code:
+   ```python
+   from simworld.config import Config
+   config = Config('./simworld/config/your_config.yaml')
+   ```
+
+
+
 ## Precommit Setup (For Contributors)
 We use Google docstring format for our docstrings and the pre-commit library to check our code. To install pre-commit, run the following command:
 

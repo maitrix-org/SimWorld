@@ -142,6 +142,18 @@ class Communicator:
         elif state == 'pedestrian walk':
             self.unrealcv.tl_set_pedestrian_walk(name)
 
+    def traffic_signal_set_duration(self, traffic_signal_id, green_duration, yellow_duration, pedestrian_green_duration):
+        """Set traffic signal duration.
+
+        Args:
+            traffic_signal_id: Traffic signal ID.
+            green_duration: Green duration.
+            yellow_duration: Yellow duration.
+            pedestrian_green_duration: Pedestrian green duration.
+        """
+        name = self.get_traffic_signal_name(traffic_signal_id)
+        self.unrealcv.tl_set_duration(name, green_duration, yellow_duration, pedestrian_green_duration)
+
     # Traffic management related methods
     def get_position_and_direction(self, vehicle_ids, pedestrian_ids, traffic_signal_ids):
         """Get position and direction of vehicles, pedestrians, and traffic signals.

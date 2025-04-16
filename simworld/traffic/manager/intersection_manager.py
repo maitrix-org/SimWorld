@@ -69,6 +69,18 @@ class IntersectionManager:
             all_traffic_signals.extend(intersection.pedestrian_lights)
         communicator.spawn_traffic_signals(all_traffic_signals, self.config['traffic.traffic_signal.traffic_light_model_path'], self.config['traffic.traffic_signal.pedestrian_light_model_path'])
 
+    def set_traffic_signal_duration(self, communicator: Communicator):
+        """Set the duration of all traffic signals.
+
+        Args:
+            communicator: Interface for communicating with the simulation environment.
+        """
+        for intersection in self.intersections:
+            for light in intersection.traffic_lights:
+                communicator.traffic_signal_set_duration(light.id, self.config['traffic.traffic_signal.green_light_duration'], self.config['traffic.traffic_signal.yellow_light_duration'], self.config['traffic.traffic_signal.pedestrian_green_light_duration'])
+            for light in intersection.pedestrian_lights:
+                communicator.traffic_signal_set_duration(light.id, self.config['traffic.traffic_signal.green_light_duration'], self.config['traffic.traffic_signal.yellow_light_duration'], self.config['traffic.traffic_signal.pedestrian_green_light_duration'])
+
     def get_intersection_by_lane(self, lane: TrafficLane):
         """Find the intersection that contains a specific lane.
 
