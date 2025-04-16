@@ -222,6 +222,7 @@ class TrafficController:
         try:
             self.logger.info('Starting simulation')
             self.pedestrian_manager.set_pedestrians_max_speed(self.communicator)
+            self.intersection_manager.set_traffic_signal_duration(self.communicator)
 
             while True:
                 self.update_states()

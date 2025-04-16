@@ -16,7 +16,7 @@ class Logger:
     _log_to_console = True
 
     @classmethod
-    def configure(cls, logging_enabled=True, log_to_console=True):
+    def configure(cls, logging_enabled=False, log_to_console=False):
         """Configure global logging settings.
 
         Args:
@@ -43,6 +43,7 @@ class Logger:
         A log file is created with timestamp in the filename.
         """
         if not Logger._initialized:
+            Logger.configure(logging_enabled=False, log_to_console=False)
             # Only initialize logger if logging is enabled in config
             if Logger._logging_enabled:
                 # create logs directory
@@ -55,11 +56,11 @@ class Logger:
 
                 # configure root logger
                 self.logger = logging.getLogger('TrafficSimulation')
-                self.logger.setLevel(Logger._log_level)
+                self.logger.setLevel(logging.DEBUG)
 
                 # file handler
                 file_handler = logging.FileHandler(log_filename)
-                file_handler.setLevel(Logger._log_level)
+                file_handler.setLevel(logging.DEBUG)
 
                 # console handler - only add if enabled in config
                 if Logger._log_to_console:

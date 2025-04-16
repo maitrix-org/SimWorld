@@ -102,6 +102,6 @@ traffic:
     light_radial_offset: 1400
     traffic_light_model_path: "/Game/city_props/BP/props/street_light/BP_street_light.BP_street_light_C"
     pedestrian_light_model_path: "/Game/city_props/BP/props/street_light/BP_street_light_ped.BP_street_light_ped_C"
-    green_light_duration: 6
+    green_light_duration: 20
     yellow_light_duration: 2
-    pedestrian_green_light_duration: 20
+    pedestrian_green_light_duration: 30

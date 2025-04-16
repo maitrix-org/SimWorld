@@ -390,8 +390,8 @@ class UnrealCV(object):
             brake: Brake value.
             steering: Steering value.
         """
+        cmd = f'vbp {object_name} SetState {throttle} {brake} {steering}'
         with self.lock:
-            cmd = f'vbp {object_name} SetState {throttle} {brake} {steering}'
             self.client.request(cmd)
 
     def v_make_u_turn(self, object_name):
@@ -400,8 +400,8 @@ class UnrealCV(object):
         Args:
             object_name: Object name.
         """
+        cmd = f'vbp {object_name} MakeUTurn'
         with self.lock:
-            cmd = f'vbp {object_name} MakeUTurn'
             self.client.request(cmd)
 
     def v_set_states(self, manager_object_name, states: str):
@@ -411,8 +411,8 @@ class UnrealCV(object):
             manager_object_name: Manager object name.
             states: States string.
         """
+        cmd = f'vbp {manager_object_name} VSetState {states}'
         with self.lock:
-            cmd = f'vbp {manager_object_name} VSetState {states}'
             self.client.request(cmd)
 
     def p_set_states(self, manager_object_name, states: str):
@@ -422,8 +422,8 @@ class UnrealCV(object):
             manager_object_name: Manager object name.
             states: States string.
         """
+        cmd = f'vbp {manager_object_name} PSetState {states}'
         with self.lock:
-            cmd = f'vbp {manager_object_name} PSetState {states}'
             self.client.request(cmd)
 
     def p_stop(self, object_name):
@@ -432,8 +432,8 @@ class UnrealCV(object):
         Args:
             object_name: Object name.
         """
+        cmd = f'vbp {object_name} StopPedestrian'
         with self.lock:
-            cmd = f'vbp {object_name} StopPedestrian'
             self.client.request(cmd)
 
     def p_move_forward(self, object_name):
@@ -442,8 +442,8 @@ class UnrealCV(object):
         Args:
             object_name: Object name.
         """
+        cmd = f'vbp {object_name} MoveForward'
         with self.lock:
-            cmd = f'vbp {object_name} MoveForward'
             self.client.request(cmd)
 
     def p_rotate(self, object_name, angle, direction='left'):
@@ -459,8 +459,8 @@ class UnrealCV(object):
         elif direction == 'left':
             angle = -angle
             clockwise = -1
+        cmd = f'vbp {object_name} Rotate_Angle {1} {angle} {clockwise}'
         with self.lock:
-            cmd = f'vbp {object_name} Rotate_Angle {1} {angle} {clockwise}'
             self.client.request(cmd)
 
     def p_set_speed(self, object_name, speed):
@@ -470,8 +470,8 @@ class UnrealCV(object):
             object_name: Object name.
             speed: Speed.
         """
+        cmd = f'vbp {object_name} SetMaxSpeed {speed}'
         with self.lock:
-            cmd = f'vbp {object_name} SetMaxSpeed {speed}'
             self.client.request(cmd)
 
     def get_informations(self, manager_object_name):
@@ -483,8 +483,8 @@ class UnrealCV(object):
         Returns:
             Information string.
         """
+        cmd = f'vbp {manager_object_name} GetInformation'
         with self.lock:
-            cmd = f'vbp {manager_object_name} GetInformation'
             return self.client.request(cmd)
 
     def tl_set_vehicle_green(self, object_name: str):
@@ -493,8 +493,8 @@ class UnrealCV(object):
         Args:
             object_name: Object name.
         """
+        cmd = f'vbp {object_name} SwitchVehicleFrontGreen'
         with self.lock:
-            cmd = f'vbp {object_name} SwitchVehicleFrontGreen'
             self.client.request(cmd)
 
     def tl_set_pedestrian_walk(self, object_name: str):
@@ -503,6 +503,19 @@ class UnrealCV(object):
         Args:
             object_name: Object name.
         """
+        cmd = f'vbp {object_name} SetPedestrianWalk'
         with self.lock:
-            cmd = f'vbp {object_name} SetPedestrianWalk'
+            self.client.request(cmd)
+
+    def tl_set_duration(self, object_name: str, green_duration: float, yellow_duration: float, pedestrian_green_duration: float):
+        """Set traffic light duration.
+
+        Args:
+            object_name: Object name.
+            green_duration: Green duration.
+            yellow_duration: Yellow duration.
+            pedestrian_green_duration: Pedestrian green duration.
+        """
+        cmd = f'vbp {object_name} SetDuration {green_duration} {yellow_duration} {pedestrian_green_duration}'
+        with self.lock:
             self.client.request(cmd)

@@ -113,7 +113,7 @@ class PedestrianManager:
 
                 if crosswalk is not None:
                     pedestrian_light_state, left_time = current_intersection.get_crosswalk_light_state(crosswalk)
-                    if pedestrian_light_state == TrafficSignalState.PEDESTRIAN_GREEN and left_time > 10:
+                    if pedestrian_light_state == TrafficSignalState.PEDESTRIAN_GREEN and left_time > min(15, self.config['traffic.traffic_signal.pedestrian_green_duration']):
                         pedestrian.add_waypoint(waypoints)
                         pedestrian.change_to_next_sidewalk(next_sidewalk)
                         self.logger.debug(f'Pedestrian {pedestrian.id} is moving to Sidewalk {next_sidewalk.id} with waypoints {waypoints}')
