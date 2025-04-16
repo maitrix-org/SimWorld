@@ -69,3 +69,9 @@ class ElementManager:
             self.element_quadtree.remove(element.bounds, element)
         except ValueError:
             print(f'Element {element.element_type.name} not found in elements list')
+
+    def rebuild_quadtree(self):
+        """Rebuild the quadtree."""
+        self.element_quadtree.clear()
+        for element in self.elements:
+            self.element_quadtree.insert(element.bounds, element)

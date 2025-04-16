@@ -32,6 +32,7 @@ class ElementGenerator:
         self.element_manager = ElementManager(config)
         self.element_types = element_types
         self.map_element_offsets = map_element_offsets
+        self.element_to_owner = {}
 
     def _add_elements_around_building(self, building: Building) -> List[Element]:
         """Generate elements around a building.
@@ -232,10 +233,11 @@ class ElementGenerator:
             future_elements = list(executor.map(self._add_elements_around_building, buildings))
 
             # add generated elements to element manager
-            for elements in future_elements:
+            for idx, elements in enumerate(future_elements):
                 for element in elements:
                     if self.element_manager.can_place_element(element.bounds):
                         self.element_manager.add_element(element)
+                        self.element_to_owner[element] = buildings[idx]
 
     def generate_elements_on_road_multithread(self, segments: List[Segment]):
         """Generate elements on roads using multiprocessing.
@@ -245,9 +247,10 @@ class ElementGenerator:
         """
         with ProcessPoolExecutor(max_workers=self.config['citygen.element.generation_thread_number']) as executor:
             future_elements = list(executor.map(self._add_elements_spline_road, segments))
-            for elements in future_elements:
+            for idx, elements in enumerate(future_elements):
                 for element in elements:
                     self.element_manager.add_element(element)
+                    self.element_to_owner[element] = segments[idx]
 
     def generate_elements_around_building(self, building: Building):
         """Generate and add elements around a single building.

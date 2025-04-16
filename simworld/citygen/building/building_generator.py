@@ -25,6 +25,7 @@ class BuildingGenerator:
         self.normal_buildings = [b for b in building_types if not b.is_required]
         self.sorted_buildings = sorted(building_types, key=lambda b: b.width, reverse=True)
         self.required_buildings_count = {b: 0 for b in self.required_buildings}
+        self.building_to_segment = {}
 
     def get_next_building_type(self):
         """Choose the next building type to generate.
@@ -99,6 +100,7 @@ class BuildingGenerator:
                         rotation=rotation,
                     )
                     self.building_manager.add_building(building)
+                    self.building_to_segment[building] = segment
                     if building_type.is_required:
                         self.required_buildings_count[building_type] += 1
 

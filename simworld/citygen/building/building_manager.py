@@ -77,3 +77,9 @@ class BuildingManager:
         """
         self.buildings.remove(building)
         self.building_quadtree.remove(building.bounds, building)
+
+    def rebuild_quadtree(self):
+        """Rebuild the quadtree."""
+        self.building_quadtree.clear()
+        for building in self.buildings:
+            self.building_quadtree.insert(building.bounds, building)
