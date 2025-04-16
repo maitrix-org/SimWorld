@@ -55,7 +55,7 @@ To set up your own configuration:
 3. Load your custom configuration in your code:
    ```python
    from simworld.config import Config
-   config = Config('./simworld/config/your_config.yaml')
+   config = Config('<path_to_your_file>/your_config.yaml')    # use absolute path here
    ```
 
 
