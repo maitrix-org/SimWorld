@@ -79,7 +79,7 @@ class VehicleManager:
                 vehicle.set_attributes(0.05, 0, -1) # throttle = 0, brake = 0, steering = -1
                 vehicle.state = VehicleState.MAKING_U_TURN
 
-            
+
             if vehicle.state == VehicleState.MAKING_U_TURN:
                 if vehicle.completed_u_turn():
                     vehicle.state = VehicleState.MOVING

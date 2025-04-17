@@ -99,3 +99,9 @@ traffic:
     yellow_light_duration: 2
     pedestrian_green_light_duration: 20
 
+user:
+  num_agents: 3
+  speed: 200
+  a2a: True
+  rule_based: True
+  waypoint_distance_threshold: 200
