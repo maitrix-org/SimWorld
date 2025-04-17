@@ -248,4 +248,4 @@ class Vehicle(BaseAgent):
         """
         # Calculate angle between vehicle direction and lane direction
         angle_diff = abs(np.degrees(np.arccos(self.direction.dot(self.current_lane.direction))))
-        return angle_diff < 10
+        return angle_diff < 15
