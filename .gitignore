@@ -401,3 +401,7 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+*.yaml
+!default.yaml
+!example.yaml

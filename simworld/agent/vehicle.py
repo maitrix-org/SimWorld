@@ -1,20 +1,39 @@
-import math
-import numpy as np
+"""Vehicle agent module for simulating vehicles in traffic."""
 from enum import Enum, auto
-from simworld.utils.vector import Vector
-from simworld.utils.traffic_utils import cal_waypoints
+
+import numpy as np
+
 from simworld.agent.base_agent import BaseAgent
 from simworld.traffic.ad_algorithm.pid_controller import PIDController
+from simworld.utils.traffic_utils import cal_waypoints
+from simworld.utils.vector import Vector
+
 
 class VehicleState(Enum):
-    WAITING = auto() # waiting for making u-turn
-    MAKING_U_TURN = auto() # making u-turn
-    MOVING = auto() # moving
-    STOPPED = auto() # stopped for red light or avoiding collision
+    """Enumeration of possible vehicle states."""
+    WAITING = auto()  # waiting for making u-turn
+    MAKING_U_TURN = auto()  # making u-turn
+    MOVING = auto()  # moving
+    STOPPED = auto()  # stopped for red light or avoiding collision
+
 
 class Vehicle(BaseAgent):
+    """Vehicle agent for traffic simulation."""
+
     _id_counter = 0
+
     def __init__(self, position: Vector, direction: Vector, current_lane, vehicle_reference: str, config, length: float = 500, width: float = 200):
+        """Initialize a vehicle agent.
+
+        Args:
+            position: Initial position vector.
+            direction: Initial direction vector.
+            current_lane: Lane where the vehicle starts.
+            vehicle_reference: Reference identifier for the vehicle.
+            config: Configuration dictionary.
+            length: Vehicle length in units.
+            width: Vehicle width in units.
+        """
         super().__init__(position, direction)
         self.id = Vehicle._id_counter
         Vehicle._id_counter += 1
@@ -41,17 +60,27 @@ class Vehicle(BaseAgent):
 
     @classmethod
     def reset_id_counter(cls):
+        """Reset the vehicle ID counter to zero."""
         cls._id_counter = 0
 
     def __str__(self):
-        return f"Vehicle(id={self.id}, position={self.position}, direction={self.direction}, yaw={self.yaw})"
+        """Return a string representation of the vehicle."""
+        return f'Vehicle(id={self.id}, position={self.position}, direction={self.direction}, yaw={self.yaw})'
 
-    
     def __repr__(self):
-        return f"Vehicle(id={self.id}, current_lane={self.current_lane.id}, position={self.position}, direction={self.direction}, yaw={self.yaw}, waypoints={self.waypoints})"
-    
+        """Return a detailed string representation of the vehicle."""
+        return f'Vehicle(id={self.id}, current_lane={self.current_lane.id}, position={self.position}, direction={self.direction}, yaw={self.yaw}, waypoints={self.waypoints})'
+
     def compute_control(self, waypoint, dt):
-        """Compute throttle, brake, steering"""
+        """Compute throttle, brake, steering.
+
+        Args:
+            waypoint: Target waypoint to calculate control values.
+            dt: Time delta for PID controller.
+
+        Returns:
+            tuple: Throttle, brake, steering values, and a boolean indicating control change.
+        """
         target_x, target_y = waypoint.x, waypoint.y
 
         # Compute target yaw
@@ -72,11 +101,11 @@ class Vehicle(BaseAgent):
         lane_start = self.current_lane.start
         vehicle_to_lane = self.position - lane_start
         normal_distance = abs(vehicle_to_lane.cross(lane_direction))
-        
+
         angle_diff = abs(np.degrees(np.arccos(lane_direction.dot(vehicle_direction))))
-        
+
         # Consider both angle difference and normal distance
-        if angle_diff < 3 and normal_distance < self.config['traffic.vehicle.lane_deviation']: 
+        if angle_diff < 3 and normal_distance < self.config['traffic.vehicle.lane_deviation']:
             steering = 0
             self.steering_pid.reset()
         else:
@@ -100,12 +129,25 @@ class Vehicle(BaseAgent):
         self.steering = steering
 
         return throttle, brake, steering, True
-    
+
     def is_close_to_end(self):
+        """Check if the vehicle is close to the end of the current lane.
+
+        Returns:
+            bool: True if vehicle is close to the end of the lane.
+        """
         return self.position.distance(self.current_lane.end) < self.config['traffic.vehicle.distance_to_end'] + self.length / 2
-    
-    # TODO: detect all objects in the world
+
     def is_close_to_object(self, vehicles, pedestrians):
+        """Detect objects in the vehicle's path.
+
+        Args:
+            vehicles: List of vehicles to check for proximity.
+            pedestrians: List of pedestrians to check for proximity.
+
+        Returns:
+            bool: True if the vehicle is close to any object.
+        """
         # Define detection area (cone-shaped area in front of vehicle)
         DETECTION_ANGLE = self.config['traffic.detection_angle']
         PEDESTRIAN_DETECTION_DISTANCE = 2 * self.config['traffic.distance_between_objects'] + self.length / 2
@@ -119,18 +161,18 @@ class Vehicle(BaseAgent):
             # Calculate relative position
             position_diff = vehicle.position - self.position
             distance = self.position.distance(vehicle.position)
-            
+
             # Check if object is in detection cone
             if distance > VEHICLE_DETECTION_DISTANCE:
                 continue
-            
+
             # First check if object is in front of the vehicle using dot product
             if vehicle.direction.dot(self.direction) <= 0:  # object is behind or beside the vehicle
                 continue
-              
+
             # Calculate angle between vehicle direction and position difference
             angle = abs(np.degrees(np.arccos(np.clip(position_diff.normalize().dot(self.direction), -1, 1))))
-            
+
             if angle <= DETECTION_ANGLE:
                 return True
 
@@ -138,18 +180,23 @@ class Vehicle(BaseAgent):
         for pedestrian in pedestrians:
             position_diff = pedestrian.position - self.position
             distance = self.position.distance(pedestrian.position)
-            
+
             if distance > PEDESTRIAN_DETECTION_DISTANCE:
                 continue
-                
+
             angle = abs(np.degrees(np.arccos(np.clip(position_diff.normalize().dot(self.direction), -1, 1))))
-            
+
             if angle <= DETECTION_ANGLE:
                 return True
-        
+
         return False
-    
+
     def change_to_next_lane(self, next_lane):
+        """Change the vehicle's current lane to the next lane.
+
+        Args:
+            next_lane: The lane to change to.
+        """
         self.current_lane.vehicles.remove(self)
         self.current_lane = next_lane
         self.current_lane.vehicles.append(self)
@@ -158,20 +205,47 @@ class Vehicle(BaseAgent):
         self.add_waypoint(waypoints)
 
     def add_waypoint(self, waypoint: list[Vector]):
+        """Add waypoints to the vehicle's path.
+
+        Args:
+            waypoint: List of waypoint vectors to add.
+        """
         self.waypoints.extend(waypoint)
 
     def pop_waypoint(self):
+        """Remove and return the first waypoint.
+
+        Returns:
+            Vector: The first waypoint.
+        """
         return self.waypoints.pop(0)
-    
+
     def set_attributes(self, throttle: float, brake: float, steering: float):
+        """Set the vehicle's control attributes.
+
+        Args:
+            throttle: Throttle value.
+            brake: Brake value.
+            steering: Steering value.
+        """
         self.throttle = throttle
         self.brake = brake
         self.steering = steering
 
     def get_attributes(self):
+        """Get the vehicle's current control attributes.
+
+        Returns:
+            tuple: Current throttle, brake, and steering values.
+        """
         return self.throttle, self.brake, self.steering
 
     def completed_u_turn(self):
+        """Check if the vehicle has completed a U-turn.
+
+        Returns:
+            bool: True if the U-turn is completed.
+        """
         # Calculate angle between vehicle direction and lane direction
         angle_diff = abs(np.degrees(np.arccos(self.direction.dot(self.current_lane.direction))))
-        return angle_diff < 10
+        return angle_diff < 15

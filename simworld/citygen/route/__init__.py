@@ -1,2 +1,11 @@
-from simworld.citygen.route.route_generator import *
-from simworld.citygen.route.route_manager import *
+"""Route generation and management package.
+
+This package provides functionality for generating and managing travel routes in the city.
+It includes tools for creating routes along roads, between points of interest, and
+managing route data for simulation purposes.
+"""
+
+from simworld.citygen.route.route_generator import RouteGenerator
+from simworld.citygen.route.route_manager import RouteManager
+
+__all__ = ['RouteGenerator', 'RouteManager']

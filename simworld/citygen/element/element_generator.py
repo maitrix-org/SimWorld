@@ -1,30 +1,50 @@
+"""Element generation module for the city simulation.
+
+This module provides functionality for generating various elements in the city,
+such as trees, street furniture, and other objects around buildings and roads.
+"""
 import math
 import random
-from typing import List
 from concurrent.futures import ProcessPoolExecutor
+from typing import List
 
-from simworld.citygen.dataclass import (
-    Segment,
-    Building,
-    Bounds,
-    Element
-)
+from simworld.citygen.dataclass import Bounds, Building, Element, Segment
 from simworld.citygen.element.element_manager import ElementManager
 from simworld.utils.bbox_utils import BboxUtils
 from simworld.utils.quadtree import QuadTree
 
 
-
 class ElementGenerator:
+    """Generator for placing elements in the city environment.
+
+    This class is responsible for creating and placing elements such as trees,
+    street furniture, and other decorative objects around buildings and along roads.
+    """
     def __init__(self, config, element_types, map_element_offsets):
+        """Initialize the element generator.
+
+        Args:
+            config: Configuration dictionary with simulation parameters.
+            element_types: List of available element types to generate.
+            map_element_offsets: Mapping of offset distances to element types.
+        """
         self.config = config
         self.element_manager = ElementManager(config)
         self.element_types = element_types
         self.map_element_offsets = map_element_offsets
+        self.element_to_owner = {}
 
     def _add_elements_around_building(self, building: Building) -> List[Element]:
-        """Generate elements around a building
-        Returns a list of generated elements
+        """Generate elements around a building.
+
+        Creates elements at various positions around a building, considering
+        the building's shape and orientation.
+
+        Args:
+            building: The building to place elements around.
+
+        Returns:
+            A list of generated elements.
         """
         elements = []
         DISTANCE = self.config['citygen.element.element_building_distance']
@@ -40,15 +60,14 @@ class ElementGenerator:
                 # Random angle and distance from building
                 distance = DISTANCE
 
-
                 x_offset = random.uniform(-building.width/2 + distance/2, building.width/2 - distance/2)
                 y_offset = random.uniform(-building.height/2 + distance/2, building.height/2 - distance/2)
 
                 x = building_center.x +\
-                    (building.width / 2 * abs(math.cos(building_rotation)) + building.height/ 2 * abs(math.sin(building_rotation)) + distance) * -math.sin(building_rotation) * side +\
+                    (building.width / 2 * abs(math.cos(building_rotation)) + building.height / 2 * abs(math.sin(building_rotation)) + distance) * -math.sin(building_rotation) * side +\
                     (x_offset * abs(math.cos(building_rotation)) + y_offset * abs(math.sin(building_rotation))) * math.cos(building_rotation)
                 y = building_center.y +\
-                    (building.height / 2 * abs(math.cos(building_rotation)) + building.width/ 2 * abs(math.sin(building_rotation)) + distance) * math.cos(building_rotation) * side +\
+                    (building.height / 2 * abs(math.cos(building_rotation)) + building.width / 2 * abs(math.sin(building_rotation)) + distance) * math.cos(building_rotation) * side +\
                     (y_offset * abs(math.cos(building_rotation)) + x_offset * abs(math.sin(building_rotation))) * math.sin(building_rotation)
 
                 element_type = random.choice(self.element_types)
@@ -82,10 +101,10 @@ class ElementGenerator:
                 y_offset = random.uniform(-building.height/2 + distance/2, building.height/2 - distance/2)
 
                 x = building_center.x +\
-                    (building.width / 2 * abs(math.cos(building_rotation)) + building.height/ 2 * abs(math.sin(building_rotation)) + distance) * -math.cos(building_rotation) * side +\
+                    (building.width / 2 * abs(math.cos(building_rotation)) + building.height / 2 * abs(math.sin(building_rotation)) + distance) * -math.cos(building_rotation) * side +\
                     (x_offset * abs(math.cos(building_rotation)) + y_offset * abs(math.sin(building_rotation))) * math.sin(building_rotation)
                 y = building_center.y +\
-                    (building.height / 2 * abs(math.cos(building_rotation)) + building.width/ 2 * abs(math.sin(building_rotation)) + distance) * -math.sin(building_rotation) * side +\
+                    (building.height / 2 * abs(math.cos(building_rotation)) + building.width / 2 * abs(math.sin(building_rotation)) + distance) * -math.sin(building_rotation) * side +\
                     (y_offset * abs(math.cos(building_rotation)) + x_offset * abs(math.sin(building_rotation))) * math.cos(building_rotation)
 
                 element_type = random.choice(self.element_types)
@@ -108,12 +127,20 @@ class ElementGenerator:
                     building=building
                 ))
 
-
         return elements
 
-
     def _add_elements_spline_road(self, segment: Segment):
-        """Generate elements on a spline road"""
+        """Generate elements on a spline road.
+
+        Places elements like trees and street furniture along a road segment,
+        considering both sides of the road.
+
+        Args:
+            segment: The road segment to place elements along.
+
+        Returns:
+            A list of generated elements.
+        """
         # Calculate road properties
         dx = segment.end.x - segment.start.x
         dy = segment.end.y - segment.start.y
@@ -130,7 +157,7 @@ class ElementGenerator:
 
         # Calculate angles based on sorted points
         road_angle = math.atan2(end_point.y - start_point.y, end_point.x - start_point.x)
-        element_angle = road_angle + math.pi/2 
+        element_angle = road_angle + math.pi/2
 
         def generate_elements_for_offset(offset_config, density_config, road_angle, element_angle):
             if offset_config not in self.map_element_offsets or not self.map_element_offsets[offset_config]:
@@ -156,8 +183,8 @@ class ElementGenerator:
             for px, py in positions:
                 element_type = next(
                     (element for element in self.element_types
-                        if element.name == random.choice(self.map_element_offsets[offset_config])),
-                        None
+                     if element.name == random.choice(self.map_element_offsets[offset_config])),
+                    None
                 )
                 if not element_type:
                     continue
@@ -196,34 +223,52 @@ class ElementGenerator:
         )
 
     def generate_elements_around_buildings_multithread(self, buildings: List[Building]):
-        """Generate elements around buildings using multiprocessing"""
+        """Generate elements around buildings using multiprocessing.
+
+        Args:
+            buildings: List of buildings to place elements around.
+        """
         with ProcessPoolExecutor(max_workers=self.config['citygen.element.generation_thread_number']) as executor:
             # generate elements around buildings
             future_elements = list(executor.map(self._add_elements_around_building, buildings))
 
             # add generated elements to element manager
-            for elements in future_elements:
+            for idx, elements in enumerate(future_elements):
                 for element in elements:
                     if self.element_manager.can_place_element(element.bounds):
                         self.element_manager.add_element(element)
+                        self.element_to_owner[element] = buildings[idx]
 
     def generate_elements_on_road_multithread(self, segments: List[Segment]):
-        """Generate elements on roads using multiprocessing"""
+        """Generate elements on roads using multiprocessing.
+
+        Args:
+            segments: List of road segments to place elements along.
+        """
         with ProcessPoolExecutor(max_workers=self.config['citygen.element.generation_thread_number']) as executor:
             future_elements = list(executor.map(self._add_elements_spline_road, segments))
-            for elements in future_elements:
+            for idx, elements in enumerate(future_elements):
                 for element in elements:
                     self.element_manager.add_element(element)
+                    self.element_to_owner[element] = segments[idx]
 
     def generate_elements_around_building(self, building: Building):
-        """Generate and add elements around a single building"""
+        """Generate and add elements around a single building.
+
+        Args:
+            building: The building to place elements around.
+        """
         elements = self._add_elements_around_building(building)
         for element in elements:
             if self.element_manager.can_place_element(element.bounds):
                 self.element_manager.add_element(element)
 
     def filter_elements_by_buildings(self, building_quadtree: QuadTree[Building]):
-        """Filter out elements that overlap with buildings"""
+        """Filter out elements that overlap with buildings.
+
+        Args:
+            building_quadtree: Quadtree containing all buildings for efficient spatial querying.
+        """
         elements_to_remove = []
 
         for element in self.element_manager.elements:

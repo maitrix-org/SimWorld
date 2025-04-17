@@ -1,19 +1,57 @@
+"""Utility module for bounding box calculations and operations.
+
+This module provides functionality for checking intersections between rotated bounding boxes
+and other geometric operations without external dependencies.
+"""
 import math
+
 from simworld.citygen.dataclass import Bounds
 
+
 class BboxUtils:
+    """Utility class for bounding box operations.
+
+    Provides static methods for geometric operations on bounding boxes,
+    particularly for detecting collisions between rotated rectangles.
+    """
     @staticmethod
     def bbox_overlap(a: Bounds, b: Bounds) -> bool:
-        """Check if two rotated bounding boxes overlap without using shapely"""
+        """Check if two rotated bounding boxes overlap without using shapely.
+
+        Args:
+            a: First bounding box.
+            b: Second bounding box.
+
+        Returns:
+            True if the bounding boxes overlap, False otherwise.
+        """
         def rotate_point(cx, cy, x, y, angle):
-            """Rotate a point around a center by a given angle (in radians)"""
+            """Rotate a point around a center by a given angle (in radians).
+
+            Args:
+                cx: Center x coordinate.
+                cy: Center y coordinate.
+                x: Point x coordinate.
+                y: Point y coordinate.
+                angle: Rotation angle in radians.
+
+            Returns:
+                Tuple of rotated (x, y) coordinates.
+            """
             dx, dy = x - cx, y - cy
             rotated_x = cx + dx * math.cos(angle) - dy * math.sin(angle)
             rotated_y = cy + dx * math.sin(angle) + dy * math.cos(angle)
             return rotated_x, rotated_y
 
         def get_corners(bounds):
-            """Get the rotated corners of a bounding box"""
+            """Get the rotated corners of a bounding box.
+
+            Args:
+                bounds: The bounding box.
+
+            Returns:
+                List of corner coordinates as (x, y) tuples.
+            """
             cx = bounds.x + bounds.width / 2
             cy = bounds.y + bounds.height / 2
             w2, h2 = bounds.width / 2, bounds.height / 2
@@ -25,7 +63,16 @@ class BboxUtils:
             return [rotate_point(cx, cy, cx + x, cy + y, angle) for x, y in corners]
 
         def is_point_in_polygon(px, py, polygon):
-            """Check if a point is inside a polygon using the ray-casting method"""
+            """Check if a point is inside a polygon using the ray-casting method.
+
+            Args:
+                px: Point x coordinate.
+                py: Point y coordinate.
+                polygon: List of vertex coordinates forming the polygon.
+
+            Returns:
+                True if the point is inside the polygon, False otherwise.
+            """
             n = len(polygon)
             inside = False
             x1, y1 = polygon[0]
@@ -40,7 +87,17 @@ class BboxUtils:
             return inside
 
         def do_segments_intersect(p1, q1, p2, q2):
-            """Check if two line segments intersect"""
+            """Check if two line segments intersect.
+
+            Args:
+                p1: First point of first segment.
+                q1: Second point of first segment.
+                p2: First point of second segment.
+                q2: Second point of second segment.
+
+            Returns:
+                True if the segments intersect, False otherwise.
+            """
             def orientation(p, q, r):
                 val = (q[1] - p[1]) * (r[0] - q[0]) - (q[0] - p[0]) * (r[1] - q[1])
                 if val == 0:
@@ -91,5 +148,3 @@ class BboxUtils:
                     return True
 
         return False
-
-    

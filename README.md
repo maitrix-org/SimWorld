@@ -9,7 +9,7 @@
     <a href="https://simworld-doc.readthedocs.io/en/latest/"><img src="https://img.shields.io/badge/Documentation-Read%20Docs-green" alt="Documentation" /></a>
 </div>
 
-## 🔥 News 
+## 🔥 News
  - 2025.4 The first formal release of **SimWorld** has been published! 🚀
  - 2025.3 Our demo of **SimWolrd** been accepted by CVPR 2025 Demostration Tack! 🎉
 
@@ -29,6 +29,36 @@ SimWorld leverages Unreal Engine 5's **photorealistic rendering** and **physics 
 ![Architecture](https://github.com/user-attachments/assets/f5f43638-7583-483f-aadc-1ddf5d6ff27a)
 
 SimWorld's architecture is designed to be modular and flexible, supporting an array of functionalities such as dynamic world generation, agent control, and performance benchmarking. The components are seamlessly integrated to provide a robust platform for **Embodied AI** and **Agents** research and applications.
+
+## Setup
+### Install
+TODO
+
+### Configuration
+
+SimWorld uses YAML-formatted configuration files for system settings. The configuration files are located in the `./simworld/config` directory, where:
+
+- `default.yaml` serves as the default configuration file
+- `example.yaml` is provided as a template for custom configurations
+
+Users can switch between different configurations by specifying a custom configuration file path through the `Config` class:
+
+To set up your own configuration:
+
+1. Create your custom configuration by copying the example template:
+   ```bash
+   cp ./simworld/config/example.yaml ./simworld/config/your_config.yaml
+   ```
+
+2. Modify the configuration values in `your_config.yaml` according to your needs
+
+3. Load your custom configuration in your code:
+   ```python
+   from simworld.config import Config
+   config = Config('<path_to_your_file>/your_config.yaml')    # use absolute path here
+   ```
+
+
 
 ## Precommit Setup (For Contributors)
 We use Google docstring format for our docstrings and the pre-commit library to check our code. To install pre-commit, run the following command:

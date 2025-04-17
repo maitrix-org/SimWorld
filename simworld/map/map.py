@@ -1,261 +1,284 @@
+"""Map module: defines Road, Node, Edge, and Map graph structures for navigation."""
+
 import random
-from collections import defaultdict
-from typing import Optional, List
-from utils.Types import Vector
+from collections import defaultdict, deque
+from typing import List, Optional
+
 from Config import Config
-from collections import deque
+from utils.Types import Vector
+
 
 class Road:
+    """Represents a road segment between two points."""
+
     def __init__(self, start: Vector, end: Vector):
+        """Initialize a Road.
+
+        Args:
+            start: Starting position vector.
+            end: Ending position vector.
+        """
         self.start = start
         self.end = end
         self.direction = (end - start).normalize()
         self.length = start.distance(end)
         self.center = (start + end) / 2
 
+
 class Node:
-    def __init__(self, position: Vector, type: str = "normal"):
+    """Graph node with a position and type ('normal' or 'intersection')."""
+
+    def __init__(self, position: Vector, type: str = 'normal'):
+        """Initialize a Node.
+
+        Args:
+            position: Position vector of the node.
+            type: Node type; 'normal' or 'intersection'.
+        """
         self.position = position
-        self.type = type   # "normal" or "intersection"
+        self.type = type
 
-    def __str__(self):
-        return f"Node(position={self.position}, type={self.type})"
+    def __str__(self) -> str:
+        """Return a readable string representation of the node."""
+        return f'Node(position={self.position}, type={self.type})'
 
-    def __repr__(self):
-        return f"Node(position={self.position}, type={self.type})"
+    def __repr__(self) -> str:
+        """Alias for __str__."""
+        return self.__str__()
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
+        """Compare nodes by position."""
         if not isinstance(other, Node):
             return False
         return self.position == other.position
 
-    def __hash__(self):
+    def __hash__(self) -> int:
+        """Hash node by its position."""
         return hash(self.position)
 
+
 class Edge:
+    """Undirected weighted edge between two nodes."""
+
     def __init__(self, node1: Node, node2: Node):
+        """Initialize an Edge.
+
+        Args:
+            node1: First endpoint.
+            node2: Second endpoint.
+        """
         self.node1 = node1
         self.node2 = node2
         self.weight = node1.position.distance(node2.position)
 
-    def __str__(self):
-        return f"Edge(node1={self.node1}, node2={self.node2}, distance={self.weight})"
+    def __str__(self) -> str:
+        """Return a readable string of the edge."""
+        return f'Edge(node1={self.node1}, node2={self.node2}, distance={self.weight})'
 
-    def __repr__(self):
-        return f"Edge(node1={self.node1}, node2={self.node2}, distance={self.weight})"
+    def __repr__(self) -> str:
+        """Alias for __str__."""
+        return self.__str__()
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
+        """Edges are equal if they connect the same positions (unordered)."""
         if not isinstance(other, Edge):
             return False
-        return ((self.node1.position == other.node1.position and
-                self.node2.position == other.node2.position) or
-                (self.node1.position == other.node2.position and
-                self.node2.position == other.node1.position))
+        p1, p2 = self.node1.position, self.node2.position
+        q1, q2 = other.node1.position, other.node2.position
+        return (p1 == q1 and p2 == q2) or (p1 == q2 and p2 == q1)
 
-    def __hash__(self):
-        if self.node1.position.x < self.node2.position.x or \
-            (self.node1.position.x == self.node2.position.x and
-            self.node1.position.y <= self.node2.position.y):
+    def __hash__(self) -> int:
+        """Hash edge by its sorted endpoint positions."""
+        if self.node1.position.x < self.node2.position.x or (
+            self.node1.position.x == self.node2.position.x and
+            self.node1.position.y <= self.node2.position.y
+        ):
             pos1, pos2 = self.node1.position, self.node2.position
         else:
             pos1, pos2 = self.node2.position, self.node1.position
         return hash((pos1, pos2))
 
+
 class Map:
+    """Graph of nodes and edges supporting path queries and random access."""
+
     def __init__(self):
+        """Initialize an empty Map."""
         self.nodes = set()
         self.edges = set()
         self.adjacency_list = defaultdict(list)
 
-    def __str__(self):
-        return f"Nodes: {self.nodes}\nEdges: {self.edges}\n"
+    def __str__(self) -> str:
+        """Return a summary of nodes and edges."""
+        return f'Nodes: {self.nodes}\nEdges: {self.edges}\n'
 
-    def __repr__(self):
+    def __repr__(self) -> str:
+        """Alias for __str__."""
         return self.__str__()
 
-    def add_node(self, node: Node):
+    def add_node(self, node: Node) -> None:
+        """Add a node to the map."""
         self.nodes.add(node)
 
-    def add_edge(self, edge: Edge):
+    def add_edge(self, edge: Edge) -> None:
+        """Add an edge and update adjacency."""
         self.edges.add(edge)
         self.adjacency_list[edge.node1].append(edge.node2)
         self.adjacency_list[edge.node2].append(edge.node1)
 
-    def get_adjacency_list(self):
+    def get_adjacency_list(self) -> dict:
+        """Get the adjacency list mapping each node to its neighbors."""
         return self.adjacency_list
 
-    def get_adjacent_points(self, node: Node):
-        points = [n.position for n in self.adjacency_list[node]]
-        return points
+    def get_adjacent_points(self, node: Node) -> List[Vector]:
+        """Get neighboring node positions for a given node."""
+        return [nbr.position for nbr in self.adjacency_list[node]]
 
-    def has_edge(self, edge: Edge):
+    def get_closest_node(self, position: Vector) -> Node:
+        """Find the node nearest to a given position."""
+        return min(self.nodes, key=lambda n: n.position.distance(position))
+
+    def has_edge(self, edge: Edge) -> bool:
+        """Check if an edge exists in the map."""
         return edge in self.edges
 
-    def get_points(self):
+    def get_points(self) -> List[Vector]:
+        """Return all node positions."""
         return [node.position for node in self.nodes]
 
-    def get_nodes(self):
+    def get_nodes(self) -> set:
+        """Return the set of nodes."""
         return self.nodes
 
-    def get_random_node(self, exclude_pos: Optional[List[Node]] = None):
-        # get a random node that is not an intersection
-        nodes = [node for node in self.nodes if node.type == "normal"]
-        # nodes = list(self.nodes)
+    def get_random_node(self, exclude_pos: Optional[List[Node]] = None) -> Node:
+        """Return a random non-intersection node, optionally excluding some."""
+        candidates = [n for n in self.nodes if n.type == 'normal']
         if exclude_pos:
-            nodes = [node for node in nodes if node not in exclude_pos]
-        return random.choice(nodes)
+            candidates = [n for n in candidates if n not in exclude_pos]
+        return random.choice(candidates)
 
-    def get_random_node_with_distance(self, base_pos: List[Node], exclude_pos: Optional[List[Node]] = None, min_distance: float = 0, max_distance: float = 100000):
-        # get a random node that is not an intersection and is at least min_distance away from any nodes in exclude_pos
-        nodes = [node for node in self.nodes if node.type != "intersection"]
+    def get_random_node_with_distance(
+        self,
+        base_pos: List[Node],
+        exclude_pos: Optional[List[Node]] = None,
+        min_distance: float = 0,
+        max_distance: float = 100000,
+    ) -> Node:
+        """Return a random non-intersection node within distance bounds from a base."""
+        candidates = [n for n in self.nodes if n.type != 'intersection']
         if exclude_pos:
-            nodes = [node for node in nodes if node not in exclude_pos]
-        # get a random node that is at least min_distance away from any nodes in exclude_pos
+            candidates = [n for n in candidates if n not in exclude_pos]
         while True:
-            node = random.choice(nodes)
-            base_node = random.choice(base_pos)
-            if node.position.distance(base_node.position) >= min_distance and node.position.distance(base_node.position) <= max_distance:
+            node = random.choice(candidates)
+            base = random.choice(base_pos)
+            dist = node.position.distance(base.position)
+            if min_distance <= dist <= max_distance:
                 return node
 
-    def get_random_node_with_edge_distance(self, base_pos: List[Node], exclude_pos: Optional[List[Node]] = None, min_distance: float = 0, max_distance: float = 200):
-        # get a random node that is at least min_distance away from any nodes in exclude_pos
-        nodes = [node for node in self.nodes if node.type != "intersection"]
+    def get_random_node_with_edge_distance(
+        self,
+        base_pos: List[Node],
+        exclude_pos: Optional[List[Node]] = None,
+        min_distance: int = 0,
+        max_distance: int = 200,
+    ) -> Node:
+        """Return a random non-intersection node at a given edge-count distance."""
+        candidates = [n for n in self.nodes if n.type != 'intersection']
         if exclude_pos:
-            nodes = [node for node in nodes if node not in exclude_pos]
-        base_node = random.choice(base_pos)
-        target_distance = random.choice(range(min_distance, max_distance))
+            candidates = [n for n in candidates if n not in exclude_pos]
+        start = random.choice(base_pos)
+        target = random.randint(min_distance, max_distance)
 
-        # dfs with correct distance tracking
-        def dfs(node, current_distance, visited):
-            if current_distance == target_distance and node.type != "intersection":
+        def dfs(node: Node, d: int, visited: set) -> Optional[Node]:
+            if d == target and node.type != 'intersection':
                 return node
             visited.add(node)
-            for neighbor in self.adjacency_list[node]:
-                if neighbor not in visited and neighbor.type != "intersection":
-                    result = dfs(neighbor, current_distance + 1, visited)
-                    if result is not None:
-                        return result
-            visited.remove(node)  # backtrack
+            for nbr in self.adjacency_list[node]:
+                if nbr not in visited and nbr.type != 'intersection':
+                    found = dfs(nbr, d + 1, visited)
+                    if found:
+                        return found
+            visited.remove(node)
             return None
 
-        visited = set()
-        result = dfs(base_node, 0, visited)
-        # 如果找不到符合条件的节点，返回一个随机节点
-        if result is None:
-            # 尝试找到一个距离目标距离最近的节点
-            closest_node = None
-            min_diff = float('inf')
-            # 使用BFS找到所有可达节点
-            queue = deque([(base_node, 0)])
-            all_visited = {base_node}
-            while queue:
-                current_node, distance = queue.popleft()
-                diff = abs(distance - target_distance)
+        result = dfs(start, 0, set())
+        if result:
+            return result
 
-                if diff < min_diff and current_node.type != "intersection":
-                    min_diff = diff
-                    closest_node = current_node
+        # fallback: closest by BFS
+        closest = None
+        best_diff = float('inf')
+        queue = deque([(start, 0)])
+        seen = {start}
+        while queue:
+            node, dist = queue.popleft()
+            diff = abs(dist - target)
+            if diff < best_diff and node.type != 'intersection':
+                best_diff = diff
+                closest = node
+            for nbr in self.adjacency_list[node]:
+                if nbr not in seen and nbr.type != 'intersection':
+                    seen.add(nbr)
+                    queue.append((nbr, dist + 1))
+        if closest:
+            return closest
+        return random.choice(candidates)
 
-                for neighbor in self.adjacency_list[current_node]:
-                    if neighbor not in all_visited and neighbor.type != "intersection":
-                        all_visited.add(neighbor)
-                        queue.append((neighbor, distance + 1))
+    def get_supply_points(self) -> List[Vector]:
+        """Return positions of supply nodes."""
+        return [n.position for n in self.nodes if n.type == 'supply']
 
-            # 如果找到了最近的节点，返回它
-            if closest_node is not None:
-                return closest_node
-
-            # 如果仍然没有找到节点，返回一个随机节点
-            if nodes:
-                return random.choice(nodes)
-            else:
-                # 如果nodes为空，返回base_node
-                return base_node
-
-        return result
-
-    def get_supply_points(self):
-        return [node.position for node in self.nodes if node.type == "supply"]
-
-    def connect_adjacent_roads(self):
-        """
-        Connect nodes from adjacent roads that are close to each other
-        """
+    def connect_adjacent_roads(self) -> None:
+        """Link nodes from nearby roads within a threshold."""
         nodes = list(self.nodes)
-        connection_threshold = Config.SIDEWALK_OFFSET * 2 + 100   # Reasonable threshold for connecting nearby nodes
-
-
+        threshold = Config.SIDEWALK_OFFSET * 2 + 100
         for i in range(len(nodes)):
-            for j in range(i+1, len(nodes)):
-                node1 = nodes[i]
-                node2 = nodes[j]
+            for j in range(i + 1, len(nodes)):
+                n1, n2 = nodes[i], nodes[j]
+                if (n1.position.distance(n2.position) < threshold and
+                        not self.has_edge(Edge(n1, n2))):
+                    self.add_edge(Edge(n1, n2))
 
-                # If nodes are close enough and not already connected
-                if (node1.position.distance(node2.position) < connection_threshold and
-                    not self.has_edge(Edge(node1, node2))):
-                    self.add_edge(Edge(node1, node2))
-
-    def interpolate_nodes(self):
-        """
-        Interpolate nodes between existing nodes to create a smoother map
-        """
-        current_edges = list(self.edges)
-
-        for edge in current_edges:
-            distance = edge.weight
-            num_points = int(distance / (2 * Config.SIDEWALK_OFFSET))
-
-            if num_points <= 1:
+    def interpolate_nodes(self) -> None:
+        """Insert intermediate nodes along existing edges."""
+        edges = list(self.edges)
+        for edge in edges:
+            num_pts = int(edge.weight / (2 * Config.SIDEWALK_OFFSET))
+            if num_pts <= 1:
                 continue
-
             direction = (edge.node2.position - edge.node1.position).normalize()
-
+            idx = random.randint(2, num_pts - 2) if num_pts > 1 else None
             new_nodes = []
-            
-            supply_point_index = random.randint(2, num_points - 2) if num_points > 1 else None
-
-            for i in range(1, num_points + 1):
-                new_point = edge.node1.position + direction * (i * 2 * Config.SIDEWALK_OFFSET)
-                node_type = "supply" if i == supply_point_index else "normal"
-                new_node = Node(new_point, type=node_type)
-                self.add_node(new_node)
-                new_nodes.append(new_node)
-
+            for k in range(1, num_pts + 1):
+                pt = edge.node1.position + direction * (k * 2 * Config.SIDEWALK_OFFSET)
+                ntype = 'supply' if k == idx else 'normal'
+                nd = Node(pt, type=ntype)
+                self.add_node(nd)
+                new_nodes.append(nd)
+            # remove old edge
             self.edges.remove(edge)
             self.adjacency_list[edge.node1].remove(edge.node2)
             self.adjacency_list[edge.node2].remove(edge.node1)
+            chain = [edge.node1] + new_nodes + [edge.node2]
+            for a, b in zip(chain, chain[1:]):
+                self.add_edge(Edge(a, b))
 
-            all_nodes = [edge.node1] + new_nodes + [edge.node2]
-            for i in range(len(all_nodes) - 1):
-                self.add_edge(Edge(all_nodes[i], all_nodes[i + 1]))
-
-    def get_edge_distance_between_two_points(self, point1: Node, point2: Node) -> int:
-        """Calculate the minimum edge distance between two points using BFS.
-        Args:
-            point1: Starting node
-            point2: Target node
-
-        Returns:
-            The minimum number of edges between the two points
-        """
+    def get_edge_distance_between_two_points(
+        self,
+        point1: Node,
+        point2: Node,
+    ) -> int:
+        """Return the minimum number of edges between two nodes using BFS."""
         if point1 == point2:
             return 0
-
-        queue = deque([(point1, 0)])  # (node, distance) pairs
-        visited = {point1}
-
+        queue = deque([(point1, 0)])
+        seen = {point1}
         while queue:
-            current_point, distance = queue.popleft()
-
-            # Check if we've reached the target
-            if current_point == point2:
-                return distance
-
-            # Explore neighbors
-            for neighbor in self.adjacency_list[current_point]:
-                if neighbor not in visited:
-                    visited.add(neighbor)
-                    queue.append((neighbor, distance + 1))
-
-        # If we get here, no path was found
-        raise ValueError(f"No path found between {point1} and {point2}")
+            node, dist = queue.popleft()
+            if node == point2:
+                return dist
+            for nbr in self.adjacency_list[node]:
+                if nbr not in seen:
+                    seen.add(nbr)
+                    queue.append((nbr, dist + 1))
+        raise ValueError(f'No path found between {point1} and {point2}')
