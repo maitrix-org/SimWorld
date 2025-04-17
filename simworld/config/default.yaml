@@ -3,6 +3,7 @@ simworld:
   dt: 0.1
   enable_logging: false
   enable_console_logging: false
+  ue_manager_path: "/Game/TrafficSystem/UE_Manager.UE_Manager_C"
 
 
 citygen:
@@ -79,7 +80,6 @@ traffic:
   sidewalk_offset: 1700
   crosswalk_offset: 1700
   steering_point_num: 12
-  traffic_manager_path: "/Game/TrafficSystem/TrafficManager.TrafficManager_C"
 
   pedestrian:
     max_speed: 200

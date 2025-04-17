@@ -150,7 +150,6 @@ class TrafficController:
             self.spawn_vehicles()
             self.spawn_pedestrians()
             self.spawn_traffic_signals()
-            self.spawn_traffic_manager()
         except Exception as e:
             print(f'Error occurred in {__file__}:{e.__traceback__.tb_lineno}')
             print(f'Error type: {type(e).__name__}')
@@ -172,11 +171,6 @@ class TrafficController:
         """Spawn traffic signals in the simulation environment."""
         self.intersection_manager.spawn_traffic_signals(self.communicator)
         print('Traffic signals spawned')
-
-    def spawn_traffic_manager(self):
-        """Spawn the traffic manager in the simulation environment."""
-        self.communicator.spawn_traffic_manager(self.config['traffic.traffic_manager_path'])
-        print('Traffic manager spawned')
 
     # Reset
     def reset(self, num_vehicles: int, num_pedestrians: int, map: str):

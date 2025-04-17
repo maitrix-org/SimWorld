@@ -78,6 +78,10 @@ class Activity2Action:
         )
         self.logger.info(f'Response: {response}')
 
+        if response is None:
+            self.logger.error('Parse failed, response is None')
+            return
+
         data = json.loads(response)
         actions = data['actions']
         waypoints: List[Vector] = []

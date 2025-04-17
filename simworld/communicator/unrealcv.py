@@ -474,19 +474,6 @@ class UnrealCV(object):
         with self.lock:
             self.client.request(cmd)
 
-    def get_informations(self, manager_object_name):
-        """Get information.
-
-        Args:
-            manager_object_name: Manager object name.
-
-        Returns:
-            Information string.
-        """
-        cmd = f'vbp {manager_object_name} GetInformation'
-        with self.lock:
-            return self.client.request(cmd)
-
     def tl_set_vehicle_green(self, object_name: str):
         """Set vehicle traffic light to green.
 
@@ -519,3 +506,79 @@ class UnrealCV(object):
         cmd = f'vbp {object_name} SetDuration {green_duration} {yellow_duration} {pedestrian_green_duration}'
         with self.lock:
             self.client.request(cmd)
+
+    def get_informations(self, manager_object_name):
+        """Get information.
+
+        Args:
+            manager_object_name: Name of the manager object to get information from.
+
+        Returns:
+            str: Information string containing the current state of the environment.
+        """
+        cmd = f'vbp {manager_object_name} GetInformation'
+        with self.lock:
+            return self.client.request(cmd)
+
+    def update_ue_manager(self, manager_object_name):
+        """Update UE manager.
+
+        Args:
+            manager_object_name: Name of the manager object to update.
+        """
+        cmd = f'vbp {manager_object_name} UpdateObjects'
+        with self.lock:
+            self.client.request(cmd)
+
+    #
+    # User Agent Methods
+    #
+
+    def agent_move_forward(self, object_name):
+        """Move agent forward.
+
+        Args:
+            object_name: Name of the agent object to move forward.
+        """
+        cmd = f'vbp {object_name} MoveForward'
+        with self.lock:
+            self.client.request(cmd)
+
+    def agent_rotate(self, object_name, angle, direction='left'):
+        """Rotate agent.
+
+        Args:
+            object_name: Name of the agent object to rotate.
+            angle: Rotation angle in degrees.
+            direction: Direction of rotation, either 'left' or 'right'. Defaults to 'left'.
+        """
+        if direction == 'right':
+            clockwise = 1
+        elif direction == 'left':
+            angle = -angle
+            clockwise = -1
+        cmd = f'vbp {object_name} Rotate_Angle {1} {angle} {clockwise}'
+        with self.lock:
+            self.client.request(cmd)
+
+    def agent_stop(self, object_name):
+        """Stop agent.
+
+        Args:
+            object_name: Name of the agent object to stop.
+        """
+        cmd = f'vbp {object_name} StopAgent'
+        with self.lock:
+            self.client.request(cmd)
+
+    def agent_step_forward(self, object_name, duration):
+        """Step forward.
+
+        Args:
+            object_name: Name of the agent object to step forward.
+            duration: Duration of the step forward movement in seconds.
+        """
+        cmd = f'vbp {object_name} StepForward {duration}'
+        with self.lock:
+            self.client.request(cmd)
+        time.sleep(duration)

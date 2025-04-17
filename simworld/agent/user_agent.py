@@ -6,7 +6,6 @@ from typing import List, Tuple
 from simworld.activity2action.a2a import Activity2Action
 from simworld.agent.base_agent import BaseAgent
 from simworld.communicator.user_communicator import UserCommunicator
-from simworld.config import Config
 from simworld.llm.base_llm import BaseLLM
 from simworld.map.map import Map
 from simworld.prompt.prompt import user_system_prompt, user_user_prompt
@@ -24,7 +23,7 @@ class UserAgent(BaseAgent):
         direction: Vector,
         map: Map,
         communicator: UserCommunicator,
-        model: str = 'meta-llama/llama-3.3-70b-instruct',
+        model: BaseLLM,
         speed: float = 100,
         use_a2a: bool = False,
         use_rule_based: bool = False,
@@ -47,11 +46,7 @@ class UserAgent(BaseAgent):
         self.communicator = communicator
         self.map: Map = map
         self.a2a = None
-        self.llm = BaseLLM(
-            model_name=model,
-            url='https://openrouter.ai/api/v1',
-            api_key='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',
-        )
+        self.llm = model
         if use_a2a:
             self.a2a = Activity2Action(self, model=self.llm, rule_based=use_rule_based)
 
@@ -60,7 +55,7 @@ class UserAgent(BaseAgent):
 
         self.last_state: Tuple[Vector, str] = (self.position, 'do nothing')
         self.waypoints: List[Vector] = []
-        self.config = config if config else Config()
+        self.config = config
 
         self.logger = logging.getLogger(__name__)
         self.logger.setLevel(logging.INFO)

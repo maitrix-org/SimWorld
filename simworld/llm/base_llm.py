@@ -34,7 +34,6 @@ class BaseLLM:
         )
         self.model_name = model_name
 
-    @retry_llm_call()
     def generate_text(
         self,
         system_prompt: str,
@@ -42,7 +41,7 @@ class BaseLLM:
         max_tokens: int = 2048,
         temperature: float = 0.5,
         top_p: float = None,
-    ) -> str:
+    ) -> str | None:
         """Generate text using the language model.
 
         Args:
@@ -53,8 +52,29 @@ class BaseLLM:
             top_p: Top p sampling parameter.
 
         Returns:
-            Generated text response.
+            Generated text response or None if generation fails.
         """
+        try:
+            response = self._generate_text_with_retry(
+                system_prompt,
+                user_prompt,
+                max_tokens,
+                temperature,
+                top_p
+            )
+            return response
+        except Exception:
+            return None
+
+    @retry_llm_call()
+    def _generate_text_with_retry(
+        self,
+        system_prompt: str,
+        user_prompt: str,
+        max_tokens: int = 2048,
+        temperature: float = 0.5,
+        top_p: float = None,
+    ) -> str:
         response = self.client.chat.completions.create(
             model=self.model_name,
             messages=[
@@ -67,7 +87,6 @@ class BaseLLM:
         )
         return response.choices[0].message.content
 
-    @retry_llm_call()
     def generate_text_structured(
         self,
         system_prompt: str,
@@ -77,7 +96,7 @@ class BaseLLM:
         max_tokens: int = 2048,
         temperature: float = 0.5,
         top_p: float = None,
-    ) -> str:
+    ) -> str | None:
         """Generate structured text output using a Pydantic model.
 
         Args:
@@ -90,8 +109,33 @@ class BaseLLM:
             top_p: Top p sampling parameter.
 
         Returns:
-            JSON string matching the specified format.
+            JSON string matching the specified format or None if generation fails.
         """
+        try:
+            response = self._generate_text_structured_with_retry(
+                system_prompt,
+                user_prompt,
+                output_format,
+                few_shot_examples,
+                max_tokens,
+                temperature,
+                top_p
+            )
+            return response
+        except Exception:
+            return None
+
+    @retry_llm_call()
+    def _generate_text_structured_with_retry(
+        self,
+        system_prompt: str,
+        user_prompt: str,
+        output_format: str,
+        few_shot_examples: str = '',
+        max_tokens: int = 2048,
+        temperature: float = 0.5,
+        top_p: float = None,
+    ) -> str:
         format_message = (
             f'You must respond with a valid JSON object that matches the following structure: '
             f'{output_format}'
@@ -110,22 +154,19 @@ class BaseLLM:
             response_format={'type': 'json_object'},
             top_p=top_p,
         )
+        content = response.choices[0].message.content
         try:
-            content = response.choices[0].message.content
-            try:
-                parsed = json.loads(content)
-                return json.dumps(parsed)
-            except json.JSONDecodeError:
-                if '```json' in content and '```' in content:
-                    block = content.split('```json')[1].split('```')[0].strip()
-                    try:
-                        json.loads(block)
-                        return block
-                    except json.JSONDecodeError:
-                        raise LLMResponseParsingError('Invalid JSON in markdown block')
-                raise LLMResponseParsingError('No JSON or markdown JSON block found')
-        except Exception as e:
-            raise LLMResponseParsingError(f'Failed to parse LLM response: {e}')
+            parsed = json.loads(content)
+            return json.dumps(parsed)
+        except json.JSONDecodeError:
+            if '```json' in content and '```' in content:
+                block = content.split('```json')[1].split('```')[0].strip()
+                try:
+                    json.loads(block)
+                    return block
+                except json.JSONDecodeError:
+                    raise LLMResponseParsingError('Invalid JSON in markdown block')
+            raise LLMResponseParsingError('No JSON or markdown JSON block found')
 
 
 if __name__ == '__main__':
@@ -143,12 +184,11 @@ if __name__ == '__main__':
     0: navigate
     1: pickup
     2: drop
-    output as format
     """
     llm = BaseLLM(
         model_name='meta-llama/llama-3.3-70b-instruct',
         url='https://openrouter.ai/api/v1',
-        api_key='sk-or-v1-...'
+        api_key='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'
     )
     resp = llm.generate_text_structured(system_prompt, user_prompt, fmt)
     print(f'Response: {resp}')
