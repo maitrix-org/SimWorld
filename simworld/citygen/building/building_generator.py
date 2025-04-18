@@ -20,7 +20,7 @@ class BuildingGenerator:
         self.config = config
         self.building_manager = BuildingManager(self.config)
         self.sorted_buildings = sorted(building_types, key=lambda b: b.width, reverse=True)
-        # 将 required_buildings_count 改为 building_counts
+
         self.building_counts = {b: 0 for b in building_types}
         self.building_to_segment = {}
 
@@ -104,7 +104,7 @@ class BuildingGenerator:
                     + side * perpendicular_dy * offset
                 )
 
-                rotation = (math.degrees(math.atan2(dy, dx)) + (180 if side == -1 else 0)) % 360
+                rotation = (math.degrees(math.atan2(dy, dx)) + (180 if side == 1 else 0)) % 360
                 building_bounds = Bounds(x - building_type.width / 2, y - building_type.height / 2, building_type.width, building_type.height, rotation)
 
                 if self.building_manager.can_place_building(building_bounds) and not self.check_building_road_overlap(building_bounds, road_quadtree):
