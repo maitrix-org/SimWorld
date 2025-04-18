@@ -226,8 +226,8 @@ class Communicator:
         """
         return f'GEN_BP_TrafficSignal_{traffic_signal_id}'
 
-    # Traffic management related methods
-    def get_position_and_direction(self, vehicle_ids, pedestrian_ids, traffic_signal_ids, agent_ids=[]):
+    # Management related methods
+    def get_position_and_direction(self, vehicle_ids=[], pedestrian_ids=[], traffic_signal_ids=[], agent_ids=[]):
         """Get position and direction of vehicles, pedestrians, and traffic signals.
 
         Args:

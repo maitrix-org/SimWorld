@@ -3,6 +3,7 @@
 import json
 import os
 import re
+import time
 
 import openai
 
@@ -54,6 +55,7 @@ class BaseLLM:
         Returns:
             Generated text response or None if generation fails.
         """
+        start_time = time.time()
         try:
             response = self._generate_text_with_retry(
                 system_prompt,
@@ -62,9 +64,9 @@ class BaseLLM:
                 temperature,
                 top_p
             )
-            return response
+            return response, time.time() - start_time
         except Exception:
-            return None
+            return None, time.time() - start_time
 
     @retry_llm_call()
     def _generate_text_with_retry(
@@ -111,6 +113,7 @@ class BaseLLM:
         Returns:
             JSON string matching the specified format or None if generation fails.
         """
+        start_time = time.time()
         try:
             response = self._generate_text_structured_with_retry(
                 system_prompt,
@@ -121,9 +124,9 @@ class BaseLLM:
                 temperature,
                 top_p
             )
-            return response
+            return response, time.time() - start_time
         except Exception:
-            return None
+            return None, time.time() - start_time
 
     @retry_llm_call()
     def _generate_text_structured_with_retry(
