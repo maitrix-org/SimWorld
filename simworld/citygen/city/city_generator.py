@@ -179,10 +179,11 @@ class CityGenerator:
         ELEMENT_COLORS = {}
 
         for name, building in buildings.items():
-            x = building['bbox']['x'] / 100     # scaling for easy generation
+            x = building['bbox']['x'] / 100
             y = building['bbox']['y'] / 100
+            num_limit = building.get('num_limit', -1)
 
-            BUILDING_TYPES.append(BuildingType(name, x, y, is_required='Building' not in name))
+            BUILDING_TYPES.append(BuildingType(name, x, y, num_limit))
             BUILDING_COLORS[name] = '#{:06x}'.format(random.randint(0, 0xFFFFFF))
 
         for name, element in elements.items():
