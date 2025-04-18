@@ -8,7 +8,7 @@ setup(
     author='SimWorld Team',
     author_email='example@example.com',
     description='A simulation framework for urban environments and traffic',
-    long_description=open('README.md').read(),
+    long_description=open('README.md', encoding='utf-8').read(),
     long_description_content_type='text/markdown',
     url='https://github.com/example/simworld',
     packages=find_packages(),
