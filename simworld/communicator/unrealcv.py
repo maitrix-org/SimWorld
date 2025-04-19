@@ -582,3 +582,14 @@ class UnrealCV(object):
         with self.lock:
             self.client.request(cmd)
         time.sleep(duration)
+
+    def agent_set_speed(self, object_name, speed):
+        """Set agent speed.
+
+        Args:
+            object_name: Name of the agent object to set speed.
+            speed: Speed to set.
+        """
+        cmd = f'vbp {object_name} SetMaxSpeed {speed}'
+        with self.lock:
+            self.client.request(cmd)

@@ -69,6 +69,15 @@ class Communicator:
         """
         self.unrealcv.agent_step_forward(self.get_agent_name(agent_id), duration)
 
+    def agent_set_speed(self, agent_id, speed):
+        """Set agent speed.
+
+        Args:
+            agent_id: Agent ID.
+            speed: Speed.
+        """
+        self.unrealcv.agent_set_speed(self.get_agent_name(agent_id), speed)
+
     def get_agent_name(self, agent_id):
         """Get agent name.
 
