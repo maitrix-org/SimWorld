@@ -7,7 +7,6 @@ from typing import Tuple
 from simworld.activity2action.a2a import Activity2Action
 from simworld.agent.base_agent import BaseAgent
 from simworld.communicator import UnrealCV
-from simworld.config import Config
 from simworld.llm.base_llm import BaseLLM
 from simworld.map.map import Map
 from simworld.prompt.prompt import user_system_prompt, user_user_prompt
@@ -29,7 +28,6 @@ class UserAgent(BaseAgent):
         speed: float = 100,
         use_a2a: bool = False,
         use_rule_based: bool = False,
-        config=None,
     ):
         """Initialize the UserAgent.
 
@@ -42,7 +40,6 @@ class UserAgent(BaseAgent):
             speed: Movement speed parameter.
             use_a2a: Whether to enable Activity2Action planning.
             use_rule_based: Whether to use rule-based navigation in A2A.
-            config: Optional configuration overrides.
         """
         super().__init__(position, direction)
         self.communicator = communicator
@@ -60,7 +57,6 @@ class UserAgent(BaseAgent):
             self.a2a = Activity2Action(user_agent=self, name=self.communicator.get_agent_name(self.id), model=self.llm, rule_based=use_rule_based)
 
         self.last_state: Tuple[Vector, str] = (self.position, 'do nothing')
-        self.config = config if config else Config()
 
         self.logger = logging.getLogger(__name__)
         self.logger.setLevel(logging.INFO)

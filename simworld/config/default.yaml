@@ -5,7 +5,6 @@ simworld:
   enable_console_logging: false
   ue_manager_path: "/Game/TrafficSystem/UE_Manager.UE_Manager_C"
 
-
 citygen:
   input_layout: false
   input_roads: "/LLMDelivery/SimWorld/input/roads.json"
@@ -111,6 +110,10 @@ user:
   speed: 200
   a2a: True
   rule_based: True
+  input_roads: "D:/Projects/SimWorld/output/roads.json"
   waypoint_distance_threshold: 200
   model_path: "/Game/TrafficSystem/Pedestrian/Base_User_Agent.Base_User_Agent_C"
   num_threads: 20
+
+map:
+  input_roads: "D:/Projects/SimWorld/output/roads.json"

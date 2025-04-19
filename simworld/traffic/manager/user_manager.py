@@ -10,7 +10,7 @@ from typing import List
 
 from simworld.agent.user_agent import UserAgent
 from simworld.communicator import Communicator, UnrealCV
-from simworld.map.map import Edge, Map, Node
+from simworld.map.map import Map
 from simworld.utils.logger import Logger
 from simworld.utils.vector import Vector
 
@@ -30,11 +30,11 @@ class Road:
 class UserManager:
     """Manage multiple UserAgent instances in the simulation."""
 
-    def __init__(self, num_agent: int, config):
+    def __init__(self, num_agent: int, config, traffic_signals: list = None):
         """Initialize UserManager with agent count and configuration."""
         self.num_agent = num_agent
         self.config = config
-        self.map = Map(self.config)
+        self.map = Map(self.config, traffic_signals)
         self.agent: List[UserAgent] = []
         self.model_path = self.config['simworld.ue_manager_path']
         self.agent_path = self.config['user.model_path']
@@ -61,7 +61,7 @@ class UserManager:
     def initialize(self):
         """Load roads, construct map nodes/edges, and spawn agents."""
         self.init_communicator()
-        roads_file = os.path.join(self.config['citygen.input_roads'])
+        roads_file = os.path.join(self.config['user.input_roads'])
         with open(roads_file, 'r') as f:
             roads_data = json.load(f)
 
@@ -71,25 +71,6 @@ class UserManager:
             start = Vector(road['start']['x'] * 100, road['start']['y'] * 100)
             end = Vector(road['end']['x'] * 100, road['end']['y'] * 100)
             road_objects.append(Road(start, end))
-
-        for road in road_objects:
-            normal = Vector(road.direction.y, -road.direction.x)
-            offset = self.config['traffic.sidewalk_offset']
-            p1 = road.start - normal * offset + road.direction * offset
-            p2 = road.end - normal * offset - road.direction * offset
-            p3 = road.end + normal * offset - road.direction * offset
-            p4 = road.start + normal * offset + road.direction * offset
-
-            nodes = [Node(point, 'intersection') for point in (p1, p2, p3, p4)]
-            for node in nodes:
-                self.map.add_node(node)
-
-            self.map.add_edge(Edge(nodes[0], nodes[1]))
-            self.map.add_edge(Edge(nodes[2], nodes[3]))
-            self.map.add_edge(Edge(nodes[0], nodes[3]))
-            self.map.add_edge(Edge(nodes[1], nodes[2]))
-
-        self.map.connect_adjacent_roads()
 
         for _ in range(self.num_agent):
             road = random.choice(road_objects)

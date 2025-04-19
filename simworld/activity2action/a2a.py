@@ -155,15 +155,18 @@ class Activity2Action:
 
     def navigate(self, waypoint: Vector) -> None:
         """Navigate from current position to a given waypoint."""
-        self.logger.info(f'Agent {self.agent.id} Next waypoint: {waypoint}')
-        print(f'Agent {self.agent.id} Next waypoint: {waypoint}', flush=True)
-        path = self.shortest_path(self.agent.position, waypoint)
-        print(f'Agent {self.agent.id} Shortest Path: {path}', flush=True)
-        for point in path:
-            if self.rule_based:
+        self.logger.info(f'Agent {self.agent.id} Target waypoint: {waypoint}')
+        print(f'Agent {self.agent.id} Target waypoint: {waypoint}', flush=True)
+
+        if self.rule_based:
+            # Get the shortest path from current position to the target waypoint
+            path = self.shortest_path(self.agent.position, waypoint)
+            print(f'Agent {self.agent.id} Shortest Path: {path}', flush=True)
+            for point in path:
+                # TODO: check if the point is an intersection
                 self.navigate_rule_based(point)
-            else:
-                self.navigate_vision_based()
+        else:
+            self.navigate_vision_based()
 
     def navigate_rule_based(self, waypoint: Vector) -> None:
         """Rule-based steering and movement toward a waypoint."""

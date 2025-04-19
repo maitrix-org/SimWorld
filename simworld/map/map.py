@@ -1,5 +1,7 @@
 """Map module: defines Road, Node, Edge, and Map graph structures for navigation."""
 
+import json
+import os
 import random
 from collections import defaultdict, deque
 from typing import List, Optional
@@ -106,12 +108,13 @@ class Edge:
 class Map:
     """Graph of nodes and edges supporting path queries and random access."""
 
-    def __init__(self, config: Config):
+    def __init__(self, config: Config, traffic_signals: list = None):
         """Initialize an empty Map."""
         self.nodes = set()
         self.edges = set()
         self.adjacency_list = defaultdict(list)
         self.config = config
+        self.traffic_signals = traffic_signals
 
     def __str__(self) -> str:
         """Return a summary of nodes and edges."""
@@ -120,6 +123,38 @@ class Map:
     def __repr__(self) -> str:
         """Alias for __str__."""
         return self.__str__()
+
+    def initializa_map(self):
+        """Initialize the map from the input roads file."""
+        roads_file = os.path.join(self.config['map.input_roads'])
+        with open(roads_file, 'r') as f:
+            roads_data = json.load(f)
+
+        road_items = roads_data.get('roads', [])
+        road_objects = []
+        for road in road_items:
+            start = Vector(road['start']['x'] * 100, road['start']['y'] * 100)
+            end = Vector(road['end']['x'] * 100, road['end']['y'] * 100)
+            road_objects.append(Road(start, end))
+
+        for road in road_objects:
+            normal = Vector(road.direction.y, -road.direction.x)
+            offset = self.config['traffic.sidewalk_offset']
+            p1 = road.start - normal * offset + road.direction * offset
+            p2 = road.end - normal * offset - road.direction * offset
+            p3 = road.end + normal * offset - road.direction * offset
+            p4 = road.start + normal * offset + road.direction * offset
+
+            nodes = [Node(point, 'intersection') for point in (p1, p2, p3, p4)]
+            for node in nodes:
+                self.add_node(node)
+
+            self.add_edge(Edge(nodes[0], nodes[1]))
+            self.add_edge(Edge(nodes[2], nodes[3]))
+            self.add_edge(Edge(nodes[0], nodes[3]))
+            self.add_edge(Edge(nodes[1], nodes[2]))
+
+        self.connect_adjacent_roads()
 
     def add_node(self, node: Node) -> None:
         """Add a node to the map."""
@@ -243,30 +278,6 @@ class Map:
                 if (n1.position.distance(n2.position) < threshold and
                         not self.has_edge(Edge(n1, n2))):
                     self.add_edge(Edge(n1, n2))
-
-    def interpolate_nodes(self) -> None:
-        """Insert intermediate nodes along existing edges."""
-        edges = list(self.edges)
-        for edge in edges:
-            num_pts = int(edge.weight / (2 * self.config['traffic.sidewalk_offset']))
-            if num_pts <= 1:
-                continue
-            direction = (edge.node2.position - edge.node1.position).normalize()
-            idx = random.randint(2, num_pts - 2) if num_pts > 1 else None
-            new_nodes = []
-            for k in range(1, num_pts + 1):
-                pt = edge.node1.position + direction * (k * 2 * self.config['traffic.sidewalk_offset'])
-                ntype = 'supply' if k == idx else 'normal'
-                nd = Node(pt, type=ntype)
-                self.add_node(nd)
-                new_nodes.append(nd)
-            # remove old edge
-            self.edges.remove(edge)
-            self.adjacency_list[edge.node1].remove(edge.node2)
-            self.adjacency_list[edge.node2].remove(edge.node1)
-            chain = [edge.node1] + new_nodes + [edge.node2]
-            for a, b in zip(chain, chain[1:]):
-                self.add_edge(Edge(a, b))
 
     def get_edge_distance_between_two_points(
         self,
