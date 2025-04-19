@@ -62,7 +62,7 @@ class UnrealCV(object):
         self.client.request('vrun sg.EffectsQuality 0', -1)  # Set effects quality to low
 
         self.client.request('vrun Editor.AsyncSkinnedAssetCompilation 2', -1)  # To correctly load the character
-        time.sleep(0.1)
+        time.sleep(1)
 
     def check_connection(self):
         """Check connection status, attempt to reconnect if not connected."""
@@ -132,6 +132,18 @@ class UnrealCV(object):
         """
         [x, y, z] = scale
         cmd = f'vset /object/{name}/scale {x} {y} {z}'
+        with self.lock:
+            self.client.request(cmd)
+
+    def set_color(self, actor_name, color):
+        """Set object color.
+
+        Args:
+            actor_name: Object name.
+            color: Color in the form [R, G, B].
+        """
+        [R, G, B] = color
+        cmd = f'vset /object/{actor_name}/color {R} {G} {B}'
         with self.lock:
             self.client.request(cmd)
 

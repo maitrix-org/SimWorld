@@ -91,17 +91,17 @@ def vector_cosine_similarity(vec1, vec2):
     return dot / (norm1 * norm2)
 
 
-def construct_building_from_candidate(candidate: dict, output_dir: str) -> Building:
+def construct_building_from_candidate(candidate: dict, input_dir: str) -> Building:
     """Construct a Building object based on candidate asset information and building data.
 
     Args:
         candidate: dictionary containing instance name and location.
-        output_dir: directory containing 'buildings.json' file.
+        input_dir: directory containing 'buildings.json' file.
 
     Returns:
         A Building object matching the candidate, or None if no match is found.
     """
-    buildings_json_path = os.path.join(output_dir, 'buildings.json')
+    buildings_json_path = os.path.join(input_dir, 'buildings.json')
     with open(buildings_json_path, 'r', encoding='utf-8') as f:
         buildings_data = json.load(f)
 
@@ -149,7 +149,7 @@ def get_coordinates_around_building(conf, building: Building, relation: str, num
     r = math.radians(building.rotation)
     cx, cy = building.center.x, building.center.y
 
-    offset = conf['citygen']['element']['element_building_distance']
+    offset = conf['citygen.element.element_building_distance']
     variation_ratio = 0.3
     random_variation = lambda: random.uniform(-variation_ratio, variation_ratio) * offset
 
@@ -225,6 +225,8 @@ def place_target_asset(related_assets, positions, output_dir: str):
         positions: list of Point objects representing where to place each asset.
         output_dir: directory to save the output JSON file.
     """
+    os.makedirs(output_dir, exist_ok=True)
+
     json_output = generate_json(related_assets, positions)
     print(json_output)
     output_file = os.path.join(output_dir, 'simple_world_asset.json')

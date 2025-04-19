@@ -20,17 +20,30 @@ class Config:
         Args:
             path: Optional path to a user config file. If provided, values from this file
                  will be merged with and override the default configuration.
+
+        Raises:
+            FileNotFoundError: If the provided config path does not exist
+            PermissionError: If the config file cannot be opened due to permission issues
         """
         default_path = Path(__file__).parent / 'default.yaml'
         config_path = Path(path) if path else default_path
 
-        with open(default_path, 'r') as f:
-            self.default_config = yaml.safe_load(f) or {}
+        if path and not config_path.exists():
+            raise FileNotFoundError(f'Config file not found: {config_path}')
 
-        if config_path != default_path and config_path.exists():
-            with open(config_path, 'r') as f:
-                user_config = yaml.safe_load(f) or {}
-                self._merge_dicts(self.default_config, user_config)
+        try:
+            with open(default_path, 'r') as f:
+                self.default_config = yaml.safe_load(f) or {}
+        except (PermissionError, IOError) as e:
+            raise PermissionError(f'Cannot open default config file: {default_path}') from e
+
+        if config_path != default_path:
+            try:
+                with open(config_path, 'r') as f:
+                    user_config = yaml.safe_load(f) or {}
+                    self._merge_dicts(self.default_config, user_config)
+            except (PermissionError, IOError) as e:
+                raise PermissionError(f'Cannot open user config file: {config_path}') from e
 
         self.config = self.default_config
 

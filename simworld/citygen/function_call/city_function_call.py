@@ -20,20 +20,23 @@ class CityFunctionCall:
         Args:
             config: Configuration object with simulation parameters.
         """
-        self.city_generator = CityGenerator(config)
+        self.config = config
+        self.city_generator = CityGenerator(self.config)
 
     def generate_city(self):
         """Generate city randomly with roads, buildings and elements."""
         self.city_generator.generate()
 
-    def export_city(self, output_path: str):
+    def export_city(self, output_dir: str = None):
         """Export city data to JSON files.
 
         Args:
-            output_path: Directory path where the city data will be exported.
+            output_dir: Directory path where the city data will be exported.
         """
+        if output_dir is None:
+            output_dir = self.config['citygen.output_dir']
         exporter = DataExporter(self.city_generator)
-        exporter.export_to_json(output_path)
+        exporter.export_to_json(output_dir)
 
     def add_road(self, start: List[float], end: List[float]) -> int:
         """Add a road segment to the city.
