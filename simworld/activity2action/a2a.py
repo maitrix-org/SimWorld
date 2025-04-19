@@ -9,7 +9,7 @@ from typing import List, Optional
 
 import numpy as np
 
-from simworld.activity2action.ActionSpace import FORMAT
+from simworld.activity2action.action_space import FORMAT
 from simworld.llm.base_llm import BaseLLM
 from simworld.map.map import Map, Node
 from simworld.prompt.prompt import SYSTEM_PROMPT, USER_PROMPT
