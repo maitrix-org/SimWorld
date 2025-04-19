@@ -4,8 +4,8 @@ import random
 from collections import defaultdict, deque
 from typing import List, Optional
 
-from Config import Config
-from utils.Types import Vector
+from simworld.config import Config
+from simworld.utils.vector import Vector
 
 
 class Road:
@@ -45,6 +45,10 @@ class Node:
     def __repr__(self) -> str:
         """Alias for __str__."""
         return self.__str__()
+
+    def __lt__(self, other):
+        """For the purpose of calculating shortest path."""
+        return self.position.x < other.position.x
 
     def __eq__(self, other) -> bool:
         """Compare nodes by position."""
@@ -102,11 +106,12 @@ class Edge:
 class Map:
     """Graph of nodes and edges supporting path queries and random access."""
 
-    def __init__(self):
+    def __init__(self, config: Config):
         """Initialize an empty Map."""
         self.nodes = set()
         self.edges = set()
         self.adjacency_list = defaultdict(list)
+        self.config = config
 
     def __str__(self) -> str:
         """Return a summary of nodes and edges."""
@@ -231,7 +236,7 @@ class Map:
     def connect_adjacent_roads(self) -> None:
         """Link nodes from nearby roads within a threshold."""
         nodes = list(self.nodes)
-        threshold = Config.SIDEWALK_OFFSET * 2 + 100
+        threshold = self.config['traffic.sidewalk_offset'] * 2 + 100
         for i in range(len(nodes)):
             for j in range(i + 1, len(nodes)):
                 n1, n2 = nodes[i], nodes[j]
@@ -243,14 +248,14 @@ class Map:
         """Insert intermediate nodes along existing edges."""
         edges = list(self.edges)
         for edge in edges:
-            num_pts = int(edge.weight / (2 * Config.SIDEWALK_OFFSET))
+            num_pts = int(edge.weight / (2 * self.config['traffic.sidewalk_offset']))
             if num_pts <= 1:
                 continue
             direction = (edge.node2.position - edge.node1.position).normalize()
             idx = random.randint(2, num_pts - 2) if num_pts > 1 else None
             new_nodes = []
             for k in range(1, num_pts + 1):
-                pt = edge.node1.position + direction * (k * 2 * Config.SIDEWALK_OFFSET)
+                pt = edge.node1.position + direction * (k * 2 * self.config['traffic.sidewalk_offset'])
                 ntype = 'supply' if k == idx else 'normal'
                 nd = Node(pt, type=ntype)
                 self.add_node(nd)

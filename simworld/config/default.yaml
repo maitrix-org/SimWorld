@@ -8,11 +8,11 @@ simworld:
 
 citygen:
   input_layout: false
-  input_roads: "D:/Projects/SimWorld/input/roadnet.json"
-  input_bounding_boxes: "/home/xuhong_he/SimWorld/input/Bbox.json"
-  output_dir: "/home/xuhong_he/SimWorld/output"
-  world_json: "D:/Projects/SimWorld/output/progen_world.json"
-  ue_asset_path: "D:/Projects/SimWorld/input/ue_assets.json"
+  input_roads: "/LLMDelivery/SimWorld/input/roads.json"
+  input_bounding_boxes: "/LLMDelivery/SimWorld/input/Bbox.json"
+  output_dir: "/LLMDelivery/SimWorld/output"
+  world_json: "/LLMDelivery/SimWorld/output/progen_world.json"
+  ue_asset_path: "/LLMDelivery/SimWorld/input/ue_assets.json"
 
   road:
     segment_length: 200
@@ -61,8 +61,8 @@ citygen:
     max_points_per_route: 5
 
 assets_rp:
-  input_descrption_map: "/home/xuhong_he/SimWorld/input/DescriptionMap.json"
-  input_sample_dataset: "/home/xuhong_he/SimWorld/input/sample_dataset"
+  input_descrption_map: "/LLMDelivery/SimWorld/input/DescriptionMap.json"
+  input_sample_dataset: "/LLMDelivery/SimWorld/input/sample_dataset"
   env_description_retrieval_model: "paraphrase-MiniLM-L6-v2"
   assets_retrieval_model: "openai/clip-vit-large-patch14-336"
   openai_api_key: "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"
@@ -70,7 +70,7 @@ assets_rp:
 traffic:
   num_vehicles: 10
   num_pedestrians: 10
-  map_path: "/Users/prosperous/Desktop/Code/SimWorld/input/roads.json"
+  map_path: "/LLMDelivery/SimWorld/input/roads.json"
   distance_between_objects: 400
   detection_angle: 40
   gap_between_waypoints: 800
@@ -95,7 +95,7 @@ traffic:
     max_steering: 0.5
     lane_deviation: 70
     distance_to_end: 400
-    model_file_path: "/Users/prosperous/Desktop/Code/SimWorld/input/VehicleTypes.json"
+    model_file_path: "/LLMDelivery/SimWorld/input/VehicleTypes.json"
 
   traffic_signal:
     light_normal_offset: -1400
@@ -112,3 +112,5 @@ user:
   a2a: True
   rule_based: True
   waypoint_distance_threshold: 200
+  model_path: "/Game/TrafficSystem/Pedestrian/Base_User_Agent.Base_User_Agent_C"
+  num_threads: 20

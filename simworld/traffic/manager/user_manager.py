@@ -1,150 +1,188 @@
-import random
-import os
+"""UserManager module: manages user agents, simulation updates, and JSON serialization."""
 import json
-import time
-from typing import List
-from threading import Lock
-from utils.Types import Vector, Road
-from simworld.config import Config
-from simworld.map import Map, Node, Edge
-from agent.user_agent import UserAgent
-from simworld.communicator import Communicator, UnrealCV
-
-import traceback
+import os
+import random
 import sys
+import traceback
+from concurrent.futures import ThreadPoolExecutor
+from threading import Lock
+from typing import List
+
+from simworld.agent.user_agent import UserAgent
+from simworld.communicator import Communicator, UnrealCV
+from simworld.map.map import Edge, Map, Node
 from simworld.utils.logger import Logger
+from simworld.utils.vector import Vector
+
+
+class Road:
+    """Represents a road segment with geometry and direction."""
+
+    def __init__(self, start: Vector, end: Vector):
+        """Initialize Road with start and end vectors."""
+        self.start = start
+        self.end = end
+        self.direction = (end - start).normalize()
+        self.length = start.distance(end)
+        self.center = (start + end) / 2
 
 
 class UserManager:
+    """Manage multiple UserAgent instances in the simulation."""
+
     def __init__(self, num_agent: int, config):
+        """Initialize UserManager with agent count and configuration."""
         self.num_agent = num_agent
         self.config = config
-        self.map = Map()
-
+        self.map = Map(self.config)
         self.agent: List[UserAgent] = []
-        self.model_path = self.config['traffic.pedestrian.model_path']
+        self.model_path = self.config['simworld.ue_manager_path']
+        self.agent_path = self.config['user.model_path']
         self.communicator = None
         self.logger = Logger.get_logger('UserManager')
-
+        self.dt = self.config['simworld.dt']
         self.lock = Lock()
 
         self.initialize()
 
-    ##############################################################
-    #################  Initialize the platform  ##################
-    ##############################################################
-    def init_communicator(self, communicator = None):
+    def init_communicator(self, communicator=None):
+        """Set up the Communicator, defaulting to UnrealCV."""
         if communicator is None:
-            self.communicator = Communicator(UnrealCV(port=9000, ip='127.0.0.1', resolution=(720, 600)))
+            self.communicator = Communicator(
+                UnrealCV(
+                    port=self.config.get('simworld.ue_port', 9000),
+                    ip=self.config.get('simworld.ue_ip', '127.0.0.1'),
+                    resolution=self.config.get('simworld.resolution', (720, 600)),
+                )
+            )
         else:
             self.communicator = communicator
 
     def initialize(self):
-        '''
-        Initialize the platform, customers, delivery men, and stores from the map
-        '''
-        ############# load roads #############
-        with open(os.path.join(self.config['citygen.input_roads']), 'r') as f:
+        """Load roads, construct map nodes/edges, and spawn agents."""
+        self.init_communicator()
+        roads_file = os.path.join(self.config['citygen.input_roads'])
+        with open(roads_file, 'r') as f:
             roads_data = json.load(f)
 
-        roads = roads_data['roads']
-
+        road_items = roads_data.get('roads', [])
         road_objects = []
-        for road in roads:
-            start = Vector(road['start']['x']*100, road['start']['y']*100)
-            end = Vector(road['end']['x']*100, road['end']['y']*100)
+        for road in road_items:
+            start = Vector(road['start']['x'] * 100, road['start']['y'] * 100)
+            end = Vector(road['end']['x'] * 100, road['end']['y'] * 100)
             road_objects.append(Road(start, end))
 
-        # Initialize the map
         for road in road_objects:
-            normal_vector = Vector(road.direction.y, -road.direction.x)
-            point1 = road.start - normal_vector * (self.config['traffic.sidewalk_offset']) + road.direction * self.config['traffic.sidewalk_offset']
-            point2 = road.end - normal_vector * (self.config['traffic.sidewalk_offset']) - road.direction * self.config['traffic.sidewalk_offset']
+            normal = Vector(road.direction.y, -road.direction.x)
+            offset = self.config['traffic.sidewalk_offset']
+            p1 = road.start - normal * offset + road.direction * offset
+            p2 = road.end - normal * offset - road.direction * offset
+            p3 = road.end + normal * offset - road.direction * offset
+            p4 = road.start + normal * offset + road.direction * offset
 
-            point3 = road.end + normal_vector * (self.config['traffic.sidewalk_offset']) - road.direction * self.config['traffic.sidewalk_offset']
-            point4 = road.start + normal_vector * (self.config['traffic.sidewalk_offset']) + road.direction * self.config['traffic.sidewalk_offset']
+            nodes = [Node(point, 'intersection') for point in (p1, p2, p3, p4)]
+            for node in nodes:
+                self.map.add_node(node)
 
-            node1 = Node(point1, "intersection")
-            node2 = Node(point2, "intersection")
-            node3 = Node(point3, "intersection")
-            node4 = Node(point4, "intersection")
+            self.map.add_edge(Edge(nodes[0], nodes[1]))
+            self.map.add_edge(Edge(nodes[2], nodes[3]))
+            self.map.add_edge(Edge(nodes[0], nodes[3]))
+            self.map.add_edge(Edge(nodes[1], nodes[2]))
 
-            self.map.add_node(node1)
-            self.map.add_node(node2)
-            self.map.add_node(node3)
-            self.map.add_node(node4)
-
-            self.map.add_edge(Edge(node1, node2))
-            self.map.add_edge(Edge(node3, node4))
-            self.map.add_edge(Edge(node1, node4))
-            self.map.add_edge(Edge(node2, node3))
-        # Connect adjacent roads by finding nearby nodes
         self.map.connect_adjacent_roads()
 
-        for i in range(self.num_agent):
-            # Randomly select a road
+        for _ in range(self.num_agent):
             road = random.choice(road_objects)
-            # Randomly select a point on the road
-            position = road.get_random_point_on_road()
-            direction = road.direction
-
-            # Create a new user agent
-            agent = UserAgent(position, direction, map=self.map, communicator=self.communicator, speed=self.config['user.speed'], use_a2a=self.config['user.a2a'], use_rule_based=self.config['user.rule_based'])
+            position = random.uniform(road.start, road.end)
+            agent = UserAgent(
+                position,
+                Vector(0, 0),
+                map=self.map,
+                communicator=self.communicator,
+                speed=self.config['user.speed'],
+                use_a2a=self.config['user.a2a'],
+                use_rule_based=self.config['user.rule_based'],
+                config=self.config,
+            )
             self.agent.append(agent)
-            
-    def run(self):
-        try:
-            self.logger.info("Starting simulation")
 
-            while True:
-                for agent in self.agent:
-                    agent.step()
-                time.sleep(self.dt)
-        except KeyboardInterrupt:
-            print("Simulation interrupted")
-            sys.exit(1)
-        except Exception as e:
-            print(f"Error occurred in {__file__}:{e.__traceback__.tb_lineno}")
-            print(f"Error type: {type(e).__name__}")
-            print(f"Error message: {str(e)}")
-            print(f"Error traceback:")
+    def update(self):
+        """Fetch and apply agents' latest positions and directions."""
+        agent_ids = [agent.id for agent in self.agent]
+        self.logger.info(f'Updating positions for agents: {agent_ids}')
+        try:
+            result = self.communicator.get_position_and_direction(agent_ids=agent_ids)
+            for idx in agent_ids:
+                pos, dir_ = result[('agent', idx)]
+                self.agent[idx].position = pos
+                self.agent[idx].direction = dir_
+                self.logger.info(f'Agent {idx} position: {pos}, direction: {dir_}')
+        except Exception as exc:
+            self.logger.error(f'Error in get_position_and_direction: {exc}')
             traceback.print_exc()
 
+    def run(self):
+        """Execute all agents concurrently and update until completion."""
+        with ThreadPoolExecutor(
+            max_workers=self.config['user.num_threads']
+        ) as executor:
+            self.logger.info('Starting simulation.')
+            futures = [executor.submit(agent.step) for agent in self.agent]
+
+            try:
+                while not all(f.done() for f in futures):
+                    self.update()
+            except KeyboardInterrupt:
+                print('Simulation interrupted')
+                sys.exit(1)
+            except Exception as exc:
+                lineno = exc.__traceback__.tb_lineno
+                self.logger.error(f'Error at line {lineno}: {type(exc).__name__}: {exc}')
+                traceback.print_exc()
+            finally:
+                for f in futures:
+                    try:
+                        f.result()
+                    except Exception as thr_exc:
+                        self.logger.error(f'Thread error: {thr_exc}')
+                self.logger.info('Simulation fully stopped.')
+
     def spawn_agent(self):
-        self.communicator.spawn_agent(self.agent, self.model_path)
+        """Spawn all agents in the Unreal environment."""
+        for agent in self.agent:
+            self.communicator.spawn_agent(agent, self.agent_path)
+
+    def spawn_manager(self):
+        """Spawn the UE manager process."""
+        self.communicator.spawn_ue_manager(self.model_path)
 
     def to_json(self):
-        """
-        将系统内所有数据转换为 JSON 结构返回
-        """
+        """Serialize map and delivery men data to JSON."""
         with self.lock:
             data = {
-                "map": {
-                    "nodes": [
-                        {
-                            "position": {"x": node.position.x, "y": node.position.y},
-                            "type": node.type
-                        }
-                        for node in self.map.nodes
+                'map': {
+                    'nodes': [
+                        {'position': {'x': n.position.x, 'y': n.position.y}, 'type': n.type}
+                        for n in self.map.nodes
                     ],
-                    "edges": [
+                    'edges': [
                         {
-                            "node1": {"x": edge.node1.position.x, "y": edge.node1.position.y},
-                            "node2": {"x": edge.node2.position.x, "y": edge.node2.position.y}
+                            'node1': {'x': e.node1.position.x, 'y': e.node1.position.y},
+                            'node2': {'x': e.node2.position.x, 'y': e.node2.position.y},
                         }
-                        for edge in self.map.edges
-                    ]
+                        for e in self.map.edges
+                    ],
                 },
-                "delivery_men": [
+                'delivery_men': [
                     {
-                        "id": dm.id,
-                        "position": {"x": dm.position.x, "y": dm.position.y},
-                        "direction": {"x": dm.direction.x, "y": dm.direction.y},
-                        "state": str(dm.get_state()),
-                        "energy": dm.get_energy(),
-                        "speed": dm.get_speed()
+                        'id': dm.id,
+                        'position': {'x': dm.position.x, 'y': dm.position.y},
+                        'direction': {'x': dm.direction.x, 'y': dm.direction.y},
+                        'state': str(dm.get_state()),
+                        'energy': dm.get_energy(),
+                        'speed': dm.get_speed(),
                     }
-                    for dm in self.delivery_men
+                    for dm in self.agent
                 ],
             }
             return data

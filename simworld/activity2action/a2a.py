@@ -9,7 +9,7 @@ from typing import List, Optional
 
 import numpy as np
 
-from simworld.activity2action.ActionSpace import FORMAT, Action
+from simworld.activity2action.ActionSpace import FORMAT
 from simworld.llm.base_llm import BaseLLM
 from simworld.map.map import Map, Node
 from simworld.prompt.prompt import SYSTEM_PROMPT, USER_PROMPT
@@ -21,10 +21,10 @@ class Activity2Action:
 
     def __init__(
         self,
+        name: str,
         user_agent,
         model: BaseLLM,
-        vision_model,
-        name: str,
+        vision_model: Optional[BaseLLM] = None,
         temperature: float = 1.5,
         max_history_step: int = 5,
         camera_id: int = 1,
@@ -53,14 +53,12 @@ class Activity2Action:
         self.system_prompt = SYSTEM_PROMPT.replace('<NAME>', name)
         self.temperature = temperature
         self.max_history_step = max_history_step
-        self.action_history = ''  # accumulated action history
         self.camera_id = camera_id
         self.observation_viewmode = observation_viewmode
-        self.map: Map = self.client.map
+        self.map: Map = self.agent.map
         self.rule_based = rule_based
         self.dt = dt
         self.logger = logging.getLogger(__name__)
-        self.update_position_and_direction()
 
     def parse(self, plan: str) -> None:
         """Parse a plan string and execute the resulting actions."""
@@ -70,30 +68,45 @@ class Activity2Action:
             plan=plan,
         )
 
-        response = self.model.generate_text_structured(
+        response, _ = self.model.generate_text_structured(
             system_prompt=self.system_prompt,
             user_prompt=user_prompt,
-            format=FORMAT,
+            output_format=FORMAT,
             temperature=self.temperature,
         )
-        self.logger.info(f'Response: {response}')
+        print(f'Agent {self.agent.id} Response: {response}', flush=True)
+        self.logger.info(f'Agent {self.agent.id} Response: {response}')
 
         if response is None:
             self.logger.error('Parse failed, response is None')
             return
+        try:
+            data = json.loads(response)
+            actions = data['actions']
+            waypoints: List[Vector] = []
 
-        data = json.loads(response)
-        actions = data['actions']
-        waypoints: List[Vector] = []
-
-        for point in data.get('waypoints', []):
-            match = re.search(r'Vector\(x=([\-\d.]+), y=([\-\d.]+)\)', point)
-            if match:
-                x, y = float(match.group(1)), float(match.group(2))
-                waypoints.append(Vector(x, y))
+            for point in data.get('waypoints', []):
+                match = re.search(r'Vector\(x=([\-\d.]+), y=([\-\d.]+)\)', point)
+                if match:
+                    x, y = float(match.group(1)), float(match.group(2))
+                    waypoints.append(Vector(x, y))
+        except json.JSONDecodeError as e:
+            self.logger.error(f'JSON decode error: {e}')
+            self.logger.error(f'Failed to parse response: {response}')
+            return
+        except KeyError as e:
+            self.logger.error(f'Missing key in response: {e}')
+            self.logger.error(f'Failed to parse response: {response}')
+            return
+        except Exception as e:
+            self.logger.error(f'Unexpected error: {e}')
+            self.logger.error(f'Failed to parse response: {response}')
+            return
+        print(f'Agent {self.agent.id} Actions: {actions}', flush=True)
+        print(f'Agent {self.agent.id} Waypoints: {waypoints}', flush=True)
 
         for action, waypoint in zip(actions, waypoints):
-            if action == Action.Navigate:
+            if action == 0:  # Navigate action
                 self.navigate(waypoint)
 
     def shortest_path(
@@ -104,6 +117,8 @@ class Activity2Action:
         """Compute the shortest path between two positions on the map."""
         start_node = self.map.get_closest_node(start_pos)
         end_node = self.map.get_closest_node(end_pos)
+        if start_node.position == end_node.position:
+            return [start_node.position]
 
         dist: dict[Node, float] = {node: math.inf for node in self.map.nodes}
         prev: dict[Node, Optional[Node]] = {node: None for node in self.map.nodes}
@@ -140,30 +155,34 @@ class Activity2Action:
 
     def navigate(self, waypoint: Vector) -> None:
         """Navigate from current position to a given waypoint."""
-        self.logger.info(f'Next waypoint: {waypoint}')
+        self.logger.info(f'Agent {self.agent.id} Next waypoint: {waypoint}')
+        print(f'Agent {self.agent.id} Next waypoint: {waypoint}', flush=True)
         path = self.shortest_path(self.agent.position, waypoint)
+        print(f'Agent {self.agent.id} Shortest Path: {path}', flush=True)
         for point in path:
-            self.logger.info(f'Waypoint step: {point}')
             if self.rule_based:
                 self.navigate_rule_based(point)
             else:
                 self.navigate_vision_based()
-            self.update_position_and_direction()
 
     def navigate_rule_based(self, waypoint: Vector) -> None:
         """Rule-based steering and movement toward a waypoint."""
         self.logger.info(
-            f'Current pos: {self.agent.position}, target: {waypoint}, dir: {self.agent.direction}'
+            f'Agent {self.agent.id} Current pos: {self.agent.position}, target: {waypoint}, dir: {self.agent.direction}'
+        )
+        print(
+            f'Agent {self.agent.id} Current pos: {self.agent.position}, target: {waypoint}, dir: {self.agent.direction}', flush=True
         )
         while not self.walk_arrive_at_waypoint(waypoint):
             while not self.align_direction(waypoint):
+                self.client.agent_stop(self.agent.id)
                 angle, turn = self.get_angle_and_direction(waypoint)
-                self.logger.info(f'Angle: {angle}, turn: {turn}')
-                self.unrealcv_client.d_rotate(self.name, angle, turn)
-                self.update_position_and_direction()
-            self.logger.info(f'Stepping toward: {waypoint}')
-            self.unrealcv_client.d_step_forward(self.name)
-            self.update_position_and_direction()
+                self.logger.info(f'Agent {self.agent.id} Angle: {angle}, turn: {turn}')
+                print(f'Agent {self.agent.id} Angle: {angle}, turn: {turn}', flush=True)
+                self.client.agent_rotate(self.agent.id, angle, turn)
+            self.logger.info(f'Agent {self.agent.id} Stepping toward: {waypoint}')
+            print(f'Agent {self.agent.id} Stepping toward: {waypoint}', flush=True)
+            self.client.agent_move_forward(self.agent.id)
 
     def navigate_vision_based(self) -> None:
         """Placeholder for vision-based navigation logic."""
@@ -172,8 +191,10 @@ class Activity2Action:
     def walk_arrive_at_waypoint(self, waypoint: Vector) -> bool:
         """Return True if agent is within threshold of waypoint."""
         threshold = self.agent.config['user.waypoint_distance_threshold']
+        print(f'Agent {self.agent.id} Walk distance: {self.agent.position.distance(waypoint)}', flush=True)
         if self.agent.position.distance(waypoint) < threshold:
-            self.logger.info(f'Arrived at {waypoint}')
+            self.logger.info(f'Agent {self.agent.id} Arrived at {waypoint}')
+            print(f'Agent {self.agent.id} Arrived at {waypoint}', flush=True)
             return True
         return False
 
@@ -198,7 +219,7 @@ class Activity2Action:
         angle = math.degrees(
             math.acos(np.clip(self.agent.direction.dot(to_wp.normalize()), -1, 1))
         )
-        self.logger.info(f'Align angle: {angle}')
+        self.logger.info(f'Agent {self.agent.id} Align angle: {angle}')
         return angle < 5
 
     def update_position_and_direction(self) -> None:
@@ -213,4 +234,4 @@ class Activity2Action:
 
     def reset(self) -> None:
         """Re-enable controller after episode reset."""
-        self.unrealcv_client.enable_controller(self.name, True)
+        self.client.enable_controller(self.name, True)
