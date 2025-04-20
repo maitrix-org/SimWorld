@@ -110,10 +110,13 @@ user:
   speed: 200
   a2a: True
   rule_based: True
-  input_roads: "D:/Projects/SimWorld/output/roads.json"
+  input_roads: "/LLMDelivery/SimWorld/output/roads.json"
   waypoint_distance_threshold: 200
   model_path: "/Game/TrafficSystem/Pedestrian/Base_User_Agent.Base_User_Agent_C"
   num_threads: 20
+  llm_model_path: "meta-llama/llama-3.3-70b-instruct"
+  llm_api_key: "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"
+  llm_url: "https://openrouter.ai/api/v1"
 
 map:
-  input_roads: "D:/Projects/SimWorld/output/roads.json"
+  input_roads: "/LLMDelivery/SimWorld/output/roads.json"

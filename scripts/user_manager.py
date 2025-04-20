@@ -8,8 +8,9 @@ from concurrent.futures import ThreadPoolExecutor
 from threading import Lock
 from typing import List
 
-from simworld.agent.user_agent import UserAgent
+from scripts.user_agent import UserAgent
 from simworld.communicator import Communicator, UnrealCV
+from simworld.llm.base_llm import BaseLLM
 from simworld.map.map import Map
 from simworld.utils.logger import Logger
 from simworld.utils.vector import Vector
@@ -72,6 +73,12 @@ class UserManager:
             end = Vector(road['end']['x'] * 100, road['end']['y'] * 100)
             road_objects.append(Road(start, end))
 
+        llm = BaseLLM(
+            model_name=self.config['user.llm_model_path'],
+            url=self.config['user.llm_url'],
+            api_key=self.config['user.llm_api_key'],
+        )
+
         for _ in range(self.num_agent):
             road = random.choice(road_objects)
             position = random.uniform(road.start, road.end)
@@ -80,6 +87,7 @@ class UserManager:
                 Vector(0, 0),
                 map=self.map,
                 communicator=self.communicator,
+                llm=llm,
                 speed=self.config['user.speed'],
                 use_a2a=self.config['user.a2a'],
                 use_rule_based=self.config['user.rule_based'],

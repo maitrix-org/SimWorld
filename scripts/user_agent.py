@@ -7,6 +7,7 @@ from typing import Tuple
 from simworld.activity2action.a2a import Activity2Action
 from simworld.agent.base_agent import BaseAgent
 from simworld.communicator import UnrealCV
+from simworld.config.config_loader import Config
 from simworld.llm.base_llm import BaseLLM
 from simworld.map.map import Map
 from simworld.prompt.prompt import user_system_prompt, user_user_prompt
@@ -24,7 +25,8 @@ class UserAgent(BaseAgent):
         direction: Vector,
         map: Map,
         communicator: UnrealCV,
-        model: str = 'meta-llama/llama-3.3-70b-instruct',
+        llm: BaseLLM,
+        config: Config,
         speed: float = 100,
         use_a2a: bool = False,
         use_rule_based: bool = False,
@@ -36,7 +38,8 @@ class UserAgent(BaseAgent):
             direction: Initial facing direction vector.
             map: The environment map.
             communicator: Communicator for user inputs.
-            model: LLM model identifier.
+            llm: LLM model identifier.
+            config: Configuration object.
             speed: Movement speed parameter.
             use_a2a: Whether to enable Activity2Action planning.
             use_rule_based: Whether to use rule-based navigation in A2A.
@@ -45,12 +48,9 @@ class UserAgent(BaseAgent):
         self.communicator = communicator
         self.map: Map = map
         self.a2a = None
-        self.llm = BaseLLM(
-            model_name=model,
-            url='https://openrouter.ai/api/v1',
-            api_key='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',
-        )
+        self.llm = llm
         self.id = UserAgent._id_counter
+        self.config = config
         UserAgent._id_counter += 1
 
         if use_a2a:

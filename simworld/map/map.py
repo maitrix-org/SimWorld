@@ -115,6 +115,7 @@ class Map:
         self.adjacency_list = defaultdict(list)
         self.config = config
         self.traffic_signals = traffic_signals
+        self.initializa_map()
 
     def __str__(self) -> str:
         """Return a summary of nodes and edges."""

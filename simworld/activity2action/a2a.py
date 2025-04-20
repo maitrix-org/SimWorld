@@ -13,6 +13,7 @@ from simworld.activity2action.action_space import FORMAT
 from simworld.llm.base_llm import BaseLLM
 from simworld.map.map import Map, Node
 from simworld.prompt.prompt import SYSTEM_PROMPT, USER_PROMPT
+from simworld.traffic.base import TrafficSignalState
 from simworld.utils.vector import Vector
 
 
@@ -169,6 +170,25 @@ class Activity2Action:
             self.navigate_vision_based()
 
     def navigate_rule_based(self, waypoint: Vector) -> None:
+        """Navigate using traffic rules and conditions."""
+        if self.map.traffic_signals:
+            current_node = self.map.get_closest_node(self.agent.position)
+            if current_node.type == 'intersection':
+                traffic_light = None
+                min_distance = float('inf')
+                for signal in self.map.traffic_signals:
+                    distance = self.agent.position.distance(signal.position)
+                    if distance < min_distance:
+                        min_distance = distance
+                        traffic_light = signal
+                while True:
+                    state = traffic_light.get_state()
+                    left_time = traffic_light.get_left_time()
+                    if state[1] == TrafficSignalState.PEDESTRIAN_GREEN and left_time > 10:
+                        break
+        self.navigate_moving(waypoint)
+
+    def navigate_moving(self, waypoint: Vector) -> None:
         """Rule-based steering and movement toward a waypoint."""
         self.logger.info(
             f'Agent {self.agent.id} Current pos: {self.agent.position}, target: {waypoint}, dir: {self.agent.direction}'
