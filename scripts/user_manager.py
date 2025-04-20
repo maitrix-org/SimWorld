@@ -2,10 +2,9 @@
 import json
 import os
 import random
-import sys
 import traceback
 from concurrent.futures import ThreadPoolExecutor
-from threading import Lock
+from threading import Event, Lock
 from typing import List
 
 from scripts.user_agent import UserAgent
@@ -31,8 +30,9 @@ class Road:
 class UserManager:
     """Manage multiple UserAgent instances in the simulation."""
 
-    def __init__(self, num_agent: int, config, traffic_signals: list = None):
+    def __init__(self, num_agent: int, config, traffic_signals: list = None, seed: int = 42):
         """Initialize UserManager with agent count and configuration."""
+        random.seed(seed)
         self.num_agent = num_agent
         self.config = config
         self.map = Map(self.config, traffic_signals)
@@ -43,6 +43,7 @@ class UserManager:
         self.logger = Logger.get_logger('UserManager')
         self.dt = self.config['simworld.dt']
         self.lock = Lock()
+        self.exit_event = Event()
 
         self.initialize()
 
@@ -61,8 +62,9 @@ class UserManager:
 
     def initialize(self):
         """Load roads, construct map nodes/edges, and spawn agents."""
+        # self.map.visualize_map()
         self.init_communicator()
-        roads_file = os.path.join(self.config['user.input_roads'])
+        roads_file = os.path.join(self.config['map.input_roads'])
         with open(roads_file, 'r') as f:
             roads_data = json.load(f)
 
@@ -92,6 +94,7 @@ class UserManager:
                 use_a2a=self.config['user.a2a'],
                 use_rule_based=self.config['user.rule_based'],
                 config=self.config,
+                exit_event=self.exit_event,
             )
             self.agent.append(agent)
 
@@ -116,18 +119,19 @@ class UserManager:
             max_workers=self.config['user.num_threads']
         ) as executor:
             self.logger.info('Starting simulation.')
-            futures = [executor.submit(agent.step) for agent in self.agent]
 
             try:
+                futures = [executor.submit(agent.step) for agent in self.agent]
                 while not all(f.done() for f in futures):
                     self.update()
             except KeyboardInterrupt:
                 print('Simulation interrupted')
-                sys.exit(1)
+                self.exit_event.set()
             except Exception as exc:
                 lineno = exc.__traceback__.tb_lineno
                 self.logger.error(f'Error at line {lineno}: {type(exc).__name__}: {exc}')
                 traceback.print_exc()
+                self.exit_event.set()
             finally:
                 for f in futures:
                     try:
@@ -144,34 +148,3 @@ class UserManager:
     def spawn_manager(self):
         """Spawn the UE manager process."""
         self.communicator.spawn_ue_manager(self.model_path)
-
-    def to_json(self):
-        """Serialize map and delivery men data to JSON."""
-        with self.lock:
-            data = {
-                'map': {
-                    'nodes': [
-                        {'position': {'x': n.position.x, 'y': n.position.y}, 'type': n.type}
-                        for n in self.map.nodes
-                    ],
-                    'edges': [
-                        {
-                            'node1': {'x': e.node1.position.x, 'y': e.node1.position.y},
-                            'node2': {'x': e.node2.position.x, 'y': e.node2.position.y},
-                        }
-                        for e in self.map.edges
-                    ],
-                },
-                'delivery_men': [
-                    {
-                        'id': dm.id,
-                        'position': {'x': dm.position.x, 'y': dm.position.y},
-                        'direction': {'x': dm.direction.x, 'y': dm.direction.y},
-                        'state': str(dm.get_state()),
-                        'energy': dm.get_energy(),
-                        'speed': dm.get_speed(),
-                    }
-                    for dm in self.agent
-                ],
-            }
-            return data

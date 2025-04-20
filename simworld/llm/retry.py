@@ -16,7 +16,7 @@ class LLMResponseParsingError(Exception):
 
 
 def retry_llm_call(
-    max_retries: int = 3,
+    max_retries: int = 5,
     initial_delay: float = 1.0,
     exponential_base: float = 2.0,
     rate_limit_per_min: int = 20,

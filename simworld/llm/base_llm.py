@@ -191,7 +191,7 @@ if __name__ == '__main__':
     llm = BaseLLM(
         model_name='meta-llama/llama-3.3-70b-instruct',
         url='https://openrouter.ai/api/v1',
-        api_key='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'
+        api_key='sk-or-v1-...'
     )
     resp = llm.generate_text_structured(system_prompt, user_prompt, fmt)
     print(f'Response: {resp}')

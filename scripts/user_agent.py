@@ -2,6 +2,7 @@
 
 import logging
 import traceback
+from threading import Event
 from typing import Tuple
 
 from simworld.activity2action.a2a import Activity2Action
@@ -30,6 +31,7 @@ class UserAgent(BaseAgent):
         speed: float = 100,
         use_a2a: bool = False,
         use_rule_based: bool = False,
+        exit_event: Event = None,
     ):
         """Initialize the UserAgent.
 
@@ -43,6 +45,7 @@ class UserAgent(BaseAgent):
             speed: Movement speed parameter.
             use_a2a: Whether to enable Activity2Action planning.
             use_rule_based: Whether to use rule-based navigation in A2A.
+            exit_event: Event to signal when the agent should stop.
         """
         super().__init__(position, direction)
         self.communicator = communicator
@@ -52,9 +55,10 @@ class UserAgent(BaseAgent):
         self.id = UserAgent._id_counter
         self.config = config
         UserAgent._id_counter += 1
+        self.exit_event = exit_event
 
         if use_a2a:
-            self.a2a = Activity2Action(user_agent=self, name=self.communicator.get_agent_name(self.id), model=self.llm, rule_based=use_rule_based)
+            self.a2a = Activity2Action(user_agent=self, name=self.communicator.get_agent_name(self.id), model=self.llm, rule_based=use_rule_based, exit_event=self.exit_event)
 
         self.last_state: Tuple[Vector, str] = (self.position, 'do nothing')
 
@@ -73,7 +77,7 @@ class UserAgent(BaseAgent):
     def step(self) -> None:
         """Perform one decision step using A2A planning if enabled."""
         try:
-            while True:
+            while not self.exit_event.is_set():
                 if self.a2a:
                     self.logger.info(f'DeliveryMan {self.id} is deciding what to do')
                     user_prompt = user_user_prompt.format(

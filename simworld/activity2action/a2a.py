@@ -5,6 +5,7 @@ import json
 import logging
 import math
 import re
+from threading import Event
 from typing import List, Optional
 
 import numpy as np
@@ -32,6 +33,7 @@ class Activity2Action:
         dt: float = 0.1,
         observation_viewmode: str = 'lit',
         rule_based: bool = True,
+        exit_event: Event = None,
     ):
         """Initialize the Activity2Action agent.
 
@@ -46,6 +48,7 @@ class Activity2Action:
             dt: Simulation time step.
             observation_viewmode: Rendering mode for observations.
             rule_based: Whether to use rule-based navigation.
+            exit_event: Event to signal when the agent should stop.
         """
         self.name = name
         self.model = model
@@ -59,6 +62,7 @@ class Activity2Action:
         self.map: Map = self.agent.map
         self.rule_based = rule_based
         self.dt = dt
+        self.exit_event = exit_event
         self.logger = logging.getLogger(__name__)
 
     def parse(self, plan: str) -> None:
@@ -107,7 +111,7 @@ class Activity2Action:
         print(f'Agent {self.agent.id} Waypoints: {waypoints}', flush=True)
 
         for action, waypoint in zip(actions, waypoints):
-            if action == 0:  # Navigate action
+            if action == 0:
                 self.navigate(waypoint)
 
     def shortest_path(
@@ -164,7 +168,6 @@ class Activity2Action:
             path = self.shortest_path(self.agent.position, waypoint)
             print(f'Agent {self.agent.id} Shortest Path: {path}', flush=True)
             for point in path:
-                # TODO: check if the point is an intersection
                 self.navigate_rule_based(point)
         else:
             self.navigate_vision_based()
@@ -181,10 +184,10 @@ class Activity2Action:
                     if distance < min_distance:
                         min_distance = distance
                         traffic_light = signal
-                while True:
+                while True and not self.exit_event.is_set():
                     state = traffic_light.get_state()
                     left_time = traffic_light.get_left_time()
-                    if state[1] == TrafficSignalState.PEDESTRIAN_GREEN and left_time > 10:
+                    if state[1] == TrafficSignalState.PEDESTRIAN_GREEN and left_time > min(15, self.agent.config['traffic.traffic_signal.pedestrian_green_light_duration']):
                         break
         self.navigate_moving(waypoint)
 
@@ -196,16 +199,16 @@ class Activity2Action:
         print(
             f'Agent {self.agent.id} Current pos: {self.agent.position}, target: {waypoint}, dir: {self.agent.direction}', flush=True
         )
-        while not self.walk_arrive_at_waypoint(waypoint):
-            while not self.align_direction(waypoint):
-                self.client.agent_stop(self.agent.id)
+        self.client.agent_move_forward(self.agent.id)
+        while not self.walk_arrive_at_waypoint(waypoint) and not self.exit_event.is_set():
+            while not self.align_direction(waypoint) and not self.exit_event.is_set():
                 angle, turn = self.get_angle_and_direction(waypoint)
                 self.logger.info(f'Agent {self.agent.id} Angle: {angle}, turn: {turn}')
-                print(f'Agent {self.agent.id} Angle: {angle}, turn: {turn}', flush=True)
+                # print(f'Agent {self.agent.id} Angle: {angle}, turn: {turn}', flush=True)
                 self.client.agent_rotate(self.agent.id, angle, turn)
             self.logger.info(f'Agent {self.agent.id} Stepping toward: {waypoint}')
-            print(f'Agent {self.agent.id} Stepping toward: {waypoint}', flush=True)
-            self.client.agent_move_forward(self.agent.id)
+            # print(f'Agent {self.agent.id} Stepping toward: {waypoint}', flush=True)
+        self.client.agent_stop(self.agent.id)
 
     def navigate_vision_based(self) -> None:
         """Placeholder for vision-based navigation logic."""
@@ -214,10 +217,10 @@ class Activity2Action:
     def walk_arrive_at_waypoint(self, waypoint: Vector) -> bool:
         """Return True if agent is within threshold of waypoint."""
         threshold = self.agent.config['user.waypoint_distance_threshold']
-        print(f'Agent {self.agent.id} Walk distance: {self.agent.position.distance(waypoint)}', flush=True)
+        # print(f'Agent {self.agent.id} Walk distance: {self.agent.position.distance(waypoint)}', flush=True)
         if self.agent.position.distance(waypoint) < threshold:
             self.logger.info(f'Agent {self.agent.id} Arrived at {waypoint}')
-            print(f'Agent {self.agent.id} Arrived at {waypoint}', flush=True)
+            # print(f'Agent {self.agent.id} Arrived at {waypoint}', flush=True)
             return True
         return False
 
@@ -244,17 +247,3 @@ class Activity2Action:
         )
         self.logger.info(f'Agent {self.agent.id} Align angle: {angle}')
         return angle < 5
-
-    def update_position_and_direction(self) -> None:
-        """Query simulator for current position and direction."""
-        info = self.client.get_informations(self.agent.id)
-        pos, direction = info[self.agent.id]
-        self.agent.position(pos)
-        self.agent.direction(direction)
-        self.logger.info(
-            f'Agent {self.agent.id} updated pos: {self.agent.position}, dir: {self.agent.direction}'
-        )
-
-    def reset(self) -> None:
-        """Re-enable controller after episode reset."""
-        self.client.enable_controller(self.name, True)

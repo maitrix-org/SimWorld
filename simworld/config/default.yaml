@@ -7,7 +7,7 @@ simworld:
 
 citygen:
   input_layout: false
-  input_roads: "/LLMDelivery/SimWorld/input/roads.json"
+  input_roads: "/LLMDelivery/SimWorld/input/predefined_roads.json"
   input_bounding_boxes: "/LLMDelivery/SimWorld/input/Bbox.json"
   output_dir: "/LLMDelivery/SimWorld/output"
   world_json: "/LLMDelivery/SimWorld/output/progen_world.json"
@@ -107,10 +107,9 @@ traffic:
 
 user:
   num_agents: 3
-  speed: 200
+  speed: 100
   a2a: True
   rule_based: True
-  input_roads: "/LLMDelivery/SimWorld/output/roads.json"
   waypoint_distance_threshold: 200
   model_path: "/Game/TrafficSystem/Pedestrian/Base_User_Agent.Base_User_Agent_C"
   num_threads: 20

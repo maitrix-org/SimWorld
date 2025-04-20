@@ -2,9 +2,13 @@
 
 import json
 import os
-import random
-from collections import defaultdict, deque
-from typing import List, Optional
+import sys
+from collections import defaultdict
+from typing import List
+
+from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QPainter, QPen
+from PyQt5.QtWidgets import QApplication, QWidget
 
 from simworld.config import Config
 from simworld.utils.vector import Vector
@@ -115,7 +119,7 @@ class Map:
         self.adjacency_list = defaultdict(list)
         self.config = config
         self.traffic_signals = traffic_signals
-        self.initializa_map()
+        self.initialize_map()
 
     def __str__(self) -> str:
         """Return a summary of nodes and edges."""
@@ -125,7 +129,7 @@ class Map:
         """Alias for __str__."""
         return self.__str__()
 
-    def initializa_map(self):
+    def initialize_map(self):
         """Initialize the map from the input roads file."""
         roads_file = os.path.join(self.config['map.input_roads'])
         with open(roads_file, 'r') as f:
@@ -183,92 +187,6 @@ class Map:
         """Check if an edge exists in the map."""
         return edge in self.edges
 
-    def get_points(self) -> List[Vector]:
-        """Return all node positions."""
-        return [node.position for node in self.nodes]
-
-    def get_nodes(self) -> set:
-        """Return the set of nodes."""
-        return self.nodes
-
-    def get_random_node(self, exclude_pos: Optional[List[Node]] = None) -> Node:
-        """Return a random non-intersection node, optionally excluding some."""
-        candidates = [n for n in self.nodes if n.type == 'normal']
-        if exclude_pos:
-            candidates = [n for n in candidates if n not in exclude_pos]
-        return random.choice(candidates)
-
-    def get_random_node_with_distance(
-        self,
-        base_pos: List[Node],
-        exclude_pos: Optional[List[Node]] = None,
-        min_distance: float = 0,
-        max_distance: float = 100000,
-    ) -> Node:
-        """Return a random non-intersection node within distance bounds from a base."""
-        candidates = [n for n in self.nodes if n.type != 'intersection']
-        if exclude_pos:
-            candidates = [n for n in candidates if n not in exclude_pos]
-        while True:
-            node = random.choice(candidates)
-            base = random.choice(base_pos)
-            dist = node.position.distance(base.position)
-            if min_distance <= dist <= max_distance:
-                return node
-
-    def get_random_node_with_edge_distance(
-        self,
-        base_pos: List[Node],
-        exclude_pos: Optional[List[Node]] = None,
-        min_distance: int = 0,
-        max_distance: int = 200,
-    ) -> Node:
-        """Return a random non-intersection node at a given edge-count distance."""
-        candidates = [n for n in self.nodes if n.type != 'intersection']
-        if exclude_pos:
-            candidates = [n for n in candidates if n not in exclude_pos]
-        start = random.choice(base_pos)
-        target = random.randint(min_distance, max_distance)
-
-        def dfs(node: Node, d: int, visited: set) -> Optional[Node]:
-            if d == target and node.type != 'intersection':
-                return node
-            visited.add(node)
-            for nbr in self.adjacency_list[node]:
-                if nbr not in visited and nbr.type != 'intersection':
-                    found = dfs(nbr, d + 1, visited)
-                    if found:
-                        return found
-            visited.remove(node)
-            return None
-
-        result = dfs(start, 0, set())
-        if result:
-            return result
-
-        # fallback: closest by BFS
-        closest = None
-        best_diff = float('inf')
-        queue = deque([(start, 0)])
-        seen = {start}
-        while queue:
-            node, dist = queue.popleft()
-            diff = abs(dist - target)
-            if diff < best_diff and node.type != 'intersection':
-                best_diff = diff
-                closest = node
-            for nbr in self.adjacency_list[node]:
-                if nbr not in seen and nbr.type != 'intersection':
-                    seen.add(nbr)
-                    queue.append((nbr, dist + 1))
-        if closest:
-            return closest
-        return random.choice(candidates)
-
-    def get_supply_points(self) -> List[Vector]:
-        """Return positions of supply nodes."""
-        return [n.position for n in self.nodes if n.type == 'supply']
-
     def connect_adjacent_roads(self) -> None:
         """Link nodes from nearby roads within a threshold."""
         nodes = list(self.nodes)
@@ -280,22 +198,50 @@ class Map:
                         not self.has_edge(Edge(n1, n2))):
                     self.add_edge(Edge(n1, n2))
 
-    def get_edge_distance_between_two_points(
-        self,
-        point1: Node,
-        point2: Node,
-    ) -> int:
-        """Return the minimum number of edges between two nodes using BFS."""
-        if point1 == point2:
-            return 0
-        queue = deque([(point1, 0)])
-        seen = {point1}
-        while queue:
-            node, dist = queue.popleft()
-            if node == point2:
-                return dist
-            for nbr in self.adjacency_list[node]:
-                if nbr not in seen:
-                    seen.add(nbr)
-                    queue.append((nbr, dist + 1))
-        raise ValueError(f'No path found between {point1} and {point2}')
+    def visualize_map(self) -> None:
+        """Visualize the map using Qt with actual coordinates."""
+        class MapViewer(QWidget):
+            def __init__(self, nodes, edges):
+                super().__init__()
+                self.nodes = nodes
+                self.edges = edges
+
+                self.min_x = min(node.position.x for node in nodes)
+                self.min_y = min(node.position.y for node in nodes)
+                self.max_x = max(node.position.x for node in nodes)
+                self.max_y = max(node.position.y for node in nodes)
+                self.setMinimumSize(800, 800)
+                self.setWindowTitle('SimWorld Map Visualization')
+
+            def paintEvent(self, event):
+                painter = QPainter(self)
+                painter.setRenderHint(QPainter.Antialiasing)
+
+                width = self.width()
+                height = self.height()
+                margin = 50
+                scale_x = (width - 2 * margin) / (self.max_x - self.min_x)
+                scale_y = (height - 2 * margin) / (self.max_y - self.min_y)
+                scale = min(scale_x, scale_y)
+
+                painter.setPen(QPen(Qt.black, 2))
+                for edge in self.edges:
+                    x1 = margin + (edge.node1.position.x - self.min_x) * scale
+                    y1 = margin + (edge.node1.position.y - self.min_y) * scale
+                    x2 = margin + (edge.node2.position.x - self.min_x) * scale
+                    y2 = margin + (edge.node2.position.y - self.min_y) * scale
+                    painter.drawLine(int(x1), int(y1), int(x2), int(y2))
+
+                painter.setPen(QPen(Qt.red, 4))
+                for node in self.nodes:
+                    x = margin + (node.position.x - self.min_x) * scale
+                    y = margin + (node.position.y - self.min_y) * scale
+                    painter.drawPoint(int(x), int(y))
+
+        app = QApplication.instance()
+        if app is None:
+            app = QApplication(sys.argv)
+
+        viewer = MapViewer(self.nodes, self.edges)
+        viewer.show()
+        app.exec_()
