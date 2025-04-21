@@ -1,6 +1,6 @@
-"""LLM model implementations for SimWorld."""
-from simworld.llm.base_model import BaseModel
-from simworld.llm.openai_model import OpenAIModel
-from simworld.llm.openrouter_model import OpenRouterModel
+"""This package contains the code for the LLM."""
 
-__all__ = ['OpenAIModel', 'OpenRouterModel', 'BaseModel']
+from simworld.llm.a2a_llm import A2ALLM
+from simworld.llm.base_llm import BaseLLM
+
+__all__ = ['BaseLLM', 'A2ALLM']

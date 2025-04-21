@@ -28,7 +28,66 @@ class Communicator:
             unrealcv: UnrealCV instance for communication with Unreal Engine.
         """
         self.unrealcv = unrealcv
-        self.traffic_manager_name = None
+        self.ue_manager_name = None
+
+    #
+    # User Agent Methods
+    #
+
+    def agent_move_forward(self, agent_id):
+        """Move agent forward.
+
+        Args:
+            agent_id: The unique identifier of the agent to move forward.
+        """
+        self.unrealcv.agent_move_forward(self.get_agent_name(agent_id))
+
+    def agent_rotate(self, agent_id, angle, direction):
+        """Rotate agent.
+
+        Args:
+            agent_id: Agent ID.
+            angle: Rotation angle.
+            direction: Rotation direction.
+        """
+        self.unrealcv.agent_rotate(self.get_agent_name(agent_id), angle, direction)
+
+    def agent_stop(self, agent_id):
+        """Stop agent.
+
+        Args:
+            agent_id: Agent ID.
+        """
+        self.unrealcv.agent_stop(self.get_agent_name(agent_id))
+
+    def agent_step_forward(self, agent_id, duration):
+        """Step forward.
+
+        Args:
+            agent_id: Agent ID.
+            duration: Duration.
+        """
+        self.unrealcv.agent_step_forward(self.get_agent_name(agent_id), duration)
+
+    def agent_set_speed(self, agent_id, speed):
+        """Set agent speed.
+
+        Args:
+            agent_id: Agent ID.
+            speed: Speed.
+        """
+        self.unrealcv.agent_set_speed(self.get_agent_name(agent_id), speed)
+
+    def get_agent_name(self, agent_id):
+        """Get agent name.
+
+        Args:
+            agent_id: Agent ID.
+
+        Returns:
+            str: The formatted agent name.
+        """
+        return f'GEN_BP_Agent_{agent_id}'
 
     # Vehicle-related methods
     def update_vehicle(self, vehicle_id, throttle, brake, steering):
@@ -68,7 +127,7 @@ class Communicator:
                 vehicles_states_str += ';'
             vehicles_states_str += vehicle_state
 
-        self.unrealcv.v_set_states(self.traffic_manager_name, vehicles_states_str)
+        self.unrealcv.v_set_states(self.ue_manager_name, vehicles_states_str)
 
     # Pedestrian-related methods
     def pedestrian_move_forward(self, pedestrian_id):
@@ -126,7 +185,18 @@ class Communicator:
                 pedestrians_states_str += ';'
             pedestrians_states_str += pedestrian_state
 
-        self.unrealcv.p_set_states(self.traffic_manager_name, pedestrians_states_str)
+        self.unrealcv.p_set_states(self.ue_manager_name, pedestrians_states_str)
+
+    def get_pedestrian_name(self, pedestrian_id):
+        """Get pedestrian name.
+
+        Args:
+            pedestrian_id: Pedestrian ID.
+
+        Returns:
+            Pedestrian name.
+        """
+        return f'GEN_BP_Pedestrian_{pedestrian_id}'
 
     # Traffic signal related methods
     def traffic_signal_switch_to(self, traffic_signal_id, state='green'):
@@ -154,19 +224,31 @@ class Communicator:
         name = self.get_traffic_signal_name(traffic_signal_id)
         self.unrealcv.tl_set_duration(name, green_duration, yellow_duration, pedestrian_green_duration)
 
-    # Traffic management related methods
-    def get_position_and_direction(self, vehicle_ids, pedestrian_ids, traffic_signal_ids):
+    def get_traffic_signal_name(self, traffic_signal_id):
+        """Get traffic signal name.
+
+        Args:
+            traffic_signal_id: Traffic signal ID.
+
+        Returns:
+            Traffic signal name.
+        """
+        return f'GEN_BP_TrafficSignal_{traffic_signal_id}'
+
+    # Management related methods
+    def get_position_and_direction(self, vehicle_ids=[], pedestrian_ids=[], traffic_signal_ids=[], agent_ids=[]):
         """Get position and direction of vehicles, pedestrians, and traffic signals.
 
         Args:
             vehicle_ids: List of vehicle IDs.
             pedestrian_ids: List of pedestrian IDs.
             traffic_signal_ids: List of traffic signal IDs.
+            agent_ids: Optional list of agent IDs to get their positions and directions.
 
         Returns:
             Dictionary containing position and direction information for all objects.
         """
-        info = json.loads(self.unrealcv.get_informations(self.traffic_manager_name))
+        info = json.loads(self.unrealcv.get_informations(self.ue_manager_name))
         result = {}
 
         # Process vehicles
@@ -220,9 +302,53 @@ class Communicator:
 
                 result[('traffic_signal', traffic_signal_id)] = (is_vehicle_green, is_pedestrian_walk, left_time)
 
+        # process agents
+        locations = info['ALocations']
+        rotations = info['ARotations']
+        for agent_id in agent_ids:
+            name = self.get_agent_name(agent_id)
+            location_pattern = f'{name}X=(.*?) Y=(.*?) Z='
+            match = re.search(location_pattern, locations)
+            if match:
+                x, y = float(match.group(1)), float(match.group(2))
+                position = Vector(x, y)
+
+                rotation_pattern = f'{name}P=.*? Y=(.*?) R='
+                match = re.search(rotation_pattern, rotations)
+                if match:
+                    direction = float(match.group(1))
+                    result[('agent', agent_id)] = (position, direction)
+
         return result
 
     # Initialization methods
+    def spawn_agent(self, agent, model_path):
+        """Spawn agent.
+
+        Args:
+            agent: Agent object.
+            model_path: Model path.
+        """
+        name = self.get_agent_name(agent.id)
+        self.unrealcv.spawn_bp_asset(model_path, name)
+        # Convert 2D position to 3D (x,y -> x,y,z)
+        location_3d = (
+            agent.position.x,  # Unreal X = 2D Y
+            agent.position.y,  # Unreal Y = 2D X
+            0  # Z coordinate (ground level)
+        )
+        # Convert 2D direction to 3D orientation (assuming rotation around Z axis)
+        orientation_3d = (
+            0,  # Pitch
+            math.degrees(math.atan2(agent.direction.y, agent.direction.x)),  # Yaw
+            0  # Roll
+        )
+        self.unrealcv.set_location(location_3d, name)
+        self.unrealcv.set_orientation(orientation_3d, name)
+        self.unrealcv.set_scale((1, 1, 1), name)  # Default scale
+        self.unrealcv.set_collision(name, True)
+        self.unrealcv.set_movable(name, True)
+
     def spawn_vehicles(self, vehicles):
         """Spawn vehicles.
 
@@ -250,16 +376,16 @@ class Communicator:
             self.unrealcv.set_collision(name, True)
             self.unrealcv.set_movable(name, True)
 
-    def spawn_pedestrians(self, pedestrians, model_name):
+    def spawn_pedestrians(self, pedestrians, model_path):
         """Spawn pedestrians.
 
         Args:
             pedestrians: List of pedestrian objects.
-            model_name: Pedestrian model name.
+            model_path: Pedestrian model path.
         """
         for pedestrian in pedestrians:
             name = self.get_pedestrian_name(pedestrian.id)
-            self.unrealcv.spawn_bp_asset(model_name, name)
+            self.unrealcv.spawn_bp_asset(model_path, name)
             # Convert 2D position to 3D (x,y -> x,y,z)
             location_3d = (
                 pedestrian.position.x,  # Unreal X = 2D Y
@@ -282,9 +408,9 @@ class Communicator:
         """Spawn traffic signals.
 
         Args:
-            traffic_signals: List of traffic signal objects.
-            traffic_light_model_path: Traffic light model path.
-            pedestrian_light_model_path: Pedestrian signal light model path.
+            traffic_signals: List of traffic signal objects to spawn.
+            traffic_light_model_path: Path to the traffic light model asset.
+            pedestrian_light_model_path: Path to the pedestrian signal light model asset.
         """
         for traffic_signal in traffic_signals:
             name = self.get_traffic_signal_name(traffic_signal.id)
@@ -311,14 +437,14 @@ class Communicator:
             self.unrealcv.set_collision(name, True)
             self.unrealcv.set_movable(name, False)
 
-    def spawn_traffic_manager(self, traffic_manager_path):
-        """Spawn traffic manager.
+    def spawn_ue_manager(self, ue_manager_path):
+        """Spawn UE manager.
 
         Args:
-            traffic_manager_path: Traffic manager model path.
+            ue_manager_path: Path to the UE manager asset in the content browser.
         """
-        self.traffic_manager_name = 'GEN_TrafficManager'
-        self.unrealcv.spawn_bp_asset(traffic_manager_path, self.traffic_manager_name)
+        self.ue_manager_name = 'GEN_BP_UEManager'
+        self.unrealcv.spawn_bp_asset(ue_manager_path, self.ue_manager_name)
 
     # City layout generation methods
     def generate_world(self, world_json, ue_asset_path):
@@ -329,7 +455,7 @@ class Communicator:
             ue_asset_path: Unreal Engine asset path.
 
         Returns:
-            Set of generated object IDs.
+            set: A set of generated object IDs.
         """
         generated_ids = set()
         # Load world from JSON
@@ -400,29 +526,7 @@ class Communicator:
         Returns:
             Vehicle name.
         """
-        return f'GEN_Vehicle_{vehicle_id}'
-
-    def get_pedestrian_name(self, pedestrian_id):
-        """Get pedestrian name.
-
-        Args:
-            pedestrian_id: Pedestrian ID.
-
-        Returns:
-            Pedestrian name.
-        """
-        return f'GEN_Pedestrian_{pedestrian_id}'
-
-    def get_traffic_signal_name(self, traffic_signal_id):
-        """Get traffic signal name.
-
-        Args:
-            traffic_signal_id: Traffic signal ID.
-
-        Returns:
-            Traffic signal name.
-        """
-        return f'GEN_TrafficSignal_{traffic_signal_id}'
+        return f'GEN_BP_Vehicle_{vehicle_id}'
 
     def clean_traffic(self, vehicles, pedestrians, traffic_signals):
         """Clean traffic objects.

@@ -52,10 +52,10 @@ class Logger:
 
                 # generate log file name, include timestamp
                 current_time = datetime.now().strftime('%Y%m%d_%H%M%S')
-                log_filename = f'logs/traffic_simulation_{current_time}.log'
+                log_filename = f'logs/simworld_{current_time}.log'
 
                 # configure root logger
-                self.logger = logging.getLogger('TrafficSimulation')
+                self.logger = logging.getLogger('SimWorld')
                 self.logger.setLevel(logging.DEBUG)
 
                 # file handler
@@ -78,7 +78,7 @@ class Logger:
                 self.logger.addHandler(file_handler)
             else:
                 # Create a null logger when logging is disabled
-                self.logger = logging.getLogger('TrafficSimulation')
+                self.logger = logging.getLogger('SimWorld')
                 self.logger.addHandler(logging.NullHandler())
 
             Logger._initialized = True
@@ -95,7 +95,7 @@ class Logger:
         """
         logger_instance = Logger()
         if name:
-            child_logger = logging.getLogger(f'TrafficSimulation.{name}')
+            child_logger = logging.getLogger(f'SimWorld.{name}')
             if not Logger._logging_enabled:
                 child_logger.handlers = []
                 child_logger.addHandler(logging.NullHandler())
