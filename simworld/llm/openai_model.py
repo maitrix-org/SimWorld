@@ -12,7 +12,7 @@ import json
 from simworld.llm.base_model import BaseModel
 import os
 from openai import OpenAI
-
+ 
 class OpenAIModel(BaseModel):
     def __init__(self, url: Optional[str] = None, api_key: Optional[str] = None, model: str = "gpt-4o-mini", additional_prompt: str = "ANSWER", **kwargs):
         self.url = url
