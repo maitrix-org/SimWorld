@@ -1,24 +1,23 @@
-"""
-Base class for all LLM models.
-"""
+"""Base class for all LLM models."""
+import os
+import time
 from typing import Optional, Union
+
 import numpy as np
 from openai import OpenAI
-import time
-import os
 
 
 class BaseModel:
-    """
-    Base class for all LLM models.
-    """
-    def __init__(self, url: Optional[str] = None, api_key: Optional[str] = None, model: str = "meta-llama/Meta-Llama-3.1-70B-Instruct"):
+    """Base class for all LLM models."""
+
+    def __init__(self, url: Optional[str] = None, api_key: Optional[str] = None, model: str = 'meta-llama/Meta-Llama-3.1-70B-Instruct'):
+        """Initialize the base model with optional URL, API key, and model name."""
         self.url = url
         self.api_key = api_key
         if self.api_key is None:
-            self.api_key = os.getenv("OPENAI_API_KEY")
+            self.api_key = os.getenv('OPENAI_API_KEY')
         if self.url is None:
-            self.url = "https://api.openai.com/v1"
+            self.url = 'https://api.openai.com/v1'
         self.client = OpenAI(base_url=self.url, api_key=self.api_key)
         self.model = model
         self.max_tokens = 1000
@@ -45,23 +44,21 @@ class BaseModel:
         is_instruct_model: bool = False,
         **kwargs,
     ):
-        """
-        Generate text from the model.
-        """
+        """Generate text from the model with optional image support."""
         max_tokens = self.max_tokens if max_tokens is None else max_tokens
         temperature = self.temperature if temperature is None else temperature
         logprobs = 0 if logprobs is None else logprobs
 
         supports_vision = False
-        multimodal_models = ["gpt-4o", "gpt-4o-mini", "o1", "o1-mini"]
+        multimodal_models = ['gpt-4o', 'gpt-4o-mini', 'o1', 'o1-mini']
         model_name = self.model.lower()
         if model_name in multimodal_models:
             supports_vision = True
 
-        messages = [{"role": "system", "content": system_prompt}]
+        messages = [{'role': 'system', 'content': system_prompt}]
         user_content = []
         if user_prompt:
-            user_content.append({"type": "text", "text": user_prompt})
+            user_content.append({'type': 'text', 'text': user_prompt})
         if images and supports_vision:
             if isinstance(images, str):
                 images = [images]
@@ -72,14 +69,14 @@ class BaseModel:
                 else:
                     img_data = self._process_image_to_base64(image)
                 user_content.append({
-                    "type": "image_url",
-                    "image_url": {"url": f"data:image/jpeg;base64,{img_data}"}
+                    'type': 'image_url',
+                    'image_url': {'url': f'data:image/jpeg;base64,{img_data}'}
                 })
 
         if action_history:
-            user_content.append({"type": "text", "text": f"Your action history is: {action_history}"})
+            user_content.append({'type': 'text', 'text': f'Your action history is: {action_history}'})
 
-        messages.append({"role": "user", "content": user_content if len(user_content) > 1 else user_content[0]["text"]})
+        messages.append({'role': 'user', 'content': user_content if len(user_content) > 1 else user_content[0]['text']})
 
         for i in range(1, retry + 1):
             try:
@@ -97,19 +94,20 @@ class BaseModel:
                 )
                 return response.choices[0].message.content
             except Exception as e:
-                print(f"An Error Occured: {e}, sleeping for {i} seconds")
+                print(f'An Error Occured: {e}, sleeping for {i} seconds')
                 time.sleep(i)
 
         # after 64 tries, still no luck
         raise RuntimeError(
-            "GPTCompletionModel failed to generate output, even after 64 tries"
+            'GPTCompletionModel failed to generate output, even after 64 tries'
         )
 
-if __name__ == "__main__":
-    llm = BaseModel(url="https://openrouter.ai/api/v1",
-                    api_key="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",
-                    model="meta-llama/llama-4-maverick"
+
+if __name__ == '__main__':
+    llm = BaseModel(url='https://openrouter.ai/api/v1',
+                    api_key='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',
+                    model='meta-llama/llama-4-maverick'
                     )
 
-    response = llm.generate("You are a helpful assistant.", "What is the capital of France?")
+    response = llm.generate('You are a helpful assistant.', 'What is the capital of France?')
     print(response)

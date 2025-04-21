@@ -1,13 +1,10 @@
-"""
-Extract JSON from text and fix invalid escape sequences.
-"""
-import re
+"""Extract JSON from text and fix invalid escape sequences."""
 import json
+import re
+
 
 def extract_json_and_fix_escapes(text):
-    """
-    Extract JSON from text and fix invalid escape sequences.
-    """
+    """Extract JSON from text and fix invalid escape sequences."""
     # Extract content from first { to last }
     pattern = r'(\{.*\})'
     match = re.search(pattern, text, re.DOTALL)
@@ -21,7 +18,7 @@ def extract_json_and_fix_escapes(text):
             json_obj = json.loads(fixed_json)
             return json_obj
         except json.JSONDecodeError as e:
-            print(f"JSON parsing error: {e}")
+            print(f'JSON parsing error: {e}')
             # Return the fixed string if parsing fails
             return fixed_json
     else:
