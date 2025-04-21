@@ -10,10 +10,10 @@ from typing import List, Optional
 
 import numpy as np
 
-from simworld.activity2action.action_space import FORMAT
-from simworld.llm.base_llm import BaseLLM
+from simworld.activity2action.action_space import ACTION_LIST, FORMAT, Action
+from simworld.activity2action.prompt import SYSTEM_PROMPT, USER_PROMPT
+from simworld.llm import A2ALLM
 from simworld.map.map import Map, Node
-from simworld.prompt.prompt import SYSTEM_PROMPT, USER_PROMPT
 from simworld.traffic.base import TrafficSignalState
 from simworld.utils.vector import Vector
 
@@ -25,8 +25,8 @@ class Activity2Action:
         self,
         name: str,
         user_agent,
-        model: BaseLLM,
-        vision_model: Optional[BaseLLM] = None,
+        model: A2ALLM,
+        vision_model: Optional[A2ALLM] = None,
         temperature: float = 1.5,
         max_history_step: int = 5,
         camera_id: int = 1,
@@ -70,6 +70,7 @@ class Activity2Action:
         user_prompt = USER_PROMPT.format(
             map=self.map,
             position=self.agent.position,
+            action_list=ACTION_LIST,
             plan=plan,
         )
 
@@ -111,7 +112,7 @@ class Activity2Action:
         print(f'Agent {self.agent.id} Waypoints: {waypoints}', flush=True)
 
         for action, waypoint in zip(actions, waypoints):
-            if action == 0:
+            if action == Action.Navigate.value:
                 self.navigate(waypoint)
 
     def shortest_path(
@@ -184,7 +185,7 @@ class Activity2Action:
                     if distance < min_distance:
                         min_distance = distance
                         traffic_light = signal
-                while True and not self.exit_event.is_set():
+                while not self.exit_event.is_set():
                     state = traffic_light.get_state()
                     left_time = traffic_light.get_left_time()
                     if state[1] == TrafficSignalState.PEDESTRIAN_GREEN and left_time > min(15, self.agent.config['traffic.traffic_signal.pedestrian_green_light_duration']):
