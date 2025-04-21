@@ -1,164 +1,211 @@
 """OpenRouter model implementation for LLM interactions."""
-import os
-import time
 from typing import Optional, Union
 
 import numpy as np
-from openai import OpenAI
 
-from simworld.llm.base_model import BaseModel
+from simworld.llm.base_llm import BaseLLM
 from simworld.utils.extract_json import extract_json_and_fix_escapes
 
 
-class OpenRouterModel(BaseModel):
+class OpenRouterModel(BaseLLM):
     """OpenRouter model implementation for LLM interactions."""
 
-    def __init__(self, url: Optional[str] = None, api_key: Optional[str] = None, model: str = 'meta-llama/Meta-Llama-3.1-70B-Instruct'):
+    def __init__(self, model_name: str, url: str = 'https://openrouter.ai/api/v1', api_key: str = None, **kwargs):
         """Initialize the OpenRouter model.
 
         Args:
+            model_name: Model name to use
             url: Optional API URL override
             api_key: Optional API key override
-            model: Model name to use
+            **kwargs: Additional arguments to pass to the base model
         """
-        super().__init__(url, api_key, model)
-        self.model = model
-        self.max_tokens = 1000
-        self.temperature = 0.7
-        self.top_p = 1.0
-        self.num_return_sequences = 1
-        self.rate_limit_per_min = 20
-        self.logprobs = None
-        if self.api_key is None:
-            self.api_key = os.getenv('OPENROUTER_API_KEY')
-        self.client = OpenAI(base_url=self.url, api_key=self.api_key)
+        super().__init__(model_name, url, api_key, **kwargs)
+        self.model = model_name
+        # Default parameters
+        self.max_tokens = kwargs.get('max_tokens', 1000)
+        self.temperature = kwargs.get('temperature', 0.7)
+        self.top_p = kwargs.get('top_p', 1.0)
+        self.num_return_sequences = kwargs.get('num_return_sequences', 1)
 
-    def react(self, system_prompt: str,
-              context_prompt: str,
-              user_prompt: str,
-              reasoning_prompt: str,
-              images: Optional[Union[str, list[str], np.ndarray, list[np.ndarray]]] = None,
-              max_tokens: int = None,
-              top_p: float = 1.0,
-              num_return_sequences: int = 1,
-              rate_limit_per_min: Optional[int] = 20,
-              logprobs: Optional[int] = None,
-              reasoning_space_schema: Optional[str] = None,
-              action_space_schema: Optional[str] = None,
-              temperature=None,
-              additional_prompt=None,
-              retry=4,
-              action_history: Optional[list[str]] = None,
-              is_instruct_model: bool = False,
-              **kwargs):
+    def react(
+        self,
+        system_prompt: str,
+        context_prompt: str,
+        user_prompt: str,
+        reasoning_prompt: str,
+        images: Optional[Union[str, list[str], np.ndarray, list[np.ndarray]]] = None,
+        max_tokens: int = None,
+        temperature: float = None,
+        top_p: float = None,
+        reasoning_space_schema: Optional[str] = None,
+        action_space_schema: Optional[str] = None,
+        default_reasoning_response: Optional[dict] = None,
+        default_action_response: Optional[dict] = None,
+        **kwargs
+    ):
         """ReAct-1: Reasoning and Acting.
 
         The model will first make a reasoning according to the prompt, then consider the function calling if there is necessary.
         Then the model will act according to the reasoning and function calling.
+
+        Args:
+            system_prompt: System prompt to guide model behavior
+            context_prompt: Context for the reasoning
+            user_prompt: User prompt for the action
+            reasoning_prompt: Prompt for the reasoning step
+            images: Optional images to include
+            max_tokens: Maximum number of tokens to generate
+            temperature: Sampling temperature
+            top_p: Top p sampling parameter
+            reasoning_space_schema: JSON schema for reasoning response
+            action_space_schema: JSON schema for action response
+            **kwargs: Additional arguments
+
+        Returns:
+            Action JSON response
         """
-        max_tokens = self.max_tokens if max_tokens is None else max_tokens
-        temperature = self.temperature if temperature is None else temperature
-        num_return_sequences = self.num_return_sequences if num_return_sequences is None else num_return_sequences
+        # Set default parameters
+        max_tokens = kwargs.get('max_tokens', self.max_tokens)
+        temperature = kwargs.get('temperature', self.temperature)
+        top_p = kwargs.get('top_p', self.top_p)
 
         # Add timeout setting
-        kwargs['timeout'] = kwargs.get('timeout', 30)  # Set 30 second timeout
+        kwargs['timeout'] = kwargs.get('timeout', 30)
 
-        # Modify reasoning prompt to ensure JSON format
-        reasoning_prompt = reasoning_prompt.format(context=context_prompt)
-        reasoning_prompt += '\nPlease respond in valid JSON format following this schema: ' + str(reasoning_space_schema)
-
-        reasoning_response = None
-        for i in range(1, retry + 1):
-            try:
-                response = self.client.chat.completions.create(
-                    model=self.model,
-                    messages=[
-                        {'role': 'system', 'content': system_prompt},
-                        {'role': 'user', 'content': reasoning_prompt}
-                    ],
-                    max_tokens=max_tokens,
-                    temperature=temperature,
-                    top_p=top_p,
-                    **kwargs,
-                )
-                reasoning_response = response.choices[0].message.content
-                break
-            except Exception as e:
-                print(f'Reasoning Error Occurred: {e}, attempt {i}/{retry}')
-                if i < retry:
-                    time.sleep(min(i * 2, 10))
-                continue
-
-        if reasoning_response is None:
-            print('Warning: Failed to get reasoning response, using default')
-            reasoning_json = {'reasoning': 'No reasoning available'}
-        else:
-            reasoning_json = extract_json_and_fix_escapes(reasoning_response)
-            if reasoning_json is None:
-                reasoning_json = {'reasoning': 'No reasoning available'}
-
-        reasoning = reasoning_json.get('reasoning', 'No reasoning available')
-
-        # Modify action prompt to ensure JSON format
-        user_prompt = user_prompt.format(
-            context=context_prompt,
-            reasoning=reasoning.reasoning
+        # Get reasoning response
+        reasoning_prompt = self._build_reasoning_prompt(reasoning_prompt, context_prompt, reasoning_space_schema)
+        reasoning_response = self._get_completion(
+            system_prompt=system_prompt,
+            user_prompt=reasoning_prompt,
+            max_tokens=max_tokens,
+            temperature=temperature,
+            top_p=top_p,
+            **kwargs
         )
-        user_prompt += '\nPlease respond in valid JSON format following this schema: ' + str(action_space_schema)
 
-        action_response = None
-        for i in range(1, retry + 1):
-            try:
-                response = self.client.chat.completions.create(
-                    model=self.model,
-                    messages=[
-                        {'role': 'system', 'content': system_prompt},
-                        {'role': 'user', 'content': user_prompt}
-                    ],
-                    max_tokens=max_tokens,
-                    temperature=temperature,
-                    top_p=top_p,
-                    **kwargs,
-                )
-                action_response = response.choices[0].message.content
-                break
-            except Exception as e:
-                print(f'Action Error Occurred: {e}, attempt {i}/{retry}')
-                if i < retry:
-                    time.sleep(min(i * 2, 10))
-                continue
+        reasoning_json = self._parse_json_response(
+            reasoning_response,
+            default=default_reasoning_response
+        )
+        reasoning = reasoning_json.get('reasoning', default_reasoning_response)
 
-        if action_response is None:
-            print('Warning: Failed to get action response, using default')
-            action_json = {
-                'choice': 0,
-                'index': 0,
-                'target_point': [0, 0],
-                'meeting_point': [0, 0],
-                'next_waypoint': [0, 0],
-                'new_speed': 0,
-            }
-        else:
-            action_json = extract_json_and_fix_escapes(action_response)
-            if action_json is None:
-                action_json = {
-                    'choice': 0,
-                    'index': 0,
-                    'target_point': [0, 0],
-                    'meeting_point': [0, 0],
-                    'next_waypoint': [0, 0],
-                    'new_speed': 0,
-                }
+        # Get action response
+        action_prompt = self._build_action_prompt(user_prompt, context_prompt, reasoning, action_space_schema)
+        action_response = self._get_completion(
+            system_prompt=system_prompt,
+            user_prompt=action_prompt,
+            max_tokens=max_tokens,
+            temperature=temperature,
+            top_p=top_p,
+            **kwargs
+        )
 
-        return action_json
+        return self._parse_json_response(action_response, default=default_action_response)
+
+    def _get_completion(
+        self,
+        system_prompt: str,
+        user_prompt: str,
+        max_tokens: int,
+        temperature: float,
+        top_p: float,
+        **kwargs
+    ) -> str:
+        """Get completion from the model.
+
+        Args:
+            system_prompt: System prompt
+            user_prompt: User prompt
+            max_tokens: Maximum tokens
+            temperature: Temperature
+            top_p: Top p
+            **kwargs: Additional arguments
+
+        Returns:
+            Model response content
+        """
+        response = self.client.chat.completions.create(
+            model=self.model,
+            messages=[
+                {'role': 'system', 'content': system_prompt},
+                {'role': 'user', 'content': user_prompt}
+            ],
+            max_tokens=max_tokens,
+            temperature=temperature,
+            top_p=top_p,
+            **kwargs,
+        )
+        return response.choices[0].message.content
+
+    def _build_reasoning_prompt(
+        self,
+        reasoning_prompt: str,
+        context_prompt: str,
+        reasoning_space_schema: Optional[str]
+    ) -> str:
+        """Build the reasoning prompt.
+
+        Args:
+            reasoning_prompt: Base reasoning prompt
+            context_prompt: Context information
+            reasoning_space_schema: JSON schema for reasoning
+
+        Returns:
+            Complete reasoning prompt
+        """
+        prompt = reasoning_prompt.format(context=context_prompt)
+        if reasoning_space_schema:
+            prompt += '\nPlease respond in valid JSON format following this schema: ' + str(reasoning_space_schema)
+        return prompt
+
+    def _build_action_prompt(
+        self,
+        user_prompt: str,
+        context_prompt: str,
+        reasoning: str,
+        action_space_schema: Optional[str]
+    ) -> str:
+        """Build the action prompt.
+
+        Args:
+            user_prompt: Base user prompt
+            context_prompt: Context information
+            reasoning: Reasoning from previous step
+            action_space_schema: JSON schema for action
+
+        Returns:
+            Complete action prompt
+        """
+        prompt = user_prompt.format(
+            context=context_prompt,
+            reasoning=reasoning
+        )
+        if action_space_schema:
+            prompt += '\nPlease respond in valid JSON format following this schema: ' + str(action_space_schema)
+        return prompt
+
+    def _parse_json_response(self, response: str, default: dict) -> dict:
+        """Parse JSON response with fallback to default.
+
+        Args:
+            response: Response string to parse
+            default: Default value if parsing fails
+
+        Returns:
+            Parsed JSON or default value
+        """
+        if response is None:
+            return default
+
+        result = extract_json_and_fix_escapes(response)
+        return result if result is not None else default
 
 
 if __name__ == '__main__':
     llm = OpenRouterModel(
+        model_name='meta-llama/llama-4-maverick',
         url='https://openrouter.ai/api/v1',
-        api_key='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',
-        model='meta-llama/llama-4-maverick'
+        api_key='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'
     )
-
-    response = llm.generate('You are a helpful assistant.', 'What is the capital of France?')
+    response = llm.generate_text('You are a helpful assistant.', 'What is the capital of France?')
     print(response)
