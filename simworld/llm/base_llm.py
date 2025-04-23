@@ -7,6 +7,8 @@ from typing import Optional
 
 import openai
 
+from simworld.utils.logger import Logger
+
 from .retry import retry_api_call
 
 
@@ -30,24 +32,42 @@ class BaseLLM(metaclass=LLMMetaclass):
     def __init__(
         self,
         model_name: str,
-        url: Optional[str] = 'https://api.openai.com/v1',
+        url: Optional[str] = None,
         api_key: Optional[str] = None,
     ):
-        """Initialize the LLM client.
+        """Initialize the LLM client. Default uses OpenAI's API.
 
         Args:
             model_name: Name of the model to use.
-            url: Base URL for the API.
+            url: Base URL for the API. If None, uses OpenAI's default URL.
             api_key: Optional API key (will use OPENAI_API_KEY env var if not provided).
+
+        Raises:
+            ValueError: If no valid API key is provided or if the URL is invalid.
         """
+        # Get API key from environment if not provided
         env_api_key = os.getenv('OPENAI_API_KEY')
-        if env_api_key is None and api_key is None:
-            raise ValueError('No API key provided')
-        self.client = openai.OpenAI(
-            api_key=env_api_key if env_api_key else api_key,
-            base_url=url,
-        )
+        self.api_key = api_key or env_api_key
+
+        if not self.api_key:
+            raise ValueError('No API key provided. Please set OPENAI_API_KEY environment variable or pass api_key parameter.')
+
+        if not isinstance(self.api_key, str) or not self.api_key.startswith(('sk-', 'dummy-key')):
+            raise ValueError('Invalid API key format')
+
+        try:
+            self.client = openai.OpenAI(
+                api_key=self.api_key,
+                base_url=url,
+            )
+            # validate the api key
+            self.client.models.list()
+        except Exception as e:
+            raise ValueError(f'Failed to initialize OpenAI client: {str(e)}')
+
         self.model_name = model_name
+        self.logger = Logger.get_logger('BaseLLM')
+        self.logger.info(f'Initialized LLM client for model {model_name}, url {url or "default"}')
 
     def generate_text(
         self,
