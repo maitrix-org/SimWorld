@@ -3,6 +3,7 @@
 import inspect
 import os
 import time
+from typing import Optional
 
 import openai
 
@@ -28,9 +29,9 @@ class BaseLLM(metaclass=LLMMetaclass):
 
     def __init__(
         self,
-        model_name,
-        url,
-        api_key=None,
+        model_name: str,
+        url: Optional[str] = 'https://api.openai.com/v1',
+        api_key: Optional[str] = None,
     ):
         """Initialize the LLM client.
 
