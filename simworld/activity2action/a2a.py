@@ -201,8 +201,8 @@ class Activity2Action:
             f'Agent {self.agent.id} Current pos: {self.agent.position}, target: {waypoint}, dir: {self.agent.direction}', flush=True
         )
         self.client.agent_move_forward(self.agent.id)
-        while not self.walk_arrive_at_waypoint(waypoint) and not self.exit_event.is_set():
-            while not self.align_direction(waypoint) and not self.exit_event.is_set():
+        while not self.walk_arrive_at_waypoint(waypoint) and (self.exit_event is None or not self.exit_event.is_set()):
+            while not self.align_direction(waypoint) and (self.exit_event is None or not self.exit_event.is_set()):
                 angle, turn = self.get_angle_and_direction(waypoint)
                 self.logger.info(f'Agent {self.agent.id} Angle: {angle}, turn: {turn}')
                 # print(f'Agent {self.agent.id} Angle: {angle}, turn: {turn}', flush=True)
