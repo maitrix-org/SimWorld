@@ -238,6 +238,11 @@ class Activity2Action:
                 img=image,
                 temperature=self.temperature,
             )
+
+            if response is None:
+                self.logger.error('Parse failed, response is None')
+                continue
+
             response = json.loads(response)
             if response['choice'] == 'MoveForward':
                 self.client.agent_move_forward(self.agent.id, response['time'])
@@ -245,7 +250,6 @@ class Activity2Action:
                 self.client.agent_rotate(self.agent.id, response['angle'], response['direction'])
             else:
                 print(f'Invalid action: {response}', flush=True)
-        self.client.agent_stop(self.agent.id)
 
     def walk_arrive_at_waypoint(self, waypoint: Vector) -> bool:
         """Return True if agent is within threshold of waypoint."""
