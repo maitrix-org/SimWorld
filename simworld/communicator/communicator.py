@@ -129,6 +129,17 @@ class Communicator:
 
         self.unrealcv.v_set_states(self.ue_manager_name, vehicles_states_str)
 
+    def get_vehicle_name(self, vehicle_id):
+        """Get vehicle name.
+
+        Args:
+            vehicle_id: Vehicle ID.
+
+        Returns:
+            Vehicle name.
+        """
+        return f'GEN_BP_Vehicle_{vehicle_id}'
+
     # Pedestrian-related methods
     def pedestrian_move_forward(self, pedestrian_id):
         """Move pedestrian forward.
@@ -514,12 +525,16 @@ class Communicator:
 
         return generated_ids
 
-    def clear_env(self):
+    # Utility methods
+    def clear_env(self, keep_roads=False):
         """Clear all objects in the environment."""
         # Get all objects in the environment
         objects = [obj.lower() for obj in self.unrealcv.get_objects()]  # Convert objects to lowercase
         # Define unwanted objects
-        unwanted_terms = ['GEN_BP_']
+        if keep_roads:
+            unwanted_terms = ['GEN_BP_']
+        else:
+            unwanted_terms = ['GEN_BP_', 'GEN_Road_']
         unwanted_terms = [term.lower() for term in unwanted_terms]  # Convert unwanted terms to lowercase
 
         # Get all objects starting with the unwanted terms
@@ -531,36 +546,23 @@ class Communicator:
 
         self.unrealcv.clean_garbage()
 
-    # Utility methods
-    def get_vehicle_name(self, vehicle_id):
-        """Get vehicle name.
-
-        Args:
-            vehicle_id: Vehicle ID.
-
-        Returns:
-            Vehicle name.
-        """
-        return f'GEN_BP_Vehicle_{vehicle_id}'
-
-    def clean_traffic(self, vehicles, pedestrians, traffic_signals):
-        """Clean traffic objects.
+    def clean_traffic_only(self, vehicles, pedestrians, traffic_signals):
+        """Clean traffic objects only.
 
         Args:
             vehicles: List of vehicles.
             pedestrians: List of pedestrians.
             traffic_signals: List of traffic signals.
         """
-        # Can't destroy pedestrians due to issue in unrealcv
         for vehicle in vehicles:
-            self.destroy(self.get_vehicle_name(vehicle.vehicle_id))
+            self.unrealcv.destroy(self.get_vehicle_name(vehicle.vehicle_id))
         for traffic_signal in traffic_signals:
-            self.destroy(self.get_traffic_signal_name(traffic_signal.id))
+            self.unrealcv.destroy(self.get_traffic_signal_name(traffic_signal.id))
         for pedestrian in pedestrians:
-            self.destroy(self.get_pedestrian_name(pedestrian.pedestrian_id))
+            self.unrealcv.destroy(self.get_pedestrian_name(pedestrian.pedestrian_id))
 
-        self.destroy(self.traffic_manager_name)
-        self.clean_garbage()
+        self.unrealcv.destroy(self.ue_manager_name)
+        self.unrealcv.clean_garbage()
 
     def disconnect(self):
         """Disconnect from Unreal Engine."""

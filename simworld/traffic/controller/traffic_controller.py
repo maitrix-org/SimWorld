@@ -4,7 +4,6 @@ This module provides the main controller for the traffic simulation, handling in
 spawning, and coordination of all traffic elements including vehicles, pedestrians, and traffic signals.
 """
 import json
-import os
 import random
 import sys
 import time
@@ -83,8 +82,8 @@ class TrafficController:
         Raises:
             ValueError: If the file path is not absolute.
         """
-        if not os.path.isabs(file_path):
-            raise ValueError(f'Expected an absolute path, got: {file_path}')
+        # if not os.path.isabs(file_path):
+        #     raise ValueError(f'Expected an absolute path, got: {file_path}')
 
         self.logger.info(f'Loading road network from file: {file_path}')
 
