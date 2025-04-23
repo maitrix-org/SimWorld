@@ -10,9 +10,12 @@ from typing import List
 
 import numpy as np
 
-from simworld.communicator import Communicator
-from simworld.traffic.base import (Intersection, Sidewalk, TrafficLane,
-                                   TrafficSignal, TrafficSignalState)
+from simworld.communicator.communicator import Communicator
+from simworld.traffic.base.intersection import Intersection
+from simworld.traffic.base.sidewalk import Sidewalk
+from simworld.traffic.base.traffic_lane import TrafficLane
+from simworld.traffic.base.traffic_signal import (TrafficSignal,
+                                                  TrafficSignalState)
 from simworld.utils.logger import Logger
 from simworld.utils.traffic_utils import (cal_waypoints, extend_control_point,
                                           get_bezier_points)

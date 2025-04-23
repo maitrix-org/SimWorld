@@ -5,8 +5,8 @@ It manages pedestrian lifecycle, movement logic, and interaction with traffic si
 """
 import random
 
-from simworld.agent import Pedestrian, PedestrianState
-from simworld.traffic.base import TrafficSignalState
+from simworld.agent.pedestrian import Pedestrian, PedestrianState
+from simworld.traffic.base.traffic_signal import TrafficSignalState
 from simworld.utils.logger import Logger
 
 

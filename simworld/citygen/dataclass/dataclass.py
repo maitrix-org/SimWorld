@@ -135,7 +135,7 @@ class BuildingType:
     name: str
     width: float
     height: float
-    num_limit: int
+    num_limit: int = -1
 
     def __hash__(self):
         """Return the hash value of the building type."""

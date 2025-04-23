@@ -6,8 +6,8 @@ It manages vehicle lifecycle, movement logic, and interaction with traffic signa
 import json
 import random
 
-from simworld.agent import Vehicle, VehicleState
-from simworld.traffic.base import TrafficSignalState
+from simworld.agent.vehicle import Vehicle, VehicleState
+from simworld.traffic.base.traffic_signal import TrafficSignalState
 from simworld.utils.logger import Logger
 from simworld.utils.traffic_utils import cal_waypoints
 

@@ -8,7 +8,7 @@ from typing import Tuple
 from scripts.a2a_prompt import user_system_prompt, user_user_prompt
 from simworld.activity2action.a2a import Activity2Action
 from simworld.agent.base_agent import BaseAgent
-from simworld.communicator import UnrealCV
+from simworld.communicator.unrealcv import UnrealCV
 from simworld.config.config_loader import Config
 from simworld.llm.base_llm import BaseLLM
 from simworld.map.map import Map

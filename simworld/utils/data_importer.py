@@ -188,8 +188,7 @@ class DataImporter:
                 building_type = BuildingType(
                     name=building_data['building_type'],
                     width=building_data['bounds']['width'],
-                    height=building_data['bounds']['height'],
-                    is_required=False if 'building' in building_data['building_type'] else True
+                    height=building_data['bounds']['height']
                 )
 
                 building = Building(

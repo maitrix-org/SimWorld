@@ -10,14 +10,21 @@ import time
 import traceback
 from collections import defaultdict
 
-from simworld.agent import Pedestrian, Vehicle
-from simworld.communicator import Communicator, UnrealCV
+from simworld.agent.pedestrian import Pedestrian
+from simworld.agent.vehicle import Vehicle
+from simworld.communicator.communicator import Communicator
+from simworld.communicator.unrealcv import UnrealCV
 from simworld.config import Config
-from simworld.traffic.base import (Crosswalk, Intersection, Road, Sidewalk,
-                                   TrafficLane, TrafficSignal,
-                                   TrafficSignalState)
-from simworld.traffic.manager import (IntersectionManager, PedestrianManager,
-                                      VehicleManager)
+from simworld.traffic.base.crosswalk import Crosswalk
+from simworld.traffic.base.intersection import Intersection
+from simworld.traffic.base.road import Road
+from simworld.traffic.base.sidewalk import Sidewalk
+from simworld.traffic.base.traffic_lane import TrafficLane
+from simworld.traffic.base.traffic_signal import (TrafficSignal,
+                                                  TrafficSignalState)
+from simworld.traffic.manager.intersection_manager import IntersectionManager
+from simworld.traffic.manager.pedestrian_manager import PedestrianManager
+from simworld.traffic.manager.vehicle_manager import VehicleManager
 from simworld.utils.logger import Logger
 from simworld.utils.vector import Vector
 
