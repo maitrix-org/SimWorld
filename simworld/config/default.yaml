@@ -60,7 +60,7 @@ citygen:
     max_points_per_route: 5
 
 assets_rp:
-  input_descrption_map: "../data/DescriptionMap.json"
+  input_description_map: "../data/DescriptionMap.json"
   input_sample_dataset: "../data/sample_dataset"
   input_dir: "output"
   output_dir: "output_rp"

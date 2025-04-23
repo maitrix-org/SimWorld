@@ -46,7 +46,7 @@ class AssetsRetrieverPlacer:
 
         # 2. Load the file that store all the assets. Find the candidates that match "reference_asset_query"
         progen_world_path = os.path.join(self.config['citygen.output_dir'], 'progen_world.json')
-        referenceAssetRetriever = ReferenceAssetsRetriever(progen_world_path, self.config['assets_rp.input_descrption_map'], self.config['assets_rp.env_description_retrieval_model'])
+        referenceAssetRetriever = ReferenceAssetsRetriever(progen_world_path, self.config['assets_rp.input_description_map'], self.config['assets_rp.env_description_retrieval_model'])
         candidate_nodes = referenceAssetRetriever.retrieve_reference_assets(reference_asset_query)
 
         # 3. For each candidate, use "_get_point_around_label" to obtain its surrounding asset
@@ -58,7 +58,7 @@ class AssetsRetrieverPlacer:
             candidate_surroundings = self.city_generator.route_generator.get_point_around_label(node_position, self.city_generator.city_quadtrees, 200, 20)
 
             # 4. Integrate the surrounding information to a string and do embedding, and calculate the similarity score.
-            candidate_surroundings_str = get_surroundings(candidate_surroundings, self.config['assets_rp.input_descrption_map'])
+            candidate_surroundings_str = get_surroundings(candidate_surroundings, self.config['assets_rp.input_description_map'])
             print(candidate_surroundings_str)
             candidate_embedding = self.model.encode(candidate_surroundings_str)
             query_embedding = self.model.encode(surroundings_query)
