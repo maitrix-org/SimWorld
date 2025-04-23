@@ -6,6 +6,9 @@
 # Development software files
 .vscode/
 
+# OS-specific files
+.DS_Store
+
 # User-specific files
 *.rsuser
 *.suo

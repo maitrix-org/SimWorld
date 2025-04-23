@@ -470,7 +470,19 @@ class Communicator:
         with open(ue_asset_path, 'r') as f:
             asset_library = json.load(f)
 
-        def process_node(row):
+        def _parse_rgb(color_str):
+            """Parse RGB values from color string like '(R=255,G=255,B=0)'.
+
+            Args:
+                color_str: Color string.
+            """
+            pattern = r'R=(\d+),G=(\d+),B=(\d+)'
+            match = re.search(pattern, color_str)
+            if match:
+                return [int(match.group(1)), int(match.group(2)), int(match.group(3))]
+            return [0, 0, 0]  # Default to black if parsing fails
+
+        def _process_node(row):
             """Process a single node.
 
             Args:
@@ -479,12 +491,15 @@ class Communicator:
             # Spawn each node on the map
             id = row.name  # name is the index of the row
             try:
-                instance_ref = asset_library[node_df.loc[id, 'instance_name']]
+                instance_ref = asset_library[node_df.loc[id, 'instance_name']]['asset_path']
+                color = asset_library['colors'][asset_library[node_df.loc[id, 'instance_name']]['color']]
+                rgb_values = _parse_rgb(color)
             except KeyError:
                 print("Can't find node {} in asset library".format(node_df.loc[id, 'instance_name']))
                 return
             else:
                 self.unrealcv.spawn_bp_asset(instance_ref, id)
+                self.unrealcv.set_color(id, rgb_values)
                 location = node_df.loc[id, ['properties_location_x', 'properties_location_y', 'properties_location_z']].to_list()
                 self.unrealcv.set_location(location, id)
                 orientation = node_df.loc[id, ['properties_orientation_pitch', 'properties_orientation_yaw', 'properties_orientation_roll']].to_list()
@@ -495,7 +510,7 @@ class Communicator:
                 self.unrealcv.set_movable(id, False)
                 generated_ids.add(id)
 
-        node_df.apply(process_node, axis=1)
+        node_df.apply(_process_node, axis=1)
 
         return generated_ids
 
