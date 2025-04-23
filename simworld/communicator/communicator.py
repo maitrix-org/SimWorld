@@ -89,6 +89,27 @@ class Communicator:
         """
         return f'GEN_BP_Agent_{agent_id}'
 
+    def get_camera_observation(self, cam_id, viewmode, mode='fast'):
+        """Get camera observation.
+
+        Args:
+            cam_id: Camera ID.
+            viewmode: View mode.
+            mode: Mode, possible values are 'direct', 'file', 'fast'.
+
+        Returns:
+            Image data.
+        """
+        return self.unrealcv.read_image(cam_id, viewmode, mode)
+
+    def show_img(self, image):
+        """Show image.
+
+        Args:
+            image: Image data.
+        """
+        self.unrealcv.show_img(image)
+
     # Vehicle-related methods
     def update_vehicle(self, vehicle_id, throttle, brake, steering):
         """Update vehicle state.

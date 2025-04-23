@@ -5,13 +5,13 @@ import traceback
 from threading import Event
 from typing import Tuple
 
+from scripts.a2a_prompt import user_system_prompt, user_user_prompt
 from simworld.activity2action.a2a import Activity2Action
 from simworld.agent.base_agent import BaseAgent
 from simworld.communicator import UnrealCV
 from simworld.config.config_loader import Config
 from simworld.llm.base_llm import BaseLLM
 from simworld.map.map import Map
-from simworld.prompt.prompt import user_system_prompt, user_user_prompt
 from simworld.utils.vector import Vector
 
 
@@ -58,7 +58,8 @@ class UserAgent(BaseAgent):
         self.exit_event = exit_event
 
         if use_a2a:
-            self.a2a = Activity2Action(user_agent=self, name=self.communicator.get_agent_name(self.id), model=self.llm, rule_based=use_rule_based, exit_event=self.exit_event)
+            self.a2a = Activity2Action(user_agent=self, name=self.communicator.get_agent_name(self.id), model=self.llm,
+                                       rule_based=use_rule_based, exit_event=self.exit_event)
 
         self.last_state: Tuple[Vector, str] = (self.position, 'do nothing')
 

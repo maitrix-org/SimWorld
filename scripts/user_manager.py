@@ -9,7 +9,7 @@ from typing import List
 
 from scripts.user_agent import UserAgent
 from simworld.communicator import Communicator, UnrealCV
-from simworld.llm.base_llm import BaseLLM
+from simworld.llm import A2ALLM
 from simworld.map.map import Map
 from simworld.utils.logger import Logger
 from simworld.utils.vector import Vector
@@ -75,7 +75,7 @@ class UserManager:
             end = Vector(road['end']['x'] * 100, road['end']['y'] * 100)
             road_objects.append(Road(start, end))
 
-        llm = BaseLLM(
+        llm = A2ALLM(
             model_name=self.config['user.llm_model_path'],
             url=self.config['user.llm_url'],
             api_key=self.config['user.llm_api_key'],
