@@ -34,32 +34,20 @@ class RoadGenerator:
         # Read and parse the JSON file
         with open(input_path, 'r') as f:
             data = json.load(f)
-        road_data = data['nodes']
+        road_data = data['roads']
 
-        # Process each node and create road segments between them
+        # Process each road segment
         for road in road_data:
-            props = road['properties']
-            location = props['location']
-            orientation = props['orientation']
-            length = self.config['road.segment_length']
-
-            center = Point(
-                location['x'] / 100,
-                location['y'] / 100
-            )
-
-            angle_rad = math.radians(orientation['yaw'])
-
             start = Point(
-                center.x - length * round(math.cos(angle_rad), 10) / 2,
-                center.y - length * round(math.sin(angle_rad), 10) / 2
+                road['start']['x'],
+                road['start']['y']
             )
             end = Point(
-                start.x + length * round(math.cos(angle_rad), 10),
-                start.y + length * round(math.sin(angle_rad), 10)
+                road['end']['x'],
+                road['end']['y']
             )
             meta = MetaInfo(
-                highway=True if 'Highway' in road['instance_name'] else False,
+                highway=road['is_highway'],
                 t=0.0
             )
             segment = Segment(start, end, meta)
