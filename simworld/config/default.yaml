@@ -7,15 +7,15 @@ simworld:
 
 citygen:
   input_layout: false
-  input_roads: "/LLMDelivery/SimWorld/input/predefined_roads.json"
-  input_bounding_boxes: "/LLMDelivery/SimWorld/input/Bbox.json"
-  output_dir: "/LLMDelivery/SimWorld/output"
-  world_json: "/LLMDelivery/SimWorld/output/progen_world.json"
-  ue_asset_path: "/LLMDelivery/SimWorld/input/ue_assets.json"
+  input_roads: "data/predefined_roads.json"
+  input_bounding_boxes: "data/Bbox.json"
+  output_dir: "output"
+  world_json: "output/progen_world.json"
+  ue_asset_path: "data/ue_assets.json"
 
   road:
     segment_length: 200
-    segment_count_limit: 5
+    segment_count_limit: 10
     road_snap_distance: 90
     ignore_conflicts: false
     only_highway: false
@@ -30,7 +30,7 @@ citygen:
     building_side_distance: 27
 
   element:
-    generation: true
+    generation: false
     generation_thread_number: 16
     element_building_distance: 10
     element_element_distance: 10
@@ -60,21 +60,23 @@ citygen:
     max_points_per_route: 5
 
 assets_rp:
-  input_descrption_map: "/LLMDelivery/SimWorld/input/DescriptionMap.json"
-  input_sample_dataset: "/LLMDelivery/SimWorld/input/sample_dataset"
+  input_descrption_map: "data/DescriptionMap.json"
+  input_sample_dataset: "data/sample_dataset"
+  input_dir: "output"
+  output_dir: "output_rp"
   env_description_retrieval_model: "paraphrase-MiniLM-L6-v2"
   assets_retrieval_model: "openai/clip-vit-large-patch14-336"
   openai_api_key: "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"
 
 traffic:
-  num_vehicles: 10
-  num_pedestrians: 10
-  map_path: "/LLMDelivery/SimWorld/input/roads.json"
+  num_vehicles: 20
+  num_pedestrians: 20
+  map_path: "output/roads.json"
   distance_between_objects: 400
   detection_angle: 40
   gap_between_waypoints: 800
   num_lanes: 1
-  lane_offset: 200
+  lane_offset: 300
   intersection_offset: 3000
   sidewalk_offset: 1700
   crosswalk_offset: 1700
@@ -94,20 +96,20 @@ traffic:
     max_steering: 0.5
     lane_deviation: 70
     distance_to_end: 400
-    model_file_path: "/LLMDelivery/SimWorld/input/VehicleTypes.json"
+    model_file_path: "data/VehicleTypes.json"
 
   traffic_signal:
     light_normal_offset: -1400
     light_radial_offset: 1400
     traffic_light_model_path: "/Game/city_props/BP/props/street_light/BP_street_light.BP_street_light_C"
     pedestrian_light_model_path: "/Game/city_props/BP/props/street_light/BP_street_light_ped.BP_street_light_ped_C"
-    green_light_duration: 20
+    green_light_duration: 10
     yellow_light_duration: 2
-    pedestrian_green_light_duration: 20
+    pedestrian_green_light_duration: 30
 
 user:
   num_agents: 3
-  speed: 100
+  speed: 200
   a2a: True
   rule_based: True
   waypoint_distance_threshold: 200
@@ -118,4 +120,4 @@ user:
   llm_url: "https://openrouter.ai/api/v1"
 
 map:
-  input_roads: "/LLMDelivery/SimWorld/output/roads.json"
+  input_roads: "output/roads.json"
