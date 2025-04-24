@@ -79,6 +79,14 @@ class Communicator:
         """
         self.unrealcv.agent_set_speed(self.get_agent_name(agent_id), speed)
 
+    def agent_sit_down(self, agent_id):
+        """Sit down.
+
+        Args:
+            agent_id: Agent ID.
+        """
+        self.unrealcv.agent_sit_down(self.get_agent_name(agent_id))
+
     def get_agent_name(self, agent_id):
         """Get agent name.
 

@@ -605,3 +605,13 @@ class UnrealCV(object):
         cmd = f'vbp {object_name} SetMaxSpeed {speed}'
         with self.lock:
             self.client.request(cmd)
+
+    def agent_sit_down(self, object_name):
+        """Sit down.
+
+        Args:
+            object_name: Name of the agent object to sit down.
+        """
+        cmd = f'vbp {object_name} SitDown'
+        with self.lock:
+            self.client.request(cmd)
