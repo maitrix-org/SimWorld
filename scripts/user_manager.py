@@ -1,5 +1,4 @@
 """UserManager module: manages user agents, simulation updates, and JSON serialization."""
-import json
 import os
 import random
 import traceback
@@ -11,6 +10,7 @@ from scripts.user_agent import UserAgent
 from simworld.communicator import Communicator, UnrealCV
 from simworld.llm import A2ALLM
 from simworld.map.map import Map
+from simworld.utils.load_json import load_json
 from simworld.utils.logger import Logger
 from simworld.utils.vector import Vector
 
@@ -64,9 +64,7 @@ class UserManager:
         """Load roads, construct map nodes/edges, and spawn agents."""
         # self.map.visualize_map()
         self.init_communicator()
-        roads_file = os.path.join(self.config['map.input_roads'])
-        with open(roads_file, 'r') as f:
-            roads_data = json.load(f)
+        roads_data = load_json(self.config['map.input_roads'])
 
         road_items = roads_data.get('roads', [])
         road_objects = []
@@ -78,7 +76,7 @@ class UserManager:
         llm = A2ALLM(
             model_name=self.config['user.llm_model_path'],
             url=self.config['user.llm_url'],
-            api_key=self.config['user.llm_api_key'],
+            api_key=os.getenv('OPENROUTER_API_KEY'),
         )
 
         for _ in range(self.num_agent):

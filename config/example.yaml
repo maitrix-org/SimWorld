@@ -66,7 +66,6 @@ assets_rp:
   output_dir: "output_rp"
   env_description_retrieval_model: "paraphrase-MiniLM-L6-v2"
   assets_retrieval_model: "openai/clip-vit-large-patch14-336"
-  openai_api_key: "<your openai api key here>"
 
 traffic:
   num_vehicles: 10
@@ -119,5 +118,4 @@ user:
   model_path: "/Game/TrafficSystem/Pedestrian/Base_User_Agent.Base_User_Agent_C"
   num_threads: 20
   llm_model_path: "<your model name here>"
-  llm_api_key: "<your llm api key here>"
   llm_url: "<your llm url here>"

@@ -3,13 +3,13 @@
 This module handles the procedural generation of road networks, including the creation
 of road segments, intersections, and the overall structure of the city's transportation system.
 """
-import json
 import math
 import random
 from typing import List
 
 from simworld.citygen.dataclass import Intersection, MetaInfo, Point, Segment
 from simworld.citygen.road.road_manager import RoadManager
+from simworld.utils.load_json import load_json
 from simworld.utils.math_utils import MathUtils
 from simworld.utils.priority_queue import PriorityQueue
 from simworld.utils.road_utils import RoadUtils
@@ -32,8 +32,7 @@ class RoadGenerator:
             input_path: Path to the JSON file containing road data.
         """
         # Read and parse the JSON file
-        with open(input_path, 'r') as f:
-            data = json.load(f)
+        data = load_json(input_path)
         road_data = data['roads']
 
         # Process each road segment

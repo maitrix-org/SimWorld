@@ -40,7 +40,7 @@ class AssetsRetrieverPlacer:
             output_dir: the directory to save the output.
         """
         # 1. Parse the input
-        parsed_input, asset_to_place, reference_asset_query, relation, surroundings_query = get_parsed_input(natural_language_input, self.config['assets_rp.openai_api_key'])
+        parsed_input, asset_to_place, reference_asset_query, relation, surroundings_query = get_parsed_input(natural_language_input, os.getenv('OPENAI_API_KEY'))
 
         print('LLM parse result:', parsed_input)
 

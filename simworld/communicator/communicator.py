@@ -11,6 +11,7 @@ import numpy as np
 import pandas as pd
 
 from simworld.communicator.unrealcv import UnrealCV
+from simworld.utils.load_json import load_json
 from simworld.utils.vector import Vector
 
 
@@ -470,16 +471,14 @@ class Communicator:
         """
         generated_ids = set()
         # Load world from JSON
-        with open(world_json, 'r') as f:
-            world_setting = json.load(f)
+        world_setting = load_json(world_json)
         # Use pandas data structure, convert JSON data to pandas dataframe
         nodes = world_setting['nodes']
         node_df = pd.json_normalize(nodes, sep='_')
         node_df.set_index('id', inplace=True)
 
         # Load asset library
-        with open(ue_asset_path, 'r') as f:
-            asset_library = json.load(f)
+        asset_library = load_json(ue_asset_path)
 
         def _parse_rgb(color_str):
             """Parse RGB values from color string like '(R=255,G=255,B=0)'.

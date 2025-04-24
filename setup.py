@@ -15,6 +15,7 @@ setup(
     include_package_data=True,
     package_data={
         'simworld.config': ['*.yaml'],
+        'simworld.data': ['*.json', 'sample_dataset/*.png'],
     },
     classifiers=[
         'Programming Language :: Python :: 3',

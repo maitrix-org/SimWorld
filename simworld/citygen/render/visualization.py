@@ -3,7 +3,6 @@
 This module provides functionality for loading city data from JSON files and
 rendering a visualization of the city layout including roads, buildings, and elements.
 """
-import json
 import random
 from typing import List
 
@@ -15,6 +14,7 @@ from PyQt5.QtWidgets import (QApplication, QLabel, QMainWindow, QVBoxLayout,
 from simworld.citygen.dataclass import (Bounds, Building, BuildingType,
                                         Element, ElementType)
 from simworld.config import Config
+from simworld.utils.load_json import load_json
 
 
 class CityData:
@@ -37,55 +37,52 @@ class CityData:
         elements_path = f'{output_dir}/elements.json'
         try:
             # Load roads
-            with open(roads_path, 'r') as f:
-                roads_data = json.load(f)
-                self.roads = roads_data['roads']  # Store as raw dict
+            roads_data = load_json(roads_path)
+            self.roads = roads_data['roads']  # Store as raw dict
 
             # Load buildings
-            with open(buildings_path, 'r') as f:
-                buildings_data = json.load(f)
-                self.buildings = []
-                for b in buildings_data['buildings']:
-                    building_type = BuildingType(
-                        name=b['type'],
-                        width=b['bounds']['width'],
-                        height=b['bounds']['height']
-                    )
-                    bounds = Bounds(
-                        x=b['bounds']['x'],
-                        y=b['bounds']['y'],
-                        width=b['bounds']['width'],
-                        height=b['bounds']['height'],
-                        rotation=b['bounds']['rotation']
-                    )
-                    self.buildings.append(Building(
-                        building_type=building_type,
-                        bounds=bounds,
-                        rotation=b['rotation']
-                    ))
+            buildings_data = load_json(buildings_path)
+            self.buildings = []
+            for b in buildings_data['buildings']:
+                building_type = BuildingType(
+                    name=b['type'],
+                    width=b['bounds']['width'],
+                    height=b['bounds']['height']
+                )
+                bounds = Bounds(
+                    x=b['bounds']['x'],
+                    y=b['bounds']['y'],
+                    width=b['bounds']['width'],
+                    height=b['bounds']['height'],
+                    rotation=b['bounds']['rotation']
+                )
+                self.buildings.append(Building(
+                    building_type=building_type,
+                    bounds=bounds,
+                    rotation=b['rotation']
+                ))
 
             # Load elements
-            with open(elements_path, 'r') as f:
-                elements_data = json.load(f)
-                self.elements = []
-                for e in elements_data['elements']:
-                    element_type = ElementType(
-                        name=e['type'],
-                        width=e['bounds']['width'],
-                        height=e['bounds']['height']
-                    )
-                    bounds = Bounds(
-                        x=e['bounds']['x'],
-                        y=e['bounds']['y'],
-                        width=e['bounds']['width'],
-                        height=e['bounds']['height'],
-                        rotation=e['bounds']['rotation']
-                    )
-                    self.elements.append(Element(
-                        element_type=element_type,
-                        bounds=bounds,
-                        rotation=e['rotation']
-                    ))
+            elements_data = load_json(elements_path)
+            self.elements = []
+            for e in elements_data['elements']:
+                element_type = ElementType(
+                    name=e['type'],
+                    width=e['bounds']['width'],
+                    height=e['bounds']['height']
+                )
+                bounds = Bounds(
+                    x=e['bounds']['x'],
+                    y=e['bounds']['y'],
+                    width=e['bounds']['width'],
+                    height=e['bounds']['height'],
+                    rotation=e['bounds']['rotation']
+                )
+                self.elements.append(Element(
+                    element_type=element_type,
+                    bounds=bounds,
+                    rotation=e['rotation']
+                ))
 
             print('Successfully loaded city data')
 

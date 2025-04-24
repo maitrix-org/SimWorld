@@ -14,6 +14,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 from simworld.assets_rp.utils.clip_embedder import CLIPEmbedder
 from simworld.assets_rp.utils.input_parser import InputParser
 from simworld.citygen.dataclass import Bounds, Building, Point
+from simworld.utils.load_json import load_json
 
 
 def get_parsed_input(natural_language_input, api_key):
@@ -48,8 +49,7 @@ def load_instance_desc_map(description_map_path: str):
     Returns:
         A dictionary mapping instance names to their descriptions.
     """
-    with open(description_map_path, 'r', encoding='utf-8') as f:
-        return json.load(f)
+    return load_json(description_map_path)
 
 
 def get_surroundings(data, description_map_path: str):

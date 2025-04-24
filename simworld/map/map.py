@@ -1,7 +1,5 @@
 """Map module: defines Road, Node, Edge, and Map graph structures for navigation."""
 
-import json
-import os
 import sys
 from collections import defaultdict
 from typing import List
@@ -11,6 +9,7 @@ from PyQt5.QtGui import QPainter, QPen
 from PyQt5.QtWidgets import QApplication, QWidget
 
 from simworld.config import Config
+from simworld.utils.load_json import load_json
 from simworld.utils.vector import Vector
 
 
@@ -131,9 +130,7 @@ class Map:
 
     def initialize_map(self):
         """Initialize the map from the input roads file."""
-        roads_file = os.path.join(self.config['map.input_roads'])
-        with open(roads_file, 'r') as f:
-            roads_data = json.load(f)
+        roads_data = load_json(self.config['map.input_roads'])
 
         road_items = roads_data.get('roads', [])
         road_objects = []

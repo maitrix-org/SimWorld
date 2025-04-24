@@ -3,7 +3,6 @@
 This module provides the main controller for the traffic simulation, handling initialization,
 spawning, and coordination of all traffic elements including vehicles, pedestrians, and traffic signals.
 """
-import json
 import random
 import sys
 import time
@@ -25,6 +24,7 @@ from simworld.traffic.base.traffic_signal import (TrafficSignal,
 from simworld.traffic.manager.intersection_manager import IntersectionManager
 from simworld.traffic.manager.pedestrian_manager import PedestrianManager
 from simworld.traffic.manager.vehicle_manager import VehicleManager
+from simworld.utils.load_json import load_json
 from simworld.utils.logger import Logger
 from simworld.utils.vector import Vector
 
@@ -94,8 +94,7 @@ class TrafficController:
 
         self.logger.info(f'Loading road network from file: {file_path}')
 
-        with open(file_path, 'r') as f:
-            data = json.load(f)
+        data = load_json(file_path)
 
         roads = []
         _intersections = defaultdict(list)

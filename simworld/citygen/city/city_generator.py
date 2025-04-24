@@ -1,5 +1,4 @@
 """City generator module for generating cities with roads, buildings, and elements."""
-import json
 import random
 from enum import Enum, auto
 
@@ -8,6 +7,7 @@ from simworld.citygen.dataclass.dataclass import BuildingType, ElementType
 from simworld.citygen.element.element_generator import ElementGenerator
 from simworld.citygen.road.road_generator import RoadGenerator
 from simworld.citygen.route.route_generator import RouteGenerator
+from simworld.utils.load_json import load_json
 
 
 class GenerationState(Enum):
@@ -165,8 +165,7 @@ class CityGenerator:
             tuple: Building types, building colors, element types, element colors,
                   element offsets, and mapped element offsets.
         """
-        with open(self.config['citygen.input_bounding_boxes'], 'r') as f:
-            data = json.load(f)
+        data = load_json(self.config['citygen.input_bounding_boxes'])
         buildings = data['buildings']
         elements = data['elements']
 

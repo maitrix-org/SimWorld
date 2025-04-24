@@ -1,5 +1,4 @@
 """This module imports the city data and reconstruct the city generator."""
-import json
 import math
 import os
 from typing import Dict, List
@@ -8,6 +7,7 @@ from simworld.citygen.city.city_generator import CityGenerator
 from simworld.citygen.dataclass import (Bounds, Building, BuildingType,
                                         Element, MetaInfo, Point, Segment)
 from simworld.config import Config
+from simworld.utils.load_json import load_json
 
 
 class DataImporter:
@@ -42,8 +42,7 @@ class DataImporter:
             filepath: The json file that contain the city data.
         """
         print(f'Importing city data from {filepath}')
-        with open(filepath, 'r') as f:
-            data = json.load(f)
+        data = load_json(filepath)
         # import all nodes
         BUILDING_TYPES, _, ELEMENT_TYPES, _, _, _ = self.city._load_bounding_boxes()
         if 'nodes' in data:

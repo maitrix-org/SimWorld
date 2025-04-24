@@ -7,11 +7,11 @@ simworld:
 
 citygen:
   input_layout: false
-  input_roads: "../data/predefined_roads.json"
-  input_bounding_boxes: "../data/Bbox.json"
-  output_dir: "../output"
-  world_json: "../output/progen_world.json"
-  ue_asset_path: "../data/ue_assets.json"
+  input_roads: "predefined_roads.json"
+  input_bounding_boxes: "Bbox.json"
+  output_dir: "output"
+  world_json: "progen_world.json"
+  ue_asset_path: "ue_assets.json"
 
   road:
     segment_length: 200
@@ -60,13 +60,12 @@ citygen:
     max_points_per_route: 5
 
 assets_rp:
-  input_description_map: "../data/DescriptionMap.json"
-  input_sample_dataset: "../data/sample_dataset"
+  input_description_map: "description_map.json"
+  input_sample_dataset: "sample_dataset"
   input_dir: "output"
   output_dir: "output_rp"
   env_description_retrieval_model: "paraphrase-MiniLM-L6-v2"
   assets_retrieval_model: "openai/clip-vit-large-patch14-336"
-  openai_api_key: "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"
 
 traffic:
   num_vehicles: 10
@@ -96,7 +95,7 @@ traffic:
     max_steering: 0.5
     lane_deviation: 70
     distance_to_end: 400
-    model_file_path: "../data/VehicleTypes.json"
+    model_file_path: "vehicle_types.json"
 
   traffic_signal:
     light_normal_offset: -1400
@@ -108,7 +107,7 @@ traffic:
     pedestrian_green_light_duration: 30
 
 map:
-  input_roads: "../output/roads.json"
+  input_roads: "roads.json"
 
 user:
   num_agents: 3
@@ -119,5 +118,4 @@ user:
   model_path: "/Game/TrafficSystem/Pedestrian/Base_User_Agent.Base_User_Agent_C"
   num_threads: 20
   llm_model_path: "meta-llama/llama-3.3-70b-instruct"
-  llm_api_key: "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"
   llm_url: "https://openrouter.ai/api/v1"
