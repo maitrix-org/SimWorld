@@ -9,7 +9,8 @@ from typing import List, Optional
 
 import numpy as np
 
-from simworld.activity2action.action_space import ACTION_LIST, FORMAT, Action
+from simworld.activity2action.action_space import (ACTION_LIST, FORMAT,
+                                                   VLM_FORMAT, Action)
 from simworld.activity2action.prompt.prompt import (SYSTEM_PROMPT, USER_PROMPT,
                                                     VLM_SYSTEM_PROMPT,
                                                     VLM_USER_PROMPT)
@@ -216,12 +217,12 @@ class Activity2Action:
         self.logger.info(
             f'Agent {self.agent.id} Current pos: {self.agent.position}, target: {waypoint}, dir: {self.agent.direction}'
         )
-        print(
-            f'Agent {self.agent.id} Current pos: {self.agent.position}, target: {waypoint}, dir: {self.agent.direction}', flush=True
-        )
+        # print(
+        #     f'Agent {self.agent.id} Current pos: {self.agent.position}, target: {waypoint}, dir: {self.agent.direction}', flush=True
+        # )
         while not self.walk_arrive_at_waypoint(waypoint) and not self.exit_event.is_set():
             image = self.client.get_camera_observation(self.camera_id, self.observation_viewmode, mode='direct')
-            self.client.show_img(image)
+            # self.client.show_img(image)
             user_prompt = VLM_USER_PROMPT.format(
                 map=self.map,
                 position=self.agent.position,
@@ -231,7 +232,7 @@ class Activity2Action:
             response, _ = self.model.generate_text_structured_vlm(
                 system_prompt=self.vlm_system_prompt,
                 user_prompt=user_prompt,
-                output_format=FORMAT,
+                output_format=VLM_FORMAT,
                 img=image,
                 temperature=self.temperature,
             )
@@ -242,11 +243,11 @@ class Activity2Action:
 
             response = json.loads(response)
             if response['choice'] == 'MoveForward':
-                self.client.agent_move_forward(self.agent.id, response['time'])
+                self.client.agent_step_forward(self.agent.id, response['time'])
             elif response['choice'] == 'Rotate':
                 self.client.agent_rotate(self.agent.id, response['angle'], response['direction'])
             else:
-                print(f'Invalid action: {response}', flush=True)
+                self.logger.error(f'Invalid action: {response}')
 
     def walk_arrive_at_waypoint(self, waypoint: Vector) -> bool:
         """Return True if agent is within threshold of waypoint."""

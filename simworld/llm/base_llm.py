@@ -55,6 +55,9 @@ class BaseLLM(metaclass=LLMMetaclass):
         if not isinstance(self.api_key, str) or not self.api_key.startswith(('sk-', 'dummy-key')):
             raise ValueError('Invalid API key format')
 
+        if url == 'None':
+            url = None
+
         try:
             self.client = openai.OpenAI(
                 api_key=self.api_key,

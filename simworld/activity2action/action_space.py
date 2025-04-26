@@ -13,6 +13,14 @@ FORMAT = """
 """
 
 
+VLM_FORMAT = """
+{
+    "choice": "MoveForward",
+    "time": 1.0,
+}
+"""
+
+
 class Action(Enum):
     """Actions that an agent can perform."""
     Navigate = 0

@@ -13,14 +13,14 @@ from simworld.utils.logger import Logger
 from .base_llm import BaseLLM
 from .retry import LLMResponseParsingError
 
-logger = Logger.get_logger('A2ALLM')
-
 
 class A2ALLM(BaseLLM):
     """A2A LLM class for handling interactions with language models."""
     def __init__(self, model_name: str = 'gpt-4o-mini', url: str = 'https://openrouter.ai/api/v1', api_key: str = None):
         """Initialize the A2A LLM."""
         super().__init__(model_name, url, api_key)
+
+        self.logger = Logger.get_logger('A2ALLM')
 
     def generate_text_structured(
         self,
@@ -59,7 +59,7 @@ class A2ALLM(BaseLLM):
             )
             return response, time.time() - start_time
         except Exception as e:
-            logger.error(f'Error in generate_text_structured: {e}')
+            self.logger.error(f'Error in generate_text_structured: {e}')
             return None, time.time() - start_time
 
     def _generate_text_structured_with_retry(
@@ -91,7 +91,6 @@ class A2ALLM(BaseLLM):
             top_p=top_p,
         )
         content = response.choices[0].message.content
-        print(f'Content: {content}', flush=True)
         try:
             parsed = json.loads(content)
             return json.dumps(parsed)
@@ -180,7 +179,7 @@ class A2ALLM(BaseLLM):
             )
             return response, time.time() - start_time
         except Exception as e:
-            logger.error(f'Error in generate_text_structured_vlm: {e}')
+            self.logger.error(f'Error in generate_text_structured_vlm: {e}')
             return None, time.time() - start_time
 
     def _generate_text_structured_vlm_with_retry(
@@ -208,7 +207,6 @@ class A2ALLM(BaseLLM):
         user_content.append({'type': 'image_url',
                              'image_url': {'url': f'data:image/jpeg;base64,{img_data}'}})
         messages.append({'role': 'user', 'content': user_content})
-        print(f'Messages: {messages}', flush=True)
         response = self.client.chat.completions.create(
             model=self.model_name,
             messages=messages,
@@ -218,7 +216,6 @@ class A2ALLM(BaseLLM):
             top_p=top_p,
         )
         content = response.choices[0].message.content
-        print(f'Content: {content}', flush=True)
         try:
             parsed = json.loads(content)
             return json.dumps(parsed)
