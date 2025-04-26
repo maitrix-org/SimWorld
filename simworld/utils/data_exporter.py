@@ -36,8 +36,8 @@ class DataExporter:
 
         for segment in self.city_generator.road_manager.roads:
             road = {
-                'start': {'x': segment.start.x, 'y': segment.start.y},
-                'end': {'x': segment.end.x, 'y': segment.end.y},
+                'start': {'x': round(segment.start.x, 4), 'y': round(segment.start.y, 4)},
+                'end': {'x': round(segment.end.x, 4), 'y': round(segment.end.y, 4)},
                 'is_highway': segment.q.highway
             }
             roads_data.append(road)
@@ -54,23 +54,23 @@ class DataExporter:
 
         for building in self.city_generator.building_manager.buildings:
             building_data = {
-                'center': {'x': building.center.x, 'y': building.center.y},
-                'rotation': building.rotation,
+                'center': {'x': round(building.center.x, 4), 'y': round(building.center.y, 4)},
+                'rotation': round(building.rotation, 4),
                 'type': building.building_type.name,
                 'bounds': {
-                    'x': building.bounds.x,
-                    'y': building.bounds.y,
-                    'width': building.bounds.width,
-                    'height': building.bounds.height,
-                    'rotation': building.bounds.rotation
+                    'x': round(building.bounds.x, 4),
+                    'y': round(building.bounds.y, 4),
+                    'width': round(building.bounds.width, 4),
+                    'height': round(building.bounds.height, 4),
+                    'rotation': round(building.bounds.rotation, 4)
                 }
             }
             segment = self.city_generator.building_generator.building_to_segment.get(building)
             if segment:
                 building_data['segment_assignment'] = {
-                    'start': {'x': segment.start.x, 'y': segment.start.y},
-                    'end': {'x': segment.end.x, 'y': segment.end.y},
-                    'angle': segment.get_angle()
+                    'start': {'x': round(segment.start.x, 4), 'y': round(segment.start.y, 4)},
+                    'end': {'x': round(segment.end.x, 4), 'y': round(segment.end.y, 4)},
+                    'angle': round(segment.get_angle(), 4)
                 }
             buildings_data.append(building_data)
 
@@ -86,35 +86,35 @@ class DataExporter:
 
         for element in self.city_generator.element_manager.elements:
             element_data = {
-                'center': {'x': element.center.x, 'y': element.center.y},
-                'rotation': element.rotation,
+                'center': {'x': round(element.center.x, 4), 'y': round(element.center.y, 4)},
+                'rotation': round(element.rotation, 4),
                 'type': element.element_type.name,
                 'bounds': {
-                    'x': element.bounds.x,
-                    'y': element.bounds.y,
-                    'width': element.bounds.width,
-                    'height': element.bounds.height,
-                    'rotation': element.bounds.rotation
+                    'x': round(element.bounds.x, 4),
+                    'y': round(element.bounds.y, 4),
+                    'width': round(element.bounds.width, 4),
+                    'height': round(element.bounds.height, 4),
+                    'rotation': round(element.bounds.rotation, 4)
                 }
             }
             owner = self.city_generator.element_generator.element_to_owner.get(element)
             if isinstance(owner, Building):
                 element_data['building_assignment'] = {
                     'building_type': owner.building_type.name,
-                    'center': {'x': owner.center.x, 'y': owner.center.y},
+                    'center': {'x': round(owner.center.x, 4), 'y': round(owner.center.y, 4)},
                     'bounds': {
-                        'x': owner.bounds.x,
-                        'y': owner.bounds.y,
-                        'width': owner.bounds.width,
-                        'height': owner.bounds.height,
-                        'rotation': owner.bounds.rotation
+                        'x': round(owner.bounds.x, 4),
+                        'y': round(owner.bounds.y, 4),
+                        'width': round(owner.bounds.width, 4),
+                        'height': round(owner.bounds.height, 4),
+                        'rotation': round(owner.bounds.rotation, 4)
                     }
                 }
             elif isinstance(owner, Segment):
                 element_data['segment_assignment'] = {
-                    'start': {'x': owner.start.x, 'y': owner.start.y},
-                    'end': {'x': owner.end.x, 'y': owner.end.y},
-                    'angle': owner.get_angle()
+                    'start': {'x': round(owner.start.x, 4), 'y': round(owner.start.y, 4)},
+                    'end': {'x': round(owner.end.x, 4), 'y': round(owner.end.y, 4)},
+                    'angle': round(owner.get_angle(), 4)
                 }
             elements_data.append(element_data)
         return {'elements': elements_data}
@@ -128,9 +128,9 @@ class DataExporter:
         routes_data = []
         for route in self.city_generator.route_manager.routes:
             route_data = {
-                'start': {'x': route.start.x, 'y': route.start.y},
-                'end': {'x': route.end.x, 'y': route.end.y},
-                'points': [{'x': point.x, 'y': point.y} for point in route.points]
+                'start': {'x': round(route.start.x, 4), 'y': round(route.start.y, 4)},
+                'end': {'x': round(route.end.x, 4), 'y': round(route.end.y, 4)},
+                'points': [{'x': round(point.x, 4), 'y': round(point.y, 4)} for point in route.points]
             }
             routes_data.append(route_data)
 
