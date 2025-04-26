@@ -38,10 +38,10 @@ class UnrealCV(object):
         self.client.connect()
 
         self.resolution = resolution
-        self.ini_unrealcv(resolution)
 
         self.lock = Lock()
         self.logger = Logger.get_logger('UnrealCV')
+        self.ini_unrealcv(resolution)
 
     ###################################################
     # Basic Operations

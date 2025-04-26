@@ -1017,6 +1017,5404 @@
         },
         "angle": -90.0
       }
+    },
+    {
+      "id": "GEN_BP_Scooter_04_1_33",
+      "instance_name": "BP_Scooter_04_C",
+      "properties": {
+        "location": {
+          "x": -800.0,
+          "y": -9973.11,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -32.5261,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_88_C",
+        "center": {
+          "x": 55.1523,
+          "y": -84.6159
+        },
+        "bounds": {
+          "x": 0.0,
+          "y": -142.2318,
+          "width": 110.3046,
+          "height": 115.2318,
+          "rotation": 0.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Can_2_34",
+      "instance_name": "BP_Can_C",
+      "properties": {
+        "location": {
+          "x": -800.0,
+          "y": -12034.39,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -55.9781,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_88_C",
+        "center": {
+          "x": 55.1523,
+          "y": -84.6159
+        },
+        "bounds": {
+          "x": 0.0,
+          "y": -142.2318,
+          "width": 110.3046,
+          "height": 115.2318,
+          "rotation": 0.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_RoadCone_4_35",
+      "instance_name": "BP_RoadCone_C",
+      "properties": {
+        "location": {
+          "x": -800.0,
+          "y": -3127.46,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -79.617,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_88_C",
+        "center": {
+          "x": 55.1523,
+          "y": -84.6159
+        },
+        "bounds": {
+          "x": 0.0,
+          "y": -142.2318,
+          "width": 110.3046,
+          "height": 115.2318,
+          "rotation": 0.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_RoadCone_3_36",
+      "instance_name": "BP_RoadCone_C",
+      "properties": {
+        "location": {
+          "x": -800.0,
+          "y": -8417.68,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -0.1066,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_88_C",
+        "center": {
+          "x": 55.1523,
+          "y": -84.6159
+        },
+        "bounds": {
+          "x": 0.0,
+          "y": -142.2318,
+          "width": 110.3046,
+          "height": 115.2318,
+          "rotation": 0.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Table_4_37",
+      "instance_name": "BP_Table_C",
+      "properties": {
+        "location": {
+          "x": -800.0,
+          "y": -6696.47,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -158.9301,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_88_C",
+        "center": {
+          "x": 55.1523,
+          "y": -84.6159
+        },
+        "bounds": {
+          "x": 0.0,
+          "y": -142.2318,
+          "width": 110.3046,
+          "height": 115.2318,
+          "rotation": 0.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Trash_bin_a_3_38",
+      "instance_name": "BP_Trash_bin_a_C",
+      "properties": {
+        "location": {
+          "x": 11830.46,
+          "y": -7336.16,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 72.403,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_88_C",
+        "center": {
+          "x": 55.1523,
+          "y": -84.6159
+        },
+        "bounds": {
+          "x": 0.0,
+          "y": -142.2318,
+          "width": 110.3046,
+          "height": 115.2318,
+          "rotation": 0.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Tree4_1_39",
+      "instance_name": "BP_Tree4_C",
+      "properties": {
+        "location": {
+          "x": 11830.46,
+          "y": -11190.08,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -58.1631,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_88_C",
+        "center": {
+          "x": 55.1523,
+          "y": -84.6159
+        },
+        "bounds": {
+          "x": 0.0,
+          "y": -142.2318,
+          "width": 110.3046,
+          "height": 115.2318,
+          "rotation": 0.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Tree5_2_40",
+      "instance_name": "BP_Tree5_C",
+      "properties": {
+        "location": {
+          "x": 11830.46,
+          "y": -13814.27,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -107.1478,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_88_C",
+        "center": {
+          "x": 55.1523,
+          "y": -84.6159
+        },
+        "bounds": {
+          "x": 0.0,
+          "y": -142.2318,
+          "width": 110.3046,
+          "height": 115.2318,
+          "rotation": 0.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Hydrant_3_41",
+      "instance_name": "BP_Hydrant_C",
+      "properties": {
+        "location": {
+          "x": 11516.29,
+          "y": -5294.38,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 55.8819,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_126_C",
+        "center": {
+          "x": 146.3629,
+          "y": -62.2
+        },
+        "bounds": {
+          "x": 123.1629,
+          "y": -97.4,
+          "width": 46.4,
+          "height": 70.4,
+          "rotation": 0.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Couch_2_42",
+      "instance_name": "BP_Couch_C",
+      "properties": {
+        "location": {
+          "x": 17756.29,
+          "y": -3376.52,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 82.7696,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_126_C",
+        "center": {
+          "x": 146.3629,
+          "y": -62.2
+        },
+        "bounds": {
+          "x": 123.1629,
+          "y": -97.4,
+          "width": 46.4,
+          "height": 70.4,
+          "rotation": 0.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Soda2_1_43",
+      "instance_name": "BP_Soda2_C",
+      "properties": {
+        "location": {
+          "x": 17756.29,
+          "y": -8931.11,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 138.4283,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_126_C",
+        "center": {
+          "x": 146.3629,
+          "y": -62.2
+        },
+        "bounds": {
+          "x": 123.1629,
+          "y": -97.4,
+          "width": 46.4,
+          "height": 70.4,
+          "rotation": 0.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Scooter_03_2_44",
+      "instance_name": "BP_Scooter_03_C",
+      "properties": {
+        "location": {
+          "x": 17756.29,
+          "y": -4678.76,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -0.8203,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_126_C",
+        "center": {
+          "x": 146.3629,
+          "y": -62.2
+        },
+        "bounds": {
+          "x": 123.1629,
+          "y": -97.4,
+          "width": 46.4,
+          "height": 70.4,
+          "rotation": 0.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Scooter_04_3_45",
+      "instance_name": "BP_Scooter_04_C",
+      "properties": {
+        "location": {
+          "x": 8116.12,
+          "y": 13502.04,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -77.0194,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_89_C",
+        "center": {
+          "x": 36.5806,
+          "y": 93.5472
+        },
+        "bounds": {
+          "x": 0.0,
+          "y": 27.0,
+          "width": 73.1612,
+          "height": 133.0943,
+          "rotation": 180.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_RoadCone_1_46",
+      "instance_name": "BP_RoadCone_C",
+      "properties": {
+        "location": {
+          "x": 8116.12,
+          "y": 8411.1,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -96.22,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_89_C",
+        "center": {
+          "x": 36.5806,
+          "y": 93.5472
+        },
+        "bounds": {
+          "x": 0.0,
+          "y": 27.0,
+          "width": 73.1612,
+          "height": 133.0943,
+          "rotation": 180.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Soda4_1_47",
+      "instance_name": "BP_Soda4_C",
+      "properties": {
+        "location": {
+          "x": 8116.12,
+          "y": 11198.21,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -162.8593,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_89_C",
+        "center": {
+          "x": 36.5806,
+          "y": 93.5472
+        },
+        "bounds": {
+          "x": 0.0,
+          "y": 27.0,
+          "width": 73.1612,
+          "height": 133.0943,
+          "rotation": 180.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_RoadCone_3_48",
+      "instance_name": "BP_RoadCone_C",
+      "properties": {
+        "location": {
+          "x": -800.0,
+          "y": 3338.29,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -36.5946,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_89_C",
+        "center": {
+          "x": 36.5806,
+          "y": 93.5472
+        },
+        "bounds": {
+          "x": 0.0,
+          "y": 27.0,
+          "width": 73.1612,
+          "height": 133.0943,
+          "rotation": 180.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Tree1_2_49",
+      "instance_name": "BP_Tree1_C",
+      "properties": {
+        "location": {
+          "x": -800.0,
+          "y": 8345.36,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -164.089,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_89_C",
+        "center": {
+          "x": 36.5806,
+          "y": 93.5472
+        },
+        "bounds": {
+          "x": 0.0,
+          "y": 27.0,
+          "width": 73.1612,
+          "height": 133.0943,
+          "rotation": 180.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Hydrant_4_50",
+      "instance_name": "BP_Hydrant_C",
+      "properties": {
+        "location": {
+          "x": -800.0,
+          "y": 11153.54,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 25.9982,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_89_C",
+        "center": {
+          "x": 36.5806,
+          "y": 93.5472
+        },
+        "bounds": {
+          "x": 0.0,
+          "y": 27.0,
+          "width": 73.1612,
+          "height": 133.0943,
+          "rotation": 180.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Soda2_2_51",
+      "instance_name": "BP_Soda2_C",
+      "properties": {
+        "location": {
+          "x": -800.0,
+          "y": 15312.99,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -120.4388,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_89_C",
+        "center": {
+          "x": 36.5806,
+          "y": 93.5472
+        },
+        "bounds": {
+          "x": 0.0,
+          "y": 27.0,
+          "width": 73.1612,
+          "height": 133.0943,
+          "rotation": 180.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Can_3_52",
+      "instance_name": "BP_Can_C",
+      "properties": {
+        "location": {
+          "x": 13945.23,
+          "y": 4664.96,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 60.212,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_32_C",
+        "center": {
+          "x": 102.3068,
+          "y": 43.1659
+        },
+        "bounds": {
+          "x": 73.1612,
+          "y": 27.0,
+          "width": 58.2911,
+          "height": 32.3319,
+          "rotation": 180.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Table_2_53",
+      "instance_name": "BP_Table_C",
+      "properties": {
+        "location": {
+          "x": -1900.0,
+          "y": 4657.64,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 8.6883,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_36_C",
+        "center": {
+          "x": -34.1249,
+          "y": 39.6863
+        },
+        "bounds": {
+          "x": -41.2499,
+          "y": 27.0,
+          "width": 14.2499,
+          "height": 25.3726,
+          "rotation": 180.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Scooter_02_4_54",
+      "instance_name": "BP_Scooter_02_C",
+      "properties": {
+        "location": {
+          "x": -3324.99,
+          "y": 10138.57,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -26.167,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_67_C",
+        "center": {
+          "x": -72.768,
+          "y": 81.8075
+        },
+        "bounds": {
+          "x": -104.2861,
+          "y": 27.0,
+          "width": 63.0363,
+          "height": 109.6151,
+          "rotation": 180.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Rabbish_2_55",
+      "instance_name": "BP_Rabbish_C",
+      "properties": {
+        "location": {
+          "x": -3324.99,
+          "y": 6153.83,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 163.5265,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_67_C",
+        "center": {
+          "x": -72.768,
+          "y": 81.8075
+        },
+        "bounds": {
+          "x": -104.2861,
+          "y": 27.0,
+          "width": 63.0363,
+          "height": 109.6151,
+          "rotation": 180.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Box_1_56",
+      "instance_name": "BP_Box_C",
+      "properties": {
+        "location": {
+          "x": -3324.99,
+          "y": 8126.98,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -133.9282,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_67_C",
+        "center": {
+          "x": -72.768,
+          "y": 81.8075
+        },
+        "bounds": {
+          "x": -104.2861,
+          "y": 27.0,
+          "width": 63.0363,
+          "height": 109.6151,
+          "rotation": 180.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Soda1_2_57",
+      "instance_name": "BP_Soda1_C",
+      "properties": {
+        "location": {
+          "x": -3324.99,
+          "y": 11892.05,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -169.8307,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_67_C",
+        "center": {
+          "x": -72.768,
+          "y": 81.8075
+        },
+        "bounds": {
+          "x": -104.2861,
+          "y": 27.0,
+          "width": 63.0363,
+          "height": 109.6151,
+          "rotation": 180.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Couch_1_58",
+      "instance_name": "BP_Couch_C",
+      "properties": {
+        "location": {
+          "x": -11228.61,
+          "y": 6378.23,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 2.2402,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_67_C",
+        "center": {
+          "x": -72.768,
+          "y": 81.8075
+        },
+        "bounds": {
+          "x": -104.2861,
+          "y": 27.0,
+          "width": 63.0363,
+          "height": 109.6151,
+          "rotation": 180.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Table_4_59",
+      "instance_name": "BP_Table_C",
+      "properties": {
+        "location": {
+          "x": -11228.61,
+          "y": 9035.52,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -106.6406,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_67_C",
+        "center": {
+          "x": -72.768,
+          "y": 81.8075
+        },
+        "bounds": {
+          "x": -104.2861,
+          "y": 27.0,
+          "width": 63.0363,
+          "height": 109.6151,
+          "rotation": 180.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Soda4_2_60",
+      "instance_name": "BP_Soda4_C",
+      "properties": {
+        "location": {
+          "x": -11228.61,
+          "y": 10878.01,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 78.3776,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_67_C",
+        "center": {
+          "x": -72.768,
+          "y": 81.8075
+        },
+        "bounds": {
+          "x": -104.2861,
+          "y": 27.0,
+          "width": 63.0363,
+          "height": 109.6151,
+          "rotation": 180.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Soda4_1_61",
+      "instance_name": "BP_Soda4_C",
+      "properties": {
+        "location": {
+          "x": -18527.9,
+          "y": 6383.79,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -117.5722,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_11_C",
+        "center": {
+          "x": -147.9652,
+          "y": 49.6951
+        },
+        "bounds": {
+          "x": -177.279,
+          "y": 27.0,
+          "width": 58.6277,
+          "height": 45.3903,
+          "rotation": 180.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Soda4_4_62",
+      "instance_name": "BP_Soda4_C",
+      "properties": {
+        "location": {
+          "x": -21409.04,
+          "y": 3258.77,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -163.4038,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_36_C",
+        "center": {
+          "x": -198.9654,
+          "y": 39.6863
+        },
+        "bounds": {
+          "x": -206.0904,
+          "y": 27.0,
+          "width": 14.2499,
+          "height": 25.3726,
+          "rotation": 180.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Can2_1_63",
+      "instance_name": "BP_Can2_C",
+      "properties": {
+        "location": {
+          "x": -21409.04,
+          "y": 4730.6,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 173.976,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_36_C",
+        "center": {
+          "x": -198.9654,
+          "y": 39.6863
+        },
+        "bounds": {
+          "x": -206.0904,
+          "y": 27.0,
+          "width": 14.2499,
+          "height": 25.3726,
+          "rotation": 180.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Trash_can_1_64",
+      "instance_name": "BP_Trash_can_C",
+      "properties": {
+        "location": {
+          "x": -1900.0,
+          "y": -4744.6,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 161.3315,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_62_C",
+        "center": {
+          "x": -36.1319,
+          "y": -40.9908
+        },
+        "bounds": {
+          "x": -45.2638,
+          "y": -54.9816,
+          "width": 18.2638,
+          "height": 27.9816,
+          "rotation": 0.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_RoadBlocker_1_65",
+      "instance_name": "BP_RoadBlocker_C",
+      "properties": {
+        "location": {
+          "x": -3726.38,
+          "y": -5994.94,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -127.1244,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_48_C",
+        "center": {
+          "x": -71.4874,
+          "y": -46.0857
+        },
+        "bounds": {
+          "x": -97.711,
+          "y": -65.1714,
+          "width": 52.4472,
+          "height": 38.1714,
+          "rotation": 0.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_RoadBlocker_2_66",
+      "instance_name": "BP_RoadBlocker_C",
+      "properties": {
+        "location": {
+          "x": -21689.73,
+          "y": -4237.52,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -66.5522,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_62_C",
+        "center": {
+          "x": -199.7654,
+          "y": -40.9908
+        },
+        "bounds": {
+          "x": -208.8973,
+          "y": -54.9816,
+          "width": 18.2638,
+          "height": 27.9816,
+          "rotation": 0.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Box2_1_67",
+      "instance_name": "BP_Box2_C",
+      "properties": {
+        "location": {
+          "x": 21900.0,
+          "y": -6368.64,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 129.2444,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_35_C",
+        "center": {
+          "x": 279.3314,
+          "y": -50.7668
+        },
+        "bounds": {
+          "x": 227.0,
+          "y": -74.5336,
+          "width": 104.6629,
+          "height": 47.5336,
+          "rotation": 0.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Scooter_01_3_68",
+      "instance_name": "BP_Scooter_01_C",
+      "properties": {
+        "location": {
+          "x": 21900.0,
+          "y": -4107.61,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -133.155,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_35_C",
+        "center": {
+          "x": 279.3314,
+          "y": -50.7668
+        },
+        "bounds": {
+          "x": 227.0,
+          "y": -74.5336,
+          "width": 104.6629,
+          "height": 47.5336,
+          "rotation": 0.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Rabbish_4_69",
+      "instance_name": "BP_Rabbish_C",
+      "properties": {
+        "location": {
+          "x": 33966.29,
+          "y": -6600.78,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -104.1538,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_35_C",
+        "center": {
+          "x": 279.3314,
+          "y": -50.7668
+        },
+        "bounds": {
+          "x": 227.0,
+          "y": -74.5336,
+          "width": 104.6629,
+          "height": 47.5336,
+          "rotation": 0.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Rabbish_4_70",
+      "instance_name": "BP_Rabbish_C",
+      "properties": {
+        "location": {
+          "x": 33966.29,
+          "y": -5297.7,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 79.2274,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_35_C",
+        "center": {
+          "x": 279.3314,
+          "y": -50.7668
+        },
+        "bounds": {
+          "x": 227.0,
+          "y": -74.5336,
+          "width": 104.6629,
+          "height": 47.5336,
+          "rotation": 0.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Trash_bin_a_2_71",
+      "instance_name": "BP_Trash_bin_a_C",
+      "properties": {
+        "location": {
+          "x": 33966.29,
+          "y": -3118.75,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -145.5804,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_35_C",
+        "center": {
+          "x": 279.3314,
+          "y": -50.7668
+        },
+        "bounds": {
+          "x": 227.0,
+          "y": -74.5336,
+          "width": 104.6629,
+          "height": 47.5336,
+          "rotation": 0.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Box_2_72",
+      "instance_name": "BP_Box_C",
+      "properties": {
+        "location": {
+          "x": 44003.52,
+          "y": 11458.65,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 48.7423,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_94_C",
+        "center": {
+          "x": 316.0176,
+          "y": 79.5224
+        },
+        "bounds": {
+          "x": 200.0,
+          "y": 27.0,
+          "width": 232.0352,
+          "height": 105.0447,
+          "rotation": 180.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Scooter_04_2_73",
+      "instance_name": "BP_Scooter_04_C",
+      "properties": {
+        "location": {
+          "x": 44003.52,
+          "y": 7831.94,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 84.341,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_94_C",
+        "center": {
+          "x": 316.0176,
+          "y": 79.5224
+        },
+        "bounds": {
+          "x": 200.0,
+          "y": 27.0,
+          "width": 232.0352,
+          "height": 105.0447,
+          "rotation": 180.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_RoadCone_3_74",
+      "instance_name": "BP_RoadCone_C",
+      "properties": {
+        "location": {
+          "x": 44003.52,
+          "y": 3374.92,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -155.4497,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_94_C",
+        "center": {
+          "x": 316.0176,
+          "y": 79.5224
+        },
+        "bounds": {
+          "x": 200.0,
+          "y": 27.0,
+          "width": 232.0352,
+          "height": 105.0447,
+          "rotation": 180.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_RoadCone_4_75",
+      "instance_name": "BP_RoadCone_C",
+      "properties": {
+        "location": {
+          "x": 44003.52,
+          "y": 5744.36,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 70.9646,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_94_C",
+        "center": {
+          "x": 316.0176,
+          "y": 79.5224
+        },
+        "bounds": {
+          "x": 200.0,
+          "y": 27.0,
+          "width": 232.0352,
+          "height": 105.0447,
+          "rotation": 180.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Scooter_04_4_76",
+      "instance_name": "BP_Scooter_04_C",
+      "properties": {
+        "location": {
+          "x": 19200.0,
+          "y": 7418.04,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -126.5196,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_94_C",
+        "center": {
+          "x": 316.0176,
+          "y": 79.5224
+        },
+        "bounds": {
+          "x": 200.0,
+          "y": 27.0,
+          "width": 232.0352,
+          "height": 105.0447,
+          "rotation": 180.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Cart2_2_77",
+      "instance_name": "BP_Cart2_C",
+      "properties": {
+        "location": {
+          "x": 14063.93,
+          "y": -12890.34,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -74.9731,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_39_C",
+        "center": {
+          "x": 152.1028,
+          "y": -163.3157
+        },
+        "bounds": {
+          "x": 125.6906,
+          "y": -184.2128,
+          "width": 52.8245,
+          "height": 41.7943,
+          "rotation": 270.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Scooter_03_2_78",
+      "instance_name": "BP_Scooter_03_C",
+      "properties": {
+        "location": {
+          "x": 15431.91,
+          "y": -19772.79,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -38.6283,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_39_C",
+        "center": {
+          "x": 152.1028,
+          "y": -163.3157
+        },
+        "bounds": {
+          "x": 125.6906,
+          "y": -184.2128,
+          "width": 52.8245,
+          "height": 41.7943,
+          "rotation": 270.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Trash_bin_a_1_79",
+      "instance_name": "BP_Trash_bin_a_C",
+      "properties": {
+        "location": {
+          "x": 14079.57,
+          "y": -19772.79,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -177.5987,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_39_C",
+        "center": {
+          "x": 152.1028,
+          "y": -163.3157
+        },
+        "bounds": {
+          "x": 125.6906,
+          "y": -184.2128,
+          "width": 52.8245,
+          "height": 41.7943,
+          "rotation": 270.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Trash_bin_b_2_80",
+      "instance_name": "BP_Trash_bin_b_C",
+      "properties": {
+        "location": {
+          "x": 23666.79,
+          "y": -23123.33,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -152.1434,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_95_C",
+        "center": {
+          "x": 259.2,
+          "y": -176.0333
+        },
+        "bounds": {
+          "x": 212.0,
+          "y": -208.2333,
+          "width": 94.4001,
+          "height": 64.4,
+          "rotation": 90.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Soda1_4_81",
+      "instance_name": "BP_Soda1_C",
+      "properties": {
+        "location": {
+          "x": 25469.85,
+          "y": -23123.33,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -52.0241,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_95_C",
+        "center": {
+          "x": 259.2,
+          "y": -176.0333
+        },
+        "bounds": {
+          "x": 212.0,
+          "y": -208.2333,
+          "width": 94.4001,
+          "height": 64.4,
+          "rotation": 90.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Soda4_1_82",
+      "instance_name": "BP_Soda4_C",
+      "properties": {
+        "location": {
+          "x": 26600.11,
+          "y": -12083.32,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 5.634,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_95_C",
+        "center": {
+          "x": 259.2,
+          "y": -176.0333
+        },
+        "bounds": {
+          "x": 212.0,
+          "y": -208.2333,
+          "width": 94.4001,
+          "height": 64.4,
+          "rotation": 90.0
+        }
+      }
+    },
+    {
+      "id": "GEN_BP_Cart2_3_83",
+      "instance_name": "BP_Cart2_C",
+      "properties": {
+        "location": {
+          "x": 8000.0,
+          "y": -1200.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 48.505,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "id": "GEN_BP_Cart2_3_84",
+      "instance_name": "BP_Cart2_C",
+      "properties": {
+        "location": {
+          "x": 8000.0,
+          "y": 1200.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 48.505,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "id": "GEN_BP_Cart2_4_85",
+      "instance_name": "BP_Cart2_C",
+      "properties": {
+        "location": {
+          "x": 10000.0,
+          "y": -1200.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 158.3241,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "id": "GEN_BP_Cart2_1_86",
+      "instance_name": "BP_Cart2_C",
+      "properties": {
+        "location": {
+          "x": 10000.0,
+          "y": 1200.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 158.3241,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "id": "GEN_BP_Hydrant_2_87",
+      "instance_name": "BP_Hydrant_C",
+      "properties": {
+        "location": {
+          "x": 12000.0,
+          "y": -1200.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -166.428,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "id": "GEN_BP_Hydrant_2_88",
+      "instance_name": "BP_Hydrant_C",
+      "properties": {
+        "location": {
+          "x": 12000.0,
+          "y": 1200.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -166.428,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree3_1_89",
+      "instance_name": "BP_Tree3_C",
+      "properties": {
+        "location": {
+          "x": 3000.0,
+          "y": -2300.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -177.0196,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree3_1_90",
+      "instance_name": "BP_Tree3_C",
+      "properties": {
+        "location": {
+          "x": 3000.0,
+          "y": 2300.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -177.0196,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree3_3_91",
+      "instance_name": "BP_Tree3_C",
+      "properties": {
+        "location": {
+          "x": 4000.0,
+          "y": -2300.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 119.842,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree3_2_92",
+      "instance_name": "BP_Tree3_C",
+      "properties": {
+        "location": {
+          "x": 4000.0,
+          "y": 2300.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 119.842,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree1_4_93",
+      "instance_name": "BP_Tree1_C",
+      "properties": {
+        "location": {
+          "x": 10000.0,
+          "y": -2300.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 97.1496,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree1_2_94",
+      "instance_name": "BP_Tree1_C",
+      "properties": {
+        "location": {
+          "x": 10000.0,
+          "y": 2300.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 97.1496,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree4_3_95",
+      "instance_name": "BP_Tree4_C",
+      "properties": {
+        "location": {
+          "x": 11000.0,
+          "y": -2300.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -111.1884,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree4_1_96",
+      "instance_name": "BP_Tree4_C",
+      "properties": {
+        "location": {
+          "x": 11000.0,
+          "y": 2300.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -111.1884,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree5_2_97",
+      "instance_name": "BP_Tree5_C",
+      "properties": {
+        "location": {
+          "x": 12000.0,
+          "y": -2300.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 157.8253,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree5_1_98",
+      "instance_name": "BP_Tree5_C",
+      "properties": {
+        "location": {
+          "x": 12000.0,
+          "y": 2300.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 157.8253,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree4_2_99",
+      "instance_name": "BP_Tree4_C",
+      "properties": {
+        "location": {
+          "x": 14000.0,
+          "y": -2300.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 174.527,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree4_4_100",
+      "instance_name": "BP_Tree4_C",
+      "properties": {
+        "location": {
+          "x": 14000.0,
+          "y": 2300.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 174.527,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree2_4_101",
+      "instance_name": "BP_Tree2_C",
+      "properties": {
+        "location": {
+          "x": 15000.0,
+          "y": -2300.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -111.6025,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree2_2_102",
+      "instance_name": "BP_Tree2_C",
+      "properties": {
+        "location": {
+          "x": 15000.0,
+          "y": 2300.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -111.6025,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree4_2_103",
+      "instance_name": "BP_Tree4_C",
+      "properties": {
+        "location": {
+          "x": 16000.0,
+          "y": -2300.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 71.9273,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree4_1_104",
+      "instance_name": "BP_Tree4_C",
+      "properties": {
+        "location": {
+          "x": 16000.0,
+          "y": 2300.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 71.9273,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree4_1_105",
+      "instance_name": "BP_Tree4_C",
+      "properties": {
+        "location": {
+          "x": 18000.0,
+          "y": -2300.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 23.1843,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree4_3_106",
+      "instance_name": "BP_Tree4_C",
+      "properties": {
+        "location": {
+          "x": 18000.0,
+          "y": 2300.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 23.1843,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "id": "GEN_BP_Table2_3_107",
+      "instance_name": "BP_Table2_C",
+      "properties": {
+        "location": {
+          "x": -12000.0,
+          "y": -1200.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -91.1255,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": -200.0,
+          "y": 0.0
+        },
+        "angle": 180.0
+      }
+    },
+    {
+      "id": "GEN_BP_Table2_2_108",
+      "instance_name": "BP_Table2_C",
+      "properties": {
+        "location": {
+          "x": -12000.0,
+          "y": 1200.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -91.1255,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": -200.0,
+          "y": 0.0
+        },
+        "angle": 180.0
+      }
+    },
+    {
+      "id": "GEN_BP_Rabbish_4_109",
+      "instance_name": "BP_Rabbish_C",
+      "properties": {
+        "location": {
+          "x": -10000.0,
+          "y": -1200.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -83.8327,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": -200.0,
+          "y": 0.0
+        },
+        "angle": 180.0
+      }
+    },
+    {
+      "id": "GEN_BP_Rabbish_3_110",
+      "instance_name": "BP_Rabbish_C",
+      "properties": {
+        "location": {
+          "x": -10000.0,
+          "y": 1200.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -83.8327,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": -200.0,
+          "y": 0.0
+        },
+        "angle": 180.0
+      }
+    },
+    {
+      "id": "GEN_BP_Table_3_111",
+      "instance_name": "BP_Table_C",
+      "properties": {
+        "location": {
+          "x": -8000.0,
+          "y": -1200.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -99.0169,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": -200.0,
+          "y": 0.0
+        },
+        "angle": 180.0
+      }
+    },
+    {
+      "id": "GEN_BP_Table_4_112",
+      "instance_name": "BP_Table_C",
+      "properties": {
+        "location": {
+          "x": -8000.0,
+          "y": 1200.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -99.0169,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": -200.0,
+          "y": 0.0
+        },
+        "angle": 180.0
+      }
+    },
+    {
+      "id": "GEN_BP_Can2_1_113",
+      "instance_name": "BP_Can2_C",
+      "properties": {
+        "location": {
+          "x": -6000.0,
+          "y": -1200.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 77.2016,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": -200.0,
+          "y": 0.0
+        },
+        "angle": 180.0
+      }
+    },
+    {
+      "id": "GEN_BP_Can2_1_114",
+      "instance_name": "BP_Can2_C",
+      "properties": {
+        "location": {
+          "x": -6000.0,
+          "y": 1200.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 77.2016,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": -200.0,
+          "y": 0.0
+        },
+        "angle": 180.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree4_1_115",
+      "instance_name": "BP_Tree4_C",
+      "properties": {
+        "location": {
+          "x": -17000.0,
+          "y": -2300.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 101.2136,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": -200.0,
+          "y": 0.0
+        },
+        "angle": 180.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree4_2_116",
+      "instance_name": "BP_Tree4_C",
+      "properties": {
+        "location": {
+          "x": -17000.0,
+          "y": 2300.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 101.2136,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": -200.0,
+          "y": 0.0
+        },
+        "angle": 180.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree3_2_117",
+      "instance_name": "BP_Tree3_C",
+      "properties": {
+        "location": {
+          "x": -16000.0,
+          "y": -2300.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 178.7426,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": -200.0,
+          "y": 0.0
+        },
+        "angle": 180.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree3_1_118",
+      "instance_name": "BP_Tree3_C",
+      "properties": {
+        "location": {
+          "x": -16000.0,
+          "y": 2300.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 178.7426,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": -200.0,
+          "y": 0.0
+        },
+        "angle": 180.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree3_4_119",
+      "instance_name": "BP_Tree3_C",
+      "properties": {
+        "location": {
+          "x": -15000.0,
+          "y": -2300.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -28.7358,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": -200.0,
+          "y": 0.0
+        },
+        "angle": 180.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree3_1_120",
+      "instance_name": "BP_Tree3_C",
+      "properties": {
+        "location": {
+          "x": -15000.0,
+          "y": 2300.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -28.7358,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": -200.0,
+          "y": 0.0
+        },
+        "angle": 180.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree2_1_121",
+      "instance_name": "BP_Tree2_C",
+      "properties": {
+        "location": {
+          "x": -14000.0,
+          "y": -2300.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 76.6571,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": -200.0,
+          "y": 0.0
+        },
+        "angle": 180.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree2_2_122",
+      "instance_name": "BP_Tree2_C",
+      "properties": {
+        "location": {
+          "x": -14000.0,
+          "y": 2300.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 76.6571,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": -200.0,
+          "y": 0.0
+        },
+        "angle": 180.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree5_4_123",
+      "instance_name": "BP_Tree5_C",
+      "properties": {
+        "location": {
+          "x": -13000.0,
+          "y": -2300.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -30.0877,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": -200.0,
+          "y": 0.0
+        },
+        "angle": 180.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree5_3_124",
+      "instance_name": "BP_Tree5_C",
+      "properties": {
+        "location": {
+          "x": -13000.0,
+          "y": 2300.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -30.0877,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": -200.0,
+          "y": 0.0
+        },
+        "angle": 180.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree2_4_125",
+      "instance_name": "BP_Tree2_C",
+      "properties": {
+        "location": {
+          "x": -12000.0,
+          "y": -2300.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 122.473,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": -200.0,
+          "y": 0.0
+        },
+        "angle": 180.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree2_2_126",
+      "instance_name": "BP_Tree2_C",
+      "properties": {
+        "location": {
+          "x": -12000.0,
+          "y": 2300.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 122.473,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": -200.0,
+          "y": 0.0
+        },
+        "angle": 180.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree6_3_127",
+      "instance_name": "BP_Tree6_C",
+      "properties": {
+        "location": {
+          "x": -10000.0,
+          "y": -2300.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 121.9785,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": -200.0,
+          "y": 0.0
+        },
+        "angle": 180.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree6_2_128",
+      "instance_name": "BP_Tree6_C",
+      "properties": {
+        "location": {
+          "x": -10000.0,
+          "y": 2300.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 121.9785,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": -200.0,
+          "y": 0.0
+        },
+        "angle": 180.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree1_1_129",
+      "instance_name": "BP_Tree1_C",
+      "properties": {
+        "location": {
+          "x": -9000.0,
+          "y": -2300.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 49.422,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": -200.0,
+          "y": 0.0
+        },
+        "angle": 180.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree1_3_130",
+      "instance_name": "BP_Tree1_C",
+      "properties": {
+        "location": {
+          "x": -9000.0,
+          "y": 2300.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 49.422,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": -200.0,
+          "y": 0.0
+        },
+        "angle": 180.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree3_2_131",
+      "instance_name": "BP_Tree3_C",
+      "properties": {
+        "location": {
+          "x": -6000.0,
+          "y": -2300.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -120.0734,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": -200.0,
+          "y": 0.0
+        },
+        "angle": 180.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree3_1_132",
+      "instance_name": "BP_Tree3_C",
+      "properties": {
+        "location": {
+          "x": -6000.0,
+          "y": 2300.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -120.0734,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": -200.0,
+          "y": 0.0
+        },
+        "angle": 180.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree1_2_133",
+      "instance_name": "BP_Tree1_C",
+      "properties": {
+        "location": {
+          "x": -4000.0,
+          "y": -2300.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 158.4128,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": -200.0,
+          "y": 0.0
+        },
+        "angle": 180.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree1_4_134",
+      "instance_name": "BP_Tree1_C",
+      "properties": {
+        "location": {
+          "x": -4000.0,
+          "y": 2300.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 158.4128,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": -200.0,
+          "y": 0.0
+        },
+        "angle": 180.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree1_2_135",
+      "instance_name": "BP_Tree1_C",
+      "properties": {
+        "location": {
+          "x": -3000.0,
+          "y": -2300.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -119.1281,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": -200.0,
+          "y": 0.0
+        },
+        "angle": 180.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree1_4_136",
+      "instance_name": "BP_Tree1_C",
+      "properties": {
+        "location": {
+          "x": -3000.0,
+          "y": 2300.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -119.1281,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": -200.0,
+          "y": 0.0
+        },
+        "angle": 180.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree3_2_137",
+      "instance_name": "BP_Tree3_C",
+      "properties": {
+        "location": {
+          "x": -2000.0,
+          "y": -2300.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -140.8023,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": -200.0,
+          "y": 0.0
+        },
+        "angle": 180.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree3_1_138",
+      "instance_name": "BP_Tree3_C",
+      "properties": {
+        "location": {
+          "x": -2000.0,
+          "y": 2300.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -140.8023,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": -200.0,
+          "y": 0.0
+        },
+        "angle": 180.0
+      }
+    },
+    {
+      "id": "GEN_BP_Soda1_4_139",
+      "instance_name": "BP_Soda1_C",
+      "properties": {
+        "location": {
+          "x": 26000.0,
+          "y": -1200.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -121.2224,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "end": {
+          "x": 400.0,
+          "y": 0.0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "id": "GEN_BP_Soda1_4_140",
+      "instance_name": "BP_Soda1_C",
+      "properties": {
+        "location": {
+          "x": 26000.0,
+          "y": 1200.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -121.2224,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "end": {
+          "x": 400.0,
+          "y": 0.0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "id": "GEN_BP_Soda3_1_141",
+      "instance_name": "BP_Soda3_C",
+      "properties": {
+        "location": {
+          "x": 28000.0,
+          "y": -1200.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -60.3148,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "end": {
+          "x": 400.0,
+          "y": 0.0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "id": "GEN_BP_Soda3_4_142",
+      "instance_name": "BP_Soda3_C",
+      "properties": {
+        "location": {
+          "x": 28000.0,
+          "y": 1200.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -60.3148,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "end": {
+          "x": 400.0,
+          "y": 0.0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "id": "GEN_BP_Can2_2_143",
+      "instance_name": "BP_Can2_C",
+      "properties": {
+        "location": {
+          "x": 30000.0,
+          "y": -1200.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -71.9696,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "end": {
+          "x": 400.0,
+          "y": 0.0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "id": "GEN_BP_Can2_2_144",
+      "instance_name": "BP_Can2_C",
+      "properties": {
+        "location": {
+          "x": 30000.0,
+          "y": 1200.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -71.9696,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "end": {
+          "x": 400.0,
+          "y": 0.0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "id": "GEN_BP_Can_4_145",
+      "instance_name": "BP_Can_C",
+      "properties": {
+        "location": {
+          "x": 32000.0,
+          "y": -1200.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -49.6929,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "end": {
+          "x": 400.0,
+          "y": 0.0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "id": "GEN_BP_Can_2_146",
+      "instance_name": "BP_Can_C",
+      "properties": {
+        "location": {
+          "x": 32000.0,
+          "y": 1200.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -49.6929,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "end": {
+          "x": 400.0,
+          "y": 0.0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "id": "GEN_BP_Soda3_4_147",
+      "instance_name": "BP_Soda3_C",
+      "properties": {
+        "location": {
+          "x": 34000.0,
+          "y": -1200.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -132.9411,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "end": {
+          "x": 400.0,
+          "y": 0.0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "id": "GEN_BP_Soda3_3_148",
+      "instance_name": "BP_Soda3_C",
+      "properties": {
+        "location": {
+          "x": 34000.0,
+          "y": 1200.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -132.9411,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "end": {
+          "x": 400.0,
+          "y": 0.0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree1_2_149",
+      "instance_name": "BP_Tree1_C",
+      "properties": {
+        "location": {
+          "x": 23000.0,
+          "y": -2300.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -164.8573,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "end": {
+          "x": 400.0,
+          "y": 0.0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree1_4_150",
+      "instance_name": "BP_Tree1_C",
+      "properties": {
+        "location": {
+          "x": 23000.0,
+          "y": 2300.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -164.8573,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "end": {
+          "x": 400.0,
+          "y": 0.0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree1_2_151",
+      "instance_name": "BP_Tree1_C",
+      "properties": {
+        "location": {
+          "x": 27000.0,
+          "y": -2300.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -161.971,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "end": {
+          "x": 400.0,
+          "y": 0.0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree1_3_152",
+      "instance_name": "BP_Tree1_C",
+      "properties": {
+        "location": {
+          "x": 27000.0,
+          "y": 2300.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -161.971,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "end": {
+          "x": 400.0,
+          "y": 0.0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree1_3_153",
+      "instance_name": "BP_Tree1_C",
+      "properties": {
+        "location": {
+          "x": 29000.0,
+          "y": -2300.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -74.8183,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "end": {
+          "x": 400.0,
+          "y": 0.0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree1_2_154",
+      "instance_name": "BP_Tree1_C",
+      "properties": {
+        "location": {
+          "x": 29000.0,
+          "y": 2300.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -74.8183,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "end": {
+          "x": 400.0,
+          "y": 0.0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree6_3_155",
+      "instance_name": "BP_Tree6_C",
+      "properties": {
+        "location": {
+          "x": 30000.0,
+          "y": -2300.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -148.1655,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "end": {
+          "x": 400.0,
+          "y": 0.0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree6_2_156",
+      "instance_name": "BP_Tree6_C",
+      "properties": {
+        "location": {
+          "x": 30000.0,
+          "y": 2300.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -148.1655,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "end": {
+          "x": 400.0,
+          "y": 0.0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree1_1_157",
+      "instance_name": "BP_Tree1_C",
+      "properties": {
+        "location": {
+          "x": 33000.0,
+          "y": -2300.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -151.9853,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "end": {
+          "x": 400.0,
+          "y": 0.0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree1_1_158",
+      "instance_name": "BP_Tree1_C",
+      "properties": {
+        "location": {
+          "x": 33000.0,
+          "y": 2300.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -151.9853,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "end": {
+          "x": 400.0,
+          "y": 0.0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree6_3_159",
+      "instance_name": "BP_Tree6_C",
+      "properties": {
+        "location": {
+          "x": 34000.0,
+          "y": -2300.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 25.9664,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "end": {
+          "x": 400.0,
+          "y": 0.0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree6_2_160",
+      "instance_name": "BP_Tree6_C",
+      "properties": {
+        "location": {
+          "x": 34000.0,
+          "y": 2300.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 25.9664,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "end": {
+          "x": 400.0,
+          "y": 0.0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree1_1_161",
+      "instance_name": "BP_Tree1_C",
+      "properties": {
+        "location": {
+          "x": 35000.0,
+          "y": -2300.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -128.0164,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "end": {
+          "x": 400.0,
+          "y": 0.0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree1_4_162",
+      "instance_name": "BP_Tree1_C",
+      "properties": {
+        "location": {
+          "x": 35000.0,
+          "y": 2300.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -128.0164,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "end": {
+          "x": 400.0,
+          "y": 0.0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree4_4_163",
+      "instance_name": "BP_Tree4_C",
+      "properties": {
+        "location": {
+          "x": 37000.0,
+          "y": -2300.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 59.7565,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "end": {
+          "x": 400.0,
+          "y": 0.0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree4_4_164",
+      "instance_name": "BP_Tree4_C",
+      "properties": {
+        "location": {
+          "x": 37000.0,
+          "y": 2300.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 59.7565,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "end": {
+          "x": 400.0,
+          "y": 0.0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree5_2_165",
+      "instance_name": "BP_Tree5_C",
+      "properties": {
+        "location": {
+          "x": 38000.0,
+          "y": -2300.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 4.9715,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "end": {
+          "x": 400.0,
+          "y": 0.0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree5_3_166",
+      "instance_name": "BP_Tree5_C",
+      "properties": {
+        "location": {
+          "x": 38000.0,
+          "y": 2300.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 4.9715,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "end": {
+          "x": 400.0,
+          "y": 0.0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "id": "GEN_BP_RoadBlocker_2_167",
+      "instance_name": "BP_RoadBlocker_C",
+      "properties": {
+        "location": {
+          "x": 21200.0,
+          "y": -12000.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 35.0973,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "end": {
+          "x": 200.0,
+          "y": -200.0
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "id": "GEN_BP_RoadBlocker_3_168",
+      "instance_name": "BP_RoadBlocker_C",
+      "properties": {
+        "location": {
+          "x": 18800.0,
+          "y": -12000.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 35.0973,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "end": {
+          "x": 200.0,
+          "y": -200.0
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "id": "GEN_BP_Table3_2_169",
+      "instance_name": "BP_Table3_C",
+      "properties": {
+        "location": {
+          "x": 21200.0,
+          "y": -10000.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -169.511,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "end": {
+          "x": 200.0,
+          "y": -200.0
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "id": "GEN_BP_Table3_2_170",
+      "instance_name": "BP_Table3_C",
+      "properties": {
+        "location": {
+          "x": 18800.0,
+          "y": -10000.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -169.511,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "end": {
+          "x": 200.0,
+          "y": -200.0
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "id": "GEN_BP_Cart_2_171",
+      "instance_name": "BP_Cart_C",
+      "properties": {
+        "location": {
+          "x": 21200.0,
+          "y": -8000.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -22.7012,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "end": {
+          "x": 200.0,
+          "y": -200.0
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "id": "GEN_BP_Cart_1_172",
+      "instance_name": "BP_Cart_C",
+      "properties": {
+        "location": {
+          "x": 18800.0,
+          "y": -8000.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -22.7012,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "end": {
+          "x": 200.0,
+          "y": -200.0
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "id": "GEN_BP_Box2_4_173",
+      "instance_name": "BP_Box2_C",
+      "properties": {
+        "location": {
+          "x": 21200.0,
+          "y": -6000.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -49.1217,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "end": {
+          "x": 200.0,
+          "y": -200.0
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "id": "GEN_BP_Box2_4_174",
+      "instance_name": "BP_Box2_C",
+      "properties": {
+        "location": {
+          "x": 18800.0,
+          "y": -6000.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -49.1217,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "end": {
+          "x": 200.0,
+          "y": -200.0
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree6_2_175",
+      "instance_name": "BP_Tree6_C",
+      "properties": {
+        "location": {
+          "x": 22300.0,
+          "y": -16000.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -163.0303,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "end": {
+          "x": 200.0,
+          "y": -200.0
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree6_4_176",
+      "instance_name": "BP_Tree6_C",
+      "properties": {
+        "location": {
+          "x": 17700.0,
+          "y": -16000.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -163.0303,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "end": {
+          "x": 200.0,
+          "y": -200.0
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree3_4_177",
+      "instance_name": "BP_Tree3_C",
+      "properties": {
+        "location": {
+          "x": 22300.0,
+          "y": -13000.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -125.2599,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "end": {
+          "x": 200.0,
+          "y": -200.0
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree3_3_178",
+      "instance_name": "BP_Tree3_C",
+      "properties": {
+        "location": {
+          "x": 17700.0,
+          "y": -13000.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -125.2599,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "end": {
+          "x": 200.0,
+          "y": -200.0
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree2_1_179",
+      "instance_name": "BP_Tree2_C",
+      "properties": {
+        "location": {
+          "x": 22300.0,
+          "y": -12000.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -176.9483,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "end": {
+          "x": 200.0,
+          "y": -200.0
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree2_4_180",
+      "instance_name": "BP_Tree2_C",
+      "properties": {
+        "location": {
+          "x": 17700.0,
+          "y": -12000.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -176.9483,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "end": {
+          "x": 200.0,
+          "y": -200.0
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree4_2_181",
+      "instance_name": "BP_Tree4_C",
+      "properties": {
+        "location": {
+          "x": 22300.0,
+          "y": -11000.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 10.7864,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "end": {
+          "x": 200.0,
+          "y": -200.0
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree4_2_182",
+      "instance_name": "BP_Tree4_C",
+      "properties": {
+        "location": {
+          "x": 17700.0,
+          "y": -11000.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 10.7864,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "end": {
+          "x": 200.0,
+          "y": -200.0
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree4_3_183",
+      "instance_name": "BP_Tree4_C",
+      "properties": {
+        "location": {
+          "x": 22300.0,
+          "y": -10000.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 113.3061,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "end": {
+          "x": 200.0,
+          "y": -200.0
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree4_4_184",
+      "instance_name": "BP_Tree4_C",
+      "properties": {
+        "location": {
+          "x": 17700.0,
+          "y": -10000.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 113.3061,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "end": {
+          "x": 200.0,
+          "y": -200.0
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree5_2_185",
+      "instance_name": "BP_Tree5_C",
+      "properties": {
+        "location": {
+          "x": 22300.0,
+          "y": -9000.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 21.506,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "end": {
+          "x": 200.0,
+          "y": -200.0
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree5_2_186",
+      "instance_name": "BP_Tree5_C",
+      "properties": {
+        "location": {
+          "x": 17700.0,
+          "y": -9000.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 21.506,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "end": {
+          "x": 200.0,
+          "y": -200.0
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree6_1_187",
+      "instance_name": "BP_Tree6_C",
+      "properties": {
+        "location": {
+          "x": 22300.0,
+          "y": -8000.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 42.3686,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "end": {
+          "x": 200.0,
+          "y": -200.0
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree6_4_188",
+      "instance_name": "BP_Tree6_C",
+      "properties": {
+        "location": {
+          "x": 17700.0,
+          "y": -8000.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 42.3686,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "end": {
+          "x": 200.0,
+          "y": -200.0
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree1_1_189",
+      "instance_name": "BP_Tree1_C",
+      "properties": {
+        "location": {
+          "x": 22300.0,
+          "y": -6000.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -105.8157,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "end": {
+          "x": 200.0,
+          "y": -200.0
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree1_1_190",
+      "instance_name": "BP_Tree1_C",
+      "properties": {
+        "location": {
+          "x": 17700.0,
+          "y": -6000.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -105.8157,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "end": {
+          "x": 200.0,
+          "y": -200.0
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree5_4_191",
+      "instance_name": "BP_Tree5_C",
+      "properties": {
+        "location": {
+          "x": 22300.0,
+          "y": -4000.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -49.927,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "end": {
+          "x": 200.0,
+          "y": -200.0
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree5_1_192",
+      "instance_name": "BP_Tree5_C",
+      "properties": {
+        "location": {
+          "x": 17700.0,
+          "y": -4000.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": -49.927,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "end": {
+          "x": 200.0,
+          "y": -200.0
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree1_4_193",
+      "instance_name": "BP_Tree1_C",
+      "properties": {
+        "location": {
+          "x": 22300.0,
+          "y": -3000.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 168.6087,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "end": {
+          "x": 200.0,
+          "y": -200.0
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree1_4_194",
+      "instance_name": "BP_Tree1_C",
+      "properties": {
+        "location": {
+          "x": 17700.0,
+          "y": -3000.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 168.6087,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "end": {
+          "x": 200.0,
+          "y": -200.0
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree2_4_195",
+      "instance_name": "BP_Tree2_C",
+      "properties": {
+        "location": {
+          "x": 22300.0,
+          "y": -2000.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 9.299,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "end": {
+          "x": 200.0,
+          "y": -200.0
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "id": "GEN_BP_Tree2_1_196",
+      "instance_name": "BP_Tree2_C",
+      "properties": {
+        "location": {
+          "x": 17700.0,
+          "y": -2000.0,
+          "z": 30
+        },
+        "orientation": {
+          "pitch": 0,
+          "yaw": 9.299,
+          "roll": 0
+        },
+        "scale": {
+          "x": 1.0,
+          "y": 1.0,
+          "z": 1.0
+        }
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200.0,
+          "y": 0.0
+        },
+        "end": {
+          "x": 200.0,
+          "y": -200.0
+        },
+        "angle": -90.0
+      }
     }
   ]
 }

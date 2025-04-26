@@ -30,7 +30,7 @@ citygen:
     building_side_distance: 27
 
   element:
-    generation: false
+    generation: true
     generation_thread_number: 16
     element_building_distance: 8
     element_element_distance: 10
