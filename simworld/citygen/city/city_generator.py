@@ -8,6 +8,7 @@ from simworld.citygen.element.element_generator import ElementGenerator
 from simworld.citygen.road.road_generator import RoadGenerator
 from simworld.citygen.route.route_generator import RouteGenerator
 from simworld.utils.load_json import load_json
+from simworld.utils.logger import Logger
 
 
 class GenerationState(Enum):
@@ -51,6 +52,8 @@ class CityGenerator:
         self.input_path = self.config['citygen.input_roads']
         self.input = self.config['citygen.input_layout']
 
+        self.logger = Logger.get_logger('CityGenerator')
+
     def generate(self):
         """Generate the city."""
         while not self.is_generation_complete():
@@ -67,7 +70,7 @@ class CityGenerator:
             # generate roads randomly
             if not self.input:
                 if len(self.roads) == 0:
-                    print('Generating roads randomly')
+                    self.logger.info('Generating roads randomly')
                     # Initialize road generation
                     self.road_generator.generate_initial_segments()
                 # check if the number of roads has reached the limit
@@ -80,7 +83,7 @@ class CityGenerator:
                 return False
             # generate roads from existing file
             else:
-                print(f'Generating roads from existing file {self.input_path}')
+                self.logger.info(f'Generating roads from existing file {self.input_path}')
                 self.generation_state = GenerationState.GENERATING_BUILDINGS
                 return self.road_generator.generate_roads_from_file(self.input_path)
 
@@ -137,7 +140,7 @@ class CityGenerator:
                 self.generation_state = GenerationState.COMPLETED
                 return True
             # Generate routes
-            print('Generating routes')
+            self.logger.info('Generating routes')
             target_data_list = []
             for _ in range(self.config['citygen.route.number']):
                 target_point = self.route_generator.generate_target_point_randomly()

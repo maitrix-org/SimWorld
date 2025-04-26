@@ -14,6 +14,8 @@ import numpy as np
 import PIL.Image
 import unrealcv
 
+from simworld.utils.logger import Logger
+
 
 class UnrealCV(object):
     """Interface class for communication with Unreal Engine.
@@ -39,6 +41,7 @@ class UnrealCV(object):
         self.ini_unrealcv(resolution)
 
         self.lock = Lock()
+        self.logger = Logger.get_logger('UnrealCV')
 
     ###################################################
     # Basic Operations
@@ -67,7 +70,7 @@ class UnrealCV(object):
     def check_connection(self):
         """Check connection status, attempt to reconnect if not connected."""
         while self.client.isconnected() is False:
-            print('UnrealCV server is not running. Please try again')
+            self.logger.error('UnrealCV server is not running. Please try again')
             time.sleep(1)
             self.client.connect()
 

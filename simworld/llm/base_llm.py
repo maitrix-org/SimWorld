@@ -67,7 +67,7 @@ class BaseLLM(metaclass=LLMMetaclass):
 
         self.model_name = model_name
         self.logger = Logger.get_logger('BaseLLM')
-        self.logger.info(f'Initialized LLM client for model {model_name}, url {url or "default"}')
+        self.logger.info(f'Initialized LLM client for model -- {model_name}, url -- {url or "default"}')
 
     def generate_text(
         self,

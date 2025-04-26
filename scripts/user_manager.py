@@ -12,7 +12,6 @@ from simworld.communicator.unrealcv import UnrealCV
 from simworld.llm.a2a_llm import A2ALLM
 from simworld.map.map import Map
 from simworld.utils.load_json import load_json
-from simworld.utils.logger import Logger
 from simworld.utils.vector import Vector
 
 
@@ -41,7 +40,6 @@ class UserManager:
         self.model_path = self.config['simworld.ue_manager_path']
         self.agent_path = self.config['user.model_path']
         self.communicator = None
-        self.logger = Logger.get_logger('UserManager')
         self.dt = self.config['simworld.dt']
         self.lock = Lock()
         self.exit_event = Event()
@@ -91,16 +89,14 @@ class UserManager:
     def update(self):
         """Fetch and apply agents' latest positions and directions."""
         agent_ids = [agent.id for agent in self.agent]
-        self.logger.info(f'Updating positions for agents: {agent_ids}')
         try:
             result = self.communicator.get_position_and_direction(agent_ids=agent_ids)
             for idx in agent_ids:
                 pos, dir_ = result[('agent', idx)]
                 self.agent[idx].position = pos
                 self.agent[idx].direction = dir_
-                self.logger.info(f'Agent {idx} position: {pos}, direction: {dir_}')
         except Exception as exc:
-            self.logger.error(f'Error in get_position_and_direction: {exc}')
+            print(f'Error in get_position_and_direction: {exc}')
             traceback.print_exc()
 
     def run(self):
@@ -108,7 +104,7 @@ class UserManager:
         with ThreadPoolExecutor(
             max_workers=self.config['user.num_threads']
         ) as executor:
-            self.logger.info('Starting simulation.')
+            print('Starting simulation.')
 
             try:
                 futures = [executor.submit(agent.step) for agent in self.agent]
@@ -119,7 +115,7 @@ class UserManager:
                 self.exit_event.set()
             except Exception as exc:
                 lineno = exc.__traceback__.tb_lineno
-                self.logger.error(f'Error at line {lineno}: {type(exc).__name__}: {exc}')
+                print(f'Error at line {lineno}: {type(exc).__name__}: {exc}')
                 traceback.print_exc()
                 self.exit_event.set()
             finally:
@@ -127,8 +123,8 @@ class UserManager:
                     try:
                         f.result()
                     except Exception as thr_exc:
-                        self.logger.error(f'Thread error: {thr_exc}')
-                self.logger.info('Simulation fully stopped.')
+                        print(f'Thread error: {thr_exc}')
+                print('Simulation fully stopped.')
 
     def spawn_agent(self):
         """Spawn all agents in the Unreal environment."""

@@ -105,10 +105,9 @@ class PedestrianManager:
 
             # get the next sidewalk and waypoints for the pedestrian at the intersection
             if pedestrian.is_close_to_end(self.config['traffic.pedestrian.waypoint_distance_threshold']):
-                # print(f"Pedestrian {pedestrian.pedestrian_id} is close to end")
                 next_sidewalk, crosswalk, waypoints, current_intersection = intersection_controller.get_waypoints_for_pedestrian(pedestrian.current_sidewalk, pedestrian.waypoints[0])
                 if next_sidewalk is None or waypoints is None:
-                    print(f'Pedestrian {pedestrian.id} has no waypoints to move to')
+                    self.logger.debug(f'Pedestrian {pedestrian.id} has no waypoints to move to')
                     continue
 
                 if crosswalk is not None:
@@ -133,7 +132,6 @@ class PedestrianManager:
                 to_waypoint = pedestrian.waypoints[0] - pedestrian.position
                 dot_product = pedestrian.direction.dot(to_waypoint.normalize())
                 if dot_product < 0:
-                    # print(f"popped waypoint {pedestrian.waypoints[0]}")
                     self.logger.debug(f'Pedestrian {pedestrian.id} passed waypoint {pedestrian.waypoints[0]}')
                     pedestrian.pop_waypoint()
 

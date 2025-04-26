@@ -16,7 +16,7 @@ class Logger:
     _log_to_console = True
 
     @classmethod
-    def configure(cls, logging_enabled=False, log_to_console=False):
+    def configure(cls, logging_enabled=True, log_to_console=True):
         """Configure global logging settings.
 
         Args:
@@ -43,7 +43,7 @@ class Logger:
         A log file is created with timestamp in the filename.
         """
         if not Logger._initialized:
-            Logger.configure(logging_enabled=False, log_to_console=False)
+            Logger.configure(logging_enabled=True, log_to_console=True)
             # Only initialize logger if logging is enabled in config
             if Logger._logging_enabled:
                 # create logs directory

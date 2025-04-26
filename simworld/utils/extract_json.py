@@ -2,6 +2,10 @@
 import json
 import re
 
+from simworld.utils.logger import Logger
+
+logger = Logger.get_logger('ExtractJSON')
+
 
 def extract_json_and_fix_escapes(text):
     """Extract JSON from text and fix invalid escape sequences."""
@@ -18,7 +22,7 @@ def extract_json_and_fix_escapes(text):
             json_obj = json.loads(fixed_json)
             return json_obj
         except json.JSONDecodeError as e:
-            print(f'JSON parsing error: {e}')
+            logger.error(f'JSON parsing error: {e}')
             # Return the fixed string if parsing fails
             return fixed_json
     else:

@@ -8,8 +8,12 @@ import cv2
 import numpy as np
 from PIL import Image
 
+from simworld.utils.logger import Logger
+
 from .base_llm import BaseLLM
-from .retry import LLMResponseParsingError, retry_parsing
+from .retry import LLMResponseParsingError
+
+logger = Logger.get_logger('A2ALLM')
 
 
 class A2ALLM(BaseLLM):
@@ -54,10 +58,10 @@ class A2ALLM(BaseLLM):
                 top_p
             )
             return response, time.time() - start_time
-        except Exception:
+        except Exception as e:
+            logger.error(f'Error in generate_text_structured: {e}')
             return None, time.time() - start_time
 
-    @retry_parsing()
     def _generate_text_structured_with_retry(
         self,
         system_prompt: str,
@@ -87,6 +91,7 @@ class A2ALLM(BaseLLM):
             top_p=top_p,
         )
         content = response.choices[0].message.content
+        print(f'Content: {content}', flush=True)
         try:
             parsed = json.loads(content)
             return json.dumps(parsed)
@@ -174,10 +179,10 @@ class A2ALLM(BaseLLM):
                 top_p
             )
             return response, time.time() - start_time
-        except Exception:
+        except Exception as e:
+            logger.error(f'Error in generate_text_structured_vlm: {e}')
             return None, time.time() - start_time
 
-    @retry_parsing()
     def _generate_text_structured_vlm_with_retry(
         self,
         system_prompt: str,
@@ -248,7 +253,7 @@ if __name__ == '__main__':
     llm = A2ALLM(
         model_name='meta-llama/llama-3.3-70b-instruct',
         url='https://openrouter.ai/api/v1',
-        api_key='sk-or-v1-...'
+        api_key='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'
     )
     resp = llm.generate_text_structured(system_prompt, user_prompt, fmt)
     print(f'Response: {resp}')

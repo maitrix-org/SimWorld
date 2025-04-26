@@ -9,6 +9,7 @@ from typing import List
 from simworld.citygen.dataclass import (Bounds, Building, Element, Point,
                                         Segment)
 from simworld.citygen.route.route_manager import RouteManager
+from simworld.utils.logger import Logger
 from simworld.utils.math_utils import MathUtils
 from simworld.utils.quadtree import QuadTree
 
@@ -27,6 +28,7 @@ class RouteGenerator:
         """
         self.config = config
         self.route_manager = RouteManager()
+        self.logger = Logger.get_logger('RouteGenerator')
 
     def generate_route_along_road(self, road: Segment):
         """Generate a route along a road segment.
@@ -39,7 +41,7 @@ class RouteGenerator:
         # Generate random number of points along road
         num_points = random.randint(self.config['citygen.route.min_points_per_route'], self.config['citygen.route.max_points_per_route'])
         points = []
-        print(f'Generating route with {num_points} points')
+        self.logger.info(f'Generating route with {num_points} points')
         for _ in range(num_points):
             # Generate random point along road segment
             point = MathUtils.interpolate_point(road.start, road.end, random.random())
@@ -88,7 +90,7 @@ class RouteGenerator:
             Dictionary containing statistics about nearby elements and buildings.
         """
         bounds = Bounds(point.x - distance, point.y - distance, 2 * distance, 2 * distance)
-        # print(bounds)
+
         neighbors = []
         for quadtree in quadtrees:
             nodes = quadtree.retrieve(bounds)

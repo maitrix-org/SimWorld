@@ -4,6 +4,7 @@ import random
 
 from simworld.citygen.building.building_manager import BuildingManager
 from simworld.citygen.dataclass import Bounds, Building, Point, Segment
+from simworld.utils.logger import Logger
 from simworld.utils.math_utils import MathUtils
 from simworld.utils.quadtree import QuadTree
 
@@ -23,6 +24,8 @@ class BuildingGenerator:
 
         self.building_counts = {b: 0 for b in building_types}
         self.building_to_segment = {}
+
+        self.logger = Logger.get_logger('BuildingGenerator')
 
     def get_next_building_type(self):
         """Choose the next building type to generate.
@@ -178,11 +181,11 @@ class BuildingGenerator:
             segments_quadtree: Quadtree containing all road segments.
         """
         buildings_to_remove = []
-        print('Generated buildings:', len(self.building_manager.buildings))
+        self.logger.info(f'Generated buildings: {len(self.building_manager.buildings)}')
         for building in self.building_manager.buildings:
             if self.check_building_road_overlap(building.bounds, segments_quadtree):
                 buildings_to_remove.append(building)
-        print('Buildings to keep:', len(self.building_manager.buildings) - len(buildings_to_remove))
+        self.logger.info(f'Buildings to keep: {len(self.building_manager.buildings) - len(buildings_to_remove)}')
         for building in set(buildings_to_remove):
             self.building_manager.remove_building(building)
 

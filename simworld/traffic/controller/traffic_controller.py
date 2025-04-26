@@ -156,26 +156,26 @@ class TrafficController:
             self.spawn_pedestrians()
             self.spawn_traffic_signals()
         except Exception as e:
-            print(f'Error occurred in {__file__}:{e.__traceback__.tb_lineno}')
-            print(f'Error type: {type(e).__name__}')
-            print(f'Error message: {str(e)}')
-            print('Error traceback:')
+            self.logger.error(f'Error occurred in {__file__}:{e.__traceback__.tb_lineno}')
+            self.logger.error(f'Error type: {type(e).__name__}')
+            self.logger.error(f'Error message: {str(e)}')
+            self.logger.error('Error traceback:')
             traceback.print_exc()
 
     def spawn_vehicles(self):
         """Spawn vehicles in the simulation environment."""
         self.vehicle_manager.spawn_vehicles(self.communicator)
-        print('Vehicles spawned')
+        self.logger.info('Vehicles spawned')
 
     def spawn_pedestrians(self):
         """Spawn pedestrians in the simulation environment."""
         self.pedestrian_manager.spawn_pedestrians(self.communicator)
-        print('Pedestrians spawned')
+        self.logger.info('Pedestrians spawned')
 
     def spawn_traffic_signals(self):
         """Spawn traffic signals in the simulation environment."""
         self.intersection_manager.spawn_traffic_signals(self.communicator)
-        print('Traffic signals spawned')
+        self.logger.info('Traffic signals spawned')
 
     # Reset
     def reset(self, num_vehicles: int, num_pedestrians: int, map: str):
@@ -230,13 +230,13 @@ class TrafficController:
                 self.intersection_manager.update_intersections(self.communicator)
                 time.sleep(self.dt)
         except KeyboardInterrupt:
-            print('Simulation interrupted')
+            self.logger.info('Simulation interrupted')
             sys.exit(1)
         except Exception as e:
-            print(f'Error occurred in {__file__}:{e.__traceback__.tb_lineno}')
-            print(f'Error type: {type(e).__name__}')
-            print(f'Error message: {str(e)}')
-            print('Error traceback:')
+            self.logger.error(f'Error occurred in {__file__}:{e.__traceback__.tb_lineno}')
+            self.logger.error(f'Error type: {type(e).__name__}')
+            self.logger.error(f'Error message: {str(e)}')
+            self.logger.error('Error traceback:')
             traceback.print_exc()
 
     def update_states(self):

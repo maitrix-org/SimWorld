@@ -157,7 +157,6 @@ class QuadTree(Generic[T]):
         for item, item_rect in zip(candidates, candidate_rects):
             if query_rect.intersects(item_rect):
                 result.append(item)
-        print('result', result)
         return result
 
     def clear(self):

@@ -12,6 +12,7 @@ import pandas as pd
 
 from simworld.communicator.unrealcv import UnrealCV
 from simworld.utils.load_json import load_json
+from simworld.utils.logger import Logger
 from simworld.utils.vector import Vector
 
 
@@ -30,6 +31,7 @@ class Communicator:
         """
         self.unrealcv = unrealcv
         self.ue_manager_name = None
+        self.logger = Logger.get_logger('Communicator')
 
     #
     # User Agent Methods
@@ -534,7 +536,7 @@ class Communicator:
                 color = asset_library['colors'][asset_library[node_df.loc[id, 'instance_name']]['color']]
                 rgb_values = _parse_rgb(color)
             except KeyError:
-                print("Can't find node {} in asset library".format(node_df.loc[id, 'instance_name']))
+                self.logger.error(f"Can't find node {node_df.loc[id, 'instance_name']} in asset library")
                 return
             else:
                 self.unrealcv.spawn_bp_asset(instance_ref, id)
