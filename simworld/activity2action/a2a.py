@@ -2,7 +2,6 @@
 
 import heapq
 import json
-import logging
 import math
 import re
 from threading import Event
@@ -12,9 +11,10 @@ import numpy as np
 
 from simworld.activity2action.action_space import ACTION_LIST, FORMAT, Action
 from simworld.activity2action.prompt import SYSTEM_PROMPT, USER_PROMPT
-from simworld.llm import A2ALLM
+from simworld.llm.a2a_llm import A2ALLM
 from simworld.map.map import Map, Node
-from simworld.traffic.base import TrafficSignalState
+from simworld.traffic.base.traffic_signal import TrafficSignalState
+from simworld.utils.logger import Logger
 from simworld.utils.vector import Vector
 
 
@@ -63,7 +63,7 @@ class Activity2Action:
         self.rule_based = rule_based
         self.dt = dt
         self.exit_event = exit_event
-        self.logger = logging.getLogger(__name__)
+        self.logger = Logger.get_logger('Activity2Action')
 
     def parse(self, plan: str) -> None:
         """Parse a plan string and execute the resulting actions."""
@@ -80,7 +80,7 @@ class Activity2Action:
             output_format=FORMAT,
             temperature=self.temperature,
         )
-        print(f'Agent {self.agent.id} Response: {response}', flush=True)
+        # print(f'Agent {self.agent.id} Response: {response}', flush=True)
         self.logger.info(f'Agent {self.agent.id} Response: {response}')
 
         if response is None:
@@ -108,8 +108,8 @@ class Activity2Action:
             self.logger.error(f'Unexpected error: {e}')
             self.logger.error(f'Failed to parse response: {response}')
             return
-        print(f'Agent {self.agent.id} Actions: {actions}', flush=True)
-        print(f'Agent {self.agent.id} Waypoints: {waypoints}', flush=True)
+        # print(f'Agent {self.agent.id} Actions: {actions}', flush=True)
+        # print(f'Agent {self.agent.id} Waypoints: {waypoints}', flush=True)
 
         for action, waypoint in zip(actions, waypoints):
             if action == Action.Navigate.value:
@@ -162,12 +162,13 @@ class Activity2Action:
     def navigate(self, waypoint: Vector) -> None:
         """Navigate from current position to a given waypoint."""
         self.logger.info(f'Agent {self.agent.id} Target waypoint: {waypoint}')
-        print(f'Agent {self.agent.id} Target waypoint: {waypoint}', flush=True)
+        # print(f'Agent {self.agent.id} Target waypoint: {waypoint}', flush=True)
 
         if self.rule_based:
             # Get the shortest path from current position to the target waypoint
             path = self.shortest_path(self.agent.position, waypoint)
-            print(f'Agent {self.agent.id} Shortest Path: {path}', flush=True)
+            # print(f'Agent {self.agent.id} Shortest Path: {path}', flush=True)
+            self.logger.info(f'Agent {self.agent.id} Shortest Path: {path}')
             for point in path:
                 self.navigate_rule_based(point)
         else:
@@ -197,18 +198,14 @@ class Activity2Action:
         self.logger.info(
             f'Agent {self.agent.id} Current pos: {self.agent.position}, target: {waypoint}, dir: {self.agent.direction}'
         )
-        print(
-            f'Agent {self.agent.id} Current pos: {self.agent.position}, target: {waypoint}, dir: {self.agent.direction}', flush=True
-        )
+        # print(
+        #     f'Agent {self.agent.id} Current pos: {self.agent.position}, target: {waypoint}, dir: {self.agent.direction}', flush=True
+        # )
         self.client.agent_move_forward(self.agent.id)
         while not self.walk_arrive_at_waypoint(waypoint) and (self.exit_event is None or not self.exit_event.is_set()):
             while not self.align_direction(waypoint) and (self.exit_event is None or not self.exit_event.is_set()):
                 angle, turn = self.get_angle_and_direction(waypoint)
-                self.logger.info(f'Agent {self.agent.id} Angle: {angle}, turn: {turn}')
-                # print(f'Agent {self.agent.id} Angle: {angle}, turn: {turn}', flush=True)
                 self.client.agent_rotate(self.agent.id, angle, turn)
-            self.logger.info(f'Agent {self.agent.id} Stepping toward: {waypoint}')
-            # print(f'Agent {self.agent.id} Stepping toward: {waypoint}', flush=True)
         self.client.agent_stop(self.agent.id)
 
     def navigate_vision_based(self) -> None:
@@ -246,5 +243,4 @@ class Activity2Action:
         angle = math.degrees(
             math.acos(np.clip(self.agent.direction.dot(to_wp.normalize()), -1, 1))
         )
-        self.logger.info(f'Agent {self.agent.id} Align angle: {angle}')
         return angle < 5

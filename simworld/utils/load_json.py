@@ -4,6 +4,8 @@ import importlib.resources as pkg_resources
 import json
 import os
 
+from simworld.utils.logger import Logger
+
 
 def load_default_json(file_name: str, default_package: str = 'simworld.data'):
     """Load a JSON file from the default location.
@@ -35,6 +37,8 @@ def load_json(file_path: str):
         try:
             # Extract filename from path and try loading from default location
             file_name = os.path.basename(file_path)
+            logger = Logger().get_logger('JsonLoader')
+            logger.warning(f"File not found at '{file_path}', falling back to default location")
             return load_default_json(file_name)
         except Exception as e:
             raise FileNotFoundError(f"Could not load JSON file from '{file_path}' or default location") from e

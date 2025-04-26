@@ -7,8 +7,9 @@ from threading import Event, Lock
 from typing import List
 
 from scripts.user_agent import UserAgent
-from simworld.communicator import Communicator, UnrealCV
-from simworld.llm import A2ALLM
+from simworld.communicator.communicator import Communicator
+from simworld.communicator.unrealcv import UnrealCV
+from simworld.llm.a2a_llm import A2ALLM
 from simworld.map.map import Map
 from simworld.utils.load_json import load_json
 from simworld.utils.logger import Logger
@@ -47,18 +48,9 @@ class UserManager:
 
         self.initialize()
 
-    def init_communicator(self, communicator=None):
+    def init_communicator(self):
         """Set up the Communicator, defaulting to UnrealCV."""
-        if communicator is None:
-            self.communicator = Communicator(
-                UnrealCV(
-                    port=self.config.get('simworld.ue_port', 9000),
-                    ip=self.config.get('simworld.ue_ip', '127.0.0.1'),
-                    resolution=self.config.get('simworld.resolution', (720, 600)),
-                )
-            )
-        else:
-            self.communicator = communicator
+        self.communicator = Communicator(UnrealCV())
 
     def initialize(self):
         """Load roads, construct map nodes/edges, and spawn agents."""
