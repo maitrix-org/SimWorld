@@ -28,5 +28,5 @@ class RouteManager:
         start = points[0]
         end = points[-1]
         route = Route(points, start, end)
-        print(f'Route: {route}')
+
         self.routes.append(route)
