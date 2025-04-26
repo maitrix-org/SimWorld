@@ -10,7 +10,9 @@ from typing import List, Optional
 import numpy as np
 
 from simworld.activity2action.action_space import ACTION_LIST, FORMAT, Action
-from simworld.activity2action.prompt import SYSTEM_PROMPT, USER_PROMPT
+from simworld.activity2action.prompt.prompt import (SYSTEM_PROMPT, USER_PROMPT,
+                                                    VLM_SYSTEM_PROMPT,
+                                                    VLM_USER_PROMPT)
 from simworld.llm.a2a_llm import A2ALLM
 from simworld.map.map import Map, Node
 from simworld.traffic.base.traffic_signal import TrafficSignalState
@@ -55,6 +57,7 @@ class Activity2Action:
         self.agent = user_agent
         self.client = user_agent.communicator
         self.system_prompt = SYSTEM_PROMPT.replace('<NAME>', name)
+        self.vlm_system_prompt = VLM_SYSTEM_PROMPT.replace('<NAME>', name)
         self.temperature = temperature
         self.max_history_step = max_history_step
         self.camera_id = camera_id
@@ -172,7 +175,7 @@ class Activity2Action:
             for point in path:
                 self.navigate_rule_based(point)
         else:
-            self.navigate_vision_based()
+            self.navigate_vision_based(waypoint)
 
     def navigate_rule_based(self, waypoint: Vector) -> None:
         """Navigate using traffic rules and conditions."""
@@ -208,9 +211,42 @@ class Activity2Action:
                 self.client.agent_rotate(self.agent.id, angle, turn)
         self.client.agent_stop(self.agent.id)
 
-    def navigate_vision_based(self) -> None:
+    def navigate_vision_based(self, waypoint: Vector) -> None:
         """Placeholder for vision-based navigation logic."""
-        pass
+        self.logger.info(
+            f'Agent {self.agent.id} Current pos: {self.agent.position}, target: {waypoint}, dir: {self.agent.direction}'
+        )
+        print(
+            f'Agent {self.agent.id} Current pos: {self.agent.position}, target: {waypoint}, dir: {self.agent.direction}', flush=True
+        )
+        while not self.walk_arrive_at_waypoint(waypoint) and not self.exit_event.is_set():
+            image = self.client.get_camera_observation(self.camera_id, self.observation_viewmode, mode='direct')
+            self.client.show_img(image)
+            user_prompt = VLM_USER_PROMPT.format(
+                map=self.map,
+                position=self.agent.position,
+                waypoint=waypoint,
+            )
+
+            response, _ = self.model.generate_text_structured_vlm(
+                system_prompt=self.vlm_system_prompt,
+                user_prompt=user_prompt,
+                output_format=FORMAT,
+                img=image,
+                temperature=self.temperature,
+            )
+
+            if response is None:
+                self.logger.error('Parse failed, response is None')
+                continue
+
+            response = json.loads(response)
+            if response['choice'] == 'MoveForward':
+                self.client.agent_move_forward(self.agent.id, response['time'])
+            elif response['choice'] == 'Rotate':
+                self.client.agent_rotate(self.agent.id, response['angle'], response['direction'])
+            else:
+                print(f'Invalid action: {response}', flush=True)
 
     def walk_arrive_at_waypoint(self, waypoint: Vector) -> bool:
         """Return True if agent is within threshold of waypoint."""
