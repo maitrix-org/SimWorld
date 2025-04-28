@@ -93,11 +93,12 @@ class CityData:
 class CityVisualizer(QMainWindow):
     """Visualization renderer for city data."""
 
-    def __init__(self, config: Config):
+    def __init__(self, config: Config, input_dir: str = None):
         """Initialize visualizer.
 
         Args:
             config: Configuration settings for the visualization.
+            input_dir: Directory containing the city data JSON files.
         """
         super().__init__()
         self.setWindowTitle('City Visualization')
@@ -135,7 +136,7 @@ class CityVisualizer(QMainWindow):
 
         # Initialize city data
         self.city = CityData()
-        self.city.load_from_files(output_dir=config['citygen.output_dir'])
+        self.city.load_from_files(output_dir=config['citygen.output_dir'] if input_dir is None else input_dir)
 
         # Set window size
         self.resize(1280, 960)
@@ -244,16 +245,17 @@ class CityVisualizer(QMainWindow):
         self.title_label.setText(stats_text)
 
 
-def main(config: Config):
+def visualize(config: Config, input_dir: str = None):
     """Main function.
 
     Args:
         config: Configuration settings for the visualization.
+        input_dir: Directory containing the city data JSON files.
     """
     app = QApplication([])
     app.setStyle('Fusion')
 
-    visualizer = CityVisualizer(config=config)
+    visualizer = CityVisualizer(config=config, input_dir=input_dir)
     visualizer.show()
     visualizer.draw_frame()
 
@@ -261,4 +263,4 @@ def main(config: Config):
 
 
 if __name__ == '__main__':
-    main(config=Config())
+    visualize(config=Config())

@@ -42,7 +42,7 @@ citygen:
 
     parking_density: 0.05
     furniture_density: 0.05
-    tree_density: 0.1
+    tree_density: 0.5
 
   quadtree:
     max_levels: 10

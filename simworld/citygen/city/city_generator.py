@@ -23,21 +23,26 @@ class GenerationState(Enum):
 class CityGenerator:
     """Manages the complete city generation process including roads, buildings, and elements."""
 
-    def __init__(self, config, seed: int = None):
+    def __init__(self, config, seed: int = None, num_segments: int = None, generate_element: bool = False, generate_route: bool = False):
         """Initialize the city generator with configuration.
 
         Args:
             config: Configuration dictionary for the city generation.
             seed: Seed for the random number generator.
+            num_segments: Number of road segments to generate.
+            generate_element: Whether to generate elements.
+            generate_route: Whether to generate routes.
         """
         self.config = config
         random.seed(self.config['simworld.seed'] if seed is None else seed)
+
+        self.num_segments = num_segments if num_segments is not None else self.config['citygen.road.segment_count_limit']
 
         self.building_types, self.building_colors, self.element_types, \
             self.element_colors, self.element_offsets, self.map_element_offsets = self._load_bounding_boxes()
 
         # Initialize generator
-        self.road_generator = RoadGenerator(self.config)
+        self.road_generator = RoadGenerator(self.config, self.num_segments)
         self.building_generator = BuildingGenerator(self.config, self.building_types)
         self.element_generator = ElementGenerator(self.config, self.element_types, self.map_element_offsets)
         self.route_generator = RouteGenerator(self.config)
@@ -52,6 +57,9 @@ class CityGenerator:
 
         self.input_path = self.config['citygen.input_roads']
         self.input = self.config['citygen.input_layout']
+
+        self.generate_element = generate_element if generate_element else self.config['citygen.element.generation']
+        self.generate_route = generate_route if generate_route else self.config['citygen.route.generation']
 
         self.logger = Logger.get_logger('CityGenerator')
 
@@ -75,7 +83,7 @@ class CityGenerator:
                     # Initialize road generation
                     self.road_generator.generate_initial_segments()
                 # check if the number of roads has reached the limit
-                if len(self.roads) >= self.config['citygen.road.segment_count_limit']:
+                if len(self.roads) >= self.num_segments:
                     self.road_generator.find_intersections()
                     self.generation_state = GenerationState.GENERATING_BUILDINGS
                     return False
@@ -103,7 +111,7 @@ class CityGenerator:
 
         # generate elements
         elif self.generation_state == GenerationState.GENERATING_ELEMENTS:
-            if not self.config['citygen.element.generation']:
+            if not self.generate_element:
                 self.generation_state = GenerationState.GENERATING_ROUTES
                 return False
 
@@ -137,7 +145,7 @@ class CityGenerator:
 
         # generate routes
         elif self.generation_state == GenerationState.GENERATING_ROUTES:
-            if not self.config['citygen.route.generation']:
+            if not self.generate_route:
                 self.generation_state = GenerationState.COMPLETED
                 return True
             # Generate routes

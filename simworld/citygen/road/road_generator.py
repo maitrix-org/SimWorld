@@ -18,10 +18,11 @@ from simworld.utils.road_utils import RoadUtils
 class RoadGenerator:
     """Handles procedural road network generation."""
 
-    def __init__(self, config):
+    def __init__(self, config, num_segments: int = None):
         """Initialize the road generator."""
         # Store references
         self.config = config
+        self.num_segments = num_segments
         self.road_manager = RoadManager(config)
         self.queue = PriorityQueue()
 
@@ -79,7 +80,7 @@ class RoadGenerator:
         Returns:
             True when generation should stop, False otherwise.
         """
-        if len(self.road_manager.roads) >= self.config['citygen.road.segment_count_limit']:
+        if len(self.road_manager.roads) >= self.num_segments:
             return True
 
         if self.queue.empty():

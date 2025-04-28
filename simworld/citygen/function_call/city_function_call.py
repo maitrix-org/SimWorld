@@ -7,22 +7,29 @@ from typing import List
 
 from simworld.citygen.city.city_generator import CityGenerator
 from simworld.citygen.dataclass import Point, Segment
+from simworld.citygen.render.visualization import visualize
 from simworld.config import Config
 from simworld.utils.data_exporter import DataExporter
+from simworld.utils.logger import Logger
 
 
 class CityFunctionCall:
     """Function call interface for city generation operations."""
 
-    def __init__(self, config: Config, seed: int = None):
+    def __init__(self, config: Config, seed: int = None, num_segments: int = None, generate_element: bool = False, generate_route: bool = False):
         """Initialize the city function call with configuration.
 
         Args:
             config: Configuration object with simulation parameters.
             seed: Seed for the random number generator.
+            num_segments: Number of road segments to generate.
+            generate_element: Whether to generate elements.
+            generate_route: Whether to generate routes.
         """
         self.config = config
-        self.city_generator = CityGenerator(self.config, seed)
+        self.city_generator = CityGenerator(self.config, seed, num_segments, generate_element, generate_route)
+
+        self.logger = Logger.get_logger('CityFunctionCall')
 
     def generate_city(self):
         """Generate city randomly with roads, buildings and elements."""
@@ -91,16 +98,17 @@ class CityFunctionCall:
         except IndexError:
             return False
 
-    def generate_road_network(self, num_segments: int):
+    def generate_road_network(self):
         """Generate a procedural road network.
 
         Args:
             num_segments: Target number of road segments to generate.
         """
         self.city_generator.road_generator.generate_initial_segments()
-        while len(self.city_generator.road_manager.roads) < num_segments:
+        while len(self.city_generator.roads) < self.city_generator.num_segments:
             self.city_generator.road_generator.generate_step()
         self.city_generator.road_generator.find_intersections()
+        self.logger.info(f'Generated {len(self.city_generator.road_manager.roads)} road segments')
 
     def generate_building_alone_road(self, road_id: int):
         """Generate buildings along a single road.
@@ -115,6 +123,7 @@ class CityFunctionCall:
         """Generate buildings along all roads in the city."""
         for road in self.city_generator.road_manager.roads:
             self.city_generator.building_generator.generate_buildings_along_segment(road, self.city_generator.road_manager.road_quadtree)
+        self.logger.info(f'Generated {len(self.city_generator.building_manager.buildings)} buildings')
 
     def generate_element_alone_road(self, road_id: int):
         """Generate elements along a single road.
@@ -135,6 +144,7 @@ class CityFunctionCall:
             for element in elements:
                 if self.city_generator.element_manager.can_place_element(element.bounds):
                     self.city_generator.element_manager.add_element(element)
+        self.logger.info(f'Generated {len(self.city_generator.element_manager.elements)} elements')
 
     def generate_element_around_buildings(self):
         """Generate elements around all buildings in the city."""
@@ -144,3 +154,11 @@ class CityFunctionCall:
                 if self.city_generator.element_manager.can_place_element(element.bounds):
                     self.city_generator.element_manager.add_element(element)
         self.city_generator.element_generator.filter_elements_by_buildings(self.city_generator.building_quadtree)
+
+    def visualization(self, file_path: str):
+        """Visualize the city.
+
+        Args:
+            file_path: Path to the file to save the visualization.
+        """
+        visualize(self.config, file_path)
