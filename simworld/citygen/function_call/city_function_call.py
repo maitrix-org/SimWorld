@@ -14,14 +14,15 @@ from simworld.utils.data_exporter import DataExporter
 class CityFunctionCall:
     """Function call interface for city generation operations."""
 
-    def __init__(self, config: Config):
+    def __init__(self, config: Config, seed: int = None):
         """Initialize the city function call with configuration.
 
         Args:
             config: Configuration object with simulation parameters.
+            seed: Seed for the random number generator.
         """
         self.config = config
-        self.city_generator = CityGenerator(self.config)
+        self.city_generator = CityGenerator(self.config, seed)
 
     def generate_city(self):
         """Generate city randomly with roads, buildings and elements."""
