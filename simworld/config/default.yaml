@@ -15,7 +15,7 @@ citygen:
 
   road:
     segment_length: 200
-    segment_count_limit: 4
+    segment_count_limit: 7
     road_snap_distance: 90
     ignore_conflicts: false
     only_highway: false
@@ -30,7 +30,7 @@ citygen:
     building_side_distance: 27
 
   element:
-    generation: true
+    generation: false
     generation_thread_number: 16
     element_building_distance: 8
     element_element_distance: 10
