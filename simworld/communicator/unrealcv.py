@@ -587,14 +587,15 @@ class UnrealCV(object):
         with self.lock:
             self.client.request(cmd)
 
-    def agent_step_forward(self, object_name, duration):
+    def agent_step_forward(self, object_name, duration, direction=0):
         """Step forward.
 
         Args:
             object_name: Name of the agent object to step forward.
             duration: Duration of the step forward movement in seconds.
+            direction: Direction of the step forward movement.
         """
-        cmd = f'vbp {object_name} StepForward {duration}'
+        cmd = f'vbp {object_name} StepForward {duration} {direction}'
         with self.lock:
             self.client.request(cmd)
         time.sleep(duration)
