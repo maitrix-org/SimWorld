@@ -407,6 +407,10 @@
         "asset_path": "/Game/CityDatabase/blueprints/BP_Building_63.BP_Building_63_C",
         "color": "BUILDING"
     },
+    "BP_Building_64_C": {
+        "asset_path": "/Game/CityDatabase/blueprints/BP_Building_64.BP_Building_64_C",
+        "color": "BUILDING"
+    },
     "BP_Building_65_C": {
         "asset_path": "/Game/CityDatabase/blueprints/BP_Building_65.BP_Building_65_C",
         "color": "BUILDING"
