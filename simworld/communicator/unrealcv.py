@@ -572,9 +572,10 @@ class UnrealCV(object):
         elif direction == 'left':
             angle = -angle
             clockwise = -1
-        cmd = f'vbp {object_name} Rotate_Angle {1} {angle} {clockwise}'
+        cmd = f'vbp {object_name} TurnAround {1} {angle} {clockwise}'
         with self.lock:
             self.client.request(cmd)
+        time.sleep(1)
 
     def agent_stop(self, object_name):
         """Stop agent.
