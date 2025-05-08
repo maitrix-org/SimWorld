@@ -195,7 +195,7 @@ class TrafficController:
         self.num_pedestrians = num_pedestrians
         self.map = map
 
-        # self.communicator.clean_traffic_only(self.vehicles, self.pedestrians, self.traffic_signals)
+        self.communicator.clean_traffic_only(self.vehicles, self.pedestrians, self.traffic_signals)
 
         Vehicle.reset_id_counter()
         Pedestrian.reset_id_counter()
