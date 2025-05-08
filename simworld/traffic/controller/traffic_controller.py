@@ -35,18 +35,23 @@ class TrafficController:
     Coordinates all aspects of the traffic simulation including road network, vehicles,
     pedestrians, and traffic signals.
     """
-    def __init__(self, config: Config):
+    def __init__(self, config: Config, num_vehicles: int = None, num_pedestrians: int = None, map: str = None, seed: int = None, dt: float = None):
         """Initialize the traffic controller with configuration.
 
         Args:
             config: Configuration object containing all simulation parameters.
+            num_vehicles: Number of vehicles to spawn.
+            num_pedestrians: Number of pedestrians to spawn.
+            map: Path to the map file.
+            seed: Seed for the random number generator.
+            dt: Time step for the simulation.
         """
         self.config = config
-        self.num_vehicles = config['traffic.num_vehicles']
-        self.num_pedestrians = config['traffic.num_pedestrians']
-        self.map = config['traffic.map_path']
-        self.seed = config['simworld.seed']
-        self.dt = config['simworld.dt']
+        self.num_vehicles = num_vehicles if num_vehicles is not None else config['traffic.num_vehicles']
+        self.num_pedestrians = num_pedestrians if num_pedestrians is not None else config['traffic.num_pedestrians']
+        self.map = map if map is not None else config['traffic.map_path']
+        self.seed = seed if seed is not None else config['simworld.seed']
+        self.dt = dt if dt is not None else config['simworld.dt']
         self.communicator = None
 
         # logger
@@ -190,7 +195,7 @@ class TrafficController:
         self.num_pedestrians = num_pedestrians
         self.map = map
 
-        self.communicator.clean_traffic(self.vehicles, self.pedestrians, self.traffic_signals)
+        # self.communicator.clean_traffic_only(self.vehicles, self.pedestrians, self.traffic_signals)
 
         Vehicle.reset_id_counter()
         Pedestrian.reset_id_counter()
@@ -211,6 +216,12 @@ class TrafficController:
         self.intersection_manager = IntersectionManager(self.intersections, self.config)
         self.vehicle_manager = VehicleManager(self.roads, self.num_vehicles, self.config)
         self.pedestrian_manager = PedestrianManager(self.roads, self.num_pedestrians, self.config)
+
+    def stop_simulation(self):
+        """Stop the traffic simulation."""
+        self.logger.info('Stopping simulation')
+        self.vehicle_manager.stop_vehicles(self.communicator)
+        self.pedestrian_manager.stop_pedestrians(self.communicator)
 
     # Simulation
     def simulation(self):

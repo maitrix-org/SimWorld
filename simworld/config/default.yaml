@@ -70,7 +70,7 @@ assets_rp:
 traffic:
   num_vehicles: 10
   num_pedestrians: 10
-  map_path: "../output/roads.json"
+  map_path: "roads.json"
   distance_between_objects: 400
   detection_angle: 40
   gap_between_waypoints: 800

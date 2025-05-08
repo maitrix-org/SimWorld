@@ -168,3 +168,9 @@ class VehicleManager:
 
         if changed_states:
             communicator.update_vehicles(changed_states)
+
+    def stop_vehicles(self, communicator):
+        """Stop all vehicles in the simulation."""
+        for vehicle in self.vehicles:
+            vehicle.state = VehicleState.STOPPED
+            communicator.update_vehicle(vehicle.id, 0, 1, 0)

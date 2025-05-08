@@ -586,11 +586,11 @@ class Communicator:
             traffic_signals: List of traffic signals.
         """
         for vehicle in vehicles:
-            self.unrealcv.destroy(self.get_vehicle_name(vehicle.vehicle_id))
+            self.unrealcv.destroy(self.get_vehicle_name(vehicle.id))
         for traffic_signal in traffic_signals:
             self.unrealcv.destroy(self.get_traffic_signal_name(traffic_signal.id))
         for pedestrian in pedestrians:
-            self.unrealcv.destroy(self.get_pedestrian_name(pedestrian.pedestrian_id))
+            self.unrealcv.destroy(self.get_pedestrian_name(pedestrian.id))
 
         self.unrealcv.destroy(self.ue_manager_name)
         self.unrealcv.clean_garbage()

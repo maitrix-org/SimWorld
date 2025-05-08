@@ -145,3 +145,9 @@ class PedestrianManager:
                 if angle != 0:
                     pedestrian.state = PedestrianState.TURN_AROUND
                     communicator.pedestrian_rotate(pedestrian.id, angle, turn_direction)
+
+    def stop_pedestrians(self, communicator):
+        """Stop all pedestrians in the simulation."""
+        for pedestrian in self.pedestrians:
+            pedestrian.state = PedestrianState.STOP
+            communicator.pedestrian_stop(pedestrian.id)
