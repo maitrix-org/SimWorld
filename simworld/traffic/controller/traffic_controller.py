@@ -35,7 +35,7 @@ class TrafficController:
     Coordinates all aspects of the traffic simulation including road network, vehicles,
     pedestrians, and traffic signals.
     """
-    def __init__(self, config: Config, num_vehicles: int = None, num_pedestrians: int = None, map: str = None, seed: int = None, dt: float = None):
+    def __init__(self, config: Config, num_vehicles: int = None, num_pedestrians: int = None, map: str = None, seed: int = None, dt: float = None, center_point: Vector = None):
         """Initialize the traffic controller with configuration.
 
         Args:
@@ -45,6 +45,7 @@ class TrafficController:
             map: Path to the map file.
             seed: Seed for the random number generator.
             dt: Time step for the simulation.
+            center_point: Center point of the map.
         """
         self.config = config
         self.num_vehicles = num_vehicles if num_vehicles is not None else config['traffic.num_vehicles']
@@ -67,7 +68,7 @@ class TrafficController:
         # initialize controllers
         self.intersection_manager = IntersectionManager(self.intersections, self.config)
         self.vehicle_manager = VehicleManager(self.roads, self.num_vehicles, self.config)
-        self.pedestrian_manager = PedestrianManager(self.roads, self.num_pedestrians, self.config)
+        self.pedestrian_manager = PedestrianManager(self.roads, self.num_pedestrians, self.config, center_point)
 
     # Initialization
     def init_communicator(self, communicator=None):
@@ -183,13 +184,14 @@ class TrafficController:
         self.logger.info('Traffic signals spawned')
 
     # Reset
-    def reset(self, num_vehicles: int, num_pedestrians: int, map: str):
+    def reset(self, num_vehicles: int, num_pedestrians: int, map: str, center_point: Vector = None):
         """Reset the simulation with new parameters.
 
         Args:
             num_vehicles: New number of vehicles to spawn.
             num_pedestrians: New number of pedestrians to spawn.
             map: Path to the new map file to use.
+            center_point: Center point of the map.
         """
         self.num_vehicles = num_vehicles
         self.num_pedestrians = num_pedestrians
@@ -215,7 +217,7 @@ class TrafficController:
         # initialize controllers
         self.intersection_manager = IntersectionManager(self.intersections, self.config)
         self.vehicle_manager = VehicleManager(self.roads, self.num_vehicles, self.config)
-        self.pedestrian_manager = PedestrianManager(self.roads, self.num_pedestrians, self.config)
+        self.pedestrian_manager = PedestrianManager(self.roads, self.num_pedestrians, self.config, center_point)
 
     def stop_simulation(self):
         """Stop the traffic simulation."""

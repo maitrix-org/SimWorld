@@ -16,13 +16,14 @@ class PedestrianManager:
     This class handles spawning pedestrians on sidewalks, updating their positions and states,
     and managing their interactions with intersections and traffic signals.
     """
-    def __init__(self, roads, num_pedestrians, config):
+    def __init__(self, roads, num_pedestrians, config, center_point=None):
         """Initialize the pedestrian manager with configuration and initial pedestrians.
 
         Args:
             roads: List of road segments where pedestrians can be placed.
             num_pedestrians: Number of pedestrians to create initially.
             config: Configuration dictionary with simulation parameters.
+            center_point: Center point of the map.
         """
         self.config = config
         self.pedestrians = []
@@ -34,17 +35,38 @@ class PedestrianManager:
 
         self.model_path = self.config['traffic.pedestrian.model_path']
 
-        self.init_pedestrians()
+        self.init_pedestrians(center_point)
 
-    def init_pedestrians(self):
+    def init_pedestrians(self, center_point=None):
         """Initialize the pedestrians and place them on the sidewalks.
 
         Pedestrians are randomly placed on sidewalks, ensuring they maintain safe distances
         from other pedestrians and intersections.
+
+        Args:
+            center_point: Pedestrians should be placed in the sidewalks of the center point.
         """
         while len(self.pedestrians) < self.num_pedestrians:
-            target_road = random.choice(self.roads)
-            target_sidewalk = random.choice(list(target_road.sidewalks.values()))
+            if center_point is not None:
+                # Find the sidewalk closest to the center point
+                min_distance = float('inf')
+                target_sidewalk = None
+
+                for road in self.roads:
+                    for sidewalk in road.sidewalks.values():
+                        # Calculate sum of distances from center_point to start and end points
+                        distance = center_point.distance(sidewalk.start) + center_point.distance(sidewalk.end)
+                        if distance < min_distance:
+                            min_distance = distance
+                            target_sidewalk = sidewalk
+
+                if target_sidewalk is None:
+                    self.logger.warning(f'No sidewalk found near center point {center_point}')
+                    return
+            else:
+                target_road = random.choice(self.roads)
+                target_sidewalk = random.choice(list(target_road.sidewalks.values()))
+
             target_position = random.uniform(target_sidewalk.start, target_sidewalk.end)
 
             # check if the pedestrian is too close to the intersection
