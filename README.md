@@ -3,16 +3,6 @@
 
 **SimWorld** is a state-of-the-art world simulator built with Unreal Engine 5 to generate unlimited, dynamic environments for various **LLM/MLLM + Agent** systems' benchmarking.
 
-<div align="center">
-    <a href="http://simworld-cvpr2025.maitrix.org/"><img src="https://img.shields.io/badge/Website-SimWorld-blue" alt="Website" /></a>
-    <a href="https://github.com/renjw02/SimWorld"><img src="https://img.shields.io/github/stars/yourusername/SimWorld?style=social" alt="GitHub Stars" /></a>
-    <a href="https://simworld-doc.readthedocs.io/en/latest/"><img src="https://img.shields.io/badge/Documentation-Read%20Docs-green" alt="Documentation" /></a>
-</div>
-
-## 🔥 News
- - 2025.4 The first formal release of **SimWorld** has been published! 🚀
- - 2025.3 Our demo of **SimWolrd** been accepted by CVPR 2025 Demostration Tack! 🎉
-
 ## 💡 Introduction
 Most existing embodied simulators focus on indoor environments. While there are urban simulators, many either lack realism or are limited to specific domains, such as autonomous driving. Moreover, these simulators often don't allow users to dynamically generate new scenes or define custom AI tasks.
 
