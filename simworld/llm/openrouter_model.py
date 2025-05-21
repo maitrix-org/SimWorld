@@ -199,13 +199,3 @@ class OpenRouterModel(BaseLLM):
 
         result = extract_json_and_fix_escapes(response)
         return result if result is not None else default
-
-
-if __name__ == '__main__':
-    llm = OpenRouterModel(
-        model_name='meta-llama/llama-4-maverick',
-        url='https://openrouter.ai/api/v1',
-        api_key='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'
-    )
-    response = llm.generate_text('You are a helpful assistant.', 'What is the capital of France?')
-    print(response)

@@ -261,9 +261,3 @@ class OpenAIModel(BaseLLM):
             else:
                 results.append(choice.message.tool_calls)
         return results
-
-
-if __name__ == '__main__':
-    llm = OpenAIModel(model_name='gpt-4o-mini', api_key='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')
-    response = llm.generate('You are a helpful assistant.', 'What is the capital of France?')
-    print(response)
