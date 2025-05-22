@@ -426,3 +426,12 @@ lib64/
 venv/
 .env/
 .venv/
+
+# Package
+*.zip
+*.whl
+*.tar.gz
+*.tar.bz2
+*.tar.xz
+*.tar.lzma
+*.tar.lz

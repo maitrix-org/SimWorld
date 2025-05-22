@@ -228,36 +228,3 @@ class A2ALLM(BaseLLM):
                 except json.JSONDecodeError:
                     raise LLMResponseParsingError('Invalid JSON in markdown block')
             raise LLMResponseParsingError('No JSON or markdown JSON block found')
-
-
-if __name__ == '__main__':
-    import re
-    fmt = """
-    {
-        'actions': [0, 2, ...],
-        'waypoints': ['Vector(x=1.0, y=2.0)', 'Vector(x=2.0, y=3.0)', ...],
-    }
-    """
-    system_prompt = """
-    You are a helpful assistant.
-    """
-    user_prompt = """
-    You support action are:
-    0: navigate
-    1: pickup
-    2: drop
-    """
-    llm = A2ALLM(
-        model_name='meta-llama/llama-3.3-70b-instruct',
-        url='https://openrouter.ai/api/v1',
-        api_key='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'
-    )
-    resp = llm.generate_text_structured(system_prompt, user_prompt, fmt)
-    print(f'Response: {resp}')
-    data = json.loads(resp)
-    waypoints = []
-    for point in data.get('waypoints', []):
-        match = re.search(r'Vector\(x=([\-\d.]+), y=([\-\d.]+)\)', point)
-        if match:
-            waypoints.append((float(match.group(1)), float(match.group(2))))
-    print(waypoints)
