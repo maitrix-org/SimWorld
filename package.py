@@ -46,6 +46,8 @@ def create_zip(output_name='simworld.zip'):
         '*.egg-info',
         'dist',
         'build',
+        'data',
+        'output'
     ])
 
     with zipfile.ZipFile(output_name, 'w', zipfile.ZIP_DEFLATED) as zipf:

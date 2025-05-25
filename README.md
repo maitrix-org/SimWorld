@@ -1,5 +1,4 @@
 # SimWorld: A World Simulator for Scaling Photorealistic Multi-Agent Interactions
-![Overview](https://github.com/user-attachments/assets/6246ad14-2851-4a51-a534-70f59a40e460)
 
 **SimWorld** is a state-of-the-art world simulator built with Unreal Engine 5 to generate unlimited, dynamic environments for various **LLM/MLLM + Agent** systems' benchmarking.
 
@@ -16,7 +15,6 @@ SimWorld leverages Unreal Engine 5's **photorealistic rendering** and **physics 
 
 ## 🏗️ Architecture
 
-![Architecture](https://github.com/user-attachments/assets/f5f43638-7583-483f-aadc-1ddf5d6ff27a)
 
 SimWorld's architecture is designed to be modular and flexible, supporting an array of functionalities such as dynamic world generation, agent control, and performance benchmarking. The components are seamlessly integrated to provide a robust platform for **Embodied AI** and **Agents** research and applications.
 
@@ -44,18 +42,14 @@ README.md
 Make sure to use Python 3.10 or later.
 
 ```bash
-conda create -n reasoners python=3.10
-conda activate reasoners
+conda create -n simworld python=3.10
+conda activate simworld
 ```
 
 #### Install from github
 (Recommended if you want to run the examples in the github repo)
 
-```bash
-git clone https://github.com/renjw02/SimWorld.git
-cd SimWorld
-pip install -e .
-```
+
 
 ### Quick Start
 
