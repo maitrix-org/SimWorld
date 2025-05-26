@@ -16,6 +16,41 @@ class Vector:
     x: float
     y: float
 
+    def __init__(self, x, y=None):
+        """Initialize the vector.
+
+        Args:
+            x: X coordinate.
+            y: Y coordinate.
+        """
+        if y is None and isinstance(x, (list, tuple)):
+            # Handle list/tuple input like [1, 1] or (1, 1)
+            self.x = float(x[0])
+            self.y = float(x[1])
+        elif y is None and isinstance(x, str):
+            # Handle string input
+            # Remove all whitespace and unnecessary characters
+            clean_str = x.replace(' ', '').strip('()[]{}')
+            # Split by comma or other common separators
+            coords = clean_str.split(',')
+            if len(coords) == 2:
+                self.x = float(coords[0])
+                self.y = float(coords[1])
+            else:
+                raise ValueError(f'Invalid vector string format: {x}')
+        elif y is None and isinstance(x, dict):
+            # Handle dictionary input
+            self.x = float(x.get('x', x.get(0, 0)))
+            self.y = float(x.get('y', x.get(1, 0)))
+        else:
+            # Handle traditional x, y input
+            self.x = float(x)
+            self.y = float(y) if y is not None else 0.0
+
+        # Round values as per original implementation
+        self.x = round(self.x, 4)
+        self.y = round(self.y, 4)
+
     def __post_init__(self):
         """Post-initialization processing, rounds coordinates."""
         self.x = round(self.x, 4)

@@ -1,5 +1,4 @@
 """This module imports the city data and reconstruct the city generator."""
-import json
 import math
 import os
 from typing import Dict, List
@@ -8,6 +7,8 @@ from simworld.citygen.city.city_generator import CityGenerator
 from simworld.citygen.dataclass import (Bounds, Building, BuildingType,
                                         Element, MetaInfo, Point, Segment)
 from simworld.config import Config
+from simworld.utils.load_json import load_json
+from simworld.utils.logger import Logger
 
 
 class DataImporter:
@@ -20,6 +21,7 @@ class DataImporter:
         """
         self.config = config
         self.city = CityGenerator(config)
+        self.logger = Logger.get_logger('DataImporter')
 
     def import_city_data(self):
         """Rebuild the city_generator with the provided json file and print the result.
@@ -30,9 +32,9 @@ class DataImporter:
         output_dir = self.config['citygen.output_dir']
         progen_world_filepath = os.path.join(output_dir, 'progen_world.json')
         self.import_from_file(progen_world_filepath)
-        print(f'Imported road segments: {len(self.city.road_manager.roads)}')
-        print(f'Imported buildings: {len(self.city.building_manager.buildings)}')
-        print(f'Imported elements: {len(self.city.element_manager.elements)}')
+        self.logger.info(f'Imported road segments: {len(self.city.road_manager.roads)}')
+        self.logger.info(f'Imported buildings: {len(self.city.building_manager.buildings)}')
+        self.logger.info(f'Imported elements: {len(self.city.element_manager.elements)}')
         return self.city
 
     def import_from_file(self, filepath: str):
@@ -41,9 +43,8 @@ class DataImporter:
         Args:
             filepath: The json file that contain the city data.
         """
-        print(f'Importing city data from {filepath}')
-        with open(filepath, 'r') as f:
-            data = json.load(f)
+        self.logger.info(f'Importing city data from {filepath}')
+        data = load_json(filepath)
         # import all nodes
         BUILDING_TYPES, _, ELEMENT_TYPES, _, _, _ = self.city._load_bounding_boxes()
         if 'nodes' in data:
@@ -65,7 +66,7 @@ class DataImporter:
                 self._import_buildings(buildings, BUILDING_TYPES)
             if elements:
                 self._import_elements(elements, ELEMENT_TYPES)
-        print('Import completed successfully')
+        self.logger.info('Import completed successfully')
         return True
 
     def _import_roads(self, roads_data: List[Dict]):
@@ -188,8 +189,7 @@ class DataImporter:
                 building_type = BuildingType(
                     name=building_data['building_type'],
                     width=building_data['bounds']['width'],
-                    height=building_data['bounds']['height'],
-                    is_required=False if 'building' in building_data['building_type'] else True
+                    height=building_data['bounds']['height']
                 )
 
                 building = Building(

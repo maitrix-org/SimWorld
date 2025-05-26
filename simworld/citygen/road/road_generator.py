@@ -3,13 +3,13 @@
 This module handles the procedural generation of road networks, including the creation
 of road segments, intersections, and the overall structure of the city's transportation system.
 """
-import json
 import math
 import random
 from typing import List
 
 from simworld.citygen.dataclass import Intersection, MetaInfo, Point, Segment
 from simworld.citygen.road.road_manager import RoadManager
+from simworld.utils.load_json import load_json
 from simworld.utils.math_utils import MathUtils
 from simworld.utils.priority_queue import PriorityQueue
 from simworld.utils.road_utils import RoadUtils
@@ -18,10 +18,11 @@ from simworld.utils.road_utils import RoadUtils
 class RoadGenerator:
     """Handles procedural road network generation."""
 
-    def __init__(self, config):
+    def __init__(self, config, num_segments: int = None):
         """Initialize the road generator."""
         # Store references
         self.config = config
+        self.num_segments = num_segments
         self.road_manager = RoadManager(config)
         self.queue = PriorityQueue()
 
@@ -32,34 +33,21 @@ class RoadGenerator:
             input_path: Path to the JSON file containing road data.
         """
         # Read and parse the JSON file
-        with open(input_path, 'r') as f:
-            data = json.load(f)
-        road_data = data['nodes']
+        data = load_json(input_path)
+        road_data = data['roads']
 
-        # Process each node and create road segments between them
+        # Process each road segment
         for road in road_data:
-            props = road['properties']
-            location = props['location']
-            orientation = props['orientation']
-            length = self.config['road.segment_length']
-
-            center = Point(
-                location['x'] / 100,
-                location['y'] / 100
-            )
-
-            angle_rad = math.radians(orientation['yaw'])
-
             start = Point(
-                center.x - length * round(math.cos(angle_rad), 10) / 2,
-                center.y - length * round(math.sin(angle_rad), 10) / 2
+                road['start']['x'],
+                road['start']['y']
             )
             end = Point(
-                start.x + length * round(math.cos(angle_rad), 10),
-                start.y + length * round(math.sin(angle_rad), 10)
+                road['end']['x'],
+                road['end']['y']
             )
             meta = MetaInfo(
-                highway=True if 'Highway' in road['instance_name'] else False,
+                highway=road['is_highway'],
                 t=0.0
             )
             segment = Segment(start, end, meta)
@@ -92,7 +80,7 @@ class RoadGenerator:
         Returns:
             True when generation should stop, False otherwise.
         """
-        if len(self.road_manager.roads) >= self.config['citygen.road.segment_count_limit']:
+        if len(self.road_manager.roads) >= self.num_segments:
             return True
 
         if self.queue.empty():

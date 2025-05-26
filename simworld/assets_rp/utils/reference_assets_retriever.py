@@ -67,6 +67,5 @@ class ReferenceAssetsRetriever:
             if score >= similarity_threshold:
                 candidate_nodes.append((self.nodes[idx], float(score)))
         if not candidate_nodes:
-            print('Cannot find the reference asset')
-            return None
+            raise ValueError('Cannot find the reference asset')
         return candidate_nodes

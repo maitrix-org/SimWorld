@@ -4,13 +4,13 @@ import random
 
 from simworld.citygen.building.building_manager import BuildingManager
 from simworld.citygen.dataclass import Bounds, Building, Point, Segment
+from simworld.utils.logger import Logger
 from simworld.utils.math_utils import MathUtils
 from simworld.utils.quadtree import QuadTree
 
 
 class BuildingGenerator:
     """Building generator class for placing buildings along road segments."""
-
     def __init__(self, config, building_types):
         """Initialize the building generator.
 
@@ -19,13 +19,13 @@ class BuildingGenerator:
             building_types: List of available building types.
         """
         self.config = config
-
         self.building_manager = BuildingManager(self.config)
-        self.required_buildings = [b for b in building_types if b.is_required]
-        self.normal_buildings = [b for b in building_types if not b.is_required]
         self.sorted_buildings = sorted(building_types, key=lambda b: b.width, reverse=True)
-        self.required_buildings_count = {b: 0 for b in self.required_buildings}
+
+        self.building_counts = {b: 0 for b in building_types}
         self.building_to_segment = {}
+
+        self.logger = Logger.get_logger('BuildingGenerator')
 
     def get_next_building_type(self):
         """Choose the next building type to generate.
@@ -33,12 +33,29 @@ class BuildingGenerator:
         Returns:
             The next building type to be placed.
         """
-        # Prioritize generating ungenerated required buildings
-        for building_type in self.required_buildings:
-            if self.required_buildings_count[building_type] == 0:
+        limited_buildings = [b for b in self.sorted_buildings if b.num_limit != -1]
+        random.shuffle(limited_buildings)
+        for building_type in limited_buildings:
+            current_count = self.building_counts[building_type]
+            if current_count < building_type.num_limit:
                 return building_type
-        # If all required buildings are generated, randomly choose normal buildings
-        return random.choice(self.normal_buildings)
+
+        unlimited_buildings = [b for b in self.sorted_buildings if b.num_limit == -1]
+        if unlimited_buildings:
+            return random.choice(unlimited_buildings)
+
+        return self.sorted_buildings[-1]
+
+    def get_smallest_available_building_type(self):
+        """From the smallest building to the largest, return the first building type that has not reached the limit.
+
+        Returns:
+            The smallest available building type or None if no types are available.
+        """
+        for building_type in reversed(self.sorted_buildings):
+            if building_type.num_limit == -1 or self.building_counts[building_type] < building_type.num_limit:
+                return building_type
+        return None
 
     def generate_buildings_along_segment(self, segment: Segment, road_quadtree: QuadTree[Segment]):
         """Generate buildings along both sides of a road segment.
@@ -90,7 +107,7 @@ class BuildingGenerator:
                     + side * perpendicular_dy * offset
                 )
 
-                rotation = (math.degrees(math.atan2(dy, dx)) + (180 if side == -1 else 0)) % 360
+                rotation = (math.degrees(math.atan2(dy, dx)) + (180 if side == 1 else 0)) % 360
                 building_bounds = Bounds(x - building_type.width / 2, y - building_type.height / 2, building_type.width, building_type.height, rotation)
 
                 if self.building_manager.can_place_building(building_bounds) and not self.check_building_road_overlap(building_bounds, road_quadtree):
@@ -101,8 +118,8 @@ class BuildingGenerator:
                     )
                     self.building_manager.add_building(building)
                     self.building_to_segment[building] = segment
-                    if building_type.is_required:
-                        self.required_buildings_count[building_type] += 1
+
+                    self.building_counts[building_type] += 1
 
                     next_building_type = self.get_next_building_type()
                     while True:
@@ -126,7 +143,7 @@ class BuildingGenerator:
                         else:
                             idx = self.sorted_buildings.index(next_building_type) + 1
                             while idx < len(self.sorted_buildings):
-                                if self.required_buildings_count.get(self.sorted_buildings[idx], 0) == 0:
+                                if self.building_counts.get(self.sorted_buildings[idx], 0) == 0:
                                     next_building_type = self.sorted_buildings[idx]
                                     break
                                 idx += 1
@@ -136,19 +153,25 @@ class BuildingGenerator:
 
                 elif not self.building_manager.can_place_building(building_bounds):  # overlap with other buildings
                     if not overlap_building_flag:
-                        building_type = self.sorted_buildings[-1]
+                        building_type = self.get_smallest_available_building_type()
+                        if building_type is None:
+                            break
                         current_pos = INTERSECTION_BUFFER + self.config['citygen.building.building_side_distance'] + building_type.width / 2
                         overlap_building_flag = True
                         overlap_road_flag = True
                     else:
-                        building_type = self.sorted_buildings[-1]
+                        building_type = self.get_smallest_available_building_type()
+                        if building_type is None:
+                            break
                         current_pos += random.uniform(0, 1)
                 elif self.check_building_road_overlap(building_bounds, road_quadtree):  # overlap with roads
                     if not overlap_road_flag:
                         current_pos += self.config['citygen.building.building_side_distance']
                         overlap_road_flag = True
                     else:
-                        building_type = self.sorted_buildings[-1]
+                        building_type = self.get_smallest_available_building_type()
+                        if building_type is None:
+                            break
                         current_pos += random.uniform(0, 1)
 
     def filter_overlapping_buildings(self, segments_quadtree: QuadTree[Segment]):
@@ -158,11 +181,11 @@ class BuildingGenerator:
             segments_quadtree: Quadtree containing all road segments.
         """
         buildings_to_remove = []
-        print('Generated buildings:', len(self.building_manager.buildings))
+        self.logger.info(f'Generated buildings: {len(self.building_manager.buildings)}')
         for building in self.building_manager.buildings:
             if self.check_building_road_overlap(building.bounds, segments_quadtree):
                 buildings_to_remove.append(building)
-        print('Buildings to keep:', len(self.building_manager.buildings) - len(buildings_to_remove))
+        self.logger.info(f'Buildings to keep: {len(self.building_manager.buildings) - len(buildings_to_remove)}')
         for building in set(buildings_to_remove):
             self.building_manager.remove_building(building)
 

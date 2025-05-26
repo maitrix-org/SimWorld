@@ -3,11 +3,11 @@
 This module handles the creation, spawning, and updating of vehicles in the simulation.
 It manages vehicle lifecycle, movement logic, and interaction with traffic signals.
 """
-import json
 import random
 
-from simworld.agent import Vehicle, VehicleState
-from simworld.traffic.base import TrafficSignalState
+from simworld.agent.vehicle import Vehicle, VehicleState
+from simworld.traffic.base.traffic_signal import TrafficSignalState
+from simworld.utils.load_json import load_json
 from simworld.utils.logger import Logger
 from simworld.utils.traffic_utils import cal_waypoints
 
@@ -31,8 +31,7 @@ class VehicleManager:
         self.roads = roads
         self.num_vehicles = num_vehicles
 
-        with open(self.config['traffic.vehicle.model_file_path'], 'r') as f:
-            self.vehicle_types = json.load(f)
+        self.vehicle_types = load_json(self.config['traffic.vehicle.model_file_path'])
 
         # logger
         self.logger = Logger.get_logger('VehicleController')
@@ -169,3 +168,9 @@ class VehicleManager:
 
         if changed_states:
             communicator.update_vehicles(changed_states)
+
+    def stop_vehicles(self, communicator):
+        """Stop all vehicles in the simulation."""
+        for vehicle in self.vehicles:
+            vehicle.state = VehicleState.STOPPED
+            communicator.update_vehicle(vehicle.id, 0, 1, 0)

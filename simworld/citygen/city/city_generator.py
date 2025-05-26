@@ -1,5 +1,4 @@
 """City generator module for generating cities with roads, buildings, and elements."""
-import json
 import random
 from enum import Enum, auto
 
@@ -8,6 +7,8 @@ from simworld.citygen.dataclass.dataclass import BuildingType, ElementType
 from simworld.citygen.element.element_generator import ElementGenerator
 from simworld.citygen.road.road_generator import RoadGenerator
 from simworld.citygen.route.route_generator import RouteGenerator
+from simworld.utils.load_json import load_json
+from simworld.utils.logger import Logger
 
 
 class GenerationState(Enum):
@@ -22,20 +23,26 @@ class GenerationState(Enum):
 class CityGenerator:
     """Manages the complete city generation process including roads, buildings, and elements."""
 
-    def __init__(self, config):
+    def __init__(self, config, seed: int = None, num_segments: int = None, generate_element: bool = False, generate_route: bool = False):
         """Initialize the city generator with configuration.
 
         Args:
             config: Configuration dictionary for the city generation.
+            seed: Seed for the random number generator.
+            num_segments: Number of road segments to generate.
+            generate_element: Whether to generate elements.
+            generate_route: Whether to generate routes.
         """
         self.config = config
-        random.seed(self.config['simworld.seed'])
+        random.seed(self.config['simworld.seed'] if seed is None else seed)
+
+        self.num_segments = num_segments if num_segments is not None else self.config['citygen.road.segment_count_limit']
 
         self.building_types, self.building_colors, self.element_types, \
             self.element_colors, self.element_offsets, self.map_element_offsets = self._load_bounding_boxes()
 
         # Initialize generator
-        self.road_generator = RoadGenerator(self.config)
+        self.road_generator = RoadGenerator(self.config, self.num_segments)
         self.building_generator = BuildingGenerator(self.config, self.building_types)
         self.element_generator = ElementGenerator(self.config, self.element_types, self.map_element_offsets)
         self.route_generator = RouteGenerator(self.config)
@@ -50,6 +57,11 @@ class CityGenerator:
 
         self.input_path = self.config['citygen.input_roads']
         self.input = self.config['citygen.input_layout']
+
+        self.generate_element = generate_element if generate_element else self.config['citygen.element.generation']
+        self.generate_route = generate_route if generate_route else self.config['citygen.route.generation']
+
+        self.logger = Logger.get_logger('CityGenerator')
 
     def generate(self):
         """Generate the city."""
@@ -67,11 +79,11 @@ class CityGenerator:
             # generate roads randomly
             if not self.input:
                 if len(self.roads) == 0:
-                    print('Generating roads randomly')
+                    self.logger.info('Generating roads randomly')
                     # Initialize road generation
                     self.road_generator.generate_initial_segments()
                 # check if the number of roads has reached the limit
-                if len(self.roads) >= self.config['citygen.road.segment_count_limit']:
+                if len(self.roads) >= self.num_segments:
                     self.road_generator.find_intersections()
                     self.generation_state = GenerationState.GENERATING_BUILDINGS
                     return False
@@ -80,7 +92,7 @@ class CityGenerator:
                 return False
             # generate roads from existing file
             else:
-                print(f'Generating roads from existing file {self.input_path}')
+                self.logger.info(f'Generating roads from existing file {self.input_path}')
                 self.generation_state = GenerationState.GENERATING_BUILDINGS
                 return self.road_generator.generate_roads_from_file(self.input_path)
 
@@ -99,7 +111,7 @@ class CityGenerator:
 
         # generate elements
         elif self.generation_state == GenerationState.GENERATING_ELEMENTS:
-            if not self.config['citygen.element.generation']:
+            if not self.generate_element:
                 self.generation_state = GenerationState.GENERATING_ROUTES
                 return False
 
@@ -133,11 +145,11 @@ class CityGenerator:
 
         # generate routes
         elif self.generation_state == GenerationState.GENERATING_ROUTES:
-            if not self.config['citygen.route.generation']:
+            if not self.generate_route:
                 self.generation_state = GenerationState.COMPLETED
                 return True
             # Generate routes
-            print('Generating routes')
+            self.logger.info('Generating routes')
             target_data_list = []
             for _ in range(self.config['citygen.route.number']):
                 target_point = self.route_generator.generate_target_point_randomly()
@@ -165,8 +177,7 @@ class CityGenerator:
             tuple: Building types, building colors, element types, element colors,
                   element offsets, and mapped element offsets.
         """
-        with open(self.config['citygen.input_bounding_boxes'], 'r') as f:
-            data = json.load(f)
+        data = load_json(self.config['citygen.input_bounding_boxes'])
         buildings = data['buildings']
         elements = data['elements']
 
@@ -179,10 +190,11 @@ class CityGenerator:
         ELEMENT_COLORS = {}
 
         for name, building in buildings.items():
-            x = building['bbox']['x'] / 100     # scaling for easy generation
+            x = building['bbox']['x'] / 100
             y = building['bbox']['y'] / 100
+            num_limit = building.get('num_limit', -1)
 
-            BUILDING_TYPES.append(BuildingType(name, x, y, is_required='Building' not in name))
+            BUILDING_TYPES.append(BuildingType(name, x, y, num_limit))
             BUILDING_COLORS[name] = '#{:06x}'.format(random.randint(0, 0xFFFFFF))
 
         for name, element in elements.items():

@@ -5,6 +5,7 @@ in the city's quadtree structure.
 """
 from simworld.citygen.dataclass import Bounds, Element
 from simworld.utils.bbox_utils import BboxUtils
+from simworld.utils.logger import Logger
 from simworld.utils.quadtree import QuadTree
 
 
@@ -24,6 +25,7 @@ class ElementManager:
             self.config['citygen.quadtree.max_objects'],
             self.config['citygen.quadtree.max_levels']
         )
+        self.logger = Logger.get_logger('ElementManager')
 
     def add_element(self, element: Element):
         """Add a element to the quadtree and list.
@@ -68,7 +70,7 @@ class ElementManager:
             self.elements.remove(element)
             self.element_quadtree.remove(element.bounds, element)
         except ValueError:
-            print(f'Element {element.element_type.name} not found in elements list')
+            self.logger.error(f'Element {element.element_type.name} not found in elements list')
 
     def rebuild_quadtree(self):
         """Rebuild the quadtree."""

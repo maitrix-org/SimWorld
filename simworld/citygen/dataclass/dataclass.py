@@ -135,12 +135,12 @@ class BuildingType:
     name: str
     width: float
     height: float
-    is_required: bool = False
+    num_limit: int = -1
 
     def __hash__(self):
         """Return the hash value of the building type."""
         return hash(
-            (self.name, self.width, self.height, self.is_required)
+            (self.name, self.width, self.height, self.num_limit)
         )
 
     def to_dict(self):
@@ -149,7 +149,7 @@ class BuildingType:
             'name': self.name,
             'width': self.width,
             'height': self.height,
-            'is_required': self.is_required
+            'num_limit': self.num_limit
         }
 
 

@@ -3,22 +3,28 @@
 This module provides the main controller for the traffic simulation, handling initialization,
 spawning, and coordination of all traffic elements including vehicles, pedestrians, and traffic signals.
 """
-import json
-import os
 import random
 import sys
 import time
 import traceback
 from collections import defaultdict
 
-from simworld.agent import Pedestrian, Vehicle
-from simworld.communicator import Communicator, UnrealCV
+from simworld.agent.pedestrian import Pedestrian
+from simworld.agent.vehicle import Vehicle
+from simworld.communicator.communicator import Communicator
+from simworld.communicator.unrealcv import UnrealCV
 from simworld.config import Config
-from simworld.traffic.base import (Crosswalk, Intersection, Road, Sidewalk,
-                                   TrafficLane, TrafficSignal,
-                                   TrafficSignalState)
-from simworld.traffic.manager import (IntersectionManager, PedestrianManager,
-                                      VehicleManager)
+from simworld.traffic.base.crosswalk import Crosswalk
+from simworld.traffic.base.intersection import Intersection
+from simworld.traffic.base.road import Road
+from simworld.traffic.base.sidewalk import Sidewalk
+from simworld.traffic.base.traffic_lane import TrafficLane
+from simworld.traffic.base.traffic_signal import (TrafficSignal,
+                                                  TrafficSignalState)
+from simworld.traffic.manager.intersection_manager import IntersectionManager
+from simworld.traffic.manager.pedestrian_manager import PedestrianManager
+from simworld.traffic.manager.vehicle_manager import VehicleManager
+from simworld.utils.load_json import load_json
 from simworld.utils.logger import Logger
 from simworld.utils.vector import Vector
 
@@ -29,18 +35,23 @@ class TrafficController:
     Coordinates all aspects of the traffic simulation including road network, vehicles,
     pedestrians, and traffic signals.
     """
-    def __init__(self, config: Config):
+    def __init__(self, config: Config, num_vehicles: int = None, num_pedestrians: int = None, map: str = None, seed: int = None, dt: float = None):
         """Initialize the traffic controller with configuration.
 
         Args:
             config: Configuration object containing all simulation parameters.
+            num_vehicles: Number of vehicles to spawn.
+            num_pedestrians: Number of pedestrians to spawn.
+            map: Path to the map file.
+            seed: Seed for the random number generator.
+            dt: Time step for the simulation.
         """
         self.config = config
-        self.num_vehicles = config['traffic.num_vehicles']
-        self.num_pedestrians = config['traffic.num_pedestrians']
-        self.map = config['traffic.map_path']
-        self.seed = config['simworld.seed']
-        self.dt = config['simworld.dt']
+        self.num_vehicles = num_vehicles if num_vehicles is not None else config['traffic.num_vehicles']
+        self.num_pedestrians = num_pedestrians if num_pedestrians is not None else config['traffic.num_pedestrians']
+        self.map = map if map is not None else config['traffic.map_path']
+        self.seed = seed if seed is not None else config['simworld.seed']
+        self.dt = dt if dt is not None else config['simworld.dt']
         self.communicator = None
 
         # logger
@@ -83,13 +94,12 @@ class TrafficController:
         Raises:
             ValueError: If the file path is not absolute.
         """
-        if not os.path.isabs(file_path):
-            raise ValueError(f'Expected an absolute path, got: {file_path}')
+        # if not os.path.isabs(file_path):
+        #     raise ValueError(f'Expected an absolute path, got: {file_path}')
 
         self.logger.info(f'Loading road network from file: {file_path}')
 
-        with open(file_path, 'r') as f:
-            data = json.load(f)
+        data = load_json(file_path)
 
         roads = []
         _intersections = defaultdict(list)
@@ -150,33 +160,27 @@ class TrafficController:
             self.spawn_vehicles()
             self.spawn_pedestrians()
             self.spawn_traffic_signals()
-            self.spawn_traffic_manager()
         except Exception as e:
-            print(f'Error occurred in {__file__}:{e.__traceback__.tb_lineno}')
-            print(f'Error type: {type(e).__name__}')
-            print(f'Error message: {str(e)}')
-            print('Error traceback:')
+            self.logger.error(f'Error occurred in {__file__}:{e.__traceback__.tb_lineno}')
+            self.logger.error(f'Error type: {type(e).__name__}')
+            self.logger.error(f'Error message: {str(e)}')
+            self.logger.error('Error traceback:')
             traceback.print_exc()
 
     def spawn_vehicles(self):
         """Spawn vehicles in the simulation environment."""
         self.vehicle_manager.spawn_vehicles(self.communicator)
-        print('Vehicles spawned')
+        self.logger.info('Vehicles spawned')
 
     def spawn_pedestrians(self):
         """Spawn pedestrians in the simulation environment."""
         self.pedestrian_manager.spawn_pedestrians(self.communicator)
-        print('Pedestrians spawned')
+        self.logger.info('Pedestrians spawned')
 
     def spawn_traffic_signals(self):
         """Spawn traffic signals in the simulation environment."""
         self.intersection_manager.spawn_traffic_signals(self.communicator)
-        print('Traffic signals spawned')
-
-    def spawn_traffic_manager(self):
-        """Spawn the traffic manager in the simulation environment."""
-        self.communicator.spawn_traffic_manager(self.config['traffic.traffic_manager_path'])
-        print('Traffic manager spawned')
+        self.logger.info('Traffic signals spawned')
 
     # Reset
     def reset(self, num_vehicles: int, num_pedestrians: int, map: str):
@@ -191,7 +195,7 @@ class TrafficController:
         self.num_pedestrians = num_pedestrians
         self.map = map
 
-        self.communicator.clean_traffic(self.vehicles, self.pedestrians, self.traffic_signals)
+        self.communicator.clean_traffic_only(self.vehicles, self.pedestrians, self.traffic_signals)
 
         Vehicle.reset_id_counter()
         Pedestrian.reset_id_counter()
@@ -213,6 +217,12 @@ class TrafficController:
         self.vehicle_manager = VehicleManager(self.roads, self.num_vehicles, self.config)
         self.pedestrian_manager = PedestrianManager(self.roads, self.num_pedestrians, self.config)
 
+    def stop_simulation(self):
+        """Stop the traffic simulation."""
+        self.logger.info('Stopping simulation')
+        self.vehicle_manager.stop_vehicles(self.communicator)
+        self.pedestrian_manager.stop_pedestrians(self.communicator)
+
     # Simulation
     def simulation(self):
         """Run the traffic simulation continuously.
@@ -231,13 +241,13 @@ class TrafficController:
                 self.intersection_manager.update_intersections(self.communicator)
                 time.sleep(self.dt)
         except KeyboardInterrupt:
-            print('Simulation interrupted')
+            self.logger.info('Simulation interrupted')
             sys.exit(1)
         except Exception as e:
-            print(f'Error occurred in {__file__}:{e.__traceback__.tb_lineno}')
-            print(f'Error type: {type(e).__name__}')
-            print(f'Error message: {str(e)}')
-            print('Error traceback:')
+            self.logger.error(f'Error occurred in {__file__}:{e.__traceback__.tb_lineno}')
+            self.logger.error(f'Error type: {type(e).__name__}')
+            self.logger.error(f'Error message: {str(e)}')
+            self.logger.error('Error traceback:')
             traceback.print_exc()
 
     def update_states(self):

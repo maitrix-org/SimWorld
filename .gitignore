@@ -6,6 +6,9 @@
 # Development software files
 .vscode/
 
+# OS-specific files
+.DS_Store
+
 # User-specific files
 *.rsuser
 *.suo
@@ -405,3 +408,21 @@ FodyWeavers.xsd
 *.yaml
 !default.yaml
 !example.yaml
+
+# Python packaging
+*.egg
+*.egg-info/
+dist/
+build/
+eggs/
+parts/
+bin/
+var/
+sdist/
+develop-eggs/
+.installed.cfg
+lib/
+lib64/
+venv/
+.env/
+.venv/

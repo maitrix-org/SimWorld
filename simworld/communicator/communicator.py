@@ -11,6 +11,8 @@ import numpy as np
 import pandas as pd
 
 from simworld.communicator.unrealcv import UnrealCV
+from simworld.utils.load_json import load_json
+from simworld.utils.logger import Logger
 from simworld.utils.vector import Vector
 
 
@@ -28,7 +30,97 @@ class Communicator:
             unrealcv: UnrealCV instance for communication with Unreal Engine.
         """
         self.unrealcv = unrealcv
-        self.traffic_manager_name = None
+        self.ue_manager_name = None
+        self.logger = Logger.get_logger('Communicator')
+
+    #
+    # User Agent Methods
+    #
+
+    def agent_move_forward(self, agent_id):
+        """Move agent forward.
+
+        Args:
+            agent_id: The unique identifier of the agent to move forward.
+        """
+        self.unrealcv.agent_move_forward(self.get_agent_name(agent_id))
+
+    def agent_rotate(self, agent_id, angle, direction):
+        """Rotate agent.
+
+        Args:
+            agent_id: Agent ID.
+            angle: Rotation angle.
+            direction: Rotation direction.
+        """
+        self.unrealcv.agent_rotate(self.get_agent_name(agent_id), angle, direction)
+
+    def agent_stop(self, agent_id):
+        """Stop agent.
+
+        Args:
+            agent_id: Agent ID.
+        """
+        self.unrealcv.agent_stop(self.get_agent_name(agent_id))
+
+    def agent_step_forward(self, agent_id, duration, direction=0):
+        """Step forward.
+
+        Args:
+            agent_id: Agent ID.
+            duration: Duration.
+            direction: Direction.
+        """
+        self.unrealcv.agent_step_forward(self.get_agent_name(agent_id), duration, direction)
+
+    def agent_set_speed(self, agent_id, speed):
+        """Set agent speed.
+
+        Args:
+            agent_id: Agent ID.
+            speed: Speed.
+        """
+        self.unrealcv.agent_set_speed(self.get_agent_name(agent_id), speed)
+
+    def agent_sit_down(self, agent_id):
+        """Sit down.
+
+        Args:
+            agent_id: Agent ID.
+        """
+        self.unrealcv.agent_sit_down(self.get_agent_name(agent_id))
+
+    def get_agent_name(self, agent_id):
+        """Get agent name.
+
+        Args:
+            agent_id: Agent ID.
+
+        Returns:
+            str: The formatted agent name.
+        """
+        return f'GEN_BP_Agent_{agent_id}'
+
+    def get_camera_observation(self, cam_id, viewmode, mode='direct'):
+        """Get camera observation.
+
+        Args:
+            cam_id: Camera ID.
+            viewmode: View mode.
+            mode: Mode, possible values are 'direct', 'file', 'fast'.
+
+        Returns:
+            Image data.
+        """
+        return self.unrealcv.get_image(cam_id, viewmode, mode)
+
+    def show_img(self, image):
+        """Show image.
+
+        Args:
+            image: Image data.
+        """
+        self.unrealcv.show_img(image)
 
     # Vehicle-related methods
     def update_vehicle(self, vehicle_id, throttle, brake, steering):
@@ -68,7 +160,18 @@ class Communicator:
                 vehicles_states_str += ';'
             vehicles_states_str += vehicle_state
 
-        self.unrealcv.v_set_states(self.traffic_manager_name, vehicles_states_str)
+        self.unrealcv.v_set_states(self.ue_manager_name, vehicles_states_str)
+
+    def get_vehicle_name(self, vehicle_id):
+        """Get vehicle name.
+
+        Args:
+            vehicle_id: Vehicle ID.
+
+        Returns:
+            Vehicle name.
+        """
+        return f'GEN_BP_Vehicle_{vehicle_id}'
 
     # Pedestrian-related methods
     def pedestrian_move_forward(self, pedestrian_id):
@@ -126,7 +229,18 @@ class Communicator:
                 pedestrians_states_str += ';'
             pedestrians_states_str += pedestrian_state
 
-        self.unrealcv.p_set_states(self.traffic_manager_name, pedestrians_states_str)
+        self.unrealcv.p_set_states(self.ue_manager_name, pedestrians_states_str)
+
+    def get_pedestrian_name(self, pedestrian_id):
+        """Get pedestrian name.
+
+        Args:
+            pedestrian_id: Pedestrian ID.
+
+        Returns:
+            Pedestrian name.
+        """
+        return f'GEN_BP_Pedestrian_{pedestrian_id}'
 
     # Traffic signal related methods
     def traffic_signal_switch_to(self, traffic_signal_id, state='green'):
@@ -154,19 +268,42 @@ class Communicator:
         name = self.get_traffic_signal_name(traffic_signal_id)
         self.unrealcv.tl_set_duration(name, green_duration, yellow_duration, pedestrian_green_duration)
 
-    # Traffic management related methods
-    def get_position_and_direction(self, vehicle_ids, pedestrian_ids, traffic_signal_ids):
+    def get_traffic_signal_name(self, traffic_signal_id):
+        """Get traffic signal name.
+
+        Args:
+            traffic_signal_id: Traffic signal ID.
+
+        Returns:
+            Traffic signal name.
+        """
+        return f'GEN_BP_TrafficSignal_{traffic_signal_id}'
+
+    def get_waypoint_mark_name(self, waypoint_mark_id):
+        """Get waypoint mark name.
+
+        Args:
+            waypoint_mark_id: Waypoint mark ID.
+
+        Returns:
+            Waypoint mark name.
+        """
+        return f'GEN_BP_WaypointMark_{waypoint_mark_id}'
+
+    # Management related methods
+    def get_position_and_direction(self, vehicle_ids=[], pedestrian_ids=[], traffic_signal_ids=[], agent_ids=[]):
         """Get position and direction of vehicles, pedestrians, and traffic signals.
 
         Args:
             vehicle_ids: List of vehicle IDs.
             pedestrian_ids: List of pedestrian IDs.
             traffic_signal_ids: List of traffic signal IDs.
+            agent_ids: Optional list of agent IDs to get their positions and directions.
 
         Returns:
             Dictionary containing position and direction information for all objects.
         """
-        info = json.loads(self.unrealcv.get_informations(self.traffic_manager_name))
+        info = json.loads(self.unrealcv.get_informations(self.ue_manager_name))
         result = {}
 
         # Process vehicles
@@ -220,9 +357,53 @@ class Communicator:
 
                 result[('traffic_signal', traffic_signal_id)] = (is_vehicle_green, is_pedestrian_walk, left_time)
 
+        # process agents
+        locations = info['ALocations']
+        rotations = info['ARotations']
+        for agent_id in agent_ids:
+            name = self.get_agent_name(agent_id)
+            location_pattern = f'{name}X=(.*?) Y=(.*?) Z='
+            match = re.search(location_pattern, locations)
+            if match:
+                x, y = float(match.group(1)), float(match.group(2))
+                position = Vector(x, y)
+
+                rotation_pattern = f'{name}P=.*? Y=(.*?) R='
+                match = re.search(rotation_pattern, rotations)
+                if match:
+                    direction = float(match.group(1))
+                    result[('agent', agent_id)] = (position, direction)
+
         return result
 
     # Initialization methods
+    def spawn_agent(self, agent, model_path):
+        """Spawn agent.
+
+        Args:
+            agent: Agent object.
+            model_path: Model path.
+        """
+        name = self.get_agent_name(agent.id)
+        self.unrealcv.spawn_bp_asset(model_path, name)
+        # Convert 2D position to 3D (x,y -> x,y,z)
+        location_3d = (
+            agent.position.x,  # Unreal X = 2D Y
+            agent.position.y,  # Unreal Y = 2D X
+            0  # Z coordinate (ground level)
+        )
+        # Convert 2D direction to 3D orientation (assuming rotation around Z axis)
+        orientation_3d = (
+            0,  # Pitch
+            math.degrees(math.atan2(agent.direction.y, agent.direction.x)),  # Yaw
+            0  # Roll
+        )
+        self.unrealcv.set_location(location_3d, name)
+        self.unrealcv.set_orientation(orientation_3d, name)
+        self.unrealcv.set_scale((1, 1, 1), name)  # Default scale
+        self.unrealcv.set_collision(name, True)
+        self.unrealcv.set_movable(name, True)
+
     def spawn_vehicles(self, vehicles):
         """Spawn vehicles.
 
@@ -250,16 +431,16 @@ class Communicator:
             self.unrealcv.set_collision(name, True)
             self.unrealcv.set_movable(name, True)
 
-    def spawn_pedestrians(self, pedestrians, model_name):
+    def spawn_pedestrians(self, pedestrians, model_path):
         """Spawn pedestrians.
 
         Args:
             pedestrians: List of pedestrian objects.
-            model_name: Pedestrian model name.
+            model_path: Pedestrian model path.
         """
         for pedestrian in pedestrians:
             name = self.get_pedestrian_name(pedestrian.id)
-            self.unrealcv.spawn_bp_asset(model_name, name)
+            self.unrealcv.spawn_bp_asset(model_path, name)
             # Convert 2D position to 3D (x,y -> x,y,z)
             location_3d = (
                 pedestrian.position.x,  # Unreal X = 2D Y
@@ -282,9 +463,9 @@ class Communicator:
         """Spawn traffic signals.
 
         Args:
-            traffic_signals: List of traffic signal objects.
-            traffic_light_model_path: Traffic light model path.
-            pedestrian_light_model_path: Pedestrian signal light model path.
+            traffic_signals: List of traffic signal objects to spawn.
+            traffic_light_model_path: Path to the traffic light model asset.
+            pedestrian_light_model_path: Path to the pedestrian signal light model asset.
         """
         for traffic_signal in traffic_signals:
             name = self.get_traffic_signal_name(traffic_signal.id)
@@ -311,16 +492,43 @@ class Communicator:
             self.unrealcv.set_collision(name, True)
             self.unrealcv.set_movable(name, False)
 
-    def spawn_traffic_manager(self, traffic_manager_path):
-        """Spawn traffic manager.
+    def spawn_waypoint_mark(self, waypoints, model_path):
+        """Spawn waypoint marks.
 
         Args:
-            traffic_manager_path: Traffic manager model path.
+            waypoints: List of waypoint objects.
+            model_path: Waypoint mark model path.
         """
-        self.traffic_manager_name = 'GEN_TrafficManager'
-        self.unrealcv.spawn_bp_asset(traffic_manager_path, self.traffic_manager_name)
+        id_counter = 0
+        for waypoint in waypoints:
+            name = self.get_waypoint_mark_name(id_counter)
+            id_counter += 1
+            self.unrealcv.spawn_bp_asset(model_path, name)
+            location_3d = (
+                waypoint.position.x,
+                waypoint.position.y,
+                30  # Z coordinate (ground level)
+            )
+            self.unrealcv.set_location(location_3d, name)
+            orientation_3d = (
+                0,  # Pitch
+                math.degrees(math.atan2(waypoint.direction.y, waypoint.direction.x)),  # Yaw
+                0  # Roll
+            )
+            self.unrealcv.set_orientation(orientation_3d, name)
+            self.unrealcv.set_scale((1, 1, 1), name)
+            self.unrealcv.set_collision(name, False)
+            self.unrealcv.set_movable(name, False)
 
-    # City layout generation methods
+    def spawn_ue_manager(self, ue_manager_path):
+        """Spawn UE manager.
+
+        Args:
+            ue_manager_path: Path to the UE manager asset in the content browser.
+        """
+        self.ue_manager_name = 'GEN_BP_UEManager'
+        self.unrealcv.spawn_bp_asset(ue_manager_path, self.ue_manager_name)
+
     def generate_world(self, world_json, ue_asset_path):
         """Generate world.
 
@@ -329,22 +537,32 @@ class Communicator:
             ue_asset_path: Unreal Engine asset path.
 
         Returns:
-            Set of generated object IDs.
+            set: A set of generated object IDs.
         """
         generated_ids = set()
         # Load world from JSON
-        with open(world_json, 'r') as f:
-            world_setting = json.load(f)
+        world_setting = load_json(world_json)
         # Use pandas data structure, convert JSON data to pandas dataframe
         nodes = world_setting['nodes']
         node_df = pd.json_normalize(nodes, sep='_')
         node_df.set_index('id', inplace=True)
 
         # Load asset library
-        with open(ue_asset_path, 'r') as f:
-            asset_library = json.load(f)
+        asset_library = load_json(ue_asset_path)
 
-        def process_node(row):
+        def _parse_rgb(color_str):
+            """Parse RGB values from color string like '(R=255,G=255,B=0)'.
+
+            Args:
+                color_str: Color string.
+            """
+            pattern = r'R=(\d+),G=(\d+),B=(\d+)'
+            match = re.search(pattern, color_str)
+            if match:
+                return [int(match.group(1)), int(match.group(2)), int(match.group(3))]
+            return [0, 0, 0]  # Default to black if parsing fails
+
+        def _process_node(row):
             """Process a single node.
 
             Args:
@@ -353,12 +571,15 @@ class Communicator:
             # Spawn each node on the map
             id = row.name  # name is the index of the row
             try:
-                instance_ref = asset_library[node_df.loc[id, 'instance_name']]
+                instance_ref = asset_library[node_df.loc[id, 'instance_name']]['asset_path']
+                color = asset_library['colors'][asset_library[node_df.loc[id, 'instance_name']]['color']]
+                rgb_values = _parse_rgb(color)
             except KeyError:
-                print("Can't find node {} in asset library".format(node_df.loc[id, 'instance_name']))
+                self.logger.error(f"Can't find node {node_df.loc[id, 'instance_name']} in asset library")
                 return
             else:
                 self.unrealcv.spawn_bp_asset(instance_ref, id)
+                self.unrealcv.set_color(id, rgb_values)
                 location = node_df.loc[id, ['properties_location_x', 'properties_location_y', 'properties_location_z']].to_list()
                 self.unrealcv.set_location(location, id)
                 orientation = node_df.loc[id, ['properties_orientation_pitch', 'properties_orientation_yaw', 'properties_orientation_roll']].to_list()
@@ -369,16 +590,20 @@ class Communicator:
                 self.unrealcv.set_movable(id, False)
                 generated_ids.add(id)
 
-        node_df.apply(process_node, axis=1)
+        node_df.apply(_process_node, axis=1)
 
         return generated_ids
 
-    def clear_env(self):
+    # Utility methods
+    def clear_env(self, keep_roads=False):
         """Clear all objects in the environment."""
         # Get all objects in the environment
         objects = [obj.lower() for obj in self.unrealcv.get_objects()]  # Convert objects to lowercase
         # Define unwanted objects
-        unwanted_terms = ['GEN_BP_']
+        if keep_roads:
+            unwanted_terms = ['GEN_BP_']
+        else:
+            unwanted_terms = ['GEN_BP_', 'GEN_Road_']
         unwanted_terms = [term.lower() for term in unwanted_terms]  # Convert unwanted terms to lowercase
 
         # Get all objects starting with the unwanted terms
@@ -390,58 +615,23 @@ class Communicator:
 
         self.unrealcv.clean_garbage()
 
-    # Utility methods
-    def get_vehicle_name(self, vehicle_id):
-        """Get vehicle name.
-
-        Args:
-            vehicle_id: Vehicle ID.
-
-        Returns:
-            Vehicle name.
-        """
-        return f'GEN_Vehicle_{vehicle_id}'
-
-    def get_pedestrian_name(self, pedestrian_id):
-        """Get pedestrian name.
-
-        Args:
-            pedestrian_id: Pedestrian ID.
-
-        Returns:
-            Pedestrian name.
-        """
-        return f'GEN_Pedestrian_{pedestrian_id}'
-
-    def get_traffic_signal_name(self, traffic_signal_id):
-        """Get traffic signal name.
-
-        Args:
-            traffic_signal_id: Traffic signal ID.
-
-        Returns:
-            Traffic signal name.
-        """
-        return f'GEN_TrafficSignal_{traffic_signal_id}'
-
-    def clean_traffic(self, vehicles, pedestrians, traffic_signals):
-        """Clean traffic objects.
+    def clean_traffic_only(self, vehicles, pedestrians, traffic_signals):
+        """Clean traffic objects only.
 
         Args:
             vehicles: List of vehicles.
             pedestrians: List of pedestrians.
             traffic_signals: List of traffic signals.
         """
-        # Can't destroy pedestrians due to issue in unrealcv
         for vehicle in vehicles:
-            self.destroy(self.get_vehicle_name(vehicle.vehicle_id))
+            self.unrealcv.destroy(self.get_vehicle_name(vehicle.id))
         for traffic_signal in traffic_signals:
-            self.destroy(self.get_traffic_signal_name(traffic_signal.id))
+            self.unrealcv.destroy(self.get_traffic_signal_name(traffic_signal.id))
         for pedestrian in pedestrians:
-            self.destroy(self.get_pedestrian_name(pedestrian.pedestrian_id))
+            self.unrealcv.destroy(self.get_pedestrian_name(pedestrian.id))
 
-        self.destroy(self.traffic_manager_name)
-        self.clean_garbage()
+        self.unrealcv.destroy(self.ue_manager_name)
+        self.unrealcv.clean_garbage()
 
     def disconnect(self):
         """Disconnect from Unreal Engine."""

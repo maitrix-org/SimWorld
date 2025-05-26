@@ -55,40 +55,40 @@ class ElementGenerator:
 
         # face road and back road
         # 1 for back road, -1 for face road
-        for side in [1]:
-            for _ in range(NUM_ATTEMPTS):
-                # Random angle and distance from building
-                distance = DISTANCE
+        # for side in [1]:
+        #     for _ in range(NUM_ATTEMPTS):
+        #         # Random angle and distance from building
+        #         distance = DISTANCE
 
-                x_offset = random.uniform(-building.width/2 + distance/2, building.width/2 - distance/2)
-                y_offset = random.uniform(-building.height/2 + distance/2, building.height/2 - distance/2)
+        #         x_offset = random.uniform(-building.width/2 + distance/2, building.width/2 - distance/2)
+        #         y_offset = random.uniform(-building.height/2 + distance/2, building.height/2 - distance/2)
 
-                x = building_center.x +\
-                    (building.width / 2 * abs(math.cos(building_rotation)) + building.height / 2 * abs(math.sin(building_rotation)) + distance) * -math.sin(building_rotation) * side +\
-                    (x_offset * abs(math.cos(building_rotation)) + y_offset * abs(math.sin(building_rotation))) * math.cos(building_rotation)
-                y = building_center.y +\
-                    (building.height / 2 * abs(math.cos(building_rotation)) + building.width / 2 * abs(math.sin(building_rotation)) + distance) * math.cos(building_rotation) * side +\
-                    (y_offset * abs(math.cos(building_rotation)) + x_offset * abs(math.sin(building_rotation))) * math.sin(building_rotation)
+        #         x = building_center.x +\
+        #             (building.width / 2 * abs(math.cos(building_rotation)) + building.height / 2 * abs(math.sin(building_rotation)) + distance) * -math.sin(building_rotation) * side +\
+        #             (x_offset * abs(math.cos(building_rotation)) + y_offset * abs(math.sin(building_rotation))) * math.cos(building_rotation)
+        #         y = building_center.y +\
+        #             (building.height / 2 * abs(math.cos(building_rotation)) + building.width / 2 * abs(math.sin(building_rotation)) + distance) * math.cos(building_rotation) * side +\
+        #             (y_offset * abs(math.cos(building_rotation)) + x_offset * abs(math.sin(building_rotation))) * math.sin(building_rotation)
 
-                element_type = random.choice(self.element_types)
+        #         element_type = random.choice(self.element_types)
 
-                # Align element rotation with building rotation plus some randomness
-                element_rotation = random.uniform(-180, 180)
+        #         # Align element rotation with building rotation plus some randomness
+        #         element_rotation = random.uniform(-180, 180)
 
-                element_bounds = Bounds(
-                    x - element_type.width / 2,
-                    y - element_type.height / 2,
-                    element_type.width,
-                    element_type.height,
-                    element_rotation
-                )
+        #         element_bounds = Bounds(
+        #             x - element_type.width / 2,
+        #             y - element_type.height / 2,
+        #             element_type.width,
+        #             element_type.height,
+        #             element_rotation
+        #         )
 
-                elements.append(Element(
-                    element_type=element_type,
-                    bounds=element_bounds,
-                    rotation=element_rotation,
-                    building=building
-                ))
+        #         elements.append(Element(
+        #             element_type=element_type,
+        #             bounds=element_bounds,
+        #             rotation=element_rotation,
+        #             building=building
+        #         ))
 
         # left side and right side (building as reference)
         # 1 for right side, -1 for left side
