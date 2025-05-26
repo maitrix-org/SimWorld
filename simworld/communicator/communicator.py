@@ -112,7 +112,7 @@ class Communicator:
         Returns:
             Image data.
         """
-        return self.unrealcv.read_image(cam_id, viewmode, mode)
+        return self.unrealcv.get_image(cam_id, viewmode, mode)
 
     def show_img(self, image):
         """Show image.
@@ -278,6 +278,17 @@ class Communicator:
             Traffic signal name.
         """
         return f'GEN_BP_TrafficSignal_{traffic_signal_id}'
+
+    def get_waypoint_mark_name(self, waypoint_mark_id):
+        """Get waypoint mark name.
+
+        Args:
+            waypoint_mark_id: Waypoint mark ID.
+
+        Returns:
+            Waypoint mark name.
+        """
+        return f'GEN_BP_WaypointMark_{waypoint_mark_id}'
 
     # Management related methods
     def get_position_and_direction(self, vehicle_ids=[], pedestrian_ids=[], traffic_signal_ids=[], agent_ids=[]):
@@ -481,6 +492,34 @@ class Communicator:
             self.unrealcv.set_collision(name, True)
             self.unrealcv.set_movable(name, False)
 
+    def spawn_waypoint_mark(self, waypoints, model_path):
+        """Spawn waypoint marks.
+
+        Args:
+            waypoints: List of waypoint objects.
+            model_path: Waypoint mark model path.
+        """
+        id_counter = 0
+        for waypoint in waypoints:
+            name = self.get_waypoint_mark_name(id_counter)
+            id_counter += 1
+            self.unrealcv.spawn_bp_asset(model_path, name)
+            location_3d = (
+                waypoint.position.x,
+                waypoint.position.y,
+                30  # Z coordinate (ground level)
+            )
+            self.unrealcv.set_location(location_3d, name)
+            orientation_3d = (
+                0,  # Pitch
+                math.degrees(math.atan2(waypoint.direction.y, waypoint.direction.x)),  # Yaw
+                0  # Roll
+            )
+            self.unrealcv.set_orientation(orientation_3d, name)
+            self.unrealcv.set_scale((1, 1, 1), name)
+            self.unrealcv.set_collision(name, False)
+            self.unrealcv.set_movable(name, False)
+
     def spawn_ue_manager(self, ue_manager_path):
         """Spawn UE manager.
 
@@ -490,7 +529,6 @@ class Communicator:
         self.ue_manager_name = 'GEN_BP_UEManager'
         self.unrealcv.spawn_bp_asset(ue_manager_path, self.ue_manager_name)
 
-    # City layout generation methods
     def generate_world(self, world_json, ue_asset_path):
         """Generate world.
 

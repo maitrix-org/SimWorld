@@ -4,7 +4,7 @@ This module provides a client interface for communicating with Unreal Engine,
 allowing for various operations such as object spawning, movement, and image
 capture.
 """
-import json
+import os
 import time
 from io import BytesIO
 from threading import Lock
@@ -13,6 +13,9 @@ import cv2
 import numpy as np
 import PIL.Image
 import unrealcv
+from IPython.display import display
+from unrealcv.api import MsgDecoder
+from unrealcv.util import read_png
 
 from simworld.utils.logger import Logger
 
@@ -24,7 +27,7 @@ class UnrealCV(object):
     including basic operations and traffic system operations.
     """
 
-    def __init__(self, port=9000, ip='127.0.0.1', resolution=(320, 240)):
+    def __init__(self, port=9000, ip='127.0.0.1', resolution=(640, 480)):
         """Initialize the UnrealCV client.
 
         Args:
@@ -38,6 +41,7 @@ class UnrealCV(object):
         self.client.connect()
 
         self.resolution = resolution
+        self.decoder = MsgDecoder(self.resolution)
 
         self.lock = Lock()
         self.logger = Logger.get_logger('UnrealCV')
@@ -59,10 +63,6 @@ class UnrealCV(object):
         self.check_connection()
         [w, h] = resolution
         self.client.request(f'vrun setres {w}x{h}w', -1)  # Set resolution of display window
-        self.client.request('DisableAllScreenMessages', -1)  # Disable all screen messages
-        self.client.request('vrun sg.ShadowQuality 0', -1)  # Set shadow quality to low
-        self.client.request('vrun sg.TextureQuality 0', -1)  # Set texture quality to low
-        self.client.request('vrun sg.EffectsQuality 0', -1)  # Set effects quality to low
 
         self.client.request('vrun Editor.AsyncSkinnedAssetCompilation 2', -1)  # To correctly load the character
         time.sleep(1)
@@ -251,19 +251,23 @@ class UnrealCV(object):
         objects = np.array(res.split())
         return objects
 
-    def get_total_collision(self, name):
-        """Get total collision count.
+    def get_collision_num(self, name):
+        """Get collision number.
 
         Args:
             name: Object name.
 
         Returns:
-            Total collision count.
+            json: {
+                "HumanCollision": 0,
+                "ObjectCollision": 0,
+                "BuildingCollision": 0,
+                "VehicleCollision": 0
+            }
         """
         with self.lock:
             res = self.client.request(f'vbp {name} GetCollisionNum')
-        total_collision = eval(json.loads(res)['TotalCollision'])
-        return total_collision
+        return res
 
     def get_location(self, actor_name):
         """Get object location.
@@ -326,72 +330,6 @@ class UnrealCV(object):
         # Parse each response and convert to numpy array
         orientations = [np.array([float(i) for i in r.split()]) for r in res]
         return orientations
-
-    def show_img(self, img, title='raw_img'):
-        """Display an image.
-
-        Args:
-            img: Image.
-            title: Title, defaults to "raw_img".
-        """
-        cv2.imshow(title, img)
-        cv2.waitKey(3)
-
-    def read_image(self, cam_id, viewmode, mode='direct'):
-        """Read an image.
-
-        Args:
-            cam_id: Camera ID, e.g., 0, 1, 2...
-            viewmode: View mode, e.g., lit, normal, depth, object_mask.
-            mode: Mode, possible values are 'direct', 'file', 'fast'.
-
-        Returns:
-            Image data.
-        """
-        if mode == 'direct':  # Get image from unrealcv in png format
-            cmd = f'vget /camera/{cam_id}/{viewmode} png'
-            with self.lock:
-                image = self.decode_png(self.client.request(cmd))
-
-        elif mode == 'file':  # Save image to file and read it
-            cmd = f'vget /camera/{cam_id}/{viewmode} {viewmode}{self.ip}.png'
-            with self.lock:
-                img_dirs = self.client.request(cmd)
-            image = cv2.imread(img_dirs)
-        elif mode == 'fast':  # Get image from unrealcv in bmp format
-            cmd = f'vget /camera/{cam_id}/{viewmode} bmp'
-            with self.lock:
-                image = self.decode_bmp(self.client.request(cmd))
-        return image
-
-    def decode_png(self, res):
-        """Decode PNG image.
-
-        Args:
-            res: PNG image data.
-
-        Returns:
-            Decoded image data.
-        """
-        img = np.asarray(PIL.Image.open(BytesIO(res)))
-        img = img[:, :, :-1]  # Delete alpha channel
-        img = img[:, :, ::-1]  # Transpose channel order
-        return img
-
-    def decode_bmp(self, res, channel=4):
-        """Decode BMP image.
-
-        Args:
-            res: BMP image data.
-            channel: Number of channels, defaults to 4.
-
-        Returns:
-            Decoded image data.
-        """
-        img = np.fromstring(res, dtype=np.uint8)
-        img = img[-self.resolution[1]*self.resolution[0]*channel:]
-        img = img.reshape(self.resolution[1], self.resolution[0], channel)
-        return img[:, :, :-1]  # Delete alpha channel
 
     ##############################################################
     # Traffic System
@@ -545,9 +483,9 @@ class UnrealCV(object):
         with self.lock:
             self.client.request(cmd)
 
-    #
-    # User Agent Methods
-    #
+    ##############################################################
+    # Agent System
+    ##############################################################
 
     def agent_move_forward(self, object_name):
         """Move agent forward.
@@ -620,3 +558,249 @@ class UnrealCV(object):
         cmd = f'vbp {object_name} SitDown'
         with self.lock:
             self.client.request(cmd)
+
+    ##############################################################
+    # Camera
+    ##############################################################
+    def get_cameras(self):
+        """Get all cameras.
+
+        Returns:
+            List of camera names.
+        """
+        cmd = 'vget /cameras'
+        with self.lock:
+            return self.client.request(cmd)
+
+    def get_camera_location(self, camera_id: int):
+        """Get camera location.
+
+        Args:
+            camera_id: ID of the camera to get location.
+
+        Returns:
+            Location (x, y, z) of the camera.
+        """
+        cmd = f'vget /camera/{camera_id}/location'
+        with self.lock:
+            return self.client.request(cmd)
+
+    def get_camera_rotation(self, camera_id: int):
+        """Get camera rotation.
+
+        Args:
+            camera_id: ID of the camera to get rotation.
+
+        Returns:
+            Rotation (pitch, yaw, roll) of the camera.
+        """
+        cmd = f'vget /camera/{camera_id}/rotation'
+        with self.lock:
+            return self.client.request(cmd)
+
+    def get_camera_fov(self, camera_id: int):
+        """Get camera field of view.
+
+        Args:
+            camera_id: ID of the camera to get field of view.
+
+        Returns:
+            Field of view of the camera.
+        """
+        cmd = f'vget /camera/{camera_id}/fov'
+        with self.lock:
+            return self.client.request(cmd)
+
+    def get_camera_resolution(self, camera_id: int):
+        """Get camera resolution.
+
+        Args:
+            camera_id: ID of the camera to get resolution.
+
+        Returns:
+            Resolution (width, height) of the camera.
+        """
+        cmd = f'vget /camera/{camera_id}/size'
+        with self.lock:
+            return self.client.request(cmd)
+
+    def set_camera_location(self, camera_id: int, location: tuple):
+        """Set camera location.
+
+        Args:
+            camera_id: ID of the camera to set location.
+            location: Location (x, y, z) of the camera.
+        """
+        cmd = f'vset /camera/{camera_id}/location {location[0]} {location[1]} {location[2]}'
+        with self.lock:
+            self.client.request(cmd)
+
+    def set_camera_rotation(self, camera_id: int, rotation: tuple):
+        """Set camera rotation.
+
+        Args:
+            camera_id: ID of the camera to set rotation.
+            rotation: Rotation (pitch, yaw, roll) of the camera.
+        """
+        cmd = f'vset /camera/{camera_id}/rotation {rotation[0]} {rotation[1]} {rotation[2]}'
+        with self.lock:
+            self.client.request(cmd)
+
+    def set_camera_fov(self, camera_id: int, fov: float):
+        """Set camera field of view.
+
+        Args:
+            camera_id: ID of the camera to set field of view.
+            fov: Field of view of the camera.
+        """
+        cmd = f'vset /camera/{camera_id}/fov {fov}'
+        with self.lock:
+            self.client.request(cmd)
+
+    def set_camera_resolution(self, camera_id: int, resolution: tuple):
+        """Set camera resolution.
+
+        Args:
+            camera_id: ID of the camera to set resolution.
+            resolution: Resolution (width, height) of the camera.
+        """
+        cmd = f'vset /camera/{camera_id}/size {resolution[0]} {resolution[1]}'
+        with self.lock:
+            self.client.request(cmd)
+
+    def show_img(self, img, title='raw_img'):
+        """Display an image.
+
+        Args:
+            img: Image.
+            title: Title, defaults to "raw_img".
+        """
+        try:
+            # Check if the image is a depth image (single channel)
+            if len(img.shape) == 2:
+                # Normalize depth image for display
+                img_normalized = img / img.max()
+                # Convert to 8-bit grayscale
+                img_display = (img_normalized * 255).astype(np.uint8)
+                # Convert to RGB for display
+                img_rgb = cv2.cvtColor(img_display, cv2.COLOR_GRAY2RGB)
+            else:
+                # Convert OpenCV BGR image to RGB
+                img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+
+            # Ensure the image is in uint8 format before converting to PIL Image
+            if img_rgb.dtype != np.uint8:
+                img_rgb = (img_rgb * 255).astype(np.uint8)
+
+            # Convert to PIL Image
+            pil_img = PIL.Image.fromarray(img_rgb)
+            # Display in notebook
+            display(pil_img)
+        except ImportError:
+            # Fallback to OpenCV display if not in notebook
+            if len(img.shape) == 2:
+                # Normalize depth image for display
+                img_normalized = img / img.max()
+                # Convert to 8-bit grayscale
+                img_display = (img_normalized * 255).astype(np.uint8)
+                cv2.imshow(title, img_display)
+            else:
+                cv2.imshow(title, img)
+            cv2.waitKey(3)
+
+    def get_image(self, cam_id, viewmode, mode='direct', img_path=None):
+        """Get image.
+
+        Args:
+            cam_id: Camera ID.
+            viewmode: View mode.
+            mode: Mode.
+            img_path: Image path.
+        """
+        image = None
+        try:
+            if mode == 'direct':  # get image from unrealcv in png format
+                if viewmode == 'depth':
+                    cmd = f'vget /camera/{cam_id}/{viewmode} npy'
+                    # image = read_npy(self.client.request(cmd))
+                    image = self._decode_npy(self.client.request(cmd))
+                else:
+                    cmd = f'vget /camera/{cam_id}/{viewmode} png'
+                    # image = read_png(self.client.request(cmd))
+                    image = self._decode_png(self.client.request(cmd))
+            elif mode == 'file':  # save image to file and read it
+                img_path = os.path.join(os.getcwd(), f'{cam_id}-{viewmode}.png')
+                cmd = f'vget /camera/{cam_id}/{viewmode} {img_path}'
+                img_dirs = self.client.request(cmd)
+                image = cv2.imread(img_dirs)
+
+            elif mode == 'fast':  # get image from unrealcv in bmp format
+                cmd = f'vget /camera/{cam_id}/{viewmode} bmp'
+                image = self._decode_bmp(self.client.request(cmd))
+
+            elif mode == 'file_path':  # save image to file and read it
+                cmd = f'vget /camera/{cam_id}/{viewmode} {img_path}'
+                img_dirs = self.client.request(cmd)
+                image = read_png(img_dirs)
+
+            if image is None:
+                raise ValueError(f'Failed to read image with mode={mode}, viewmode={viewmode}')
+            return image
+
+        except Exception as e:
+            print(f'Error reading image: {str(e)}')
+            return np.zeros((480, 640, 3), dtype=np.uint8)
+
+    def _decode_npy(self, res):
+        """Decode NPY image.
+
+        Args:
+            res: NPY image.
+
+        Returns:
+            Decoded image.
+        """
+        image = np.load(BytesIO(res))
+        eps = 1e-6
+        depth_log = np.log(image + eps)
+
+        depth_min = np.min(depth_log)
+        depth_max = np.max(depth_log)
+        normalized_depth = (depth_log - depth_min) / (depth_max - depth_min)
+
+        gamma = 0.5
+        normalized_depth = np.power(normalized_depth, gamma)
+
+        image = (normalized_depth * 255).astype(np.uint8)
+
+        image = cv2.applyColorMap(image, cv2.COLORMAP_JET)
+        return image
+
+    def _decode_png(self, res):
+        """Decode PNG image.
+
+        Args:
+            res: PNG image.
+
+        Returns:
+            Decoded image.
+        """
+        img = np.asarray(PIL.Image.open(BytesIO(res)))
+        img = img[:, :, :-1]  # delete alpha channel
+        img = img[:, :, ::-1]  # transpose channel order
+        return img
+
+    def _decode_bmp(self, res, channel=4):
+        """Decode BMP image.
+
+        Args:
+            res: BMP image.
+            channel: Channel.
+
+        Returns:
+            Decoded image.
+        """
+        img = np.fromstring(res, dtype=np.uint8)
+        img = img[-self.resolution[1]*self.resolution[0]*channel:]
+        img = img.reshape(self.resolution[1], self.resolution[0], channel)
+        return img[:, :, :-1]
