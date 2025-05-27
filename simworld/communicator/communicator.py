@@ -529,12 +529,13 @@ class Communicator:
         self.ue_manager_name = 'GEN_BP_UEManager'
         self.unrealcv.spawn_bp_asset(ue_manager_path, self.ue_manager_name)
 
-    def generate_world(self, world_json, ue_asset_path):
+    def generate_world(self, world_json, ue_asset_path, run_time=True):
         """Generate world.
 
         Args:
             world_json: World configuration JSON file path.
             ue_asset_path: Unreal Engine asset path.
+            run_time: Whether to run the world generation in real time.
 
         Returns:
             set: A set of generated object IDs.
@@ -579,7 +580,8 @@ class Communicator:
                 return
             else:
                 self.unrealcv.spawn_bp_asset(instance_ref, id)
-                self.unrealcv.set_color(id, rgb_values)
+                if run_time:
+                    self.unrealcv.set_color(id, rgb_values)
                 location = node_df.loc[id, ['properties_location_x', 'properties_location_y', 'properties_location_z']].to_list()
                 self.unrealcv.set_location(location, id)
                 orientation = node_df.loc[id, ['properties_orientation_pitch', 'properties_orientation_yaw', 'properties_orientation_roll']].to_list()
