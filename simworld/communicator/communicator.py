@@ -145,6 +145,10 @@ class Communicator:
             self.agent_id_to_name[agent_id] = f'GEN_BP_Agent_{agent_id}'
         return self.agent_id_to_name[agent_id]
 
+    ##############################################################
+    # Scooter-related methods
+    ##############################################################
+
     def get_scooter_name(self, scooter_id):
         """Get scooter name.
 
@@ -154,6 +158,18 @@ class Communicator:
         if scooter_id not in self.scooter_id_to_name:
             self.scooter_id_to_name[scooter_id] = f'GEN_BP_Scooter_{scooter_id}'
         return self.scooter_id_to_name[scooter_id]
+
+    def set_scooter_attributes(self, scooter_id, throttle, brake, steering):
+        """Set scooter attributes.
+
+        Args:
+            scooter_id: Scooter ID.
+            throttle: Throttle.
+            brake: Brake.
+            steering: Steering.
+        """
+        name = self.get_scooter_name(scooter_id)
+        self.unrealcv.s_set_state(name, throttle, brake, steering)
 
     def get_camera_observation(self, cam_id, viewmode, mode='direct'):
         """Get camera observation.

@@ -591,6 +591,19 @@ class UnrealCV(object):
         with self.lock:
             self.client.request(cmd)
 
+    def s_set_state(self, object_name, throttle, brake, steering):
+        """Set scooter state.
+
+        Args:
+            object_name: Name of the scooter object.
+            throttle: Throttle value.
+            brake: Brake value.
+            steering: Steering value.
+        """
+        cmd = f'vbp {object_name} SetState {throttle} {brake} {steering}'
+        with self.lock:
+            self.client.request(cmd)
+
     ##############################################################
     # Camera
     ##############################################################
