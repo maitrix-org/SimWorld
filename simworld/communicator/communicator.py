@@ -6,6 +6,7 @@ through the UnrealCV client, handling vehicle, pedestrian, and traffic signal ma
 import json
 import math
 import re
+from threading import Lock
 
 import numpy as np
 import pandas as pd
@@ -33,9 +34,18 @@ class Communicator:
         self.ue_manager_name = None
         self.logger = Logger.get_logger('Communicator')
 
-    #
+        self.vehicle_id_to_name = {}
+        self.pedestrian_id_to_name = {}
+        self.traffic_signal_id_to_name = {}
+        self.agent_id_to_name = {}
+        self.scooter_id_to_name = {}
+        self.waypoint_mark_id_to_name = {}
+
+        self.lock = Lock()
+
+    ##############################################################
     # User Agent Methods
-    #
+    ##############################################################
 
     def agent_move_forward(self, agent_id):
         """Move agent forward.
@@ -90,6 +100,38 @@ class Communicator:
         """
         self.unrealcv.agent_sit_down(self.get_agent_name(agent_id))
 
+    def agent_get_on_scooter(self, agent_id):
+        """Get on scooter.
+
+        Args:
+            agent_id: Agent ID.
+        """
+        self.unrealcv.agent_get_on_scooter(self.get_agent_name(agent_id))
+
+    def agent_get_off_scooter(self, agent_id, scooter_id):
+        """Get off scooter.
+
+        Args:
+            agent_id: Agent ID.
+            scooter_id: Scooter ID of the agent to get off.
+        """
+        with self.lock:
+            self.unrealcv.agent_get_off_scooter(self.get_scooter_name(scooter_id))
+            objects = self.unrealcv.get_objects()
+
+        # Find the new Base_User_Agent object
+        new_agent = None
+        for obj in objects:
+            if 'Base_User_Agent_C_' in obj:
+                new_agent = obj
+                break
+
+        # Find which scooter ID no longer has a corresponding object
+        old_agent_name = self.get_agent_name(agent_id)
+        if old_agent_name not in objects:
+            # Update the mapping to bind the new agent with the scooter ID
+            self.unrealcv.set_object_name(new_agent, old_agent_name)
+
     def get_agent_name(self, agent_id):
         """Get agent name.
 
@@ -99,7 +141,19 @@ class Communicator:
         Returns:
             str: The formatted agent name.
         """
-        return f'GEN_BP_Agent_{agent_id}'
+        if agent_id not in self.agent_id_to_name:
+            self.agent_id_to_name[agent_id] = f'GEN_BP_Agent_{agent_id}'
+        return self.agent_id_to_name[agent_id]
+
+    def get_scooter_name(self, scooter_id):
+        """Get scooter name.
+
+        Args:
+            scooter_id: Scooter ID.
+        """
+        if scooter_id not in self.scooter_id_to_name:
+            self.scooter_id_to_name[scooter_id] = f'GEN_BP_Scooter_{scooter_id}'
+        return self.scooter_id_to_name[scooter_id]
 
     def get_camera_observation(self, cam_id, viewmode, mode='direct'):
         """Get camera observation.
@@ -122,7 +176,10 @@ class Communicator:
         """
         self.unrealcv.show_img(image)
 
+    ##############################################################
     # Vehicle-related methods
+    ##############################################################
+
     def update_vehicle(self, vehicle_id, throttle, brake, steering):
         """Update vehicle state.
 
@@ -171,9 +228,14 @@ class Communicator:
         Returns:
             Vehicle name.
         """
-        return f'GEN_BP_Vehicle_{vehicle_id}'
+        if vehicle_id not in self.vehicle_id_to_name:
+            self.vehicle_id_to_name[vehicle_id] = f'GEN_BP_Vehicle_{vehicle_id}'
+        return self.vehicle_id_to_name[vehicle_id]
 
+    ##############################################################
     # Pedestrian-related methods
+    ##############################################################
+
     def pedestrian_move_forward(self, pedestrian_id):
         """Move pedestrian forward.
 
@@ -240,9 +302,14 @@ class Communicator:
         Returns:
             Pedestrian name.
         """
-        return f'GEN_BP_Pedestrian_{pedestrian_id}'
+        if pedestrian_id not in self.pedestrian_id_to_name:
+            self.pedestrian_id_to_name[pedestrian_id] = f'GEN_BP_Pedestrian_{pedestrian_id}'
+        return self.pedestrian_id_to_name[pedestrian_id]
 
+    ##############################################################
     # Traffic signal related methods
+    ##############################################################
+
     def traffic_signal_switch_to(self, traffic_signal_id, state='green'):
         """Switch traffic signal state.
 
@@ -277,7 +344,9 @@ class Communicator:
         Returns:
             Traffic signal name.
         """
-        return f'GEN_BP_TrafficSignal_{traffic_signal_id}'
+        if traffic_signal_id not in self.traffic_signal_id_to_name:
+            self.traffic_signal_id_to_name[traffic_signal_id] = f'GEN_BP_TrafficSignal_{traffic_signal_id}'
+        return self.traffic_signal_id_to_name[traffic_signal_id]
 
     def get_waypoint_mark_name(self, waypoint_mark_id):
         """Get waypoint mark name.
@@ -288,10 +357,12 @@ class Communicator:
         Returns:
             Waypoint mark name.
         """
-        return f'GEN_BP_WaypointMark_{waypoint_mark_id}'
+        if waypoint_mark_id not in self.waypoint_mark_id_to_name:
+            self.waypoint_mark_id_to_name[waypoint_mark_id] = f'GEN_BP_WaypointMark_{waypoint_mark_id}'
+        return self.waypoint_mark_id_to_name[waypoint_mark_id]
 
     # Management related methods
-    def get_position_and_direction(self, vehicle_ids=[], pedestrian_ids=[], traffic_signal_ids=[], agent_ids=[]):
+    def get_position_and_direction(self, vehicle_ids=[], pedestrian_ids=[], traffic_signal_ids=[], agent_ids=[], scooter_ids=[]):
         """Get position and direction of vehicles, pedestrians, and traffic signals.
 
         Args:
@@ -299,6 +370,7 @@ class Communicator:
             pedestrian_ids: List of pedestrian IDs.
             traffic_signal_ids: List of traffic signal IDs.
             agent_ids: Optional list of agent IDs to get their positions and directions.
+            scooter_ids: Optional list of scooter IDs to get their positions and directions.
 
         Returns:
             Dictionary containing position and direction information for all objects.
@@ -374,6 +446,23 @@ class Communicator:
                     direction = float(match.group(1))
                     result[('agent', agent_id)] = (position, direction)
 
+        # process scooters
+        locations = info['SLocations']
+        rotations = info['SRotations']
+        for scooter_id in scooter_ids:
+            name = self.get_scooter_name(scooter_id)
+            location_pattern = f'{name}X=(.*?) Y=(.*?) Z='
+            match = re.search(location_pattern, locations)
+            if match:
+                x, y = float(match.group(1)), float(match.group(2))
+                position = Vector(x, y)
+
+                rotation_pattern = f'{name}P=.*? Y=(.*?) R='
+                match = re.search(rotation_pattern, rotations)
+                if match:
+                    direction = float(match.group(1))
+                    result[('scooter', scooter_id)] = (position, direction)
+
         return result
 
     # Initialization methods
@@ -396,6 +485,33 @@ class Communicator:
         orientation_3d = (
             0,  # Pitch
             math.degrees(math.atan2(agent.direction.y, agent.direction.x)),  # Yaw
+            0  # Roll
+        )
+        self.unrealcv.set_location(location_3d, name)
+        self.unrealcv.set_orientation(orientation_3d, name)
+        self.unrealcv.set_scale((1, 1, 1), name)  # Default scale
+        self.unrealcv.set_collision(name, True)
+        self.unrealcv.set_movable(name, True)
+
+    def spawn_scooter(self, scooter, model_path):
+        """Spawn scooter.
+
+        Args:
+            scooter: Scooter object.
+            model_path: Model path.
+        """
+        name = self.get_scooter_name(scooter.id)
+        self.unrealcv.spawn_bp_asset(model_path, name)
+        # Convert 2D position to 3D (x,y -> x,y,z)
+        location_3d = (
+            scooter.position.x,  # Unreal X = 2D Y
+            scooter.position.y,  # Unreal Y = 2D X
+            0  # Z coordinate (ground level)
+        )
+        # Convert 2D direction to 3D orientation (assuming rotation around Z axis)
+        orientation_3d = (
+            0,  # Pitch
+            math.degrees(math.atan2(scooter.direction.y, scooter.direction.x)),  # Yaw
             0  # Roll
         )
         self.unrealcv.set_location(location_3d, name)
@@ -528,6 +644,10 @@ class Communicator:
         """
         self.ue_manager_name = 'GEN_BP_UEManager'
         self.unrealcv.spawn_bp_asset(ue_manager_path, self.ue_manager_name)
+
+    def update_objects(self):
+        """Update objects."""
+        self.unrealcv.update_objects(self.ue_manager_name)
 
     def generate_world(self, world_json, ue_asset_path, run_time=True):
         """Generate world.

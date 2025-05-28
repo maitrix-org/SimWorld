@@ -251,6 +251,17 @@ class UnrealCV(object):
         objects = np.array(res.split())
         return objects
 
+    def set_object_name(self, name, new_name):
+        """Set object name.
+
+        Args:
+            name: Object name.
+            new_name: New object name.
+        """
+        cmd = f'vset /object/{name}/name {new_name}'
+        with self.lock:
+            self.client.request(cmd)
+
     def get_collision_num(self, name):
         """Get collision number.
 
@@ -559,6 +570,27 @@ class UnrealCV(object):
         with self.lock:
             self.client.request(cmd)
 
+    def agent_get_on_scooter(self, object_name):
+        """Get on scooter.
+
+        Args:
+            object_name: Name of the agent object to get on scooter.
+        """
+        cmd = f'vbp {object_name} GetOnScooter'
+        with self.lock:
+            self.client.request(cmd)
+        self.clean_garbage()
+
+    def agent_get_off_scooter(self, object_name):
+        """Get off scooter.
+
+        Args:
+            object_name: Name of the agent object to get off scooter.
+        """
+        cmd = f'vbp {object_name} GetOffScooter'
+        with self.lock:
+            self.client.request(cmd)
+
     ##############################################################
     # Camera
     ##############################################################
@@ -804,3 +836,13 @@ class UnrealCV(object):
         img = img[-self.resolution[1]*self.resolution[0]*channel:]
         img = img.reshape(self.resolution[1], self.resolution[0], channel)
         return img[:, :, :-1]
+
+    def update_objects(self, object_name):
+        """Update objects.
+
+        Args:
+            object_name: UE_Manager object name.
+        """
+        cmd = f'vbp {object_name} UpdateObjects'
+        with self.lock:
+            self.client.request(cmd)
