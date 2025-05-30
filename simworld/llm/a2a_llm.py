@@ -136,7 +136,7 @@ class A2ALLM(BaseLLM):
         system_prompt: str,
         user_prompt: str,
         output_format: str,
-        img: np.ndarray,
+        imgs: list[np.ndarray],
         few_shot_examples: str = '',
         max_tokens: int = 2048,
         temperature: float = 0.5,
@@ -148,6 +148,7 @@ class A2ALLM(BaseLLM):
             system_prompt: System prompt to guide model behavior.
             user_prompt: User input prompt.
             output_format: Expected JSON structure format.
+            imgs: List of images to be used in the prompt.
             few_shot_examples: Examples to guide the model output.
             max_tokens: Maximum number of tokens to generate.
             temperature: Sampling temperature.
@@ -156,22 +157,13 @@ class A2ALLM(BaseLLM):
         Returns:
             JSON string matching the specified format or None if generation fails.
         """
-        supports_vision = False
-        multimodal_models = ['gpt-4o', 'gpt-4o-mini', 'o1', 'o1-mini']
-        model_name = self.model_name.lower()
-        if model_name in multimodal_models:
-            supports_vision = True
-
-        if not supports_vision:
-            raise ValueError(f'Model {self.model_name} does not support vision')
-
         start_time = time.time()
         try:
             response = self._generate_text_structured_vlm_with_retry(
                 system_prompt,
                 user_prompt,
                 output_format,
-                img,
+                imgs,
                 few_shot_examples,
                 max_tokens,
                 temperature,
@@ -187,7 +179,7 @@ class A2ALLM(BaseLLM):
         system_prompt: str,
         user_prompt: str,
         output_format: str,
-        img: np.ndarray,
+        imgs: list[np.ndarray],
         few_shot_examples: str = '',
         max_tokens: int = 2048,
         temperature: float = 0.5,
@@ -201,11 +193,12 @@ class A2ALLM(BaseLLM):
         user_prompt = (
             f'{user_prompt}\n{format_message}\n{few_shot_examples}'
         )
-        img_data = self._process_image_to_base64(img)
+        img_datas = [self._process_image_to_base64(img) for img in imgs]
         user_content = []
         user_content.append({'type': 'text', 'text': user_prompt})
-        user_content.append({'type': 'image_url',
-                             'image_url': {'url': f'data:image/jpeg;base64,{img_data}'}})
+        for img_data in img_datas:
+            user_content.append({'type': 'image_url',
+                                 'image_url': {'url': f'data:image/jpeg;base64,{img_data}'}})
         messages.append({'role': 'user', 'content': user_content})
         response = self.client.chat.completions.create(
             model=self.model_name,
