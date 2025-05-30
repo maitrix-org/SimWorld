@@ -714,14 +714,13 @@ class UnrealCV(object):
         with self.lock:
             self.client.request(cmd)
 
-    def humanoid_listen(self, humanoid_name, listen_type):
+    def humanoid_listen(self, humanoid_name):
         """Listen.
 
         Args:
             humanoid_name: Name of the humanoid to discuss.
-            listen_type: Type of listening.
         """
-        cmd = f'vbp {humanoid_name} Listening {listen_type}'
+        cmd = f'vbp {humanoid_name} Listening'
         with self.lock:
             self.client.request(cmd)
 
