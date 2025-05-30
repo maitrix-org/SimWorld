@@ -1,8 +1,6 @@
 simworld:
   seed: 42
   dt: 0.1
-  enable_logging: false
-  enable_console_logging: false
   ue_manager_path: "/Game/TrafficSystem/UE_Manager.UE_Manager_C"
 
 citygen:
