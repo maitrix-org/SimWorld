@@ -111,12 +111,13 @@ user:
   num_agents: 3
   speed: 200
   a2a: True
-  rule_based: False
+  rule_based: True
   waypoint_distance_threshold: 200
   model_path: "/Game/TrafficSystem/Pedestrian/Base_User_Agent.Base_User_Agent_C"
   num_threads: 20
   llm_model_path: "gpt-4o-mini"
   llm_url: None
+  llm_provider: "openai"
 
 scooter:
   model_path: "/Game/ScooterAssets/Blueprints/BP_Scooter_Pawn.BP_Scooter_Pawn_C"

@@ -37,113 +37,121 @@ class Communicator:
         self.vehicle_id_to_name = {}
         self.pedestrian_id_to_name = {}
         self.traffic_signal_id_to_name = {}
-        self.agent_id_to_name = {}
+        self.humanoid_id_to_name = {}
         self.scooter_id_to_name = {}
         self.waypoint_mark_id_to_name = {}
 
         self.lock = Lock()
 
     ##############################################################
-    # User Agent Methods
+    # Humanoid Methods
     ##############################################################
 
-    def agent_move_forward(self, agent_id):
-        """Move agent forward.
+    def humanoid_move_forward(self, humanoid_id):
+        """Move humanoid forward.
 
         Args:
-            agent_id: The unique identifier of the agent to move forward.
+            humanoid_id: The unique identifier of the humanoid to move forward.
         """
-        self.unrealcv.agent_move_forward(self.get_agent_name(agent_id))
+        self.unrealcv.humanoid_move_forward(self.get_humanoid_name(humanoid_id))
 
-    def agent_rotate(self, agent_id, angle, direction):
-        """Rotate agent.
+    def humanoid_rotate(self, humanoid_id, angle, direction):
+        """Rotate humanoid.
 
         Args:
-            agent_id: Agent ID.
+            humanoid_id: humanoid ID.
             angle: Rotation angle.
             direction: Rotation direction.
         """
-        self.unrealcv.agent_rotate(self.get_agent_name(agent_id), angle, direction)
+        self.unrealcv.humanoid_rotate(self.get_humanoid_name(humanoid_id), angle, direction)
 
-    def agent_stop(self, agent_id):
-        """Stop agent.
+    def humanoid_stop(self, humanoid_id):
+        """Stop humanoid.
 
         Args:
-            agent_id: Agent ID.
+            humanoid_id: humanoid ID.
         """
-        self.unrealcv.agent_stop(self.get_agent_name(agent_id))
+        self.unrealcv.humanoid_stop(self.get_humanoid_name(humanoid_id))
 
-    def agent_step_forward(self, agent_id, duration, direction=0):
+    def humanoid_step_forward(self, humanoid_id, duration, direction=0):
         """Step forward.
 
         Args:
-            agent_id: Agent ID.
+            humanoid_id: humanoid ID.
             duration: Duration.
             direction: Direction.
         """
-        self.unrealcv.agent_step_forward(self.get_agent_name(agent_id), duration, direction)
+        self.unrealcv.humanoid_step_forward(self.get_humanoid_name(humanoid_id), duration, direction)
 
-    def agent_set_speed(self, agent_id, speed):
-        """Set agent speed.
+    def humanoid_set_speed(self, humanoid_id, speed):
+        """Set humanoid speed.
 
         Args:
-            agent_id: Agent ID.
+            humanoid_id: humanoid ID.
             speed: Speed.
         """
-        self.unrealcv.agent_set_speed(self.get_agent_name(agent_id), speed)
+        self.unrealcv.humanoid_set_speed(self.get_humanoid_name(humanoid_id), speed)
 
-    def agent_sit_down(self, agent_id):
-        """Sit down.
-
-        Args:
-            agent_id: Agent ID.
-        """
-        self.unrealcv.agent_sit_down(self.get_agent_name(agent_id))
-
-    def agent_get_on_scooter(self, agent_id):
+    def humanoid_get_on_scooter(self, humanoid_id):
         """Get on scooter.
 
         Args:
-            agent_id: Agent ID.
+            humanoid_id: humanoid ID.
         """
-        self.unrealcv.agent_get_on_scooter(self.get_agent_name(agent_id))
+        self.unrealcv.humanoid_get_on_scooter(self.get_humanoid_name(humanoid_id))
 
-    def agent_get_off_scooter(self, agent_id, scooter_id):
+    def humanoid_get_off_scooter(self, humanoid_id, scooter_id):
         """Get off scooter.
 
         Args:
-            agent_id: Agent ID.
-            scooter_id: Scooter ID of the agent to get off.
+            humanoid_id: humanoid ID.
+            scooter_id: Scooter ID of the humanoid to get off.
         """
         with self.lock:
-            self.unrealcv.agent_get_off_scooter(self.get_scooter_name(scooter_id))
+            self.unrealcv.humanoid_get_off_scooter(self.get_scooter_name(scooter_id))
             objects = self.unrealcv.get_objects()
 
-        # Find the new Base_User_Agent object
-        new_agent = None
+        # Find the new Base_User_humanoid object
+        new_humanoid = None
         for obj in objects:
-            if 'Base_User_Agent_C_' in obj:
-                new_agent = obj
+            if 'Base_User_humanoid_C_' in obj:
+                new_humanoid = obj
                 break
 
         # Find which scooter ID no longer has a corresponding object
-        old_agent_name = self.get_agent_name(agent_id)
-        if old_agent_name not in objects:
-            # Update the mapping to bind the new agent with the scooter ID
-            self.unrealcv.set_object_name(new_agent, old_agent_name)
+        old_humanoid_name = self.get_humanoid_name(humanoid_id)
+        if old_humanoid_name not in objects:
+            # Update the mapping to bind the new humanoid with the scooter ID
+            self.unrealcv.set_object_name(new_humanoid, old_humanoid_name)
 
-    def get_agent_name(self, agent_id):
-        """Get agent name.
+    def humanoid_sit_down(self, humanoid_id):
+        """Sit down.
 
         Args:
-            agent_id: Agent ID.
+            humanoid_id: humanoid ID.
+        """
+        self.unrealcv.humanoid_sit_down(self.get_humanoid_name(humanoid_id))
+
+    def humanoid_stand_up(self, humanoid_id):
+        """Stand up.
+
+        Args:
+            humanoid_id: humanoid ID.
+        """
+        self.unrealcv.humanoid_stand_up(self.get_humanoid_name(humanoid_id))
+
+    def get_humanoid_name(self, humanoid_id):
+        """Get humanoid name.
+
+        Args:
+            humanoid_id: humanoid ID.
 
         Returns:
-            str: The formatted agent name.
+            str: The formatted humanoid name.
         """
-        if agent_id not in self.agent_id_to_name:
-            self.agent_id_to_name[agent_id] = f'GEN_BP_Agent_{agent_id}'
-        return self.agent_id_to_name[agent_id]
+        if humanoid_id not in self.humanoid_id_to_name:
+            self.humanoid_id_to_name[humanoid_id] = f'GEN_BP_humanoid_{humanoid_id}'
+        return self.humanoid_id_to_name[humanoid_id]
 
     ##############################################################
     # Scooter-related methods
@@ -378,14 +386,14 @@ class Communicator:
         return self.waypoint_mark_id_to_name[waypoint_mark_id]
 
     # Management related methods
-    def get_position_and_direction(self, vehicle_ids=[], pedestrian_ids=[], traffic_signal_ids=[], agent_ids=[], scooter_ids=[]):
+    def get_position_and_direction(self, vehicle_ids=[], pedestrian_ids=[], traffic_signal_ids=[], humanoid_ids=[], scooter_ids=[]):
         """Get position and direction of vehicles, pedestrians, and traffic signals.
 
         Args:
             vehicle_ids: List of vehicle IDs.
             pedestrian_ids: List of pedestrian IDs.
             traffic_signal_ids: List of traffic signal IDs.
-            agent_ids: Optional list of agent IDs to get their positions and directions.
+            humanoid_ids: Optional list of humanoid IDs to get their positions and directions.
             scooter_ids: Optional list of scooter IDs to get their positions and directions.
 
         Returns:
@@ -445,11 +453,11 @@ class Communicator:
 
                 result[('traffic_signal', traffic_signal_id)] = (is_vehicle_green, is_pedestrian_walk, left_time)
 
-        # process agents
+        # process humanoids
         locations = info['ALocations']
         rotations = info['ARotations']
-        for agent_id in agent_ids:
-            name = self.get_agent_name(agent_id)
+        for humanoid_id in humanoid_ids:
+            name = self.get_humanoid_name(humanoid_id)
             location_pattern = f'{name}X=(.*?) Y=(.*?) Z='
             match = re.search(location_pattern, locations)
             if match:
@@ -460,7 +468,7 @@ class Communicator:
                 match = re.search(rotation_pattern, rotations)
                 if match:
                     direction = float(match.group(1))
-                    result[('agent', agent_id)] = (position, direction)
+                    result[('humanoid', humanoid_id)] = (position, direction)
 
         # process scooters
         locations = info['SLocations']
@@ -486,10 +494,10 @@ class Communicator:
         """Spawn agent.
 
         Args:
-            agent: Agent object.
+            agent: agent object.
             model_path: Model path.
         """
-        name = self.get_agent_name(agent.id)
+        name = self.get_humanoid_name(agent.id)
         self.unrealcv.spawn_bp_asset(model_path, name)
         # Convert 2D position to 3D (x,y -> x,y,z)
         location_3d = (

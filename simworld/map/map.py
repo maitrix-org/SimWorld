@@ -254,7 +254,14 @@ class Map:
         Returns:
             Nearest node.
         """
-        return min(self.nodes, key=lambda n: n.position.distance(position))
+        min_distance = float('inf')
+        closest_node = None
+        for node in self.nodes:
+            distance = position.distance(node.position)
+            if distance < min_distance:
+                min_distance = distance
+                closest_node = node
+        return closest_node
 
     def get_random_node(self, type: str = None, exclude: List[Node] = None) -> Node:
         """Get a random node from the map.

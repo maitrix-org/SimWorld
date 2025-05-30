@@ -56,7 +56,7 @@ class UserAgent(BaseAgent):
         self.exit_event = exit_event
 
         if use_a2a:
-            self.a2a = Activity2Action(user_agent=self, name=self.communicator.get_agent_name(self.id), model=self.llm,
+            self.a2a = Activity2Action(user_agent=self, name=self.communicator.get_humanoid_name(self.id), model=self.llm,
                                        rule_based=use_rule_based, exit_event=self.exit_event)
 
     def __str__(self):

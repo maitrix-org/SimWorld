@@ -15,7 +15,6 @@ import numpy as np
 import PIL.Image
 import unrealcv
 from IPython.display import display
-from unrealcv.api import MsgDecoder
 from unrealcv.util import read_png
 
 from simworld.utils.logger import Logger
@@ -42,7 +41,6 @@ class UnrealCV(object):
         self.client.connect()
 
         self.resolution = resolution
-        self.decoder = MsgDecoder(self.resolution)
 
         self.lock = Lock()
         self.logger = Logger.get_logger('UnrealCV')
@@ -195,40 +193,6 @@ class UnrealCV(object):
         with self.lock:
             self.client.request(cmd)
 
-    def apply_action_transition(self, robot_name, action):
-        """Apply transition action.
-
-        Args:
-            robot_name: Robot name.
-            action: Action in the form [speed, duration, direction].
-        """
-        [speed, duration, direction] = action
-        if speed < 0:
-            # Switch direction
-            if direction == 0:
-                direction = 1
-            elif direction == 1:
-                direction = 0
-            elif direction == 2:
-                direction = 3
-            elif direction == 3:
-                direction = 2
-        cmd = f'vbp {robot_name} Move_Speed {speed} {duration} {direction}'
-        with self.lock:
-            self.client.request(cmd)
-
-    def apply_action_rotation(self, robot_name, action):
-        """Apply rotation action.
-
-        Args:
-            robot_name: Robot name.
-            action: Action in the form [duration, angle, direction].
-        """
-        [duration, angle, direction] = action
-        cmd = f'vbp {robot_name} Rotate_Angle {duration} {angle} {direction}'
-        with self.lock:
-            self.client.request(cmd)
-
     def set_fps(self, fps):
         """Set FPS.
 
@@ -277,11 +241,11 @@ class UnrealCV(object):
         with self.lock:
             self.client.request(cmd)
 
-    def get_collision_num(self, name):
+    def get_collision_num(self, actor_name):
         """Get collision number.
 
         Args:
-            name: Object name.
+            actor_name: Actor name.
 
         Returns:
             json: {
@@ -292,7 +256,7 @@ class UnrealCV(object):
             }
         """
         with self.lock:
-            res = self.client.request(f'vbp {name} GetCollisionNum')
+            res = self.client.request(f'vbp {actor_name} GetCollisionNum')
         return res
 
     def get_location(self, actor_name):
@@ -533,6 +497,7 @@ class UnrealCV(object):
         cmd = f'vbp {robot_name} Move_Speed {speed} {duration} {direction}'
         with self.lock:
             self.client.request(cmd)
+        time.sleep(duration)
 
     def dog_rotate(self, robot_name, action):
         """Apply rotation action.
@@ -545,25 +510,27 @@ class UnrealCV(object):
         cmd = f'vbp {robot_name} Rotate_Angle {duration} {angle} {direction}'
         with self.lock:
             self.client.request(cmd)
+        time.sleep(duration)
+
     ##############################################################
-    # Agent System
+    # Humanoid System
     ##############################################################
 
-    def agent_move_forward(self, object_name):
-        """Move agent forward.
+    def humanoid_move_forward(self, object_name):
+        """Move humanoid forward.
 
         Args:
-            object_name: Name of the agent object to move forward.
+            object_name: Name of the humanoid object to move forward.
         """
         cmd = f'vbp {object_name} MoveForward'
         with self.lock:
             self.client.request(cmd)
 
-    def agent_rotate(self, object_name, angle, direction='left'):
-        """Rotate agent.
+    def humanoid_rotate(self, object_name, angle, direction='left'):
+        """Rotate humanoid.
 
         Args:
-            object_name: Name of the agent object to rotate.
+            object_name: Name of the humanoid object to rotate.
             angle: Rotation angle in degrees.
             direction: Direction of rotation, either 'left' or 'right'. Defaults to 'left'.
         """
@@ -577,21 +544,21 @@ class UnrealCV(object):
             self.client.request(cmd)
         time.sleep(1)
 
-    def agent_stop(self, object_name):
-        """Stop agent.
+    def humanoid_stop(self, object_name):
+        """Stop humanoid.
 
         Args:
-            object_name: Name of the agent object to stop.
+            object_name: Name of the humanoid object to stop.
         """
-        cmd = f'vbp {object_name} StopAgent'
+        cmd = f'vbp {object_name} Stophumanoid'
         with self.lock:
             self.client.request(cmd)
 
-    def agent_step_forward(self, object_name, duration, direction=0):
+    def humanoid_step_forward(self, object_name, duration, direction=0):
         """Step forward.
 
         Args:
-            object_name: Name of the agent object to step forward.
+            object_name: Name of the humanoid object to step forward.
             duration: Duration of the step forward movement in seconds.
             direction: Direction of the step forward movement.
         """
@@ -600,22 +567,22 @@ class UnrealCV(object):
             self.client.request(cmd)
         time.sleep(duration)
 
-    def agent_set_speed(self, object_name, speed):
-        """Set agent speed.
+    def humanoid_set_speed(self, object_name, speed):
+        """Set humanoid speed.
 
         Args:
-            object_name: Name of the agent object to set speed.
+            object_name: Name of the humanoid object to set speed.
             speed: Speed to set.
         """
         cmd = f'vbp {object_name} SetMaxSpeed {speed}'
         with self.lock:
             self.client.request(cmd)
 
-    def agent_sit_down(self, object_name):
+    def humanoid_sit_down(self, object_name):
         """Sit down.
 
         Args:
-            object_name: Name of the agent object to sit down.
+            object_name: Name of the humanoid object to sit down.
         """
         cmd = f'vbp {object_name} SitDown'
         with self.lock:
@@ -626,11 +593,11 @@ class UnrealCV(object):
             elif success == 'true':
                 return True
 
-    def agent_stand_up(self, object_name):
+    def humanoid_stand_up(self, object_name):
         """Stand up.
 
         Args:
-            object_name: Name of the agent object to sit down.
+            object_name: Name of the humanoid object to sit down.
         """
         cmd = f'vbp {object_name} StandUp'
         with self.lock:
@@ -641,35 +608,35 @@ class UnrealCV(object):
             elif success == 'true':
                 return True
 
-    def agent_get_on_scooter(self, object_name):
+    def humanoid_get_on_scooter(self, object_name):
         """Get on scooter.
 
         Args:
-            object_name: Name of the agent object to get on scooter.
+            object_name: Name of the humanoid object to get on scooter.
         """
         cmd = f'vbp {object_name} GetOnScooter'
         with self.lock:
             self.client.request(cmd)
         self.clean_garbage()
 
-    def agent_get_off_scooter(self, object_name):
+    def humanoid_get_off_scooter(self, object_name):
         """Get off scooter.
 
         Args:
-            object_name: Name of the agent object to get off scooter.
+            object_name: Name of the humanoid object to get off scooter.
         """
         cmd = f'vbp {object_name} GetOffScooter'
         with self.lock:
             self.client.request(cmd)
 
-    def agent_pick_up_object(self, agent_name, object_name):
+    def humanoid_pick_up_object(self, humanoid_name, object_name):
         """Get off scooter.
 
         Args:
-            agent_name: Name of the agent to pick up object.
+            humanoid_name: Name of the humanoid to pick up object.
             object_name: Name of the object to pick up.
         """
-        cmd = f'vbp {agent_name} PickUp {object_name}'
+        cmd = f'vbp {humanoid_name} PickUp {object_name}'
         with self.lock:
             res = self.client.request(cmd)
             success = str(json.loads(res)['Success'])
@@ -678,13 +645,13 @@ class UnrealCV(object):
             elif success == 'true':
                 return True
 
-    def agent_drop_object(self, agent_name):
+    def humanoid_drop_object(self, humanoid_name):
         """Drop object.
 
         Args:
-            agent_name: Name of the agent to drop object.
+            humanoid_name: Name of the humanoid to drop object.
         """
-        cmd = f'vbp {agent_name} DropOff'
+        cmd = f'vbp {humanoid_name} DropOff'
         with self.lock:
             res = self.client.request(cmd)
             success = str(json.loads(res)['Success'])
@@ -693,14 +660,14 @@ class UnrealCV(object):
             elif success == 'true':
                 return True
 
-    def agent_enter_vehicle(self, agent_name, vehicle_name):
+    def humanoid_enter_vehicle(self, humanoid_name, vehicle_name):
         """Enter vehicle.
 
         Args:
-            agent_name: Name of the agent to enter vehicle.
+            humanoid_name: Name of the humanoid to enter vehicle.
             vehicle_name: Name of the vehicle to enter.
         """
-        cmd = f'vbp {agent_name} EnterVehicle {vehicle_name}'
+        cmd = f'vbp {humanoid_name} EnterVehicle {vehicle_name}'
         with self.lock:
             res = self.client.request(cmd)
             success = str(json.loads(res)['Success'])
@@ -709,14 +676,14 @@ class UnrealCV(object):
             elif success == 'true':
                 return True
 
-    def agent_exit_vehicle(self, agent_name, vehicle_name):
+    def humanoid_exit_vehicle(self, humanoid_name, vehicle_name):
         """Exit vehicle.
 
         Args:
-            agent_name: Name of the agent to enter vehicle.
+            humanoid_name: Name of the humanoid to enter vehicle.
             vehicle_name: Name of the vehicle to exit.
         """
-        cmd = f'vbp {agent_name} ExitVehicle {vehicle_name}'
+        cmd = f'vbp {humanoid_name} ExitVehicle {vehicle_name}'
         with self.lock:
             res = self.client.request(cmd)
             success = str(json.loads(res)['Success'])
@@ -725,56 +692,56 @@ class UnrealCV(object):
             elif success == 'true':
                 return True
 
-    def agent_discuss(self, agent_name, discuss_type):
+    def humanoid_discuss(self, humanoid_name, discuss_type):
         """Discuss.
 
         Args:
-            agent_name: Name of the agent to discuss.
-            discuss_type: Type of discussion.
+            humanoid_name: Name of the humanoid to discuss.
+            discuss_type: Type of discussion. Can be [0, 1]
         """
-        cmd = f'vbp {agent_name} Discussion {discuss_type}'
+        cmd = f'vbp {humanoid_name} Discussion {discuss_type}'
         with self.lock:
             self.client.request(cmd)
 
-    def agent_argue(self, agent_name, argue_type):
+    def humanoid_argue(self, humanoid_name, argue_type):
         """Argue.
 
         Args:
-            agent_name: Name of the agent to argue.
-            argue_type: Type of arguing.
+            humanoid_name: Name of the humanoid to argue.
+            argue_type: Type of arguing. Can be [0, 1]
         """
-        cmd = f'vbp {agent_name} Arguing {argue_type}'
+        cmd = f'vbp {humanoid_name} Arguing {argue_type}'
         with self.lock:
             self.client.request(cmd)
 
-    def agent_listen(self, agent_name, listen_type):
+    def humanoid_listen(self, humanoid_name, listen_type):
         """Listen.
 
         Args:
-            agent_name: Name of the agent to discuss.
+            humanoid_name: Name of the humanoid to discuss.
             listen_type: Type of listening.
         """
-        cmd = f'vbp {agent_name} Listening {listen_type}'
+        cmd = f'vbp {humanoid_name} Listening {listen_type}'
         with self.lock:
             self.client.request(cmd)
 
-    def agent_wave_to_dog(self, agent_name):
+    def humanoid_wave_to_dog(self, humanoid_name):
         """Wave to dog.
 
         Args:
-            agent_name: Name of the agent to wave to dog.
+            humanoid_name: Name of the humanoid to wave to dog.
         """
-        cmd = f'vbp {agent_name} Wave2Dog'
+        cmd = f'vbp {humanoid_name} Wave2Dog'
         with self.lock:
             self.client.request(cmd)
 
-    def agent_stop_current_action(self, agent_name):
+    def humanoid_stop_current_action(self, humanoid_name):
         """Stop current action.
 
         Args:
-            agent_name: Name of the agent to stop current action.
+            humanoid_name: Name of the humanoid to stop current action.
         """
-        cmd = f'vbp {agent_name} StopAction'
+        cmd = f'vbp {humanoid_name} StopAction'
         with self.lock:
             self.client.request(cmd)
 

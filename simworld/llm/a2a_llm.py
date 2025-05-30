@@ -16,9 +16,9 @@ from .retry import LLMResponseParsingError
 
 class A2ALLM(BaseLLM):
     """A2A LLM class for handling interactions with language models."""
-    def __init__(self, model_name: str = 'gpt-4o-mini', url: str = 'https://openrouter.ai/api/v1', api_key: str = None):
+    def __init__(self, model_name: str = 'gpt-4o-mini', url: str = None, provider: str = 'openai'):
         """Initialize the A2A LLM."""
-        super().__init__(model_name, url, api_key)
+        super().__init__(model_name, url, provider)
 
         self.logger = Logger.get_logger('A2ALLM')
 

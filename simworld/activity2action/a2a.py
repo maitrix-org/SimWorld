@@ -166,12 +166,11 @@ class Activity2Action:
     def navigate(self, waypoint: Vector) -> None:
         """Navigate from current position to a given waypoint."""
         self.logger.info(f'Agent {self.agent.id} Target waypoint: {waypoint}')
-        # print(f'Agent {self.agent.id} Target waypoint: {waypoint}', flush=True)
 
         if self.rule_based:
             # Get the shortest path from current position to the target waypoint
-            path = self.shortest_path(self.agent.position, waypoint)
-            # print(f'Agent {self.agent.id} Shortest Path: {path}', flush=True)
+            path = self.map.get_shortest_path(self.map.get_closest_node(self.agent.position), self.map.get_closest_node(waypoint))
+            path = [n.position for n in path]
             self.logger.info(f'Agent {self.agent.id} Shortest Path: {path}')
             for point in path:
                 self.navigate_rule_based(point)
@@ -199,27 +198,18 @@ class Activity2Action:
 
     def navigate_moving(self, waypoint: Vector) -> None:
         """Rule-based steering and movement toward a waypoint."""
-        self.logger.info(
-            f'Agent {self.agent.id} Current pos: {self.agent.position}, target: {waypoint}, dir: {self.agent.direction}'
-        )
-        # print(
-        #     f'Agent {self.agent.id} Current pos: {self.agent.position}, target: {waypoint}, dir: {self.agent.direction}', flush=True
-        # )
-        self.client.agent_move_forward(self.agent.id)
+        self.logger.info(f'Agent {self.agent.id} Current pos: {self.agent.position}, target: {waypoint}, dir: {self.agent.direction}')
+
+        self.client.humanoid_move_forward(self.agent.id)
         while not self.walk_arrive_at_waypoint(waypoint) and (self.exit_event is None or not self.exit_event.is_set()):
             while not self.align_direction(waypoint) and (self.exit_event is None or not self.exit_event.is_set()):
                 angle, turn = self.get_angle_and_direction(waypoint)
-                self.client.agent_rotate(self.agent.id, angle, turn)
-        self.client.agent_stop(self.agent.id)
+                self.client.humanoid_rotate(self.agent.id, angle, turn)
+        self.client.humanoid_stop(self.agent.id)
 
     def navigate_vision_based(self, waypoint: Vector) -> None:
         """Placeholder for vision-based navigation logic."""
-        self.logger.info(
-            f'Agent {self.agent.id} Current pos: {self.agent.position}, target: {waypoint}, dir: {self.agent.direction}'
-        )
-        # print(
-        #     f'Agent {self.agent.id} Current pos: {self.agent.position}, target: {waypoint}, dir: {self.agent.direction}', flush=True
-        # )
+        self.logger.info(f'Agent {self.agent.id} Current pos: {self.agent.position}, target: {waypoint}, dir: {self.agent.direction}')
         while not self.walk_arrive_at_waypoint(waypoint) and not self.exit_event.is_set():
             image = self.client.get_camera_observation(self.camera_id, self.observation_viewmode, mode='direct')
             # self.client.show_img(image)
@@ -243,14 +233,14 @@ class Activity2Action:
 
             response = json.loads(response)
             if response['choice'] == 'MoveForward':
-                self.client.agent_step_forward(self.agent.id, response['time'])
+                self.client.humanoid_step_forward(self.agent.id, response['time'])
             elif response['choice'] == 'Rotate':
-                self.client.agent_rotate(self.agent.id, response['angle'], response['direction'])
+                self.client.humanoid_rotate(self.agent.id, response['angle'], response['direction'])
             else:
                 self.logger.error(f'Invalid action: {response}')
 
     def walk_arrive_at_waypoint(self, waypoint: Vector) -> bool:
-        """Return True if agent is within threshold of waypoint."""
+        """Return True if humanoid is within threshold of waypoint."""
         threshold = self.agent.config['user.waypoint_distance_threshold']
         # print(f'Agent {self.agent.id} Walk distance: {self.agent.position.distance(waypoint)}', flush=True)
         if self.agent.position.distance(waypoint) < threshold:
