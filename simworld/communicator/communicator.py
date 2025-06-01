@@ -111,10 +111,10 @@ class Communicator:
             self.unrealcv.humanoid_get_off_scooter(self.get_scooter_name(scooter_id))
             objects = self.unrealcv.get_objects()
 
-        # Find the new Base_User_humanoid object
+        # Find the new Base_User_Agent object
         new_humanoid = None
         for obj in objects:
-            if 'Base_User_humanoid_C_' in obj:
+            if 'Base_User_Agent_C_' in obj:
                 new_humanoid = obj
                 break
 
@@ -150,7 +150,7 @@ class Communicator:
             str: The formatted humanoid name.
         """
         if humanoid_id not in self.humanoid_id_to_name:
-            self.humanoid_id_to_name[humanoid_id] = f'GEN_BP_humanoid_{humanoid_id}'
+            self.humanoid_id_to_name[humanoid_id] = f'GEN_BP_Humanoid_{humanoid_id}'
         return self.humanoid_id_to_name[humanoid_id]
 
     ##############################################################

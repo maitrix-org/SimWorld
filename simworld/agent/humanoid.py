@@ -12,7 +12,7 @@ class Humanoid(BaseAgent):
 
     _id_counter = 0
 
-    def __init__(self, position: Vector, direction: Vector, map: Map, communicator: Communicator, config: Config):
+    def __init__(self, position: Vector, direction: Vector, map: Map = None, communicator: Communicator = None, config: Config = None):
         """Initialize humanoid agent.
 
         Args:
