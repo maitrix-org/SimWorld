@@ -49,6 +49,8 @@ class BaseLLM(metaclass=LLMMetaclass):
         openai_api_key = os.getenv('OPENAI_API_KEY')
         openrouter_api_key = os.getenv('OPENROUTER_API_KEY')
 
+        self.provider = provider
+
         if provider == 'openai':
             if not openai_api_key:
                 raise ValueError('No OpenAI API key provided. Please set OPENAI_API_KEY environment variable.')

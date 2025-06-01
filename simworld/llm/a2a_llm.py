@@ -47,7 +47,7 @@ class A2ALLM(BaseLLM):
         user_content = []
         user_content.append({'type': 'text', 'text': user_prompt})
 
-        self.logger.info(f'user_content: {user_content}')
+        # self.logger.info(f'user_content: {user_content}')
         for image in images:
             img_data = self._process_image_to_base64(image)
             user_content.append({

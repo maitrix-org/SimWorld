@@ -33,7 +33,7 @@ SimWorld's architecture is designed to be modular and flexible, supporting an ar
 ### Project Structure
 ```bash
 simworld/                # Python package
-   activity2action/      # Activity to action component
+   local_planner/        # Local planner component
    agent/                # Basic agent class
    assets_rp/            # Live editor component for retrieval and re-placing
    citygen/              # City layout procedural generator

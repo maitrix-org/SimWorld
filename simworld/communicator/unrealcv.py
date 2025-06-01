@@ -15,7 +15,6 @@ import numpy as np
 import PIL.Image
 import unrealcv
 from IPython.display import display
-from unrealcv.util import read_png
 
 from simworld.utils.logger import Logger
 
@@ -550,7 +549,7 @@ class UnrealCV(object):
         Args:
             object_name: Name of the humanoid object to stop.
         """
-        cmd = f'vbp {object_name} Stophumanoid'
+        cmd = f'vbp {object_name} StopAgent'
         with self.lock:
             self.client.request(cmd)
 
@@ -920,26 +919,32 @@ class UnrealCV(object):
             if mode == 'direct':  # get image from unrealcv in png format
                 if viewmode == 'depth':
                     cmd = f'vget /camera/{cam_id}/{viewmode} npy'
-                    # image = read_npy(self.client.request(cmd))
-                    image = self._decode_npy(self.client.request(cmd))
+                    with self.lock:
+                        res = self.client.request(cmd)
+                    image = self._decode_npy(res)
                 else:
                     cmd = f'vget /camera/{cam_id}/{viewmode} png'
-                    # image = read_png(self.client.request(cmd))
-                    image = self._decode_png(self.client.request(cmd))
+                    with self.lock:
+                        res = self.client.request(cmd)
+                    image = self._decode_png(res)
             elif mode == 'file':  # save image to file and read it
                 img_path = os.path.join(os.getcwd(), f'{cam_id}-{viewmode}.png')
                 cmd = f'vget /camera/{cam_id}/{viewmode} {img_path}'
-                img_dirs = self.client.request(cmd)
+                with self.lock:
+                    img_dirs = self.client.request(cmd)
                 image = cv2.imread(img_dirs)
 
             elif mode == 'fast':  # get image from unrealcv in bmp format
                 cmd = f'vget /camera/{cam_id}/{viewmode} bmp'
-                image = self._decode_bmp(self.client.request(cmd))
+                with self.lock:
+                    res = self.client.request(cmd)
+                image = self._decode_bmp(res)
 
             elif mode == 'file_path':  # save image to file and read it
                 cmd = f'vget /camera/{cam_id}/{viewmode} {img_path}'
-                img_dirs = self.client.request(cmd)
-                image = read_png(img_dirs)
+                with self.lock:
+                    img_dirs = self.client.request(cmd)
+                image = cv2.imread(img_dirs)
 
             if image is None:
                 raise ValueError(f'Failed to read image with mode={mode}, viewmode={viewmode}')

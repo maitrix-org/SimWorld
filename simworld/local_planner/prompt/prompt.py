@@ -1,11 +1,9 @@
 """Prompt module: defines system and user prompt templates for SimWorld agents."""
 
-PARSER_SYSTEM_PROMPT = """
-You are a planner for a embodied agent. You are given a plan from the user, you should parse the plan into a list of actions.
+PARSER_SYSTEM_PROMPT = """You are a planner for a embodied agent. You are given a plan from the user, you should parse the plan into a list of actions.
 """
 
-PARSER_USER_PROMPT = """
-You are now at {position} in a city, where the unit is cm. And you have a map of the city structured as a graph with nodes and edges:
+PARSER_USER_PROMPT = """You are now at {position} in a city, where the unit is cm. And you have a map of the city structured as a graph with nodes and edges:
 {map}
 
 You have the following actions:
@@ -15,9 +13,11 @@ You are given a plan in natural language:
 {plan}
 
 You should parse the plan into a list of actions. Output your decision in JSON format with only the following keys: action_queue, destination, object_name, reasoning.
+
 Example outputs:
-{"action_queue": [0, 1], "destination": [200, 0], "reasoning": "I need to go to the destination."}
-{"action_queue": [0, 1, 2], "destination": [100, 100], "object_name": "bottle", "reasoning": "I need to go to the destination and pick up the bottle."}
+
+{{"action_queue": [0, 1], "destination": [200, 0], "reasoning": "I need to go to the destination."}}
+{{"action_queue": [0, 1, 2], "destination": [100, 100], "object_name": "bottle", "reasoning": "I need to go to the destination and pick up the bottle."}}
 """
 
 
@@ -47,8 +47,9 @@ You are required to make a decision for your next action. You have the following
 - 2: Turn. Specify angle (0–180 degrees) and direction (clockwise = true/false).
 
 Output only the action JSON with the following keys: choice, duration, direction, angle, clockwise.
+
 Example outputs:
-{"choice": 0}
-{"choice": 1, "duration": 3, "direction": 0}
-{"choice": 2, "angle": 90, "clockwise": true}
+{{"choice": 0}}
+{{"choice": 1, "duration": 3, "direction": 0}}
+{{"choice": 2, "angle": 90, "clockwise": true}}
 """

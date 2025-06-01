@@ -1,6 +1,9 @@
 """Humanoid agent class."""
 
 from simworld.agent.base_agent import BaseAgent
+from simworld.communicator.communicator import Communicator
+from simworld.config import Config
+from simworld.map.map import Map
 from simworld.utils.vector import Vector
 
 
@@ -9,16 +12,23 @@ class Humanoid(BaseAgent):
 
     _id_counter = 0
 
-    def __init__(self, position: Vector, direction: Vector):
+    def __init__(self, position: Vector, direction: Vector, map: Map, communicator: Communicator, config: Config):
         """Initialize humanoid agent.
 
         Args:
-            position: Position.
-            direction: Direction.
+            position: Initial position.
+            direction: Initial direction.
+            map: Map.
+            communicator: Communicator.
+            config: Config.
         """
         super().__init__(position, direction)
         self.id = Humanoid._id_counter
         Humanoid._id_counter += 1
+
+        self.map = map
+        self.communicator = communicator
+        self.config = config
 
         self.scooter_id = None
 

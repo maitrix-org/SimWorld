@@ -1,4 +1,4 @@
-"""Activity2Action module: translates high-level plans into simulator actions."""
+"""Local Planner module: translates high-level plans into simulator actions."""
 
 import math
 import time
@@ -7,39 +7,39 @@ from typing import Optional
 
 import numpy as np
 
-from simworld.activity2action.action_space import (HighLevelAction,
-                                                   HighLevelActionSpace,
-                                                   LowLevelAction,
-                                                   LowLevelActionSpace)
-from simworld.activity2action.prompt.prompt import (NAVIGATION_SYSTEM_PROMPT,
-                                                    NAVIGATION_USER_PROMPT,
-                                                    PARSER_SYSTEM_PROMPT,
-                                                    PARSER_USER_PROMPT)
 from simworld.llm.a2a_llm import A2ALLM
+from simworld.local_planner.action_space import (HighLevelAction,
+                                                 HighLevelActionSpace,
+                                                 LowLevelAction,
+                                                 LowLevelActionSpace)
+from simworld.local_planner.prompt.prompt import (NAVIGATION_SYSTEM_PROMPT,
+                                                  NAVIGATION_USER_PROMPT,
+                                                  PARSER_SYSTEM_PROMPT,
+                                                  PARSER_USER_PROMPT)
 from simworld.map.map import Map
 from simworld.traffic.base.traffic_signal import TrafficSignalState
 from simworld.utils.logger import Logger
 from simworld.utils.vector import Vector
 
 
-class Activity2Action:
+class LocalPlanner:
     """Converts a high-level plan into low-level navigation actions."""
 
     def __init__(
         self,
-        user_agent,
+        agent,
         model: A2ALLM,
-        max_history_step: int = 5,
+        max_history_step: int = 3,
         camera_id: int = 1,
         dt: float = 0.1,
         observation_viewmode: str = 'lit',
         rule_based: bool = True,
         exit_event: Event = None,
     ):
-        """Initialize the Activity2Action agent.
+        """Initialize the Local Planner.
 
         Args:
-            user_agent: Simulator agent interface.
+            agent: Simulator agent interface.
             model: Language model for instruction parsing.
             max_history_step: Max steps of history to retain.
             camera_id: Camera ID for observations.
@@ -49,8 +49,8 @@ class Activity2Action:
             exit_event: Event to signal when the agent should stop.
         """
         self.model = model
-        self.agent = user_agent
-        self.communicator = user_agent.communicator
+        self.agent = agent
+        self.communicator = agent.communicator
         self.max_history_step = max_history_step
         self.camera_id = camera_id
         self.observation_viewmode = observation_viewmode
@@ -58,42 +58,35 @@ class Activity2Action:
         self.rule_based = rule_based
         self.dt = dt
         self.exit_event = exit_event
-        self.logger = Logger.get_logger('Activity2Action')
-
-        self.parser_system_prompt = PARSER_SYSTEM_PROMPT
-        self.parser_user_prompt = PARSER_USER_PROMPT
-        self.navigation_system_prompt = NAVIGATION_SYSTEM_PROMPT
-        self.navigation_user_prompt = NAVIGATION_USER_PROMPT
+        self.logger = Logger.get_logger('LocalPlanner')
 
         self.action_history = []
         self.last_image = None
 
-    def parse(self, plan: str) -> None:
+    def parse(self, plan: str) -> HighLevelActionSpace:
         """Parse a plan string and execute the resulting actions."""
-        action_space = HighLevelActionSpace
-
-        user_prompt = self.parser_user_prompt.format(
-            map=self.map,
+        user_prompt = PARSER_USER_PROMPT.format(
             position=self.agent.position,
-            action_list=action_space.get_action_list(),
-            plan=plan,
+            map=self.map,
+            action_list=HighLevelAction.get_action_list(),
+            plan=plan
         )
 
         response, call_time = self.model.generate_instructions(
-            system_prompt=self.parser_system_prompt,
+            system_prompt=PARSER_SYSTEM_PROMPT,
             user_prompt=user_prompt,
-            response_format=action_space,
+            response_format=HighLevelActionSpace,
         )
         self.logger.info(f'Agent {self.agent.id} Response: {response}, call time: {call_time}')
 
         if response is None:
             self.logger.error('Parse failed, response is None')
-            return
+            return None
 
-        actions = action_space.from_json(response)
+        actions = HighLevelActionSpace.from_json(response)
         self.logger.info(f'Agent {self.agent.id} Actions: {actions}')
 
-        self.execute(actions)
+        return actions
 
     def execute(self, actions: HighLevelActionSpace) -> None:
         """Execute a list of actions."""
@@ -163,8 +156,9 @@ class Activity2Action:
 
     def navigate_vision_based(self, point: Vector) -> None:
         """Placeholder for vision-based navigation logic."""
-        self.logger.info(f'Agent {self.agent.id} Current pos: {self.agent.position}, target: {point}, dir: {self.agent.direction}')
-        while not self._walk_arrive_at_waypoint(point) and not self.exit_event.is_set():
+        self.logger.info(f'Agent {self.agent.id} is navigating to {point}, current position: {self.agent.position}, vision based mode')
+        while not self._walk_arrive_at_waypoint(point) and (self.exit_event is None or not self.exit_event.is_set()):
+            time.sleep(self.dt)
 
             images = []
             image = self.communicator.get_camera_observation(self.camera_id, self.observation_viewmode, mode='direct')
@@ -180,11 +174,11 @@ class Activity2Action:
 
             # Calculate relative direction considering UE coordinate system
             # Convert yaw to radians - UE yaw is clockwise from X axis
-            current_yaw_rad = math.radians(self.yaw)
+            current_yaw_rad = math.radians(self.agent.yaw)
 
             # Calculate target angle in UE coordinates
-            dx = point.x - self.position.x
-            dy = point.y - self.position.y
+            dx = point.x - self.agent.position.x
+            dy = point.y - self.agent.position.y
             target_yaw_rad = math.atan2(dy, dx)
 
             # Calculate relative angle
@@ -197,7 +191,7 @@ class Activity2Action:
 
             action_str = f'I was at {self.agent.position} and I want to go to {point}. The relative distance is {relative_distance} cm and the relative angle is {angle} degrees. After I made the decision, '
 
-            user_prompt = self.navigation_user_prompt.format(
+            user_prompt = NAVIGATION_USER_PROMPT.format(
                 current_position=self.agent.position,
                 current_direction=self.agent.direction,
                 target_position=point,
@@ -207,7 +201,7 @@ class Activity2Action:
             )
 
             response, _ = self.model.generate_instructions(
-                system_prompt=self.navigation_system_prompt,
+                system_prompt=NAVIGATION_SYSTEM_PROMPT,
                 user_prompt=user_prompt,
                 images=images,
                 response_format=LowLevelActionSpace,
@@ -221,13 +215,13 @@ class Activity2Action:
             self.logger.info(f'Agent {self.agent.id} is taking action {vlm_action}')
 
             if vlm_action.choice == LowLevelAction.STEP_FORWARD:
-                self.communicator.humanoid_move_forward(self.agent.id, vlm_action.duration, vlm_action.direction)
+                self.communicator.humanoid_step_forward(self.agent.id, vlm_action.duration, vlm_action.direction)
                 if vlm_action.direction == 0:
                     action_str += f'I chose to step forward for {vlm_action.duration} seconds.'
                 else:
                     action_str += f'I chose to step backward for {vlm_action.duration} seconds.'
 
-                _human_collision, _object_collision, _building_collision = self.communicator.get_collision_number(self.id)
+                _human_collision, _object_collision, _building_collision = self.communicator.get_collision_number(self.agent.id)
                 if _human_collision > 0 or _object_collision > 0 or _building_collision > 0:
                     action_str += 'But I have collided with something.'
 
@@ -278,4 +272,5 @@ class Activity2Action:
 
     def pick_up(self, object_name: str) -> None:
         """Pick up an object."""
+        self.logger.info(f'Agent {self.agent.id} is picking up {object_name}')
         pass

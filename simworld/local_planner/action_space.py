@@ -29,16 +29,12 @@ class HighLevelAction(Enum):
     @classmethod
     def get_all_actions(cls):
         """Return a formatted string describing all available actions."""
-        return f"The action can be one of the following: {', '.join([f'{action.value}: {action.name}' for action in cls])}."
+        return f'The action can be one of the following: {", ".join([f"{action.value}: {action.name}" for action in cls])}.'
 
     @classmethod
     def get_action_list(cls):
         """Return a list of all available actions."""
-        return """
-                0: DO_NOTHING. Do nothing.
-                1: NAVIGATE. Navigate to the destination. Must specify the destination.
-                2: PICK_UP. Pick up the object. Must specify the object.
-            """
+        return '0: DO_NOTHING. Do nothing.\n1: NAVIGATE. Navigate to the destination. Must specify the destination.\n2: PICK_UP. Pick up the object. Must specify the object.'
 
 
 class LowLevelAction(Enum):
@@ -83,7 +79,7 @@ class LowLevelActionSpace(BaseModel):
 
     def __str__(self):
         """Return the string representation of the action."""
-        return f'ActionSpace(choice={self.choice}, duration={self.duration}, direction={self.direction}, angle={self.angle}, clockwise={self.clockwise}, reasoning={self.reasoning})'
+        return f'LowLevelActionSpace(choice={self.choice}, duration={self.duration}, direction={self.direction}, angle={self.angle}, clockwise={self.clockwise}, reasoning={self.reasoning})'
 
     def __repr__(self):
         """Return the string representation of the action."""
@@ -133,14 +129,14 @@ class LowLevelActionSpace(BaseModel):
 
 class HighLevelActionSpace(BaseModel):
     """High-level action space that an agent can perform."""
+    action_queue: Optional[list[int]] = None
     destination: Optional[Vector] = None
     object_name: Optional[str] = None
-    action_queue: Optional[list] = None
     reasoning: Optional[str] = None
 
     def __str__(self):
         """Return the string representation of the action."""
-        return f'ActionSpace(destination={self.destination}, object_name={self.object_name}, action_queue={self.action_queue}, reasoning={self.reasoning})'
+        return f'HighLevelActionSpace(destination={self.destination}, object_name={self.object_name}, action_queue={self.action_queue}, reasoning={self.reasoning})'
 
     def __repr__(self):
         """Return the string representation of the action."""
@@ -169,14 +165,14 @@ class HighLevelActionSpace(BaseModel):
     def to_json_schema(cls):
         """Return the json schema of the action space."""
         return {
-            'name': 'ActionSpace',
+            'name': 'HighLevelActionSpace',
             'strict': True,
             'schema': {
                 'type': 'object',
                 'properties': {
                     'destination': {'type': 'string', 'description': 'The destination of the navigate action. You should specify the destination of the navigate action.'},
                     'object_name': {'type': 'string', 'description': 'The name of the object to interact with.'},
-                    'action_queue': {'type': 'array', 'description': 'A list of actions (index of the action) to be performed.'},
+                    'action_queue': {'type': 'array', 'items': {'type': 'integer'}, 'description': 'A list of actions (index of the action) to be performed.'},
                     'reasoning': {'type': 'string', 'description': 'The reasoning of your choice.'},
                 },
                 'required': ['destination', 'action_queue']

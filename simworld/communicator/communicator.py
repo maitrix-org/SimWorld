@@ -24,7 +24,7 @@ class Communicator:
     including the management of vehicles, pedestrians, and traffic signals.
     """
 
-    def __init__(self, unrealcv: UnrealCV):
+    def __init__(self, unrealcv: UnrealCV = None):
         """Initialize the communicator.
 
         Args:
@@ -385,7 +385,26 @@ class Communicator:
             self.waypoint_mark_id_to_name[waypoint_mark_id] = f'GEN_BP_WaypointMark_{waypoint_mark_id}'
         return self.waypoint_mark_id_to_name[waypoint_mark_id]
 
-    # Management related methods
+    ##############################################################
+    # Utility methods
+    ##############################################################
+    def get_collision_number(self, humanoid_id):
+        """Get collision number.
+
+        Args:
+            humanoid_id: Humanoid ID.
+
+        Returns:
+            Human collision number, object collision number, building collision number, vehicle collision number.
+        """
+        collision_json = self.unrealcv.get_collision_num(self.get_humanoid_name(humanoid_id))
+        collision_data = json.loads(collision_json)
+        human_collision_num = int(collision_data['HumanCollision'])
+        object_collision_num = int(collision_data['ObjectCollision'])
+        building_collision_num = int(collision_data['BuildingCollision'])
+        vehicle_collision_num = int(collision_data['VehicleCollision'])
+        return human_collision_num, object_collision_num, building_collision_num, vehicle_collision_num
+
     def get_position_and_direction(self, vehicle_ids=[], pedestrian_ids=[], traffic_signal_ids=[], humanoid_ids=[], scooter_ids=[]):
         """Get position and direction of vehicles, pedestrians, and traffic signals.
 
