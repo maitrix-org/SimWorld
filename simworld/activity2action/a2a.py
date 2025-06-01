@@ -1,21 +1,22 @@
 """Activity2Action module: translates high-level plans into simulator actions."""
 
-import heapq
-import json
 import math
-import re
+import time
 from threading import Event
-from typing import List, Optional
+from typing import Optional
 
 import numpy as np
 
-from simworld.activity2action.action_space import (ACTION_LIST, FORMAT,
-                                                   VLM_FORMAT, Action)
-from simworld.activity2action.prompt.prompt import (SYSTEM_PROMPT, USER_PROMPT,
-                                                    VLM_SYSTEM_PROMPT,
-                                                    VLM_USER_PROMPT)
+from simworld.activity2action.action_space import (HighLevelAction,
+                                                   HighLevelActionSpace,
+                                                   LowLevelAction,
+                                                   LowLevelActionSpace)
+from simworld.activity2action.prompt.prompt import (NAVIGATION_SYSTEM_PROMPT,
+                                                    NAVIGATION_USER_PROMPT,
+                                                    PARSER_SYSTEM_PROMPT,
+                                                    PARSER_USER_PROMPT)
 from simworld.llm.a2a_llm import A2ALLM
-from simworld.map.map import Map, Node
+from simworld.map.map import Map
 from simworld.traffic.base.traffic_signal import TrafficSignalState
 from simworld.utils.logger import Logger
 from simworld.utils.vector import Vector
@@ -26,11 +27,8 @@ class Activity2Action:
 
     def __init__(
         self,
-        name: str,
         user_agent,
         model: A2ALLM,
-        vision_model: Optional[A2ALLM] = None,
-        temperature: float = 1.5,
         max_history_step: int = 5,
         camera_id: int = 1,
         dt: float = 0.1,
@@ -43,9 +41,6 @@ class Activity2Action:
         Args:
             user_agent: Simulator agent interface.
             model: Language model for instruction parsing.
-            vision_model: Vision model for perception.
-            name: Agent name for system prompts.
-            temperature: Sampling temperature for LLM.
             max_history_step: Max steps of history to retain.
             camera_id: Camera ID for observations.
             dt: Simulation time step.
@@ -53,13 +48,9 @@ class Activity2Action:
             rule_based: Whether to use rule-based navigation.
             exit_event: Event to signal when the agent should stop.
         """
-        self.name = name
         self.model = model
         self.agent = user_agent
-        self.client = user_agent.communicator
-        self.system_prompt = SYSTEM_PROMPT.replace('<NAME>', name)
-        self.vlm_system_prompt = VLM_SYSTEM_PROMPT.replace('<NAME>', name)
-        self.temperature = temperature
+        self.communicator = user_agent.communicator
         self.max_history_step = max_history_step
         self.camera_id = camera_id
         self.observation_viewmode = observation_viewmode
@@ -69,187 +60,200 @@ class Activity2Action:
         self.exit_event = exit_event
         self.logger = Logger.get_logger('Activity2Action')
 
+        self.parser_system_prompt = PARSER_SYSTEM_PROMPT
+        self.parser_user_prompt = PARSER_USER_PROMPT
+        self.navigation_system_prompt = NAVIGATION_SYSTEM_PROMPT
+        self.navigation_user_prompt = NAVIGATION_USER_PROMPT
+
+        self.action_history = []
+        self.last_image = None
+
     def parse(self, plan: str) -> None:
         """Parse a plan string and execute the resulting actions."""
-        user_prompt = USER_PROMPT.format(
+        action_space = HighLevelActionSpace
+
+        user_prompt = self.parser_user_prompt.format(
             map=self.map,
             position=self.agent.position,
-            action_list=ACTION_LIST,
+            action_list=action_space.get_action_list(),
             plan=plan,
         )
 
-        response, _ = self.model.generate_text_structured(
-            system_prompt=self.system_prompt,
+        response, call_time = self.model.generate_instructions(
+            system_prompt=self.parser_system_prompt,
             user_prompt=user_prompt,
-            output_format=FORMAT,
-            temperature=self.temperature,
+            response_format=action_space,
         )
-        # print(f'Agent {self.agent.id} Response: {response}', flush=True)
-        self.logger.info(f'Agent {self.agent.id} Response: {response}')
+        self.logger.info(f'Agent {self.agent.id} Response: {response}, call time: {call_time}')
 
         if response is None:
             self.logger.error('Parse failed, response is None')
             return
-        try:
-            data = json.loads(response)
-            actions = data['actions']
-            waypoints: List[Vector] = []
 
-            for point in data.get('waypoints', []):
-                match = re.search(r'Vector\(x=([\-\d.]+), y=([\-\d.]+)\)', point)
-                if match:
-                    x, y = float(match.group(1)), float(match.group(2))
-                    waypoints.append(Vector(x, y))
-        except json.JSONDecodeError as e:
-            self.logger.error(f'JSON decode error: {e}')
-            self.logger.error(f'Failed to parse response: {response}')
+        actions = action_space.from_json(response)
+        self.logger.info(f'Agent {self.agent.id} Actions: {actions}')
+
+        self.execute(actions)
+
+    def execute(self, actions: HighLevelActionSpace) -> None:
+        """Execute a list of actions."""
+        action_queue = actions.action_queue
+        destination = actions.destination
+        object_name = actions.object_name
+
+        # Check if destination is valid
+        all_possible_destinations = [node.position for node in self.map.nodes]
+        if destination not in all_possible_destinations:
+            self.logger.error(f'Agent {self.agent.id} Destination {destination} is not valid')
             return
-        except KeyError as e:
-            self.logger.error(f'Missing key in response: {e}')
-            self.logger.error(f'Failed to parse response: {response}')
-            return
-        except Exception as e:
-            self.logger.error(f'Unexpected error: {e}')
-            self.logger.error(f'Failed to parse response: {response}')
-            return
-        # print(f'Agent {self.agent.id} Actions: {actions}', flush=True)
-        # print(f'Agent {self.agent.id} Waypoints: {waypoints}', flush=True)
 
-        for action, waypoint in zip(actions, waypoints):
-            if action == Action.Navigate.value:
-                self.navigate(waypoint)
+        for action in action_queue:
+            if action == HighLevelAction.NAVIGATE.value:
+                self.navigate_to(destination)
+            elif action == HighLevelAction.PICK_UP.value:
+                self.pick_up(object_name)
 
-    def shortest_path(
-        self,
-        start_pos: Vector,
-        end_pos: Vector,
-    ) -> List[Vector]:
-        """Compute the shortest path between two positions on the map."""
-        start_node = self.map.get_closest_node(start_pos)
-        end_node = self.map.get_closest_node(end_pos)
-        if start_node.position == end_node.position:
-            return [start_node.position]
-
-        dist: dict[Node, float] = {node: math.inf for node in self.map.nodes}
-        prev: dict[Node, Optional[Node]] = {node: None for node in self.map.nodes}
-        dist[start_node] = 0.0
-
-        heap: List[tuple[float, Node]] = [(0.0, start_node)]
-
-        while heap:
-            current_dist, node = heapq.heappop(heap)
-            if node is end_node:
-                break
-            if current_dist > dist[node]:
-                continue
-
-            for neighbor in self.map.adjacency_list[node]:
-                weight = node.position.distance(neighbor.position)
-                alt = current_dist + weight
-                if alt < dist[neighbor]:
-                    dist[neighbor] = alt
-                    prev[neighbor] = node
-                    heapq.heappush(heap, (alt, neighbor))
-
-        if prev[end_node] is None and end_node is not start_node:
-            raise ValueError(f'No path found between {start_node} and {end_node}')
-
-        path_nodes: List[Node] = []
-        curr = end_node
-        while curr:
-            path_nodes.append(curr)
-            curr = prev[curr]
-        path_nodes.reverse()
-
-        return [n.position for n in path_nodes]
-
-    def navigate(self, waypoint: Vector) -> None:
-        """Navigate from current position to a given waypoint."""
-        self.logger.info(f'Agent {self.agent.id} Target waypoint: {waypoint}')
+    def navigate_to(self, destination: Vector) -> None:
+        """Navigate from current position to a given destination."""
+        self.logger.info(f'Agent {self.agent.id} Target destination: {destination}')
 
         if self.rule_based:
-            # Get the shortest path from current position to the target waypoint
-            path = self.map.get_shortest_path(self.map.get_closest_node(self.agent.position), self.map.get_closest_node(waypoint))
+            # Get the shortest path from current position to the target destination
+            path = self.map.get_shortest_path(self.map.get_closest_node(self.agent.position), self.map.get_closest_node(destination))
             path = [n.position for n in path]
             self.logger.info(f'Agent {self.agent.id} Shortest Path: {path}')
-            for point in path:
+            for point in path[1:]:
                 self.navigate_rule_based(point)
         else:
-            self.navigate_vision_based(waypoint)
+            self.navigate_vision_based(destination)
 
-    def navigate_rule_based(self, waypoint: Vector) -> None:
+    def navigate_rule_based(self, point: Vector) -> None:
         """Navigate using traffic rules and conditions."""
+        self.logger.info(f'Agent {self.agent.id} is navigating to {point}, current position: {self.agent.position}, rule based mode')
         if self.map.traffic_signals:
             current_node = self.map.get_closest_node(self.agent.position)
             if current_node.type == 'intersection':
                 traffic_light = None
-                min_distance = float('inf')
+                min_distance = self.config['traffic.sidewalk_offset'] * 2
                 for signal in self.map.traffic_signals:
                     distance = self.agent.position.distance(signal.position)
                     if distance < min_distance:
                         min_distance = distance
                         traffic_light = signal
-                while not self.exit_event.is_set():
-                    state = traffic_light.get_state()
-                    left_time = traffic_light.get_left_time()
-                    if state[1] == TrafficSignalState.PEDESTRIAN_GREEN and left_time > min(15, self.agent.config['traffic.traffic_signal.pedestrian_green_light_duration']):
-                        break
-        self.navigate_moving(waypoint)
 
-    def navigate_moving(self, waypoint: Vector) -> None:
-        """Rule-based steering and movement toward a waypoint."""
-        self.logger.info(f'Agent {self.agent.id} Current pos: {self.agent.position}, target: {waypoint}, dir: {self.agent.direction}')
+                if traffic_light is not None:
+                    while not self.exit_event.is_set():
+                        state = traffic_light.get_state()
+                        left_time = traffic_light.get_left_time()
+                        if state[1] == TrafficSignalState.PEDESTRIAN_GREEN and left_time > min(15, self.agent.config['traffic.traffic_signal.pedestrian_green_light_duration']):
+                            break
+                        time.sleep(self.dt)
 
-        self.client.humanoid_move_forward(self.agent.id)
-        while not self.walk_arrive_at_waypoint(waypoint) and (self.exit_event is None or not self.exit_event.is_set()):
-            while not self.align_direction(waypoint) and (self.exit_event is None or not self.exit_event.is_set()):
-                angle, turn = self.get_angle_and_direction(waypoint)
-                self.client.humanoid_rotate(self.agent.id, angle, turn)
-        self.client.humanoid_stop(self.agent.id)
+        time.sleep(2)
+        self.communicator.humanoid_move_forward(self.agent.id)
+        while not self._walk_arrive_at_waypoint(point) and (self.exit_event is None or not self.exit_event.is_set()):
+            while not self._align_direction(point) and (self.exit_event is None or not self.exit_event.is_set()):
+                self.communicator.humanoid_stop(self.agent.id)
+                angle, turn = self._get_angle_and_direction(point)
+                self.communicator.humanoid_rotate(self.agent.id, angle, turn)
+                time.sleep(self.dt)
+            self.communicator.humanoid_move_forward(self.agent.id)
+            time.sleep(self.dt)
+        self.communicator.humanoid_stop(self.agent.id)
 
-    def navigate_vision_based(self, waypoint: Vector) -> None:
+    def navigate_vision_based(self, point: Vector) -> None:
         """Placeholder for vision-based navigation logic."""
-        self.logger.info(f'Agent {self.agent.id} Current pos: {self.agent.position}, target: {waypoint}, dir: {self.agent.direction}')
-        while not self.walk_arrive_at_waypoint(waypoint) and not self.exit_event.is_set():
-            image = self.client.get_camera_observation(self.camera_id, self.observation_viewmode, mode='direct')
-            # self.client.show_img(image)
-            user_prompt = VLM_USER_PROMPT.format(
-                map=self.map,
-                position=self.agent.position,
-                waypoint=waypoint,
+        self.logger.info(f'Agent {self.agent.id} Current pos: {self.agent.position}, target: {point}, dir: {self.agent.direction}')
+        while not self._walk_arrive_at_waypoint(point) and not self.exit_event.is_set():
+
+            images = []
+            image = self.communicator.get_camera_observation(self.camera_id, self.observation_viewmode, mode='direct')
+            if self.last_image is not None:
+                images.append(self.last_image)
+            else:
+                images.append(image)
+            images.append(image)
+            self.last_image = image
+
+            # Distance calculation remains the same as it uses magnitude
+            relative_distance = self.agent.position.distance(point)
+
+            # Calculate relative direction considering UE coordinate system
+            # Convert yaw to radians - UE yaw is clockwise from X axis
+            current_yaw_rad = math.radians(self.yaw)
+
+            # Calculate target angle in UE coordinates
+            dx = point.x - self.position.x
+            dy = point.y - self.position.y
+            target_yaw_rad = math.atan2(dy, dx)
+
+            # Calculate relative angle
+            # Normalize the difference to [-π, π]
+            angle = math.degrees(target_yaw_rad - current_yaw_rad)
+            if angle > 180:
+                angle -= 360
+            elif angle < -180:
+                angle += 360
+
+            action_str = f'I was at {self.agent.position} and I want to go to {point}. The relative distance is {relative_distance} cm and the relative angle is {angle} degrees. After I made the decision, '
+
+            user_prompt = self.navigation_user_prompt.format(
+                current_position=self.agent.position,
+                current_direction=self.agent.direction,
+                target_position=point,
+                relative_distance=relative_distance,
+                relative_angle=angle,
+                action_history=self.action_history
             )
 
-            response, _ = self.model.generate_text_structured_vlm(
-                system_prompt=self.vlm_system_prompt,
+            response, _ = self.model.generate_instructions(
+                system_prompt=self.navigation_system_prompt,
                 user_prompt=user_prompt,
-                output_format=VLM_FORMAT,
-                img=image,
-                temperature=self.temperature,
+                images=images,
+                response_format=LowLevelActionSpace,
             )
 
             if response is None:
                 self.logger.error('Parse failed, response is None')
                 continue
 
-            response = json.loads(response)
-            if response['choice'] == 'MoveForward':
-                self.client.humanoid_step_forward(self.agent.id, response['time'])
-            elif response['choice'] == 'Rotate':
-                self.client.humanoid_rotate(self.agent.id, response['angle'], response['direction'])
-            else:
-                self.logger.error(f'Invalid action: {response}')
+            vlm_action = LowLevelActionSpace.from_json(response)
+            self.logger.info(f'Agent {self.agent.id} is taking action {vlm_action}')
 
-    def walk_arrive_at_waypoint(self, waypoint: Vector) -> bool:
+            if vlm_action.choice == LowLevelAction.STEP_FORWARD:
+                self.communicator.humanoid_move_forward(self.agent.id, vlm_action.duration, vlm_action.direction)
+                if vlm_action.direction == 0:
+                    action_str += f'I chose to step forward for {vlm_action.duration} seconds.'
+                else:
+                    action_str += f'I chose to step backward for {vlm_action.duration} seconds.'
+
+                _human_collision, _object_collision, _building_collision = self.communicator.get_collision_number(self.id)
+                if _human_collision > 0 or _object_collision > 0 or _building_collision > 0:
+                    action_str += 'But I have collided with something.'
+
+                self.last_position = Vector(self.agent.position.x, self.agent.position.y)  # Create new Vector instance
+
+            elif vlm_action.choice == LowLevelAction.TURN_AROUND:
+                clockwise = 'right' if vlm_action.clockwise else 'left'
+                action_str += f'I chose to turn {clockwise} {vlm_action.angle} degrees.'
+                self.communicator.humanoid_rotate(self.agent.id, vlm_action.angle, clockwise)
+
+            elif vlm_action.choice == LowLevelAction.DO_NOTHING:
+                action_str += 'I chose to do nothing.'
+
+            self.action_history.append(action_str)
+            if len(self.action_history) > self.max_history_step:
+                self.action_history.pop(0)
+
+    def _walk_arrive_at_waypoint(self, waypoint: Vector) -> bool:
         """Return True if humanoid is within threshold of waypoint."""
         threshold = self.agent.config['user.waypoint_distance_threshold']
-        # print(f'Agent {self.agent.id} Walk distance: {self.agent.position.distance(waypoint)}', flush=True)
         if self.agent.position.distance(waypoint) < threshold:
             self.logger.info(f'Agent {self.agent.id} Arrived at {waypoint}')
-            # print(f'Agent {self.agent.id} Arrived at {waypoint}', flush=True)
             return True
         return False
 
-    def get_angle_and_direction(
+    def _get_angle_and_direction(
         self,
         waypoint: Vector,
     ) -> tuple[float, Optional[str]]:
@@ -264,10 +268,14 @@ class Activity2Action:
             return 0.0, None
         return angle, turn_direction
 
-    def align_direction(self, waypoint: Vector) -> bool:
+    def _align_direction(self, waypoint: Vector) -> bool:
         """Return True if facing the waypoint within a small angle."""
         to_wp = waypoint - self.agent.position
         angle = math.degrees(
             math.acos(np.clip(self.agent.direction.dot(to_wp.normalize()), -1, 1))
         )
         return angle < 5
+
+    def pick_up(self, object_name: str) -> None:
+        """Pick up an object."""
+        pass

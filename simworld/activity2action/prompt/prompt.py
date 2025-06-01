@@ -1,43 +1,54 @@
 """Prompt module: defines system and user prompt templates for SimWorld agents."""
 
-SYSTEM_PROMPT = """
-You are a low-level planner for object <NAME>. You are given a list of goal and a waypoint.
-Your goal is to plan the action to achieve the goal.
-You have to use the provided functions to achieve the goal.
+PARSER_SYSTEM_PROMPT = """
+You are a planner for a embodied agent. You are given a plan from the user, you should parse the plan into a list of actions.
 """
 
-USER_PROMPT = """
+PARSER_USER_PROMPT = """
 You are now at {position} in a city, where the unit is cm. And you have a map of the city structured as a graph with nodes and edges:
 {map}
-You are given a plan from the user, you should parse the plan into a list of actions and a list of waypoints if necessary.
-You support action are:
+
+You have the following actions:
 {action_list}
-The number of navigate actions should be equal to the number of waypoints.
-The plan is:
+
+You are given a plan in natural language:
 {plan}
+
+You should parse the plan into a list of actions. Output your decision in JSON format with only the following keys: action_queue, destination, object_name, reasoning.
+Example outputs:
+{"action_queue": [0, 1], "destination": [200, 0], "reasoning": "I need to go to the destination."}
+{"action_queue": [0, 1, 2], "destination": [100, 100], "object_name": "bottle", "reasoning": "I need to go to the destination and pick up the bottle."}
 """
 
 
-VLM_SYSTEM_PROMPT = """
-You are a planner for object <NAME>. You are given a first-person view of your current position and a destination.
-You should only plan the next action. Make sure you do not hit any obstacles.
+NAVIGATION_SYSTEM_PROMPT = """
+You are an embodied agent in a 3D simulation environment, where the unit is centimeters (cm). You are good at navigating in a city environment. Your task is to navigate from your current position to a specified destination safely and efficiently.
 """
 
-VLM_USER_PROMPT = """
-You are now at {position} in a city and your destination is at {waypoint}, where the unit is cm. And you have a map of the city structured as a graph with nodes and edges:
-{map}
-The given image is a first-person view of your current position.
-You next action should be either "MoveForward" or "Rotate".
-For "MoveForward", you should specify the time (in seconds) to move forward.
-For "Rotate", you should specify the direction (left or right) and the angle (in degrees) to rotate to.
+NAVIGATION_USER_PROMPT = """
+You are currently at {current_position} and your direction is {current_direction}. Your final destination is {target_position}. The destination is approximately {relative_distance:.2f} cm away, and the relative angle to it is {relative_angle:.2f} degrees (negative = to your left, positive = to your right). Your walking speed is 200 cm/s.
 
-Here are some example outputs:
-```json
-{{"choice": "MoveForward", "time": 1.0}}
-```
+You are given two images:
+- Previous view (1 step ago): what you saw before your last decision.
+- Current view: what you see now.
+Use these images to understand how your environment is changing and make smart decisions.
 
-```json
-{{"choice": "Rotate", "direction": "left", "angle": 90}}
-```
-Provide only the JSON object with keys: choice, time, direction, angle.
+You have the following action history (most recent at the bottom):
+{action_history}
+Before making your decision, you should consider the history of actions.
+
+The relative distance and angle only give you a rough idea of where the destination is. **You must not walk directly toward the destination without checking the surroundings.** Carefully plan your path instead.
+
+Always walk on the **sidewalk**. Do **not** step into the **roadway**, **crash into buildings**, or ** hit obstacles** on your way.
+
+You are required to make a decision for your next action. You have the following options:
+- 0: Do nothing.
+- 1: Step. Must specify duration (max 5 sec) and direction (0 = forward, 1 = backward).
+- 2: Turn. Specify angle (0–180 degrees) and direction (clockwise = true/false).
+
+Output only the action JSON with the following keys: choice, duration, direction, angle, clockwise.
+Example outputs:
+{"choice": 0}
+{"choice": 1, "duration": 3, "direction": 0}
+{"choice": 2, "angle": 90, "clockwise": true}
 """
