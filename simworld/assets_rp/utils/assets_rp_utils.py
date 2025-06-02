@@ -17,12 +17,11 @@ from simworld.citygen.dataclass import Bounds, Building, Point
 from simworld.utils.load_json import load_json
 
 
-def get_parsed_input(natural_language_input, api_key):
+def get_parsed_input(natural_language_input):
     """Use LLMs to parse the natural language input into 4 parts for post-handling.
 
     Args:
         natural_language_input: the input text prompt.
-        api_key: openai api key
 
     Returns:
         asset_to_place: the asset that user wants to place
@@ -30,7 +29,7 @@ def get_parsed_input(natural_language_input, api_key):
         relation: which direction/relation should be placed relative to reference_asset
         surrounding_assets: the surrounding assets of the user
     """
-    inputParser = InputParser(api_key)
+    inputParser = InputParser()
     parsed_input = inputParser.parse_input(natural_language_input)
     asset_to_place = parsed_input['asset_to_place']
     reference_asset_query = parsed_input['reference_asset']

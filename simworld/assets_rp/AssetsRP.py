@@ -51,7 +51,7 @@ class AssetsRetrieverPlacer:
             assets_retrieval_model: the name of the assets retrieval model.
         """
         # 1. Parse the input
-        parsed_input, asset_to_place, reference_asset_query, relation, surroundings_query = get_parsed_input(natural_language_input, os.getenv('OPENAI_API_KEY'))
+        parsed_input, asset_to_place, reference_asset_query, relation, surroundings_query = get_parsed_input(natural_language_input)
 
         self.logger.info('LLM parse result: %s', parsed_input)
 

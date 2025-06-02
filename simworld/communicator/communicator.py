@@ -509,14 +509,16 @@ class Communicator:
         return result
 
     # Initialization methods
-    def spawn_agent(self, agent, model_path):
+    def spawn_agent(self, agent, model_path, type='humanoid'):
         """Spawn agent.
 
         Args:
             agent: agent object.
             model_path: Model path.
+            type: Agent type, possible values: 'humanoid', 'dog', ...
         """
-        name = self.get_humanoid_name(agent.id)
+        if type == 'humanoid':
+            name = self.get_humanoid_name(agent.id)
         self.unrealcv.spawn_bp_asset(model_path, name)
         # Convert 2D position to 3D (x,y -> x,y,z)
         location_3d = (
