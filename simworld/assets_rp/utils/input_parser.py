@@ -1,5 +1,6 @@
 """The module is prompting LLM to parse the input about asset retrieval and placement."""
 import json
+import os
 
 from openai import OpenAI
 
@@ -9,16 +10,14 @@ from simworld.assets_rp.prompt.retrieval_input_prompt import \
 
 class InputParser:
     """The class will parse the input and return 4 parts: asset_to_place, reference_asset_query, relation, surroundings_query."""
-    def __init__(self, api_key: str, model: str = 'gpt-3.5-turbo'):
-        """Initialize the api_key and model of the class.
+    def __init__(self, model: str = 'gpt-3.5-turbo'):
+        """Initialize the model of the class.
 
         Args:
-            api_key: user's openai api key
             model: the name of the model
         """
-        self.api_key = api_key
         self.model = model
-        self.client = OpenAI(api_key=self.api_key)
+        self.client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
 
     def parse_input(self, prompt: str) -> dict:
         """Call OpenAI API and parse the natural language input, it will extract 4 parts: asset_to_place, reference_asset, relation, surrounding_assets.
@@ -45,7 +44,7 @@ class InputParser:
             )
             message_content = response.choices[0].message.content.strip()
 
-            print('LLM Response:', message_content)
+            # print('LLM Response:', message_content)
 
             result = json.loads(message_content)
 
@@ -69,8 +68,7 @@ class InputParser:
 
             return result
 
-        except Exception as e:
-            print(f'Error while parsing input: {e}')
+        except Exception:
             return {
                 'asset_to_place': [],
                 'reference_asset': '',

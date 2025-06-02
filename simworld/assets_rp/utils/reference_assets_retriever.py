@@ -1,8 +1,9 @@
 """This class uses Sentence-BERT and FAISS to retrieve the most relevant assets."""
-import json
 
 import faiss
 from sentence_transformers import SentenceTransformer
+
+from simworld.utils.load_json import load_json
 
 
 class ReferenceAssetsRetriever:
@@ -12,8 +13,7 @@ class ReferenceAssetsRetriever:
         self.progen_world_path = progen_world_path
         self.model = SentenceTransformer(env_description_retrieval_model_name)
         self.nodes = self._load_nodes()
-        with open(description_map_path, 'r', encoding='utf-8') as f:
-            self.instance_desc_map = json.load(f)
+        self.instance_desc_map = load_json(description_map_path)
         # pre-compute instance_name embedding of every node
         self.embeddings, self.node_ids = self._precompute_embeddings()
         # construct the FAISS index (dimension = d)
@@ -28,8 +28,7 @@ class ReferenceAssetsRetriever:
         Returns:
             A list of dictionaries, each representing an asset node.
         """
-        with open(self.progen_world_path, 'r', encoding='utf-8') as f:
-            world_data = json.load(f)
+        world_data = load_json(self.progen_world_path)
         return world_data.get('nodes', [])
 
     def _precompute_embeddings(self):

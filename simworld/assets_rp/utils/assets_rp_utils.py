@@ -63,7 +63,7 @@ def get_surroundings(data, description_map_path: str):
         A concatenated string describing nearby elements and buildings.
     """
     details = []
-    print(data)
+    # print(data)
     for asset, count in data['element_stats'].items():
         details.extend([asset] * count)
     buildings = list(data['building_stats'].keys())
@@ -91,18 +91,17 @@ def vector_cosine_similarity(vec1, vec2):
     return dot / (norm1 * norm2)
 
 
-def construct_building_from_candidate(candidate: dict, input_dir: str) -> Building:
+def construct_building_from_candidate(candidate: dict, building_file_path: str) -> Building:
     """Construct a Building object based on candidate asset information and building data.
 
     Args:
         candidate: dictionary containing instance name and location.
-        input_dir: directory containing 'buildings.json' file.
+        building_file_path: path to the building file.
 
     Returns:
         A Building object matching the candidate, or None if no match is found.
     """
-    buildings_json_path = os.path.join(input_dir, 'buildings.json')
-    with open(buildings_json_path, 'r', encoding='utf-8') as f:
+    with open(building_file_path, 'r', encoding='utf-8') as f:
         buildings_data = json.load(f)
 
     candidate_type = candidate.get('instance_name', '')
@@ -130,7 +129,7 @@ def construct_building_from_candidate(candidate: dict, input_dir: str) -> Buildi
             )
             return Building(building_type=candidate_type, bounds=bounds)
 
-    print('No matching building found.')
+    # print('No matching building found.')
     return None
 
 
@@ -213,6 +212,7 @@ def retrieve_target_asset(assets_description, folder_path: str, model_ID: str):
     embedder = CLIPEmbedder(model_ID)
     image_data_df = create_image_dataframe(folder_path)
     image_data_df['img_embeddings'] = image_data_df['image'].apply(embedder.get_image_embedding)
+
     related_assets = get_related_assets(assets_description, model_ID, image_data_df)
     return related_assets
 
@@ -228,7 +228,7 @@ def place_target_asset(related_assets, positions, output_dir: str):
     os.makedirs(output_dir, exist_ok=True)
 
     json_output = generate_json(related_assets, positions)
-    print(json_output)
+
     output_file = os.path.join(output_dir, 'simple_world_asset.json')
     with open(output_file, 'w') as f:
         f.write(json_output)

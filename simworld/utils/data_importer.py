@@ -23,14 +23,13 @@ class DataImporter:
         self.city = CityGenerator(config)
         self.logger = Logger.get_logger('DataImporter')
 
-    def import_city_data(self):
+    def import_city_data(self, input_dir: str = None):
         """Rebuild the city_generator with the provided json file and print the result.
 
         Returns:
             city_generator: The city generator object containing city data.
         """
-        output_dir = self.config['citygen.output_dir']
-        progen_world_filepath = os.path.join(output_dir, 'progen_world.json')
+        progen_world_filepath = os.path.join(input_dir, 'progen_world.json')
         self.import_from_file(progen_world_filepath)
         self.logger.info(f'Imported road segments: {len(self.city.road_manager.roads)}')
         self.logger.info(f'Imported buildings: {len(self.city.building_manager.buildings)}')
