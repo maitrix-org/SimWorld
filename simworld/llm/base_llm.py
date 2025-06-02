@@ -33,27 +33,32 @@ class BaseLLM(metaclass=LLMMetaclass):
         self,
         model_name: str,
         url: Optional[str] = None,
-        api_key: Optional[str] = None,
+        provider: Optional[str] = 'openai'
     ):
         """Initialize the LLM client. Default uses OpenAI's API.
 
         Args:
             model_name: Name of the model to use.
             url: Base URL for the API. If None, uses OpenAI's default URL.
-            api_key: Optional API key (will use OPENAI_API_KEY env var if not provided).
+            provider: Provider to use. Can be 'openai' or 'openrouter'.
 
         Raises:
             ValueError: If no valid API key is provided or if the URL is invalid.
         """
         # Get API key from environment if not provided
-        env_api_key = os.getenv('OPENAI_API_KEY')
-        self.api_key = api_key or env_api_key
+        openai_api_key = os.getenv('OPENAI_API_KEY')
+        openrouter_api_key = os.getenv('OPENROUTER_API_KEY')
 
-        if not self.api_key:
-            raise ValueError('No API key provided. Please set OPENAI_API_KEY environment variable or pass api_key parameter.')
+        self.provider = provider
 
-        if not isinstance(self.api_key, str) or not self.api_key.startswith(('sk-', 'dummy-key')):
-            raise ValueError('Invalid API key format')
+        if provider == 'openai':
+            if not openai_api_key:
+                raise ValueError('No OpenAI API key provided. Please set OPENAI_API_KEY environment variable.')
+            self.api_key = openai_api_key
+        elif provider == 'openrouter':
+            if not openrouter_api_key:
+                raise ValueError('No OpenRouter API key provided. Please set OPENROUTER_API_KEY environment variable.')
+            self.api_key = openrouter_api_key
 
         if url == 'None':
             url = None

@@ -2,107 +2,111 @@
 import base64
 import io
 import json
+import re
 import time
 
 import cv2
 import numpy as np
 from PIL import Image
+from pydantic import BaseModel
 
 from simworld.utils.logger import Logger
 
 from .base_llm import BaseLLM
-from .retry import LLMResponseParsingError
 
 
 class A2ALLM(BaseLLM):
     """A2A LLM class for handling interactions with language models."""
-    def __init__(self, model_name: str = 'gpt-4o-mini', url: str = 'https://openrouter.ai/api/v1', api_key: str = None):
+    def __init__(self, model_name: str = 'gpt-4o-mini', url: str = None, provider: str = 'openai'):
         """Initialize the A2A LLM."""
-        super().__init__(model_name, url, api_key)
+        super().__init__(model_name, url, provider)
 
         self.logger = Logger.get_logger('A2ALLM')
 
-    def generate_text_structured(
-        self,
-        system_prompt: str,
-        user_prompt: str,
-        output_format: str,
-        few_shot_examples: str = '',
-        max_tokens: int = 2048,
-        temperature: float = 0.5,
-        top_p: float = None,
-    ) -> str | None:
-        """Generate structured text output using a Pydantic model.
+    def generate_instructions(self, system_prompt, user_prompt, images=[], max_tokens=None, temperature=0.7, top_p=1.0, response_format=BaseModel):
+        """Generate instructions for the A2A system.
 
         Args:
-            system_prompt: System prompt to guide model behavior.
-            user_prompt: User input prompt.
-            output_format: Expected JSON structure format.
-            few_shot_examples: Examples to guide the model output.
-            max_tokens: Maximum number of tokens to generate.
-            temperature: Sampling temperature.
-            top_p: Top p sampling parameter.
-
-        Returns:
-            JSON string matching the specified format or None if generation fails.
+            system_prompt (str): The system prompt for the A2A system.
+            user_prompt (str): The user prompt for the A2A system.
+            images (list): The images for the A2A system.
+            max_tokens (int): The maximum number of tokens for the A2A system.
+            temperature (float): The temperature for the A2A system.
+            top_p (float): The top_p for the A2A system.
+            response_format (BaseModel): The response format for the A2A system.
         """
-        start_time = time.time()
-        try:
-            response = self._generate_text_structured_with_retry(
-                system_prompt,
-                user_prompt,
-                output_format,
-                few_shot_examples,
-                max_tokens,
-                temperature,
-                top_p
-            )
-            return response, time.time() - start_time
-        except Exception as e:
-            self.logger.error(f'Error in generate_text_structured: {e}')
-            return None, time.time() - start_time
+        if self.provider == 'openai':
+            return self._generate_instructions_openai(system_prompt, user_prompt, images, max_tokens, temperature, top_p, response_format)
+        elif self.provider == 'openrouter':
+            return self._generate_instructions_openrouter(system_prompt, user_prompt, images, max_tokens, temperature, top_p, response_format)
+        else:
+            raise ValueError(f'Invalid provider: {self.provider}')
 
-    def _generate_text_structured_with_retry(
-        self,
-        system_prompt: str,
-        user_prompt: str,
-        output_format: str,
-        few_shot_examples: str = '',
-        max_tokens: int = 2048,
-        temperature: float = 0.5,
-        top_p: float = None,
-    ) -> str:
-        format_message = (
-            f'You must respond with a valid JSON object that matches the following structure: '
-            f'{output_format}'
-        )
-        user_prompt = (
-            f'{user_prompt}\n{format_message}\n{few_shot_examples}'
-        )
-        response = self.client.chat.completions.create(
-            model=self.model_name,
-            messages=[
-                {'role': 'system', 'content': system_prompt},
-                {'role': 'user', 'content': user_prompt},
-            ],
-            max_tokens=max_tokens,
-            temperature=temperature,
-            response_format={'type': 'json_object'},
-            top_p=top_p,
-        )
-        content = response.choices[0].message.content
+    def _generate_instructions_openai(self, system_prompt, user_prompt, images=[], max_tokens=None, temperature=0.7, top_p=1.0, response_format=BaseModel):
+        start_time = time.time()
+        user_content = []
+        user_content.append({'type': 'text', 'text': user_prompt})
+
+        # self.logger.info(f'user_content: {user_content}')
+        for image in images:
+            img_data = self._process_image_to_base64(image)
+            user_content.append({
+                'type': 'image_url',
+                'image_url': {'url': f'data:image/jpeg;base64,{img_data}'}
+            })
+
         try:
-            parsed = json.loads(content)
-            return json.dumps(parsed)
-        except json.JSONDecodeError:
-            if '```json' in content and '```' in content:
-                block = content.split('```json')[1].split('```')[0].strip()
-                try:
-                    json.loads(block)
-                    return block
-                except json.JSONDecodeError:
-                    raise LLMResponseParsingError('Invalid JSON in markdown block')
-            raise LLMResponseParsingError('No JSON or markdown JSON block found')
+            response = self.client.beta.chat.completions.parse(
+                model=self.model_name,
+                messages=[{'role': 'system', 'content': system_prompt}, {'role': 'user', 'content': user_content}],
+                max_tokens=max_tokens,
+                temperature=temperature,
+                top_p=top_p,
+                response_format=response_format,
+            )
+            action_json = response.choices[0].message.content
+        except Exception as e:
+            self.logger.error(f'Error in generate_instructions_openai: {e}')
+            action_json = None
+
+        return action_json, time.time() - start_time
+
+    def _generate_instructions_openrouter(self, system_prompt, user_prompt, images=[], max_tokens=None, temperature=0.7, top_p=1.0, response_format=BaseModel):
+
+        start_time = time.time()
+        user_content = []
+        user_prompt += '\nPlease respond in valid JSON format following this schema: ' + str(response_format.to_json_schema())
+        user_content.append({'type': 'text', 'text': user_prompt})
+
+        self.logger.info(f'user_content: {user_content}')
+        for image in images:
+            img_data = self._process_image_to_base64(image)
+            user_content.append({
+                'type': 'image_url',
+                'image_url': {'url': f'data:image/jpeg;base64,{img_data}'}
+            })
+
+        action_response = None
+        try:
+            response = self.client.beta.chat.completions.parse(
+                model=self.model_name,
+                messages=[{'role': 'system', 'content': system_prompt}, {'role': 'user', 'content': user_content}],
+                max_tokens=max_tokens,
+                temperature=temperature,
+                top_p=top_p,
+            )
+            action_response = response.choices[0].message.content
+        except Exception as e:
+            self.logger.error(f'Error in generate_instructions_openrouter: {e}')
+            action_response = None
+
+        if action_response is None:
+            self.logger.warning('Warning: Failed to get action response, using default')
+            action_json = None
+        else:
+            action_json = self._extract_json_and_fix_escapes(action_response)
+
+        return action_json, time.time() - start_time
 
     def _process_image_to_base64(self, image: np.ndarray) -> str:
         """Convert numpy array image to base64 string.
@@ -131,100 +135,24 @@ class A2ALLM(BaseLLM):
 
         return img_str
 
-    def generate_text_structured_vlm(
-        self,
-        system_prompt: str,
-        user_prompt: str,
-        output_format: str,
-        img: np.ndarray,
-        few_shot_examples: str = '',
-        max_tokens: int = 2048,
-        temperature: float = 0.5,
-        top_p: float = None,
-    ) -> str | None:
-        """Generate structured text output using a Pydantic model.
+    def _extract_json_and_fix_escapes(self, text):
+        # Extract content from first { to last }
+        pattern = r'(\{.*\})'
+        match = re.search(pattern, text, re.DOTALL)
 
-        Args:
-            system_prompt: System prompt to guide model behavior.
-            user_prompt: User input prompt.
-            output_format: Expected JSON structure format.
-            few_shot_examples: Examples to guide the model output.
-            max_tokens: Maximum number of tokens to generate.
-            temperature: Sampling temperature.
-            top_p: Top p sampling parameter.
-
-        Returns:
-            JSON string matching the specified format or None if generation fails.
-        """
-        supports_vision = False
-        multimodal_models = ['gpt-4o', 'gpt-4o-mini', 'o1', 'o1-mini']
-        model_name = self.model_name.lower()
-        if model_name in multimodal_models:
-            supports_vision = True
-
-        if not supports_vision:
-            raise ValueError(f'Model {self.model_name} does not support vision')
-
-        start_time = time.time()
-        try:
-            response = self._generate_text_structured_vlm_with_retry(
-                system_prompt,
-                user_prompt,
-                output_format,
-                img,
-                few_shot_examples,
-                max_tokens,
-                temperature,
-                top_p
-            )
-            return response, time.time() - start_time
-        except Exception as e:
-            self.logger.error(f'Error in generate_text_structured_vlm: {e}')
-            return None, time.time() - start_time
-
-    def _generate_text_structured_vlm_with_retry(
-        self,
-        system_prompt: str,
-        user_prompt: str,
-        output_format: str,
-        img: np.ndarray,
-        few_shot_examples: str = '',
-        max_tokens: int = 2048,
-        temperature: float = 0.5,
-        top_p: float = None,
-    ) -> str:
-        messages = [{'role': 'system', 'content': system_prompt}]
-        format_message = (
-            f'You must respond with a valid JSON object that matches the following structure: '
-            f'{output_format}'
-        )
-        user_prompt = (
-            f'{user_prompt}\n{format_message}\n{few_shot_examples}'
-        )
-        img_data = self._process_image_to_base64(img)
-        user_content = []
-        user_content.append({'type': 'text', 'text': user_prompt})
-        user_content.append({'type': 'image_url',
-                             'image_url': {'url': f'data:image/jpeg;base64,{img_data}'}})
-        messages.append({'role': 'user', 'content': user_content})
-        response = self.client.chat.completions.create(
-            model=self.model_name,
-            messages=messages,
-            max_tokens=max_tokens,
-            temperature=temperature,
-            response_format={'type': 'json_object'},
-            top_p=top_p,
-        )
-        content = response.choices[0].message.content
-        try:
-            parsed = json.loads(content)
-            return json.dumps(parsed)
-        except json.JSONDecodeError:
-            if '```json' in content and '```' in content:
-                block = content.split('```json')[1].split('```')[0].strip()
-                try:
-                    json.loads(block)
-                    return block
-                except json.JSONDecodeError:
-                    raise LLMResponseParsingError('Invalid JSON in markdown block')
-            raise LLMResponseParsingError('No JSON or markdown JSON block found')
+        if match:
+            json_str = match.group(1)
+            # Fix invalid escape sequences in JSON
+            fixed_json = re.sub(r'\\(?!["\\/bfnrt]|u[0-9a-fA-F]{4})', r'\\\\', json_str)
+            try:
+                # Try to parse the fixed JSON
+                json_obj = json.loads(fixed_json)
+                return json_obj
+            except json.JSONDecodeError as e:
+                self.logger.error(f'JSON parsing error: {e}')
+                self.logger.error(f'Fixed JSON: {fixed_json}')
+                # Return the fixed string if parsing fails
+                return fixed_json
+        else:
+            self.logger.error(f'No JSON found in the text: {text}')
+            return None

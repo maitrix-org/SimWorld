@@ -1,20 +1,20 @@
-"""UserAgent module: implements an agent that uses LLM and optional Activity2Action planning."""
+"""UserAgent module: implements an agent that uses LLM and optional Local Planner planning."""
 
 import traceback
 from threading import Event
 
 from scripts.a2a_prompt import user_system_prompt, user_user_prompt
-from simworld.activity2action.a2a import Activity2Action
 from simworld.agent.base_agent import BaseAgent
 from simworld.communicator.unrealcv import UnrealCV
 from simworld.config.config_loader import Config
 from simworld.llm.base_llm import BaseLLM
+from simworld.local_planner.local_planner import LocalPlanner
 from simworld.map.map import Map
 from simworld.utils.vector import Vector
 
 
 class UserAgent(BaseAgent):
-    """Agent that uses an LLM (and optional Activity2Action) to decide actions."""
+    """Agent that uses an LLM (and optional Local Planner) to decide actions."""
 
     _id_counter = 0
 
@@ -27,7 +27,7 @@ class UserAgent(BaseAgent):
         llm: BaseLLM,
         config: Config,
         speed: float = 100,
-        use_a2a: bool = False,
+        use_local_planner: bool = False,
         use_rule_based: bool = False,
         exit_event: Event = None,
     ):
@@ -41,8 +41,8 @@ class UserAgent(BaseAgent):
             llm: LLM model identifier.
             config: Configuration object.
             speed: Movement speed parameter.
-            use_a2a: Whether to enable Activity2Action planning.
-            use_rule_based: Whether to use rule-based navigation in A2A.
+            use_local_planner: Whether to enable Local Planner planning.
+            use_rule_based: Whether to use rule-based navigation.
             exit_event: Event to signal when the agent should stop.
         """
         super().__init__(position, direction)
@@ -55,9 +55,8 @@ class UserAgent(BaseAgent):
         UserAgent._id_counter += 1
         self.exit_event = exit_event
 
-        if use_a2a:
-            self.a2a = Activity2Action(user_agent=self, name=self.communicator.get_agent_name(self.id), model=self.llm,
-                                       rule_based=use_rule_based, exit_event=self.exit_event)
+        if use_local_planner:
+            self.local_planner = LocalPlanner(user_agent=self, model=self.llm, rule_based=use_rule_based, exit_event=self.exit_event)
 
     def __str__(self):
         """Return a string representation of the agent."""

@@ -14,17 +14,20 @@ class Logger:
     _initialized = False
     _logging_enabled = True
     _log_to_console = True
+    _log_to_file = False
 
     @classmethod
-    def configure(cls, logging_enabled=True, log_to_console=True):
+    def configure(cls, logging_enabled=True, log_to_console=True, log_to_file=False):
         """Configure global logging settings.
 
         Args:
             logging_enabled: Whether logging is enabled globally.
             log_to_console: Whether to output logs to console.
+            log_to_file: Whether to output logs to file.
         """
         cls._logging_enabled = logging_enabled
         cls._log_to_console = log_to_console
+        cls._log_to_file = log_to_file
 
     def __new__(cls):
         """Create or return the singleton instance of Logger.
@@ -36,31 +39,35 @@ class Logger:
             cls._instance = super().__new__(cls)
         return cls._instance
 
-    def __init__(self):
+    def __init__(self, _logging_enabled=True, _log_to_console=True, _log_to_file=False):
         """Initialize the logger if not already initialized.
 
         This method sets up file and console handlers based on configuration.
         A log file is created with timestamp in the filename.
         """
         if not Logger._initialized:
-            Logger.configure(logging_enabled=True, log_to_console=True)
+            Logger.configure(logging_enabled=_logging_enabled, log_to_console=_log_to_console, log_to_file=_log_to_file)
             # Only initialize logger if logging is enabled in config
             if Logger._logging_enabled:
-                # create logs directory
-                if not os.path.exists('logs'):
-                    os.makedirs('logs')
-
-                # generate log file name, include timestamp
-                current_time = datetime.now().strftime('%Y%m%d_%H%M%S')
-                log_filename = f'logs/simworld_{current_time}.log'
-
                 # configure root logger
                 self.logger = logging.getLogger('SimWorld')
                 self.logger.setLevel(logging.DEBUG)
 
-                # file handler
-                file_handler = logging.FileHandler(log_filename)
-                file_handler.setLevel(logging.DEBUG)
+                # file handler - only add if enabled in config
+                if Logger._log_to_file:
+                    # create logs directory
+                    if not os.path.exists('logs'):
+                        os.makedirs('logs')
+
+                    # generate log file name, include timestamp
+                    current_time = datetime.now().strftime('%Y%m%d_%H%M%S')
+                    log_filename = f'logs/simworld_{current_time}.log'
+
+                    file_handler = logging.FileHandler(log_filename)
+                    file_handler.setLevel(logging.DEBUG)
+                    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+                    file_handler.setFormatter(formatter)
+                    self.logger.addHandler(file_handler)
 
                 # console handler - only add if enabled in config
                 if Logger._log_to_console:
@@ -69,13 +76,6 @@ class Logger:
                     formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
                     console_handler.setFormatter(formatter)
                     self.logger.addHandler(console_handler)
-
-                # set formatter for file handler
-                formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-                file_handler.setFormatter(formatter)
-
-                # add file handler
-                self.logger.addHandler(file_handler)
             else:
                 # Create a null logger when logging is disabled
                 self.logger = logging.getLogger('SimWorld')

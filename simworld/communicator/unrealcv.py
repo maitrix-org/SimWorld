@@ -4,6 +4,7 @@ This module provides a client interface for communicating with Unreal Engine,
 allowing for various operations such as object spawning, movement, and image
 capture.
 """
+import json
 import os
 import time
 from io import BytesIO
@@ -14,8 +15,6 @@ import numpy as np
 import PIL.Image
 import unrealcv
 from IPython.display import display
-from unrealcv.api import MsgDecoder
-from unrealcv.util import read_png
 
 from simworld.utils.logger import Logger
 
@@ -41,7 +40,6 @@ class UnrealCV(object):
         self.client.connect()
 
         self.resolution = resolution
-        self.decoder = MsgDecoder(self.resolution)
 
         self.lock = Lock()
         self.logger = Logger.get_logger('UnrealCV')
@@ -194,6 +192,22 @@ class UnrealCV(object):
         with self.lock:
             self.client.request(cmd)
 
+    def set_fps(self, fps):
+        """Set FPS.
+
+        Args:
+            fps: FPS.
+        """
+        cmd = f'vset /action/set_fixed_frame_rate {fps}'
+        with self.lock:
+            self.client.request(cmd)
+
+    def tick(self):
+        """Tick."""
+        cmd = 'vset /action/tick'
+        with self.lock:
+            self.client.request(cmd)
+
     def destroy(self, actor_name):
         """Destroy an object.
 
@@ -203,42 +217,6 @@ class UnrealCV(object):
         cmd = f'vset /object/{actor_name}/destroy'
         with self.lock:
             self.client.request(cmd)
-
-    def apply_action_transition(self, robot_name, action):
-        """Apply transition action.
-
-        Args:
-            robot_name: Robot name.
-            action: Action in the form [speed, duration, direction].
-        """
-        [speed, duration, direction] = action
-        if speed < 0:
-            # Switch direction
-            if direction == 0:
-                direction = 1
-            elif direction == 1:
-                direction = 0
-            elif direction == 2:
-                direction = 3
-            elif direction == 3:
-                direction = 2
-        cmd = f'vbp {robot_name} Move_Speed {speed} {duration} {direction}'
-        with self.lock:
-            self.client.request(cmd)
-        time.sleep(duration)
-
-    def apply_action_rotation(self, robot_name, action):
-        """Apply rotation action.
-
-        Args:
-            robot_name: Robot name.
-            action: Action in the form [duration, angle, direction].
-        """
-        [duration, angle, direction] = action
-        cmd = f'vbp {robot_name} Rotate_Angle {duration} {angle} {direction}'
-        with self.lock:
-            self.client.request(cmd)
-        time.sleep(duration)
 
     def get_objects(self):
         """Get all objects.
@@ -251,11 +229,22 @@ class UnrealCV(object):
         objects = np.array(res.split())
         return objects
 
-    def get_collision_num(self, name):
-        """Get collision number.
+    def set_object_name(self, name, new_name):
+        """Set object name.
 
         Args:
             name: Object name.
+            new_name: New object name.
+        """
+        cmd = f'vset /object/{name}/name {new_name}'
+        with self.lock:
+            self.client.request(cmd)
+
+    def get_collision_num(self, actor_name):
+        """Get collision number.
+
+        Args:
+            actor_name: Actor name.
 
         Returns:
             json: {
@@ -266,7 +255,7 @@ class UnrealCV(object):
             }
         """
         with self.lock:
-            res = self.client.request(f'vbp {name} GetCollisionNum')
+            res = self.client.request(f'vbp {actor_name} GetCollisionNum')
         return res
 
     def get_location(self, actor_name):
@@ -484,24 +473,81 @@ class UnrealCV(object):
             self.client.request(cmd)
 
     ##############################################################
-    # Agent System
+    # Robot System
     ##############################################################
-
-    def agent_move_forward(self, object_name):
-        """Move agent forward.
+    def dog_move(self, robot_name, action):
+        """Apply transition action.
 
         Args:
-            object_name: Name of the agent object to move forward.
+            robot_name: Robot name.
+            action: Action in the form [speed, duration, direction].
+        """
+        [speed, duration, direction] = action
+        if speed < 0:
+            # Switch direction
+            if direction == 0:
+                direction = 1
+            elif direction == 1:
+                direction = 0
+            elif direction == 2:
+                direction = 3
+            elif direction == 3:
+                direction = 2
+        cmd = f'vbp {robot_name} Move_Speed {speed} {duration} {direction}'
+        with self.lock:
+            self.client.request(cmd)
+
+    def dog_rotate(self, robot_name, action):
+        """Apply rotation action.
+
+        Args:
+            robot_name: Robot name.
+            action: Action in the form [duration, angle, direction].
+        """
+        [duration, angle, direction] = action
+        cmd = f'vbp {robot_name} Rotate_Angle {duration} {angle} {direction}'
+        with self.lock:
+            self.client.request(cmd)
+
+    def dog_look_up(self, robot_name):
+        """Apply look up action.
+
+        Args:
+            robot_name: Robot name.
+        """
+        cmd = f'vbp {robot_name} lookup'
+        with self.lock:
+            self.client.request(cmd)
+
+    def dog_look_down(self, robot_name):
+        """Apply look down action.
+
+        Args:
+            robot_name: Robot name.
+        """
+        cmd = f'vbp {robot_name} lookdown'
+        with self.lock:
+            self.client.request(cmd)
+
+    ##############################################################
+    # Humanoid System
+    ##############################################################
+
+    def humanoid_move_forward(self, object_name):
+        """Move humanoid forward.
+
+        Args:
+            object_name: Name of the humanoid object to move forward.
         """
         cmd = f'vbp {object_name} MoveForward'
         with self.lock:
             self.client.request(cmd)
 
-    def agent_rotate(self, object_name, angle, direction='left'):
-        """Rotate agent.
+    def humanoid_rotate(self, object_name, angle, direction='left'):
+        """Rotate humanoid.
 
         Args:
-            object_name: Name of the agent object to rotate.
+            object_name: Name of the humanoid object to rotate.
             angle: Rotation angle in degrees.
             direction: Direction of rotation, either 'left' or 'right'. Defaults to 'left'.
         """
@@ -513,23 +559,22 @@ class UnrealCV(object):
         cmd = f'vbp {object_name} TurnAround {1} {angle} {clockwise}'
         with self.lock:
             self.client.request(cmd)
-        time.sleep(1)
 
-    def agent_stop(self, object_name):
-        """Stop agent.
+    def humanoid_stop(self, object_name):
+        """Stop humanoid.
 
         Args:
-            object_name: Name of the agent object to stop.
+            object_name: Name of the humanoid object to stop.
         """
         cmd = f'vbp {object_name} StopAgent'
         with self.lock:
             self.client.request(cmd)
 
-    def agent_step_forward(self, object_name, duration, direction=0):
+    def humanoid_step_forward(self, object_name, duration, direction=0):
         """Step forward.
 
         Args:
-            object_name: Name of the agent object to step forward.
+            object_name: Name of the humanoid object to step forward.
             duration: Duration of the step forward movement in seconds.
             direction: Direction of the step forward movement.
         """
@@ -538,24 +583,203 @@ class UnrealCV(object):
             self.client.request(cmd)
         time.sleep(duration)
 
-    def agent_set_speed(self, object_name, speed):
-        """Set agent speed.
+    def humanoid_set_speed(self, object_name, speed):
+        """Set humanoid speed.
 
         Args:
-            object_name: Name of the agent object to set speed.
+            object_name: Name of the humanoid object to set speed.
             speed: Speed to set.
         """
         cmd = f'vbp {object_name} SetMaxSpeed {speed}'
         with self.lock:
             self.client.request(cmd)
 
-    def agent_sit_down(self, object_name):
+    def humanoid_sit_down(self, object_name):
         """Sit down.
 
         Args:
-            object_name: Name of the agent object to sit down.
+            object_name: Name of the humanoid object to sit down.
         """
         cmd = f'vbp {object_name} SitDown'
+        with self.lock:
+            res = self.client.request(cmd)
+            success = str(json.loads(res)['Success'])
+            if success == 'false':
+                return False
+            elif success == 'true':
+                return True
+
+    def humanoid_stand_up(self, object_name):
+        """Stand up.
+
+        Args:
+            object_name: Name of the humanoid object to sit down.
+        """
+        cmd = f'vbp {object_name} StandUp'
+        with self.lock:
+            res = self.client.request(cmd)
+            success = str(json.loads(res)['Success'])
+            if success == 'false':
+                return False
+            elif success == 'true':
+                return True
+
+    def humanoid_get_on_scooter(self, object_name):
+        """Get on scooter.
+
+        Args:
+            object_name: Name of the humanoid object to get on scooter.
+        """
+        cmd = f'vbp {object_name} GetOnScooter'
+        with self.lock:
+            self.client.request(cmd)
+        self.clean_garbage()
+
+    def humanoid_get_off_scooter(self, object_name):
+        """Get off scooter.
+
+        Args:
+            object_name: Name of the humanoid object to get off scooter.
+        """
+        cmd = f'vbp {object_name} GetOffScooter'
+        with self.lock:
+            self.client.request(cmd)
+
+    def humanoid_pick_up_object(self, humanoid_name, object_name):
+        """Pick up object.
+
+        Args:
+            humanoid_name: Name of the humanoid to pick up object.
+            object_name: Name of the object to pick up.
+        """
+        cmd = f'vbp {humanoid_name} PickUp {object_name}'
+        with self.lock:
+            res = self.client.request(cmd)
+            success = str(json.loads(res)['Success'])
+            if success == 'false':
+                return False
+            elif success == 'true':
+                return True
+
+    def humanoid_drop_object(self, humanoid_name):
+        """Drop object.
+
+        Args:
+            humanoid_name: Name of the humanoid to drop object.
+        """
+        cmd = f'vbp {humanoid_name} DropOff'
+        with self.lock:
+            res = self.client.request(cmd)
+            success = str(json.loads(res)['Success'])
+            if success == 'false':
+                return False
+            elif success == 'true':
+                return True
+
+    def humanoid_enter_vehicle(self, humanoid_name, vehicle_name):
+        """Enter vehicle.
+
+        Args:
+            humanoid_name: Name of the humanoid to enter vehicle.
+            vehicle_name: Name of the vehicle to enter.
+        """
+        cmd = f'vbp {humanoid_name} EnterVehicle {vehicle_name}'
+        with self.lock:
+            res = self.client.request(cmd)
+            success = str(json.loads(res)['Success'])
+            if success == 'false':
+                return False
+            elif success == 'true':
+                return True
+
+    def humanoid_exit_vehicle(self, humanoid_name, vehicle_name):
+        """Exit vehicle.
+
+        Args:
+            humanoid_name: Name of the humanoid to enter vehicle.
+            vehicle_name: Name of the vehicle to exit.
+        """
+        cmd = f'vbp {humanoid_name} ExitVehicle {vehicle_name}'
+        with self.lock:
+            res = self.client.request(cmd)
+            success = str(json.loads(res)['Success'])
+            if success == 'false':
+                return False
+            elif success == 'true':
+                return True
+
+    def humanoid_discuss(self, humanoid_name, discuss_type):
+        """Discuss.
+
+        Args:
+            humanoid_name: Name of the humanoid to discuss.
+            discuss_type: Type of discussion. Can be [0, 1]
+        """
+        cmd = f'vbp {humanoid_name} Discussion {discuss_type}'
+        with self.lock:
+            self.client.request(cmd)
+
+    def humanoid_argue(self, humanoid_name, argue_type):
+        """Argue.
+
+        Args:
+            humanoid_name: Name of the humanoid to argue.
+            argue_type: Type of arguing. Can be [0, 1]
+        """
+        cmd = f'vbp {humanoid_name} Arguing {argue_type}'
+        with self.lock:
+            self.client.request(cmd)
+
+    def humanoid_listen(self, humanoid_name):
+        """Listen.
+
+        Args:
+            humanoid_name: Name of the humanoid to discuss.
+        """
+        cmd = f'vbp {humanoid_name} Listening'
+        with self.lock:
+            self.client.request(cmd)
+
+    def humanoid_wave_to_dog(self, humanoid_name):
+        """Wave to dog.
+
+        Args:
+            humanoid_name: Name of the humanoid to wave to dog.
+        """
+        cmd = f'vbp {humanoid_name} Wave2Dog'
+        with self.lock:
+            self.client.request(cmd)
+
+    def humanoid_directing_path(self, humanoid_name):
+        """Directing path.
+
+        Args:
+            humanoid_name: Name of the humanoid to directing path.
+        """
+        cmd = f'vbp {humanoid_name} Directing'
+        with self.lock:
+            self.client.request(cmd)
+
+    def humanoid_stop_current_action(self, humanoid_name):
+        """Stop current action.
+
+        Args:
+            humanoid_name: Name of the humanoid to stop current action.
+        """
+        cmd = f'vbp {humanoid_name} StopAction'
+        with self.lock:
+            self.client.request(cmd)
+
+    def s_set_state(self, object_name, throttle, brake, steering):
+        """Set scooter state.
+
+        Args:
+            object_name: Name of the scooter object.
+            throttle: Throttle value.
+            brake: Brake value.
+            steering: Steering value.
+        """
+        cmd = f'vbp {object_name} SetState {throttle} {brake} {steering}'
         with self.lock:
             self.client.request(cmd)
 
@@ -722,26 +946,32 @@ class UnrealCV(object):
             if mode == 'direct':  # get image from unrealcv in png format
                 if viewmode == 'depth':
                     cmd = f'vget /camera/{cam_id}/{viewmode} npy'
-                    # image = read_npy(self.client.request(cmd))
-                    image = self._decode_npy(self.client.request(cmd))
+                    with self.lock:
+                        res = self.client.request(cmd)
+                    image = self._decode_npy(res)
                 else:
                     cmd = f'vget /camera/{cam_id}/{viewmode} png'
-                    # image = read_png(self.client.request(cmd))
-                    image = self._decode_png(self.client.request(cmd))
+                    with self.lock:
+                        res = self.client.request(cmd)
+                    image = self._decode_png(res)
             elif mode == 'file':  # save image to file and read it
                 img_path = os.path.join(os.getcwd(), f'{cam_id}-{viewmode}.png')
                 cmd = f'vget /camera/{cam_id}/{viewmode} {img_path}'
-                img_dirs = self.client.request(cmd)
+                with self.lock:
+                    img_dirs = self.client.request(cmd)
                 image = cv2.imread(img_dirs)
 
             elif mode == 'fast':  # get image from unrealcv in bmp format
                 cmd = f'vget /camera/{cam_id}/{viewmode} bmp'
-                image = self._decode_bmp(self.client.request(cmd))
+                with self.lock:
+                    res = self.client.request(cmd)
+                image = self._decode_bmp(res)
 
             elif mode == 'file_path':  # save image to file and read it
                 cmd = f'vget /camera/{cam_id}/{viewmode} {img_path}'
-                img_dirs = self.client.request(cmd)
-                image = read_png(img_dirs)
+                with self.lock:
+                    img_dirs = self.client.request(cmd)
+                image = cv2.imread(img_dirs)
 
             if image is None:
                 raise ValueError(f'Failed to read image with mode={mode}, viewmode={viewmode}')
@@ -804,3 +1034,13 @@ class UnrealCV(object):
         img = img[-self.resolution[1]*self.resolution[0]*channel:]
         img = img.reshape(self.resolution[1], self.resolution[0], channel)
         return img[:, :, :-1]
+
+    def update_objects(self, object_name):
+        """Update objects.
+
+        Args:
+            object_name: UE_Manager object name.
+        """
+        cmd = f'vbp {object_name} UpdateObjects'
+        with self.lock:
+            self.client.request(cmd)

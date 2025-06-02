@@ -1,5 +1,4 @@
 """UserManager module: manages user agents, simulation updates, and JSON serialization."""
-import os
 import random
 import traceback
 from concurrent.futures import ThreadPoolExecutor
@@ -52,7 +51,7 @@ class UserManager:
 
     def initialize(self):
         """Load roads, construct map nodes/edges, and spawn agents."""
-        # self.map.visualize_map()
+        self.map.initialize_map_from_file(self.config['map.input_roads'])
         self.init_communicator()
         roads_data = load_json(self.config['map.input_roads'])
 
@@ -66,7 +65,7 @@ class UserManager:
         llm = A2ALLM(
             model_name=self.config['user.llm_model_path'],
             url=self.config['user.llm_url'],
-            api_key=os.getenv('OPENROUTER_API_KEY'),
+            provider=self.config['user.llm_provider'],
         )
 
         for _ in range(self.num_agent):
@@ -88,11 +87,11 @@ class UserManager:
 
     def update(self):
         """Fetch and apply agents' latest positions and directions."""
-        agent_ids = [agent.id for agent in self.agent]
+        humanoid_ids = [agent.id for agent in self.agent]
         try:
-            result = self.communicator.get_position_and_direction(agent_ids=agent_ids)
-            for idx in agent_ids:
-                pos, dir_ = result[('agent', idx)]
+            result = self.communicator.get_position_and_direction(humanoid_ids=humanoid_ids)
+            for idx in humanoid_ids:
+                pos, dir_ = result[('humanoid', idx)]
                 self.agent[idx].position = pos
                 self.agent[idx].direction = dir_
         except Exception as exc:

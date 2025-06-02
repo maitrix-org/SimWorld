@@ -1,8 +1,6 @@
 simworld:
   seed: 42
   dt: 0.1
-  enable_logging: false
-  enable_console_logging: false
   ue_manager_path: "/Game/TrafficSystem/UE_Manager.UE_Manager_C"
 
 citygen:
@@ -62,10 +60,10 @@ citygen:
 assets_rp:
   input_description_map: "description_map.json"
   input_sample_dataset: "sample_dataset"
-  input_dir: "output"
   output_dir: "output_rp"
   env_description_retrieval_model: "paraphrase-MiniLM-L6-v2"
   assets_retrieval_model: "openai/clip-vit-large-patch14-336"
+  progen_world_path: "progen_world.json"
 
 traffic:
   num_vehicles: 10
@@ -113,9 +111,13 @@ user:
   num_agents: 3
   speed: 200
   a2a: True
-  rule_based: False
+  rule_based: True
   waypoint_distance_threshold: 200
   model_path: "/Game/TrafficSystem/Pedestrian/Base_User_Agent.Base_User_Agent_C"
   num_threads: 20
   llm_model_path: "gpt-4o-mini"
   llm_url: None
+  llm_provider: "openai"
+
+scooter:
+  model_path: "/Game/ScooterAssets/Blueprints/BP_Scooter_Pawn.BP_Scooter_Pawn_C"
