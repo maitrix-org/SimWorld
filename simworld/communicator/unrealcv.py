@@ -475,7 +475,7 @@ class UnrealCV(object):
     ##############################################################
     # Robot System
     ##############################################################
-    def dog_move_forward(self, robot_name, action):
+    def dog_move(self, robot_name, action):
         """Apply transition action.
 
         Args:
@@ -496,7 +496,6 @@ class UnrealCV(object):
         cmd = f'vbp {robot_name} Move_Speed {speed} {duration} {direction}'
         with self.lock:
             self.client.request(cmd)
-        time.sleep(duration)
 
     def dog_rotate(self, robot_name, action):
         """Apply rotation action.
@@ -509,7 +508,26 @@ class UnrealCV(object):
         cmd = f'vbp {robot_name} Rotate_Angle {duration} {angle} {direction}'
         with self.lock:
             self.client.request(cmd)
-        time.sleep(duration)
+
+    def dog_look_up(self, robot_name):
+        """Apply look up action.
+
+        Args:
+            robot_name: Robot name.
+        """
+        cmd = f'vbp {robot_name} lookup'
+        with self.lock:
+            self.client.request(cmd)
+
+    def dog_look_down(self, robot_name):
+        """Apply look down action.
+
+        Args:
+            robot_name: Robot name.
+        """
+        cmd = f'vbp {robot_name} lookdown'
+        with self.lock:
+            self.client.request(cmd)
 
     ##############################################################
     # Humanoid System
@@ -541,7 +559,6 @@ class UnrealCV(object):
         cmd = f'vbp {object_name} TurnAround {1} {angle} {clockwise}'
         with self.lock:
             self.client.request(cmd)
-        time.sleep(1)
 
     def humanoid_stop(self, object_name):
         """Stop humanoid.
@@ -629,7 +646,7 @@ class UnrealCV(object):
             self.client.request(cmd)
 
     def humanoid_pick_up_object(self, humanoid_name, object_name):
-        """Get off scooter.
+        """Pick up object.
 
         Args:
             humanoid_name: Name of the humanoid to pick up object.
@@ -730,6 +747,16 @@ class UnrealCV(object):
             humanoid_name: Name of the humanoid to wave to dog.
         """
         cmd = f'vbp {humanoid_name} Wave2Dog'
+        with self.lock:
+            self.client.request(cmd)
+
+    def humanoid_directing_path(self, humanoid_name):
+        """Directing path.
+
+        Args:
+            humanoid_name: Name of the humanoid to directing path.
+        """
+        cmd = f'vbp {humanoid_name} Directing'
         with self.lock:
             self.client.request(cmd)
 
