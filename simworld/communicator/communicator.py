@@ -508,6 +508,34 @@ class Communicator:
 
         return result
 
+    def spawn_object(self, object_name, model_path, position, direction):
+        """Spawn object.
+
+        Args:
+            object_name: Object name.
+            model_path: Model path.
+            position: Position. Tuple (x, y, z).
+            direction: Direction. Tuple (pitch, yaw, roll).
+        """
+        self.unrealcv.spawn_bp_asset(model_path, object_name)
+        # Convert 2D position to 3D (x,y -> x,y,z)
+        location_3d = (
+            position[0],  # Unreal X = 2D Y
+            position[1],  # Unreal Y = 2D X
+            position[2]  # Z coordinate (ground level)
+        )
+        # Convert 2D direction to 3D orientation (assuming rotation around Z axis)
+        orientation_3d = (
+            direction[0],  # Pitch
+            direction[1],  # Yaw
+            direction[2]  # Roll
+        )
+        self.unrealcv.set_location(location_3d, object_name)
+        self.unrealcv.set_orientation(orientation_3d, object_name)
+        self.unrealcv.set_scale((1, 1, 1), object_name)
+        self.unrealcv.set_collision(object_name, True)
+        self.unrealcv.set_movable(object_name, True)
+
     # Initialization methods
     def spawn_agent(self, agent, model_path, type='humanoid'):
         """Spawn agent.
@@ -524,7 +552,7 @@ class Communicator:
         location_3d = (
             agent.position.x,  # Unreal X = 2D Y
             agent.position.y,  # Unreal Y = 2D X
-            0  # Z coordinate (ground level)
+            110  # Z coordinate (ground level)
         )
         # Convert 2D direction to 3D orientation (assuming rotation around Z axis)
         orientation_3d = (
