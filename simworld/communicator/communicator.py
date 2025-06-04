@@ -179,6 +179,10 @@ class Communicator:
         name = self.get_scooter_name(scooter_id)
         self.unrealcv.s_set_state(name, throttle, brake, steering)
 
+    ##############################################################
+    # Camera-related methods
+    ##############################################################
+
     def get_camera_observation(self, cam_id, viewmode, mode='direct'):
         """Get camera observation.
 
