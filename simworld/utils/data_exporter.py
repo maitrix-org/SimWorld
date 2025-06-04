@@ -297,7 +297,7 @@ class DataExporter:
                     'location': {
                         'x': round(element['center']['x'] * 100, 4),
                         'y': round(element['center']['y'] * 100, 4),
-                        'z': 30
+                        'z': 20
                     },
                     'orientation': {
                         'pitch': 0,

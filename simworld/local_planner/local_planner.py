@@ -30,7 +30,6 @@ class LocalPlanner:
         agent,
         model: A2ALLM,
         max_history_step: int = 3,
-        camera_id: int = 1,
         dt: float = 0.1,
         observation_viewmode: str = 'lit',
         rule_based: bool = True,
@@ -52,7 +51,7 @@ class LocalPlanner:
         self.agent = agent
         self.communicator = agent.communicator
         self.max_history_step = max_history_step
-        self.camera_id = camera_id
+        self.camera_id = self.agent.camera_id
         self.observation_viewmode = observation_viewmode
         self.map: Map = self.agent.map
         self.rule_based = rule_based
