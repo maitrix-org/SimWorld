@@ -551,6 +551,8 @@ class Communicator:
         """
         if type == 'humanoid':
             name = self.get_humanoid_name(agent.id)
+        else:
+            raise ValueError(f'Not supported agent type: {type}')
         self.unrealcv.spawn_bp_asset(model_path, name)
         # Convert 2D position to 3D (x,y -> x,y,z)
         location_3d = (

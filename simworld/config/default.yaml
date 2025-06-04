@@ -13,7 +13,7 @@ citygen:
 
   road:
     segment_length: 200
-    segment_count_limit: 15
+    segment_count_limit: 10
     road_snap_distance: 90
     ignore_conflicts: false
     only_highway: false
@@ -28,7 +28,7 @@ citygen:
     building_side_distance: 27
 
   element:
-    generation: false
+    generation: true
     generation_thread_number: 16
     element_building_distance: 8
     element_element_distance: 10
@@ -40,7 +40,7 @@ citygen:
 
     parking_density: 0.05
     furniture_density: 0.05
-    tree_density: 0.5
+    tree_density: 0.1
 
   quadtree:
     max_levels: 10

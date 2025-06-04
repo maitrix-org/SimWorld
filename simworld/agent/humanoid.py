@@ -11,6 +11,7 @@ class Humanoid(BaseAgent):
     """Humanoid agent class."""
 
     _id_counter = 0
+    _camera_id_counter = 1
 
     def __init__(self, position: Vector, direction: Vector, map: Map = None, communicator: Communicator = None, config: Config = None):
         """Initialize humanoid agent.
@@ -25,6 +26,8 @@ class Humanoid(BaseAgent):
         super().__init__(position, direction)
         self.id = Humanoid._id_counter
         Humanoid._id_counter += 1
+        self.camera_id = Humanoid._camera_id_counter
+        Humanoid._camera_id_counter += 1
 
         self.map = map
         self.communicator = communicator
