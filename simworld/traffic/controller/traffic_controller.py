@@ -245,6 +245,8 @@ class TrafficController:
                 self.pedestrian_manager.update_pedestrians(self.communicator, self.intersection_manager)
                 self.intersection_manager.update_intersections(self.communicator)
                 time.sleep(self.dt)
+            self.stop_simulation()
+            self.logger.info('Simulation ended')
         except KeyboardInterrupt:
             self.logger.info('Simulation interrupted')
             self.stop_simulation()

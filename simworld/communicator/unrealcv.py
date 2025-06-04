@@ -202,7 +202,7 @@ class UnrealCV(object):
         with self.lock:
             self.client.request(cmd)
 
-    def set_mode(self, mode, tick_interval=0.05):
+    def set_mode(self, mode='async', tick_interval=0.05):
         """Set asynchronous or synchronous mode.
 
         Args:
