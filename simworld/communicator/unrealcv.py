@@ -202,6 +202,29 @@ class UnrealCV(object):
         with self.lock:
             self.client.request(cmd)
 
+    def set_mode(self, mode, tick_interval=0.05):
+        """Set asynchronous or synchronous mode.
+
+        Args:
+            mode: Mode.
+            tick_interval: Tick interval if synchronous mode.
+        """
+        if mode == 'sync':
+            self.set_tick_interval(tick_interval)
+            with self.lock:
+                self.client.request('vset /action/game/pause')
+        elif mode == 'async':
+            with self.lock:
+                self.client.request('vset /action/game/resume')
+        else:
+            raise ValueError(f'Invalid mode: {mode}. Please choose from "sync" or "async".')
+
+    def set_tick_interval(self, interval):
+        """Set tick interval."""
+        cmd = f'vset /action/tick_intervel {interval}'
+        with self.lock:
+            self.client.request(cmd)
+
     def tick(self):
         """Tick."""
         cmd = 'vset /action/tick'
