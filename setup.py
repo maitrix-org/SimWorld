@@ -31,6 +31,8 @@ setup(
         'unrealcv',
         'opencv-python',
         'pillow',
+        'sentence-transformers',
+        'faiss-cpu',
     ],
     extras_require={
         'dev': [
