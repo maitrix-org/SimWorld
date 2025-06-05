@@ -408,7 +408,7 @@ FodyWeavers.xsd
 *.yaml
 !default.yaml
 !example.yaml
-!readthedocs.yaml
+!.readthedocs.yaml
 
 # Python packaging
 *.egg
