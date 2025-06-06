@@ -7,7 +7,8 @@ import math
 import random
 from typing import List
 
-from simworld.citygen.dataclass import Intersection, MetaInfo, Point, Segment
+from simworld.citygen.dataclass.dataclass import (Intersection, MetaInfo,
+                                                  Point, Segment)
 from simworld.citygen.road.road_manager import RoadManager
 from simworld.utils.load_json import load_json
 from simworld.utils.math_utils import MathUtils

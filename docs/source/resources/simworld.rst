@@ -12,7 +12,6 @@ Subpackages
    simworld.citygen
    simworld.communicator
    simworld.config
-   simworld.data
    simworld.llm
    simworld.local_planner
    simworld.map

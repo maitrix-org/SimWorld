@@ -11,11 +11,3 @@ simworld.traffic.controller.traffic\_controller module
    :members:
    :undoc-members:
    :show-inheritance:
-
-Module contents
----------------
-
-.. automodule:: simworld.traffic.controller
-   :members:
-   :undoc-members:
-   :show-inheritance:

@@ -11,11 +11,3 @@ simworld.traffic.ad\_algorithm.pid\_controller module
    :members:
    :undoc-members:
    :show-inheritance:
-
-Module contents
----------------
-
-.. automodule:: simworld.traffic.ad_algorithm
-   :members:
-   :undoc-members:
-   :show-inheritance:

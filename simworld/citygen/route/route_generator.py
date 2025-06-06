@@ -6,8 +6,8 @@ in the generated city, providing navigation paths for the simulation.
 import random
 from typing import List
 
-from simworld.citygen.dataclass import (Bounds, Building, Element, Point,
-                                        Segment)
+from simworld.citygen.dataclass.dataclass import (Bounds, Building, Element,
+                                                  Point, Segment)
 from simworld.citygen.route.route_manager import RouteManager
 from simworld.utils.logger import Logger
 from simworld.utils.math_utils import MathUtils

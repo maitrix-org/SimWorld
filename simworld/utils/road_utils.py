@@ -1,7 +1,7 @@
 """Road utilities module, providing functions for handling road segments and points."""
 from typing import List, Optional
 
-from simworld.citygen.dataclass import Bounds, Point, Segment
+from simworld.citygen.dataclass.dataclass import Bounds, Point, Segment
 from simworld.config import Config
 from simworld.utils.math_utils import MathUtils
 

@@ -27,6 +27,9 @@ extensions = [
 
 source_suffix = ['.rst', '.md']
 
+autodoc_mock_imports = ["numpy", "pandas", "unrealcv", "unreal", "sentence_transformers", "PIL", "sklearn", "torch", "transformers", "faiss", "openai", "pyqtgraph", "PyQt5", "cv2", "IPython",
+                        "pydantic"]
+
 intersphinx_mapping = {
     'python': ('https://docs.python.org/3/', None),
     'sphinx': ('https://www.sphinx-doc.org/en/master/', None),

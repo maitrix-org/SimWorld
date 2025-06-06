@@ -4,8 +4,9 @@ import os
 from typing import Dict, List
 
 from simworld.citygen.city.city_generator import CityGenerator
-from simworld.citygen.dataclass import (Bounds, Building, BuildingType,
-                                        Element, MetaInfo, Point, Segment)
+from simworld.citygen.dataclass.dataclass import (Bounds, Building,
+                                                  BuildingType, Element,
+                                                  MetaInfo, Point, Segment)
 from simworld.config import Config
 from simworld.utils.load_json import load_json
 from simworld.utils.logger import Logger

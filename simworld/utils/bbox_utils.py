@@ -5,7 +5,7 @@ and other geometric operations without external dependencies.
 """
 import math
 
-from simworld.citygen.dataclass import Bounds
+from simworld.citygen.dataclass.dataclass import Bounds
 
 
 class BboxUtils:

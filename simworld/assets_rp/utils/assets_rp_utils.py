@@ -13,7 +13,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 from simworld.assets_rp.utils.clip_embedder import CLIPEmbedder
 from simworld.assets_rp.utils.input_parser import InputParser
-from simworld.citygen.dataclass import Bounds, Building, Point
+from simworld.citygen.dataclass.dataclass import Bounds, Building, Point
 from simworld.utils.load_json import load_json
 
 

@@ -1,4 +1,4 @@
-"""A2A LLM class for handling interactions with language models."""
+"""Local Planner (Activity to Action) LLM class for handling interactions with language models."""
 import base64
 import io
 import json
@@ -16,24 +16,24 @@ from .base_llm import BaseLLM
 
 
 class A2ALLM(BaseLLM):
-    """A2A LLM class for handling interactions with language models."""
+    """Local Planner (Activity to Action) LLM class for handling interactions with language models."""
     def __init__(self, model_name: str = 'gpt-4o-mini', url: str = None, provider: str = 'openai'):
-        """Initialize the A2A LLM."""
+        """Initialize the Local Planner LLM."""
         super().__init__(model_name, url, provider)
 
         self.logger = Logger.get_logger('A2ALLM')
 
     def generate_instructions(self, system_prompt, user_prompt, images=[], max_tokens=None, temperature=0.7, top_p=1.0, response_format=BaseModel):
-        """Generate instructions for the A2A system.
+        """Generate instructions for the Local Planner system.
 
         Args:
-            system_prompt (str): The system prompt for the A2A system.
-            user_prompt (str): The user prompt for the A2A system.
-            images (list): The images for the A2A system.
-            max_tokens (int): The maximum number of tokens for the A2A system.
-            temperature (float): The temperature for the A2A system.
-            top_p (float): The top_p for the A2A system.
-            response_format (BaseModel): The response format for the A2A system.
+            system_prompt (str): The system prompt for the Local Planner system.
+            user_prompt (str): The user prompt for the Local Planner system.
+            images (list): The images for the Local Planner system.
+            max_tokens (int): The maximum number of tokens for the Local Planner system.
+            temperature (float): The temperature for the Local Planner system.
+            top_p (float): The top_p for the Local Planner system.
+            response_format (BaseModel): The response format for the Local Planner system.
         """
         if self.provider == 'openai':
             return self._generate_instructions_openai(system_prompt, user_prompt, images, max_tokens, temperature, top_p, response_format)

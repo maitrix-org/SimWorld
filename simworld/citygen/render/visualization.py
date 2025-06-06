@@ -11,8 +11,9 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import (QApplication, QLabel, QMainWindow, QVBoxLayout,
                              QWidget)
 
-from simworld.citygen.dataclass import (Bounds, Building, BuildingType,
-                                        Element, ElementType)
+from simworld.citygen.dataclass.dataclass import (Bounds, Building,
+                                                  BuildingType, Element,
+                                                  ElementType)
 from simworld.config import Config
 from simworld.utils.load_json import load_json
 

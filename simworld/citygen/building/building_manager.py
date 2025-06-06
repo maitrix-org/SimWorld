@@ -5,7 +5,7 @@ in the city's quadtree structure.
 """
 from typing import List
 
-from simworld.citygen.dataclass import Bounds, Building
+from simworld.citygen.dataclass.dataclass import Bounds, Building
 from simworld.utils.bbox_utils import BboxUtils
 from simworld.utils.quadtree import QuadTree
 

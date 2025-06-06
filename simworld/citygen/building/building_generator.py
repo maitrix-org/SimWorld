@@ -3,7 +3,8 @@ import math
 import random
 
 from simworld.citygen.building.building_manager import BuildingManager
-from simworld.citygen.dataclass import Bounds, Building, Point, Segment
+from simworld.citygen.dataclass.dataclass import (Bounds, Building, Point,
+                                                  Segment)
 from simworld.utils.logger import Logger
 from simworld.utils.math_utils import MathUtils
 from simworld.utils.quadtree import QuadTree
