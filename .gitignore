@@ -409,6 +409,7 @@ FodyWeavers.xsd
 !default.yaml
 !example.yaml
 !.readthedocs.yaml
+!.pre-commit-config.yaml
 
 # Python packaging
 *.egg
