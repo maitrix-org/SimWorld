@@ -55,8 +55,8 @@ README.md
 Make sure to use Python 3.10 or later.
 
 ```bash
-conda create -n reasoners python=3.10
-conda activate reasoners
+conda create -n simworld python=3.10
+conda activate simworld
 ```
 
 #### Install from github
@@ -93,7 +93,7 @@ To set up your own configuration:
 3. Load your custom configuration in your code:
    ```python
    from simworld.config import Config
-   config = Config('<path_to_your_file>/your_config.yaml')    # use absolute path here
+   config = Config('path/to/your_config')    # use absolute path here
    ```
 
 
