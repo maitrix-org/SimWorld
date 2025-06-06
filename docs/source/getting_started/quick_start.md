@@ -38,4 +38,4 @@ Download the [SimWorld Windows 64-bit Server (v0.1.0)](https://simworld-release.
 
 #### Linux
 
-Download the [SimWorld Linux 64-bit Server (v0.1.0)](https://simworld-release.s3.us-east-1.amazonaws.com/SimWorld-Linux64-v0_1_0-Foundation.zip) and unzip it.
+Download the [SimWorld Linux 64-bit Server (v0.1.0)](https://simworld-release.s3.us-east-1.amazonaws.com/SimWorld-Linux-v0_1_0-Foundation.zip) and unzip it.
