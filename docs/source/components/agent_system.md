@@ -1,10 +1,6 @@
 # Agent System
 
 ## Overview
-```{todo}
-need a figure here
-```
-
 To support the development and evaluation of LLM/VLM-driven agents, SimWorld offers a robust and scalable **Agent System**. Specifically, SimWorld defines two categories of agents:
 + Rule-based agents: Serve as background entities (e.g., vehicles and pedestrians) to create a more realistic environment. See the [Traffic System](traffic_system.md) for details.
 
@@ -27,6 +23,14 @@ class BaseAgent:
 ```
 
 **Related files:** `base_agent.py`.
+
+## LLM/VLM-driven Agent
+```{image} ../assets/agent_system.png
+:width: 800px
+:align: center
+:alt: Agent 
+```
+A classic LLM/VLM-driven agent typically consists of three core components: observation, LLMs/VLMs, and memory. SimWorld supports visual observations by utilizing camera actors within Unreal Engine ([Sensors](ue_detail.md#sensors)). For LLM/VLM integration, SimWorld provides a basic LLM interface ([Base LLM](#base-llm)). However, its memory module is currently limited—it simply records the most recent steps along with their corresponding feedback.
 
 ## Local Planner
 To accommodate diverse research focuses—ranging from text-based LLM agents to vision-based VLM agents—SimWorld introduces a flexible and modular **Local Planner** to bridge high-level reasoning with low-level execution. The core functionality of the Local Planner lies in its ability to decompose abstract plans into concrete, executable actions, enabling seamless integration between language, vision, and simulation.

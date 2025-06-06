@@ -41,7 +41,7 @@ simulation powered by Unreal Engine 5.
    :maxdepth: 2
    :caption: PYTHON API REFERENCE
 
-   resources/python_api
+   resources/modules
 
 .. toctree::
    :maxdepth: 2
