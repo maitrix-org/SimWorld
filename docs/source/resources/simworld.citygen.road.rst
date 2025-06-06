@@ -19,11 +19,3 @@ simworld.citygen.road.road\_manager module
    :members:
    :undoc-members:
    :show-inheritance:
-
-Module contents
----------------
-
-.. automodule:: simworld.citygen.road
-   :members:
-   :undoc-members:
-   :show-inheritance:

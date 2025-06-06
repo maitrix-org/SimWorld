@@ -19,11 +19,3 @@ simworld.citygen.building.building\_manager module
    :members:
    :undoc-members:
    :show-inheritance:
-
-Module contents
----------------
-
-.. automodule:: simworld.citygen.building
-   :members:
-   :undoc-members:
-   :show-inheritance:

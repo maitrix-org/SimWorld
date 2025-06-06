@@ -15,11 +15,3 @@ Subpackages
    simworld.citygen.render
    simworld.citygen.road
    simworld.citygen.route
-
-Module contents
----------------
-
-.. automodule:: simworld.citygen
-   :members:
-   :undoc-members:
-   :show-inheritance:

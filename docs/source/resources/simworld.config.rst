@@ -1,10 +1,13 @@
 simworld.config package
 =======================
 
-Module contents
----------------
+Submodules
+----------
 
-.. automodule:: simworld.config
+simworld.config.config_loader module
+-----------------------------------------
+
+.. automodule:: simworld.config.config_loader
    :members:
    :undoc-members:
    :show-inheritance:

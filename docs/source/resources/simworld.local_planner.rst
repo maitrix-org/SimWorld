@@ -27,11 +27,3 @@ simworld.local\_planner.local\_planner module
    :members:
    :undoc-members:
    :show-inheritance:
-
-Module contents
----------------
-
-.. automodule:: simworld.local_planner
-   :members:
-   :undoc-members:
-   :show-inheritance:

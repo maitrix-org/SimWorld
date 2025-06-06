@@ -43,11 +43,3 @@ simworld.agent.vehicle module
    :members:
    :undoc-members:
    :show-inheritance:
-
-Module contents
----------------
-
-.. automodule:: simworld.agent
-   :members:
-   :undoc-members:
-   :show-inheritance:

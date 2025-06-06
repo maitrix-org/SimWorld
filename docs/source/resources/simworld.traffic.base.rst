@@ -51,11 +51,3 @@ simworld.traffic.base.traffic\_signal module
    :members:
    :undoc-members:
    :show-inheritance:
-
-Module contents
----------------
-
-.. automodule:: simworld.traffic.base
-   :members:
-   :undoc-members:
-   :show-inheritance:

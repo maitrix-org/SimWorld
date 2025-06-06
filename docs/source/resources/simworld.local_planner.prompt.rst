@@ -11,11 +11,3 @@ simworld.local\_planner.prompt.prompt module
    :members:
    :undoc-members:
    :show-inheritance:
-
-Module contents
----------------
-
-.. automodule:: simworld.local_planner.prompt
-   :members:
-   :undoc-members:
-   :show-inheritance:
