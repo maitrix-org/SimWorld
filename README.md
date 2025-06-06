@@ -32,20 +32,21 @@ SimWorld's architecture is designed to be modular and flexible, supporting an ar
 
 ### Project Structure
 ```bash
-simworld/                # Python package
-   local_planner/        # Local planner component
-   agent/                # Basic agent class
-   assets_rp/            # Live editor component for retrieval and re-placing
-   citygen/              # City layout procedural generator
-   communicator/         # Core component to connect Unreal Engine
-   config/               # Configuration loader and default config file
-   llm/                  # Basic llm class
-   map/                  # Basic map class
-   traffic/              # Traffic system
-   utils/                # Utility functions
-data/                    # Necessary input data
-config/                  # Example configuration file and user configuration file
-scripts/                 # Examples of usage, such as layout generation and traffic simulation
+simworld/               # Python package
+    local_planner/      # Local planner component
+    agent/              # Agent system
+    assets_rp/          # Live editor component for retrieval and re-placing
+    citygen/            # City layout procedural generator
+    communicator/       # Core component to connect Unreal Engine
+    config/             # Configuration loader and default config file
+    llm/                # Basic llm class
+    map/                # Basic map class and waypoint system
+    traffic/            # Traffic system
+    utils/              # Utility functions
+data/                   # Necessary input data
+config/                 # Example configuration file and user configuration file
+scripts/                # Examples of usage, such as layout generation and traffic simulation
+docs/                   # Documentation source files
 README.md
 ```
 
@@ -54,8 +55,8 @@ README.md
 Make sure to use Python 3.10 or later.
 
 ```bash
-conda create -n reasoners python=3.10
-conda activate reasoners
+conda create -n simworld python=3.10
+conda activate simworld
 ```
 
 #### Install from github
@@ -92,7 +93,7 @@ To set up your own configuration:
 3. Load your custom configuration in your code:
    ```python
    from simworld.config import Config
-   config = Config('<path_to_your_file>/your_config.yaml')    # use absolute path here
+   config = Config('path/to/your_config')    # use absolute path here
    ```
 
 
