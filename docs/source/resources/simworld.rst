@@ -17,11 +17,3 @@ Subpackages
    simworld.map
    simworld.traffic
    simworld.utils
-
-Module contents
----------------
-
-.. automodule:: simworld
-   :members:
-   :undoc-members:
-   :show-inheritance:
