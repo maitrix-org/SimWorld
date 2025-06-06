@@ -1,14 +1,6 @@
 simworld.local\_planner package
 ===============================
 
-Subpackages
------------
-
-.. toctree::
-   :maxdepth: 4
-
-   simworld.local_planner.prompt
-
 Submodules
 ----------
 
