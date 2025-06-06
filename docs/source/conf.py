@@ -27,7 +27,7 @@ extensions = [
 
 source_suffix = ['.rst', '.md']
 
-autodoc_mock_imports = ["numpy", "pandas", "unrealcv", "unreal", "sentence_transformers", "PIL", "sklearn", "torch"]
+autodoc_mock_imports = ["numpy", "pandas", "unrealcv", "unreal", "sentence_transformers", "PIL", "sklearn", "torch", "transformers", "faiss", "openai"]
 
 intersphinx_mapping = {
     'python': ('https://docs.python.org/3/', None),
