@@ -1,7 +1,6 @@
-Python API
-========
+# Python API
 
-.. toctree::
-   :maxdepth: 4
+```{toctree}
+:maxdepth: 4
 
-   simworld
+simworld

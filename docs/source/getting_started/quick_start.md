@@ -9,7 +9,7 @@ The following requirements should be fulfilled before installing SimWorld:
 + An adequate GPU. SimWorld aims for realistic simulations, so the server needs at least a 6 GB GPU although we would recommend 8 GB. A dedicated GPU is highly recommended for machine learning.
 + Memory. A 32 GB memory or above is recommended.
 + Disk space. SimWorld will use about 50 GB of space.
-+ Python. Python is the main scripting language in SimWorld. SimWorld supports and Python 3.10 on Linux, and Python 3 on Windows.
++ Python. SimWorld supports Python 3.10 or higher.
 + Two TCP ports and good internet connection. 9000 and 9001 by default. Make sure that these ports are not blocked by firewalls or any other applications.
 
 ## Installation

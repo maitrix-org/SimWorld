@@ -43,7 +43,7 @@ class UnrealCV:
 The Communicator class acts as the bridge between Python and Unreal Engine (UE). It maintains a unrealcv attribute (an instance of the UnrealCV class), which handles the underlying TCP connection. Additionally, the Communicator is responsible for mapping Python objects to their unique name in UE.
 
 ## Using Communicator
-All communication between Python and UE—such as rendering the scene, simulating traffic, or interacting with agents—is handled through the Communicator. Below are some basic use cases, including how to generate a city in UE, spawn objects, and clean the environment. For complete functionality, refer to the [Python API](../resources/python_api.md).
+All communication between Python and UE—such as rendering the scene, simulating traffic, or interacting with agents—is handled through the Communicator. Below are some basic use cases, including how to generate a city in UE, spawn objects, and clean the environment. For complete functionality, refer to the [Python API](../resources/modules.rst).
 
 ```python
 # Instantiate unrealcv and communicator first
