@@ -8,7 +8,8 @@ import random
 from concurrent.futures import ProcessPoolExecutor
 from typing import List
 
-from simworld.citygen.dataclass import Bounds, Building, Element, Segment
+from simworld.citygen.dataclass.dataclass import (Bounds, Building, Element,
+                                                  Segment)
 from simworld.citygen.element.element_manager import ElementManager
 from simworld.utils.bbox_utils import BboxUtils
 from simworld.utils.quadtree import QuadTree

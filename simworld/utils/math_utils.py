@@ -3,7 +3,7 @@
 import math
 from typing import Optional, Tuple
 
-from simworld.citygen.dataclass import Point, Segment
+from simworld.citygen.dataclass.dataclass import Point, Segment
 
 
 class MathUtils:

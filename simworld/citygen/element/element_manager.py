@@ -3,7 +3,7 @@
 This module provides functionality to add, remove, and check for collisions with existing elements
 in the city's quadtree structure.
 """
-from simworld.citygen.dataclass import Bounds, Element
+from simworld.citygen.dataclass.dataclass import Bounds, Element
 from simworld.utils.bbox_utils import BboxUtils
 from simworld.utils.logger import Logger
 from simworld.utils.quadtree import QuadTree

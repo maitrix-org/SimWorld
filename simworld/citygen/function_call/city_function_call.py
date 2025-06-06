@@ -6,7 +6,7 @@ creating roads, buildings, and elements, as well as exporting the generated city
 from typing import List
 
 from simworld.citygen.city.city_generator import CityGenerator
-from simworld.citygen.dataclass import Point, Segment
+from simworld.citygen.dataclass.dataclass import Point, Segment
 from simworld.citygen.render.visualization import visualize
 from simworld.config import Config
 from simworld.utils.data_exporter import DataExporter

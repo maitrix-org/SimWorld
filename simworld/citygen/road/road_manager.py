@@ -5,7 +5,7 @@ conflict detection, and intersection identification.
 """
 from typing import List
 
-from simworld.citygen.dataclass import Bounds, Intersection, Segment
+from simworld.citygen.dataclass.dataclass import Bounds, Intersection, Segment
 from simworld.utils.math_utils import MathUtils
 from simworld.utils.quadtree import QuadTree
 

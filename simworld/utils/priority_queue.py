@@ -6,7 +6,7 @@ priority-based dequeuing.
 """
 from typing import List, Optional
 
-from simworld.citygen.dataclass import Segment
+from simworld.citygen.dataclass.dataclass import Segment
 
 
 class PriorityQueue:

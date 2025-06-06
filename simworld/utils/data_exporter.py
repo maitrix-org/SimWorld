@@ -9,7 +9,7 @@ import os
 import random
 from typing import Dict
 
-from simworld.citygen.dataclass import Building, Segment
+from simworld.citygen.dataclass.dataclass import Building, Segment
 
 
 class DataExporter:

@@ -10,7 +10,7 @@ from simworld.assets_rp.utils.assets_rp_utils import (
     retrieve_target_asset, vector_cosine_similarity)
 from simworld.assets_rp.utils.reference_assets_retriever import \
     ReferenceAssetsRetriever
-from simworld.citygen.dataclass import Point
+from simworld.citygen.dataclass.dataclass import Point
 from simworld.config import Config
 from simworld.utils.data_importer import DataImporter
 from simworld.utils.logger import Logger

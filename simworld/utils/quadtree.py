@@ -1,7 +1,7 @@
 """Quadtree implementation for efficient spatial partitioning and querying."""
 from typing import Generic, List, Optional, TypeVar
 
-from simworld.citygen.dataclass import Bounds
+from simworld.citygen.dataclass.dataclass import Bounds
 
 T = TypeVar('T')
 

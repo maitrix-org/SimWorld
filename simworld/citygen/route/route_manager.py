@@ -4,7 +4,7 @@ This module provides functionality to create and manage routes between points in
 """
 from typing import List
 
-from simworld.citygen.dataclass import Point, Route
+from simworld.citygen.dataclass.dataclass import Point, Route
 
 
 class RouteManager:
