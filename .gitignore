@@ -408,6 +408,7 @@ FodyWeavers.xsd
 *.yaml
 !default.yaml
 !example.yaml
+!.readthedocs.yaml
 
 # Python packaging
 *.egg
@@ -426,3 +427,20 @@ lib64/
 venv/
 .env/
 .venv/
+
+
+# Sphinx
+docs/build/
+docs/source/_build/
+docs/source/_static/
+docs/source/_templates/
+docs/source/_static/
+
+# Zip files
+*.zip
+*.rar
+*.7z
+*.tar
+*.gz
+*.bz2
+*.xz

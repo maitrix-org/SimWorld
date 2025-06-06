@@ -4,10 +4,11 @@ This module provides the main controller for the traffic simulation, handling in
 spawning, and coordination of all traffic elements including vehicles, pedestrians, and traffic signals.
 """
 import random
-import sys
 import time
 import traceback
 from collections import defaultdict
+from threading import Event
+from typing import Callable
 
 from simworld.agent.pedestrian import Pedestrian
 from simworld.agent.vehicle import Vehicle
@@ -224,31 +225,38 @@ class TrafficController:
         self.pedestrian_manager.stop_pedestrians(self.communicator)
 
     # Simulation
-    def simulation(self):
+    def simulation(self, physical_update_function: Callable, exit_event: Event = None):
         """Run the traffic simulation continuously.
 
         Continuously updates the state of all simulation components at fixed time intervals.
+
+        Args:
+            physical_update_function: Function to update the physical state of the simulation.
+            exit_event: Event to signal the end of the simulation.
         """
         try:
             self.logger.info('Starting simulation')
             self.pedestrian_manager.set_pedestrians_max_speed(self.communicator)
             self.intersection_manager.set_traffic_signal_duration(self.communicator)
 
-            while True:
-                self.update_states()
+            while True and (exit_event is None or not exit_event.is_set()):
+                physical_update_function()
                 self.vehicle_manager.update_vehicles(self.communicator, self.intersection_manager, self.pedestrians)
                 self.pedestrian_manager.update_pedestrians(self.communicator, self.intersection_manager)
                 self.intersection_manager.update_intersections(self.communicator)
                 time.sleep(self.dt)
+            self.stop_simulation()
+            self.logger.info('Simulation ended')
         except KeyboardInterrupt:
             self.logger.info('Simulation interrupted')
-            sys.exit(1)
+            self.stop_simulation()
         except Exception as e:
             self.logger.error(f'Error occurred in {__file__}:{e.__traceback__.tb_lineno}')
             self.logger.error(f'Error type: {type(e).__name__}')
             self.logger.error(f'Error message: {str(e)}')
             self.logger.error('Error traceback:')
             traceback.print_exc()
+            self.stop_simulation()
 
     def update_states(self):
         """Update the states of all traffic components from the simulation."""

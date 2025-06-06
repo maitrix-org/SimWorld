@@ -59,6 +59,8 @@ class BaseLLM(metaclass=LLMMetaclass):
             if not openrouter_api_key:
                 raise ValueError('No OpenRouter API key provided. Please set OPENROUTER_API_KEY environment variable.')
             self.api_key = openrouter_api_key
+        else:
+            raise ValueError(f'Not supported provider: {provider}')
 
         if url == 'None':
             url = None
