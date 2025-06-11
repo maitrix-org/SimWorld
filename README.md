@@ -10,7 +10,7 @@
 </div>
 
 ## 🔥 News
- - 2025.4 The first formal release of **SimWorld** has been published! 🚀
+ - 2025.6 The first formal release of **SimWorld** has been published! 🚀
  - 2025.3 Our demo of **SimWolrd** been accepted by CVPR 2025 Demostration Tack! 🎉
 
 ## 💡 Introduction
