@@ -2,7 +2,7 @@
 
 ## Assets
 
-Our simulator provides a rich collection of city-scale assets, designed to support realistic and diverse urban simulations. These assets include buildings, trees, street furniture, vehicles, pedestrians, and robots. All assets are sourced from the Unreal Engine Marketplace to ensure high visual fidelity and performance.
+Our simulator provides a rich collection of city-scale assets, designed to support realistic and diverse urban simulations. These assets include buildings, trees, street furniture, vehicles, pedestrians, and robots. All assets are sourced from the Unreal Engine Marketplace to ensure high visual fidelity and performance. 
 
 In addition to the curated asset library, we also offer an **Asset Generation Pipeline** that enables users to create `.uasset` files directly from natural language descriptions. This tool streamlines the content creation process by converting user prompts into usable Unreal Engine assets, significantly lowering the barrier for customizing city environments.
 
@@ -15,7 +15,7 @@ Below is a selection of the assets currently available in our simulator:
 * **Street Furniture**: Items such as benches, streetlights, boxes, and trash bins to add detail and immersion.
 * **Vehicles**: A range of vehicles including cars, buses, trucks, and scooters, each with accurate scale and animations.
 * **Pedestrians**: Human characters with diverse appearances and animations to simulate crowd behavior.
-* **Robots**: Different types of mobile robots for testing autonomous navigation and interaction, such as humanoid and robot dog.
+* **Robots**: The detailed introduction of the robot can be found in [SimWorld-Robotics](../simworld-robotics/simworld_robotics.md).
 
 These assets collectively enable the creation of complex, dynamic, and realistic city scenes for simulation, visualization, and research purposes.
 
@@ -35,20 +35,18 @@ Our **Asset Generation Pipeline** enables the automatic generation of 3D assets 
 
 ## Actions
 
-To enhance realism and interactivity in the simulation, we provide a comprehensive set of **Action Space**, with a strong focus on animations for pedestrians and robots. These actions are essential for simulating lifelike behaviors such as walking, running, waving, interacting with objects, and more. All actions are sourced from the Unreal Engine Marketplace to ensure quality and compatibility.
+To enhance realism and interactivity in the simulation, we provide a comprehensive set of **Action Space**, with a strong focus on animations for pedestrians. These actions are essential for simulating lifelike behaviors such as walking, running, waving, interacting with objects, and more. All actions are sourced from the Unreal Engine Marketplace to ensure quality and compatibility.
 
 Here are some examples of actions available in the simulator:
 
 | Action | Agent Type | Category | Description |
 |---------------------------|----------------------|--------------------|------------------------------------------------------|
 | Move Forward | Humanoid | Navigation | Keep moving in the current direction |
-| Directional Step | Robot | Navigation | Step in a specified direction briefly |
-| Hold Position | Robot | Navigation | Stay motionless for a short time |
 | Step Forward/Backward | Humanoid | Navigation | Step forward/backward for a fixed time |
-| Rotate | Humanoid, Robot | Navigation | Turn the body to face a new direction |
+| Rotate | Humanoid| Navigation | Turn the body to face a new direction |
 | Stop | Humanoid | Navigation | Stop moving |
-| Look Up/Down | Humanoid, Robot | Observation | Adjust the gaze upward/downward by a degree |
-| Focus | Humanoid, Robot | Observation | Adjust the field of view |
+| Look Up/Down | Humanoid | Observation | Adjust the gaze upward/downward by a degree |
+| Focus | Humanoid| Observation | Adjust the field of view |
 | Pick Up | Humanoid | Object Interaction | Grasp and lift an object |
 | Drop Off | Humanoid | Object Interaction | Release a held object at the target location |
 | Set Throttle/Brack/Steering | Vehicle | Driving | Control a vehicle |
@@ -133,40 +131,6 @@ communicator.humanoid_move_forward(agent.id)
 
 # Stop movement, optionally play a stop animation for 2 seconds
 communicator.humanoid_stop(agent.id, 2)
-
-```
-
-Demo for robot action space
-
-```python
-# Specify robot name and asset
-robot_name = "Demo_Robot"
-robot_asset = "/Game/Robot_Dog/Blueprint/BP_SpotRobot.BP_SpotRobot_C"
-
-# Spawn robot in the simulator
-ucv.spawn_bp_asset(robot_asset, robot_name)
-ucv.enable_controller(robot_name, True)
-
-# Robot - look up / look down
-ucv.dog_look_up(robot_name)    # look up
-ucv.dog_look_down(robot_name)  # look down
-
-# Robot Movement
-# direction: 0 = forward, 1 = backward, 2 = left, 3 = right
-for direction in [0, 1, 2, 3]:
-    speed = 200
-    duration = 1
-    move_parameter = [speed, duration, direction]
-    ucv.dog_move(robot_name, move_parameter)
-    time.sleep(duration)
-
-# Robot Rotation
-# clockwise: 1 = right turn, -1 = left turn
-for angle, clockwise in [(90, 1), (-90, -1)]:
-    duration = 0.7
-    rotate_parameter = [duration, angle, clockwise]
-    ucv.dog_rotate(robot_name, rotate_parameter)
-    time.sleep(duration)
 
 ```
 **Related files:** `communicator.py`, `unrealcv.py`.

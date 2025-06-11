@@ -24,6 +24,7 @@ simulation powered by Unreal Engine 5.
 
    getting_started/introduction
    getting_started/quick_start
+   simworld-robotics/simworld_robotics
 
 .. toctree::
    :maxdepth: 2
