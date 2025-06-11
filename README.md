@@ -124,3 +124,21 @@ Example:
 ```
 feat: add user login API
 ```
+
+### Issue Guidelines
++ Use clear titles starting with [Bug] or [Feature].
++ Describe the problem or request clearly.
++ Include steps to reproduce (for bugs), expected behavior, and screenshots if possible.
++ Mention your environment (OS, browser/runtime, version, etc.).
+
+### Pull Request Guidelines
++ Fork the repo and create a new branch (e.g., feature/your-feature, fix/bug-name).
++ Keep PRs focused: one feature or fix per PR.
++ Follow the project’s coding style and naming conventions.
++ Test your changes before submitting.
++ Link related issues using Fixes #issue-number if applicable.
++ Add comments or documentation if needed.
+
+We appreciate clean, well-described contributions! 🚀
+
+
