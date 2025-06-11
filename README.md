@@ -6,7 +6,7 @@
 <div align="center">
     <a href="http://simworld-cvpr2025.maitrix.org/"><img src="https://img.shields.io/badge/Website-SimWorld-blue" alt="Website" /></a>
     <a href="https://github.com/maitrix-org/SimWorld"><img src="https://img.shields.io/github/stars/yourusername/SimWorld?style=social" alt="GitHub Stars" /></a>
-    <a href="https://simworld.readthedocs.io/en/stable/"><img src="https://img.shields.io/badge/Documentation-Read%20Docs-green" alt="Documentation" /></a>
+    <a href="https://simworld.readthedocs.io/en/latest"><img src="https://img.shields.io/badge/Documentation-Read%20Docs-green" alt="Documentation" /></a>
 </div>
 
 ## 🔥 News
