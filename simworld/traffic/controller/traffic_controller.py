@@ -225,7 +225,7 @@ class TrafficController:
         self.pedestrian_manager.stop_pedestrians(self.communicator)
 
     # Simulation
-    def simulation(self, physical_update_function: Callable, exit_event: Event = None):
+    def simulation(self, physical_update_function: Callable, exit_event: Event = None, signal_event: Event = None):
         """Run the traffic simulation continuously.
 
         Continuously updates the state of all simulation components at fixed time intervals.
@@ -233,18 +233,26 @@ class TrafficController:
         Args:
             physical_update_function: Function to update the physical state of the simulation.
             exit_event: Event to signal the end of the simulation.
+            signal_event: Event to signal the end of the simulation.
         """
         try:
             self.logger.info('Starting simulation')
             self.pedestrian_manager.set_pedestrians_max_speed(self.communicator)
             self.intersection_manager.set_traffic_signal_duration(self.communicator)
 
-            while True and (exit_event is None or not exit_event.is_set()):
+            while not (exit_event and exit_event.is_set()):
                 physical_update_function()
                 self.vehicle_manager.update_vehicles(self.communicator, self.intersection_manager, self.pedestrians)
                 self.pedestrian_manager.update_pedestrians(self.communicator, self.intersection_manager)
                 self.intersection_manager.update_intersections(self.communicator)
-                time.sleep(self.dt)
+
+                if signal_event is not None:
+                    while not signal_event.is_set():
+                        time.sleep(self.dt)
+                        signal_event.clear()  # Reset the event for next iteration
+                else:
+                    time.sleep(self.dt)
+
             self.stop_simulation()
             self.logger.info('Simulation ended')
         except KeyboardInterrupt:
