@@ -26,7 +26,7 @@ class UnrealCV(object):
     including basic operations and traffic system operations.
     """
 
-    def __init__(self, port=9000, ip='127.0.0.1', resolution=(640, 480)):
+    def __init__(self, port=9000, ip='127.0.0.1', resolution=(1280, 720)):
         """Initialize the UnrealCV client.
 
         Args:

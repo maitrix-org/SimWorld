@@ -140,6 +140,15 @@ class Communicator:
         """
         self.unrealcv.humanoid_stand_up(self.get_humanoid_name(humanoid_id))
 
+    def humanoid_pick_up_object(self, humanoid_id, object_name):
+        """Pick up object.
+
+        Args:
+            humanoid_id: humanoid ID.
+            object_name: Object name.
+        """
+        return self.unrealcv.humanoid_pick_up_object(self.get_humanoid_name(humanoid_id), object_name)
+
     def get_humanoid_name(self, humanoid_id):
         """Get humanoid name.
 

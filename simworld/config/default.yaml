@@ -4,8 +4,8 @@ simworld:
   ue_manager_path: "/Game/TrafficSystem/UE_Manager.UE_Manager_C"
 
 citygen:
-  input_layout: false
-  input_roads: "predefined_roads.json"
+  input_layout: true
+  input_roads: "E:/Projects/SimWorld/output/roads.json"
   input_bounding_boxes: "Bbox.json"
   output_dir: "output"
   world_json: "progen_world.json"
@@ -112,7 +112,7 @@ user:
   speed: 200
   a2a: True
   rule_based: True
-  waypoint_distance_threshold: 200
+  waypoint_distance_threshold: 150
   model_path: "/Game/TrafficSystem/Pedestrian/Base_User_Agent.Base_User_Agent_C"
   num_threads: 20
   llm_model_path: "gpt-4o-mini"

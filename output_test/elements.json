@@ -1,0 +1,6653 @@
+{
+  "elements": [
+    {
+      "center": {
+        "x": 19.0,
+        "y": -43.8985
+      },
+      "rotation": -7.7315,
+      "type": "BP_Trash_bin_a_C",
+      "bounds": {
+        "x": 17.72,
+        "y": -45.1785,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": -7.7315
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_50_C",
+        "center": {
+          "x": 51.5527,
+          "y": -48.4405
+        },
+        "bounds": {
+          "x": 27.0,
+          "y": -69.881,
+          "width": 49.1054,
+          "height": 42.881,
+          "rotation": 0.0
+        }
+      }
+    },
+    {
+      "center": {
+        "x": 68.1054,
+        "y": -80.0747
+      },
+      "rotation": 154.4057,
+      "type": "BP_RoadBlocker_C",
+      "bounds": {
+        "x": 66.8254,
+        "y": -81.3547,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": 154.4057
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_19_C",
+        "center": {
+          "x": 103.3334,
+          "y": -61.653
+        },
+        "bounds": {
+          "x": 76.1054,
+          "y": -96.306,
+          "width": 54.456,
+          "height": 69.306,
+          "rotation": 0.0
+        }
+      }
+    },
+    {
+      "center": {
+        "x": 138.5614,
+        "y": -78.5341
+      },
+      "rotation": -176.6929,
+      "type": "BP_Box_C",
+      "bounds": {
+        "x": 137.2814,
+        "y": -79.8141,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": -176.6929
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_19_C",
+        "center": {
+          "x": 103.3334,
+          "y": -61.653
+        },
+        "bounds": {
+          "x": 76.1054,
+          "y": -96.306,
+          "width": 54.456,
+          "height": 69.306,
+          "rotation": 0.0
+        }
+      }
+    },
+    {
+      "center": {
+        "x": 179.8751,
+        "y": -34.9326
+      },
+      "rotation": -7.6705,
+      "type": "BP_Hydrant_C",
+      "bounds": {
+        "x": 178.5951,
+        "y": -36.2126,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": -7.6705
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_83_C",
+        "center": {
+          "x": 151.2182,
+          "y": -35.4124
+        },
+        "bounds": {
+          "x": 130.5614,
+          "y": -43.8249,
+          "width": 41.3137,
+          "height": 16.8249,
+          "rotation": 0.0
+        }
+      }
+    },
+    {
+      "center": {
+        "x": 105.607,
+        "y": 49.5939
+      },
+      "rotation": 111.1327,
+      "type": "BP_Scooter_01_C",
+      "bounds": {
+        "x": 104.327,
+        "y": 48.3139,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": 111.1327
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_24_C",
+        "center": {
+          "x": 133.0479,
+          "y": 41.6631
+        },
+        "bounds": {
+          "x": 113.607,
+          "y": 27.0,
+          "width": 38.8818,
+          "height": 29.3262,
+          "rotation": 180.0
+        }
+      }
+    },
+    {
+      "center": {
+        "x": 200.936,
+        "y": 35.4654
+      },
+      "rotation": 14.6652,
+      "type": "BP_Soda3_C",
+      "bounds": {
+        "x": 199.656,
+        "y": 34.1854,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": 14.6652
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_75_C",
+        "center": {
+          "x": 186.5721,
+          "y": 33.364
+        },
+        "bounds": {
+          "x": 180.2081,
+          "y": 27.0,
+          "width": 12.7279,
+          "height": 12.7279,
+          "rotation": 180.0
+        }
+      }
+    },
+    {
+      "center": {
+        "x": 163.4743,
+        "y": -176.851
+      },
+      "rotation": -144.4493,
+      "type": "BP_Tree4_C",
+      "bounds": {
+        "x": 159.0869,
+        "y": -181.3921,
+        "width": 8.7748,
+        "height": 9.0822,
+        "rotation": -144.4493
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_82_C",
+        "center": {
+          "x": 157.9417,
+          "y": -142.8608
+        },
+        "bounds": {
+          "x": 131.9516,
+          "y": -157.9191,
+          "width": 51.9803,
+          "height": 30.1165,
+          "rotation": 270.0
+        }
+      }
+    },
+    {
+      "center": {
+        "x": 255.4368,
+        "y": 8.0
+      },
+      "rotation": -24.8997,
+      "type": "BP_Soda3_C",
+      "bounds": {
+        "x": 254.1568,
+        "y": 6.72,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": -24.8997
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_106_C",
+        "center": {
+          "x": 243.7831,
+          "y": -30.3586
+        },
+        "bounds": {
+          "x": 213.4245,
+          "y": -47.1417,
+          "width": 60.7172,
+          "height": 33.5662,
+          "rotation": 90.0
+        }
+      }
+    },
+    {
+      "center": {
+        "x": 231.6674,
+        "y": 8.0
+      },
+      "rotation": 119.9083,
+      "type": "BP_Tree3_C",
+      "bounds": {
+        "x": 227.3631,
+        "y": 3.0104,
+        "width": 8.6087,
+        "height": 9.9792,
+        "rotation": 119.9083
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_106_C",
+        "center": {
+          "x": 243.7831,
+          "y": -30.3586
+        },
+        "bounds": {
+          "x": 213.4245,
+          "y": -47.1417,
+          "width": 60.7172,
+          "height": 33.5662,
+          "rotation": 90.0
+        }
+      }
+    },
+    {
+      "center": {
+        "x": 291.3752,
+        "y": -254.7752
+      },
+      "rotation": -22.855,
+      "type": "BP_Cart_C",
+      "bounds": {
+        "x": 290.0952,
+        "y": -256.0552,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": -22.855
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_09_C",
+        "center": {
+          "x": 265.1313,
+          "y": -183.318
+        },
+        "bounds": {
+          "x": 201.6742,
+          "y": -221.4494,
+          "width": 126.9143,
+          "height": 76.2627,
+          "rotation": 90.0
+        }
+      }
+    },
+    {
+      "center": {
+        "x": 251.6707,
+        "y": -254.7752
+      },
+      "rotation": 139.1662,
+      "type": "BP_Tree5_C",
+      "bounds": {
+        "x": 246.3559,
+        "y": -259.4685,
+        "width": 10.6296,
+        "height": 9.3867,
+        "rotation": 139.1662
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_09_C",
+        "center": {
+          "x": 265.1313,
+          "y": -183.318
+        },
+        "bounds": {
+          "x": 201.6742,
+          "y": -221.4494,
+          "width": 126.9143,
+          "height": 76.2627,
+          "rotation": 90.0
+        }
+      }
+    },
+    {
+      "center": {
+        "x": 274.5232,
+        "y": -254.7752
+      },
+      "rotation": -52.0174,
+      "type": "BP_Cart_C",
+      "bounds": {
+        "x": 273.2432,
+        "y": -256.0552,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": -52.0174
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_09_C",
+        "center": {
+          "x": 265.1313,
+          "y": -183.318
+        },
+        "bounds": {
+          "x": 201.6742,
+          "y": -221.4494,
+          "width": 126.9143,
+          "height": 76.2627,
+          "rotation": 90.0
+        }
+      }
+    },
+    {
+      "center": {
+        "x": 278.3298,
+        "y": -111.8609
+      },
+      "rotation": 116.4586,
+      "type": "BP_RoadBlocker_C",
+      "bounds": {
+        "x": 277.0498,
+        "y": -113.1409,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": 116.4586
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_09_C",
+        "center": {
+          "x": 265.1313,
+          "y": -183.318
+        },
+        "bounds": {
+          "x": 201.6742,
+          "y": -221.4494,
+          "width": 126.9143,
+          "height": 76.2627,
+          "rotation": 90.0
+        }
+      }
+    },
+    {
+      "center": {
+        "x": 297.1375,
+        "y": -111.8609
+      },
+      "rotation": -77.6157,
+      "type": "BP_Can_C",
+      "bounds": {
+        "x": 295.8575,
+        "y": -113.1409,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": -77.6157
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_09_C",
+        "center": {
+          "x": 265.1313,
+          "y": -183.318
+        },
+        "bounds": {
+          "x": 201.6742,
+          "y": -221.4494,
+          "width": 126.9143,
+          "height": 76.2627,
+          "rotation": 90.0
+        }
+      }
+    },
+    {
+      "center": {
+        "x": -107.4774,
+        "y": 98.7678
+      },
+      "rotation": 55.4035,
+      "type": "BP_Trash_can_C",
+      "bounds": {
+        "x": -108.7574,
+        "y": 97.4878,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": 55.4035
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_89_C",
+        "center": {
+          "x": -152.058,
+          "y": 93.5472
+        },
+        "bounds": {
+          "x": -188.6387,
+          "y": 27.0,
+          "width": 73.1612,
+          "height": 133.0943,
+          "rotation": 180.0
+        }
+      }
+    },
+    {
+      "center": {
+        "x": -107.4774,
+        "y": 133.4224
+      },
+      "rotation": 133.781,
+      "type": "BP_RoadCone_C",
+      "bounds": {
+        "x": -108.7574,
+        "y": 132.1424,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": 133.781
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_89_C",
+        "center": {
+          "x": -152.058,
+          "y": 93.5472
+        },
+        "bounds": {
+          "x": -188.6387,
+          "y": 27.0,
+          "width": 73.1612,
+          "height": 133.0943,
+          "rotation": 180.0
+        }
+      }
+    },
+    {
+      "center": {
+        "x": -107.4774,
+        "y": 148.8261
+      },
+      "rotation": -179.5374,
+      "type": "BP_Scooter_04_C",
+      "bounds": {
+        "x": -108.7574,
+        "y": 147.5461,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": -179.5374
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_89_C",
+        "center": {
+          "x": -152.058,
+          "y": 93.5472
+        },
+        "bounds": {
+          "x": -188.6387,
+          "y": 27.0,
+          "width": 73.1612,
+          "height": 133.0943,
+          "rotation": 180.0
+        }
+      }
+    },
+    {
+      "center": {
+        "x": -196.6387,
+        "y": 126.216
+      },
+      "rotation": -2.7112,
+      "type": "BP_Table3_C",
+      "bounds": {
+        "x": -197.9187,
+        "y": 124.936,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": -2.7112
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_89_C",
+        "center": {
+          "x": -152.058,
+          "y": 93.5472
+        },
+        "bounds": {
+          "x": -188.6387,
+          "y": 27.0,
+          "width": 73.1612,
+          "height": 133.0943,
+          "rotation": 180.0
+        }
+      }
+    },
+    {
+      "center": {
+        "x": -196.6387,
+        "y": 73.7883
+      },
+      "rotation": -101.7277,
+      "type": "BP_Scooter_04_C",
+      "bounds": {
+        "x": -197.9187,
+        "y": 72.5083,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": -101.7277
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_89_C",
+        "center": {
+          "x": -152.058,
+          "y": 93.5472
+        },
+        "bounds": {
+          "x": -188.6387,
+          "y": 27.0,
+          "width": 73.1612,
+          "height": 133.0943,
+          "rotation": 180.0
+        }
+      }
+    },
+    {
+      "center": {
+        "x": -196.6387,
+        "y": 98.4184
+      },
+      "rotation": -179.1931,
+      "type": "BP_Tree4_C",
+      "bounds": {
+        "x": -201.0261,
+        "y": 93.8773,
+        "width": 8.7748,
+        "height": 9.0822,
+        "rotation": -179.1931
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_89_C",
+        "center": {
+          "x": -152.058,
+          "y": 93.5472
+        },
+        "bounds": {
+          "x": -188.6387,
+          "y": 27.0,
+          "width": 73.1612,
+          "height": 133.0943,
+          "rotation": 180.0
+        }
+      }
+    },
+    {
+      "center": {
+        "x": -196.6387,
+        "y": 145.6224
+      },
+      "rotation": -114.6138,
+      "type": "BP_Table2_C",
+      "bounds": {
+        "x": -197.9187,
+        "y": 144.3424,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": -114.6138
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_89_C",
+        "center": {
+          "x": -152.058,
+          "y": 93.5472
+        },
+        "bounds": {
+          "x": -188.6387,
+          "y": 27.0,
+          "width": 73.1612,
+          "height": 133.0943,
+          "rotation": 180.0
+        }
+      }
+    },
+    {
+      "center": {
+        "x": -211.0405,
+        "y": 47.5197
+      },
+      "rotation": -62.0943,
+      "type": "BP_Cart2_C",
+      "bounds": {
+        "x": -212.3205,
+        "y": 46.2397,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": -62.0943
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_36_C",
+        "center": {
+          "x": -195.9155,
+          "y": 39.6863
+        },
+        "bounds": {
+          "x": -203.0405,
+          "y": 27.0,
+          "width": 14.2499,
+          "height": 25.3726,
+          "rotation": 180.0
+        }
+      }
+    },
+    {
+      "center": {
+        "x": -211.0405,
+        "y": 31.307
+      },
+      "rotation": 106.4044,
+      "type": "BP_RoadBlocker_C",
+      "bounds": {
+        "x": -212.3205,
+        "y": 30.027,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": 106.4044
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_36_C",
+        "center": {
+          "x": -195.9155,
+          "y": 39.6863
+        },
+        "bounds": {
+          "x": -203.0405,
+          "y": 27.0,
+          "width": 14.2499,
+          "height": 25.3726,
+          "rotation": 180.0
+        }
+      }
+    },
+    {
+      "center": {
+        "x": -182.4129,
+        "y": -41.3644
+      },
+      "rotation": 36.4352,
+      "type": "BP_Can_C",
+      "bounds": {
+        "x": -183.6929,
+        "y": -42.6444,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": 36.4352
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_101_C",
+        "center": {
+          "x": -137.2129,
+          "y": -46.2
+        },
+        "bounds": {
+          "x": -174.4129,
+          "y": -65.4001,
+          "width": 74.4,
+          "height": 38.4001,
+          "rotation": 0.0
+        }
+      }
+    },
+    {
+      "center": {
+        "x": -19.0,
+        "y": -47.6879
+      },
+      "rotation": -121.3676,
+      "type": "BP_Box3_C",
+      "bounds": {
+        "x": -20.28,
+        "y": -48.9679,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": -121.3676
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_62_C",
+        "center": {
+          "x": -36.1319,
+          "y": -40.9908
+        },
+        "bounds": {
+          "x": -45.2638,
+          "y": -54.9816,
+          "width": 18.2638,
+          "height": 27.9816,
+          "rotation": 0.0
+        }
+      }
+    },
+    {
+      "center": {
+        "x": -19.0,
+        "y": -32.8524
+      },
+      "rotation": 69.1908,
+      "type": "BP_Scooter_04_C",
+      "bounds": {
+        "x": -20.28,
+        "y": -34.1324,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": 69.1908
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_62_C",
+        "center": {
+          "x": -36.1319,
+          "y": -40.9908
+        },
+        "bounds": {
+          "x": -45.2638,
+          "y": -54.9816,
+          "width": 18.2638,
+          "height": 27.9816,
+          "rotation": 0.0
+        }
+      }
+    },
+    {
+      "center": {
+        "x": -237.9851,
+        "y": 8.0
+      },
+      "rotation": 120.562,
+      "type": "BP_Soda2_C",
+      "bounds": {
+        "x": -239.2651,
+        "y": 6.72,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": 120.562
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_83_C",
+        "center": {
+          "x": -235.4124,
+          "y": -20.6568
+        },
+        "bounds": {
+          "x": -256.0693,
+          "y": -29.0693,
+          "width": 41.3137,
+          "height": 16.8249,
+          "rotation": 270.0
+        }
+      }
+    },
+    {
+      "center": {
+        "x": -256.8608,
+        "y": -33.3137
+      },
+      "rotation": 55.6347,
+      "type": "BP_Trash_bin_b_C",
+      "bounds": {
+        "x": -258.1408,
+        "y": -34.5937,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": 55.6347
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_25_C",
+        "center": {
+          "x": -248.0717,
+          "y": -56.0152
+        },
+        "bounds": {
+          "x": -262.7733,
+          "y": -77.087,
+          "width": 29.4031,
+          "height": 42.1434,
+          "rotation": 270.0
+        }
+      }
+    },
+    {
+      "center": {
+        "x": -263.9408,
+        "y": -114.5012
+      },
+      "rotation": -134.0309,
+      "type": "BP_Table2_C",
+      "bounds": {
+        "x": -265.2208,
+        "y": -115.7812,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": -134.0309
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_20_C",
+        "center": {
+          "x": -248.4174,
+          "y": -143.9921
+        },
+        "bounds": {
+          "x": -269.9083,
+          "y": -165.4094,
+          "width": 42.9817,
+          "height": 42.8348,
+          "rotation": 270.0
+        }
+      }
+    },
+    {
+      "center": {
+        "x": -258.5737,
+        "y": -232.1106
+      },
+      "rotation": 150.6478,
+      "type": "BP_Can2_C",
+      "bounds": {
+        "x": -259.8537,
+        "y": -233.3906,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": 150.6478
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_11_C",
+        "center": {
+          "x": -249.6951,
+          "y": -194.7968
+        },
+        "bounds": {
+          "x": -279.009,
+          "y": -217.4919,
+          "width": 58.6277,
+          "height": 45.3903,
+          "rotation": 270.0
+        }
+      }
+    },
+    {
+      "center": {
+        "x": -232.5322,
+        "y": -232.1106
+      },
+      "rotation": -96.5483,
+      "type": "BP_Scooter_03_C",
+      "bounds": {
+        "x": -233.8122,
+        "y": -233.3906,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": -96.5483
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_11_C",
+        "center": {
+          "x": -249.6951,
+          "y": -194.7968
+        },
+        "bounds": {
+          "x": -279.009,
+          "y": -217.4919,
+          "width": 58.6277,
+          "height": 45.3903,
+          "rotation": 270.0
+        }
+      }
+    },
+    {
+      "center": {
+        "x": -157.5039,
+        "y": -178.3225
+      },
+      "rotation": -120.5496,
+      "type": "BP_Tree3_C",
+      "bounds": {
+        "x": -161.8082,
+        "y": -183.3121,
+        "width": 8.6087,
+        "height": 9.9792,
+        "rotation": -120.5496
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_72_C",
+        "center": {
+          "x": -154.2774,
+          "y": -153.1302
+        },
+        "bounds": {
+          "x": -171.4697,
+          "y": -171.8528,
+          "width": 34.3845,
+          "height": 37.4452,
+          "rotation": 90.0
+        }
+      }
+    },
+    {
+      "center": {
+        "x": -40.7924,
+        "y": -69.6194
+      },
+      "rotation": -171.4953,
+      "type": "BP_Table2_C",
+      "bounds": {
+        "x": -42.0724,
+        "y": -70.8994,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": -171.4953
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_62_C",
+        "center": {
+          "x": -40.9908,
+          "y": -86.7513
+        },
+        "bounds": {
+          "x": -50.1227,
+          "y": -100.7421,
+          "width": 18.2638,
+          "height": 27.9816,
+          "rotation": 270.0
+        }
+      }
+    },
+    {
+      "center": {
+        "x": -33.9319,
+        "y": -176.7427
+      },
+      "rotation": -100.5628,
+      "type": "BP_Table2_C",
+      "bounds": {
+        "x": -35.2119,
+        "y": -178.0227,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": -100.5628
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_62_C",
+        "center": {
+          "x": -40.9908,
+          "y": -159.6108
+        },
+        "bounds": {
+          "x": -50.1227,
+          "y": -173.6016,
+          "width": 18.2638,
+          "height": 27.9816,
+          "rotation": 270.0
+        }
+      }
+    },
+    {
+      "center": {
+        "x": -49.2552,
+        "y": -176.7427
+      },
+      "rotation": -84.1357,
+      "type": "BP_Can_C",
+      "bounds": {
+        "x": -50.5352,
+        "y": -178.0227,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": -84.1357
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_62_C",
+        "center": {
+          "x": -40.9908,
+          "y": -159.6108
+        },
+        "bounds": {
+          "x": -50.1227,
+          "y": -173.6016,
+          "width": 18.2638,
+          "height": 27.9816,
+          "rotation": 270.0
+        }
+      }
+    },
+    {
+      "center": {
+        "x": 55.4121,
+        "y": -150.5174
+      },
+      "rotation": 122.8281,
+      "type": "BP_Table3_C",
+      "bounds": {
+        "x": 54.1321,
+        "y": -151.7974,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": 122.8281
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_49_C",
+        "center": {
+          "x": 43.7821,
+          "y": -115.4677
+        },
+        "bounds": {
+          "x": 16.7324,
+          "y": -132.2498,
+          "width": 54.0995,
+          "height": 33.5643,
+          "rotation": 90.0
+        }
+      }
+    },
+    {
+      "center": {
+        "x": 41.2651,
+        "y": -182.2172
+      },
+      "rotation": 42.8105,
+      "type": "BP_Cart_C",
+      "bounds": {
+        "x": 39.9851,
+        "y": -183.4972,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": 42.8105
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_80_C",
+        "center": {
+          "x": 37.9731,
+          "y": -158.3673
+        },
+        "bounds": {
+          "x": 22.1232,
+          "y": -169.3404,
+          "width": 31.6998,
+          "height": 21.9462,
+          "rotation": 90.0
+        }
+      }
+    },
+    {
+      "center": {
+        "x": -208.0,
+        "y": -238.9853
+      },
+      "rotation": 176.1092,
+      "type": "BP_Cart2_C",
+      "bounds": {
+        "x": -209.28,
+        "y": -240.2653,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": 176.1092
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_83_C",
+        "center": {
+          "x": -179.3432,
+          "y": -235.4124
+        },
+        "bounds": {
+          "x": -200.0,
+          "y": -243.8249,
+          "width": 41.3137,
+          "height": 16.8249,
+          "rotation": 0.0
+        }
+      }
+    },
+    {
+      "center": {
+        "x": 21.5601,
+        "y": -243.7175
+      },
+      "rotation": -126.2119,
+      "type": "BP_Soda1_C",
+      "bounds": {
+        "x": 20.2801,
+        "y": -244.9975,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": -126.2119
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_14_C",
+        "center": {
+          "x": -72.5631,
+          "y": -239.4969
+        },
+        "bounds": {
+          "x": -158.6863,
+          "y": -251.9938,
+          "width": 172.2465,
+          "height": 24.9938,
+          "rotation": 0.0
+        }
+      }
+    },
+    {
+      "center": {
+        "x": 208.8596,
+        "y": -239.2704
+      },
+      "rotation": -126.6015,
+      "type": "BP_Couch_C",
+      "bounds": {
+        "x": 207.5796,
+        "y": -240.5504,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": -126.6015
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_85_C",
+        "center": {
+          "x": 186.0815,
+          "y": -237.567
+        },
+        "bounds": {
+          "x": 171.3035,
+          "y": -248.1339,
+          "width": 29.5561,
+          "height": 21.1339,
+          "rotation": 0.0
+        }
+      }
+    },
+    {
+      "center": {
+        "x": 80.2886,
+        "y": -142.4296
+      },
+      "rotation": -19.1659,
+      "type": "BP_RoadBlocker_C",
+      "bounds": {
+        "x": 79.0086,
+        "y": -143.7096,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": -19.1659
+      },
+      "building_assignment": {
+        "building_type": "BP_Building_42_C",
+        "center": {
+          "x": 114.905,
+          "y": -154.7651
+        },
+        "bounds": {
+          "x": 88.2886,
+          "y": -173.0,
+          "width": 53.2328,
+          "height": 36.4698,
+          "rotation": 180.0
+        }
+      }
+    },
+    {
+      "center": {
+        "x": 60.0,
+        "y": -12.0
+      },
+      "rotation": -6.8623,
+      "type": "BP_Box_C",
+      "bounds": {
+        "x": 58.72,
+        "y": -13.28,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": -6.8623
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 200,
+          "y": 0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": 60.0,
+        "y": 12.0
+      },
+      "rotation": -6.8623,
+      "type": "BP_Box_C",
+      "bounds": {
+        "x": 58.72,
+        "y": 10.72,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": -6.8623
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 200,
+          "y": 0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": 80.0,
+        "y": -12.0
+      },
+      "rotation": 86.9957,
+      "type": "BP_Cart_C",
+      "bounds": {
+        "x": 78.72,
+        "y": -13.28,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": 86.9957
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 200,
+          "y": 0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": 80.0,
+        "y": 12.0
+      },
+      "rotation": 86.9957,
+      "type": "BP_Cart_C",
+      "bounds": {
+        "x": 78.72,
+        "y": 10.72,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": 86.9957
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 200,
+          "y": 0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": 100.0,
+        "y": -12.0
+      },
+      "rotation": -84.1475,
+      "type": "BP_Soda3_C",
+      "bounds": {
+        "x": 98.72,
+        "y": -13.28,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": -84.1475
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 200,
+          "y": 0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": 100.0,
+        "y": 12.0
+      },
+      "rotation": -84.1475,
+      "type": "BP_Soda3_C",
+      "bounds": {
+        "x": 98.72,
+        "y": 10.72,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": -84.1475
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 200,
+          "y": 0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": 120.0,
+        "y": -12.0
+      },
+      "rotation": -145.9842,
+      "type": "BP_Scooter_02_C",
+      "bounds": {
+        "x": 118.72,
+        "y": -13.28,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": -145.9842
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 200,
+          "y": 0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": 120.0,
+        "y": 12.0
+      },
+      "rotation": -145.9842,
+      "type": "BP_Scooter_02_C",
+      "bounds": {
+        "x": 118.72,
+        "y": 10.72,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": -145.9842
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 200,
+          "y": 0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": 160.0,
+        "y": -12.0
+      },
+      "rotation": -147.7351,
+      "type": "BP_Can_C",
+      "bounds": {
+        "x": 158.72,
+        "y": -13.28,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": -147.7351
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 200,
+          "y": 0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": 160.0,
+        "y": 12.0
+      },
+      "rotation": -147.7351,
+      "type": "BP_Can_C",
+      "bounds": {
+        "x": 158.72,
+        "y": 10.72,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": -147.7351
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 200,
+          "y": 0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": 30.0,
+        "y": -23.0
+      },
+      "rotation": -47.2321,
+      "type": "BP_Tree3_C",
+      "bounds": {
+        "x": 25.6957,
+        "y": -27.9896,
+        "width": 8.6087,
+        "height": 9.9792,
+        "rotation": -47.2321
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 200,
+          "y": 0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": 30.0,
+        "y": 23.0
+      },
+      "rotation": -47.2321,
+      "type": "BP_Tree3_C",
+      "bounds": {
+        "x": 25.6957,
+        "y": 18.0104,
+        "width": 8.6087,
+        "height": 9.9792,
+        "rotation": -47.2321
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 200,
+          "y": 0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": 40.0,
+        "y": -23.0
+      },
+      "rotation": 57.0817,
+      "type": "BP_Tree6_C",
+      "bounds": {
+        "x": 33.4765,
+        "y": -29.1169,
+        "width": 13.0471,
+        "height": 12.2337,
+        "rotation": 57.0817
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 200,
+          "y": 0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": 40.0,
+        "y": 23.0
+      },
+      "rotation": 57.0817,
+      "type": "BP_Tree6_C",
+      "bounds": {
+        "x": 33.4765,
+        "y": 16.8831,
+        "width": 13.0471,
+        "height": 12.2337,
+        "rotation": 57.0817
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 200,
+          "y": 0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": 60.0,
+        "y": -23.0
+      },
+      "rotation": -93.299,
+      "type": "BP_Tree5_C",
+      "bounds": {
+        "x": 54.6852,
+        "y": -27.6934,
+        "width": 10.6296,
+        "height": 9.3867,
+        "rotation": -93.299
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 200,
+          "y": 0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": 60.0,
+        "y": 23.0
+      },
+      "rotation": -93.299,
+      "type": "BP_Tree5_C",
+      "bounds": {
+        "x": 54.6852,
+        "y": 18.3066,
+        "width": 10.6296,
+        "height": 9.3867,
+        "rotation": -93.299
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 200,
+          "y": 0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": 80.0,
+        "y": -23.0
+      },
+      "rotation": -23.8811,
+      "type": "BP_Tree2_C",
+      "bounds": {
+        "x": 73.4721,
+        "y": -29.1042,
+        "width": 13.0558,
+        "height": 12.2084,
+        "rotation": -23.8811
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 200,
+          "y": 0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": 80.0,
+        "y": 23.0
+      },
+      "rotation": -23.8811,
+      "type": "BP_Tree2_C",
+      "bounds": {
+        "x": 73.4721,
+        "y": 16.8958,
+        "width": 13.0558,
+        "height": 12.2084,
+        "rotation": -23.8811
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 200,
+          "y": 0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": 90.0,
+        "y": -23.0
+      },
+      "rotation": 172.0744,
+      "type": "BP_Tree6_C",
+      "bounds": {
+        "x": 83.4765,
+        "y": -29.1169,
+        "width": 13.0471,
+        "height": 12.2337,
+        "rotation": 172.0744
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 200,
+          "y": 0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": 90.0,
+        "y": 23.0
+      },
+      "rotation": 172.0744,
+      "type": "BP_Tree6_C",
+      "bounds": {
+        "x": 83.4765,
+        "y": 16.8831,
+        "width": 13.0471,
+        "height": 12.2337,
+        "rotation": 172.0744
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 200,
+          "y": 0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": 100.0,
+        "y": -23.0
+      },
+      "rotation": -148.6709,
+      "type": "BP_Tree1_C",
+      "bounds": {
+        "x": 93.7263,
+        "y": -29.4626,
+        "width": 12.5474,
+        "height": 12.9252,
+        "rotation": -148.6709
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 200,
+          "y": 0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": 100.0,
+        "y": 23.0
+      },
+      "rotation": -148.6709,
+      "type": "BP_Tree1_C",
+      "bounds": {
+        "x": 93.7263,
+        "y": 16.5374,
+        "width": 12.5474,
+        "height": 12.9252,
+        "rotation": -148.6709
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 200,
+          "y": 0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": 170.0,
+        "y": -23.0
+      },
+      "rotation": 130.3936,
+      "type": "BP_Tree4_C",
+      "bounds": {
+        "x": 165.6126,
+        "y": -27.5411,
+        "width": 8.7748,
+        "height": 9.0822,
+        "rotation": 130.3936
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 200,
+          "y": 0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": 170.0,
+        "y": 23.0
+      },
+      "rotation": 130.3936,
+      "type": "BP_Tree4_C",
+      "bounds": {
+        "x": 165.6126,
+        "y": 18.4589,
+        "width": 8.7748,
+        "height": 9.0822,
+        "rotation": 130.3936
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 200,
+          "y": 0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": 180.0,
+        "y": -23.0
+      },
+      "rotation": -106.0781,
+      "type": "BP_Tree2_C",
+      "bounds": {
+        "x": 173.4721,
+        "y": -29.1042,
+        "width": 13.0558,
+        "height": 12.2084,
+        "rotation": -106.0781
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 200,
+          "y": 0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": 180.0,
+        "y": 23.0
+      },
+      "rotation": -106.0781,
+      "type": "BP_Tree2_C",
+      "bounds": {
+        "x": 173.4721,
+        "y": 16.8958,
+        "width": 13.0558,
+        "height": 12.2084,
+        "rotation": -106.0781
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 200,
+          "y": 0
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": 212.0,
+        "y": -140.0
+      },
+      "rotation": -59.7537,
+      "type": "BP_Soda3_C",
+      "bounds": {
+        "x": 210.72,
+        "y": -141.28,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": -59.7537
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200,
+          "y": 0
+        },
+        "end": {
+          "x": 200,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": 188.0,
+        "y": -140.0
+      },
+      "rotation": -59.7537,
+      "type": "BP_Soda3_C",
+      "bounds": {
+        "x": 186.72,
+        "y": -141.28,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": -59.7537
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200,
+          "y": 0
+        },
+        "end": {
+          "x": 200,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": 212.0,
+        "y": -120.0
+      },
+      "rotation": 67.4432,
+      "type": "BP_Scooter_02_C",
+      "bounds": {
+        "x": 210.72,
+        "y": -121.28,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": 67.4432
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200,
+          "y": 0
+        },
+        "end": {
+          "x": 200,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": 188.0,
+        "y": -120.0
+      },
+      "rotation": 67.4432,
+      "type": "BP_Scooter_02_C",
+      "bounds": {
+        "x": 186.72,
+        "y": -121.28,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": 67.4432
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200,
+          "y": 0
+        },
+        "end": {
+          "x": 200,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": 212.0,
+        "y": -100.0
+      },
+      "rotation": 164.8796,
+      "type": "BP_Soda4_C",
+      "bounds": {
+        "x": 210.72,
+        "y": -101.28,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": 164.8796
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200,
+          "y": 0
+        },
+        "end": {
+          "x": 200,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": 188.0,
+        "y": -100.0
+      },
+      "rotation": 164.8796,
+      "type": "BP_Soda4_C",
+      "bounds": {
+        "x": 186.72,
+        "y": -101.28,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": 164.8796
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200,
+          "y": 0
+        },
+        "end": {
+          "x": 200,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": 212.0,
+        "y": -80.0
+      },
+      "rotation": -129.9543,
+      "type": "BP_Scooter_02_C",
+      "bounds": {
+        "x": 210.72,
+        "y": -81.28,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": -129.9543
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200,
+          "y": 0
+        },
+        "end": {
+          "x": 200,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": 188.0,
+        "y": -80.0
+      },
+      "rotation": -129.9543,
+      "type": "BP_Scooter_02_C",
+      "bounds": {
+        "x": 186.72,
+        "y": -81.28,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": -129.9543
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200,
+          "y": 0
+        },
+        "end": {
+          "x": 200,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": 212.0,
+        "y": -60.0
+      },
+      "rotation": -38.9147,
+      "type": "BP_Rabbish_C",
+      "bounds": {
+        "x": 210.72,
+        "y": -61.28,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": -38.9147
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200,
+          "y": 0
+        },
+        "end": {
+          "x": 200,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": 188.0,
+        "y": -60.0
+      },
+      "rotation": -38.9147,
+      "type": "BP_Rabbish_C",
+      "bounds": {
+        "x": 186.72,
+        "y": -61.28,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": -38.9147
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200,
+          "y": 0
+        },
+        "end": {
+          "x": 200,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": 212.0,
+        "y": -40.0
+      },
+      "rotation": -39.0933,
+      "type": "BP_Can_C",
+      "bounds": {
+        "x": 210.72,
+        "y": -41.28,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": -39.0933
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200,
+          "y": 0
+        },
+        "end": {
+          "x": 200,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": 188.0,
+        "y": -40.0
+      },
+      "rotation": -39.0933,
+      "type": "BP_Can_C",
+      "bounds": {
+        "x": 186.72,
+        "y": -41.28,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": -39.0933
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200,
+          "y": 0
+        },
+        "end": {
+          "x": 200,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": 223.0,
+        "y": -170.0
+      },
+      "rotation": -51.3138,
+      "type": "BP_Tree2_C",
+      "bounds": {
+        "x": 216.4721,
+        "y": -176.1042,
+        "width": 13.0558,
+        "height": 12.2084,
+        "rotation": -51.3138
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200,
+          "y": 0
+        },
+        "end": {
+          "x": 200,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": 177.0,
+        "y": -170.0
+      },
+      "rotation": -51.3138,
+      "type": "BP_Tree2_C",
+      "bounds": {
+        "x": 170.4721,
+        "y": -176.1042,
+        "width": 13.0558,
+        "height": 12.2084,
+        "rotation": -51.3138
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200,
+          "y": 0
+        },
+        "end": {
+          "x": 200,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": 223.0,
+        "y": -160.0
+      },
+      "rotation": 138.7415,
+      "type": "BP_Tree2_C",
+      "bounds": {
+        "x": 216.4721,
+        "y": -166.1042,
+        "width": 13.0558,
+        "height": 12.2084,
+        "rotation": 138.7415
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200,
+          "y": 0
+        },
+        "end": {
+          "x": 200,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": 177.0,
+        "y": -160.0
+      },
+      "rotation": 138.7415,
+      "type": "BP_Tree2_C",
+      "bounds": {
+        "x": 170.4721,
+        "y": -166.1042,
+        "width": 13.0558,
+        "height": 12.2084,
+        "rotation": 138.7415
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200,
+          "y": 0
+        },
+        "end": {
+          "x": 200,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": 223.0,
+        "y": -150.0
+      },
+      "rotation": 154.7357,
+      "type": "BP_Tree2_C",
+      "bounds": {
+        "x": 216.4721,
+        "y": -156.1042,
+        "width": 13.0558,
+        "height": 12.2084,
+        "rotation": 154.7357
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200,
+          "y": 0
+        },
+        "end": {
+          "x": 200,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": 177.0,
+        "y": -150.0
+      },
+      "rotation": 154.7357,
+      "type": "BP_Tree2_C",
+      "bounds": {
+        "x": 170.4721,
+        "y": -156.1042,
+        "width": 13.0558,
+        "height": 12.2084,
+        "rotation": 154.7357
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200,
+          "y": 0
+        },
+        "end": {
+          "x": 200,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": 223.0,
+        "y": -130.0
+      },
+      "rotation": -171.8369,
+      "type": "BP_Tree1_C",
+      "bounds": {
+        "x": 216.7263,
+        "y": -136.4626,
+        "width": 12.5474,
+        "height": 12.9252,
+        "rotation": -171.8369
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200,
+          "y": 0
+        },
+        "end": {
+          "x": 200,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": 177.0,
+        "y": -130.0
+      },
+      "rotation": -171.8369,
+      "type": "BP_Tree1_C",
+      "bounds": {
+        "x": 170.7263,
+        "y": -136.4626,
+        "width": 12.5474,
+        "height": 12.9252,
+        "rotation": -171.8369
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200,
+          "y": 0
+        },
+        "end": {
+          "x": 200,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": 223.0,
+        "y": -120.0
+      },
+      "rotation": -28.0599,
+      "type": "BP_Tree4_C",
+      "bounds": {
+        "x": 218.6126,
+        "y": -124.5411,
+        "width": 8.7748,
+        "height": 9.0822,
+        "rotation": -28.0599
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200,
+          "y": 0
+        },
+        "end": {
+          "x": 200,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": 177.0,
+        "y": -120.0
+      },
+      "rotation": -28.0599,
+      "type": "BP_Tree4_C",
+      "bounds": {
+        "x": 172.6126,
+        "y": -124.5411,
+        "width": 8.7748,
+        "height": 9.0822,
+        "rotation": -28.0599
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200,
+          "y": 0
+        },
+        "end": {
+          "x": 200,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": 223.0,
+        "y": -110.0
+      },
+      "rotation": -155.9841,
+      "type": "BP_Tree1_C",
+      "bounds": {
+        "x": 216.7263,
+        "y": -116.4626,
+        "width": 12.5474,
+        "height": 12.9252,
+        "rotation": -155.9841
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200,
+          "y": 0
+        },
+        "end": {
+          "x": 200,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": 177.0,
+        "y": -110.0
+      },
+      "rotation": -155.9841,
+      "type": "BP_Tree1_C",
+      "bounds": {
+        "x": 170.7263,
+        "y": -116.4626,
+        "width": 12.5474,
+        "height": 12.9252,
+        "rotation": -155.9841
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200,
+          "y": 0
+        },
+        "end": {
+          "x": 200,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": 223.0,
+        "y": -90.0
+      },
+      "rotation": 79.5918,
+      "type": "BP_Tree1_C",
+      "bounds": {
+        "x": 216.7263,
+        "y": -96.4626,
+        "width": 12.5474,
+        "height": 12.9252,
+        "rotation": 79.5918
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200,
+          "y": 0
+        },
+        "end": {
+          "x": 200,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": 177.0,
+        "y": -90.0
+      },
+      "rotation": 79.5918,
+      "type": "BP_Tree1_C",
+      "bounds": {
+        "x": 170.7263,
+        "y": -96.4626,
+        "width": 12.5474,
+        "height": 12.9252,
+        "rotation": 79.5918
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200,
+          "y": 0
+        },
+        "end": {
+          "x": 200,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": 223.0,
+        "y": -80.0
+      },
+      "rotation": 84.025,
+      "type": "BP_Tree3_C",
+      "bounds": {
+        "x": 218.6957,
+        "y": -84.9896,
+        "width": 8.6087,
+        "height": 9.9792,
+        "rotation": 84.025
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200,
+          "y": 0
+        },
+        "end": {
+          "x": 200,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": 177.0,
+        "y": -80.0
+      },
+      "rotation": 84.025,
+      "type": "BP_Tree3_C",
+      "bounds": {
+        "x": 172.6957,
+        "y": -84.9896,
+        "width": 8.6087,
+        "height": 9.9792,
+        "rotation": 84.025
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200,
+          "y": 0
+        },
+        "end": {
+          "x": 200,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": 223.0,
+        "y": -70.0
+      },
+      "rotation": -95.1719,
+      "type": "BP_Tree1_C",
+      "bounds": {
+        "x": 216.7263,
+        "y": -76.4626,
+        "width": 12.5474,
+        "height": 12.9252,
+        "rotation": -95.1719
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200,
+          "y": 0
+        },
+        "end": {
+          "x": 200,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": 177.0,
+        "y": -70.0
+      },
+      "rotation": -95.1719,
+      "type": "BP_Tree1_C",
+      "bounds": {
+        "x": 170.7263,
+        "y": -76.4626,
+        "width": 12.5474,
+        "height": 12.9252,
+        "rotation": -95.1719
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200,
+          "y": 0
+        },
+        "end": {
+          "x": 200,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": 223.0,
+        "y": -60.0
+      },
+      "rotation": 45.0538,
+      "type": "BP_Tree2_C",
+      "bounds": {
+        "x": 216.4721,
+        "y": -66.1042,
+        "width": 13.0558,
+        "height": 12.2084,
+        "rotation": 45.0538
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200,
+          "y": 0
+        },
+        "end": {
+          "x": 200,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": 177.0,
+        "y": -60.0
+      },
+      "rotation": 45.0538,
+      "type": "BP_Tree2_C",
+      "bounds": {
+        "x": 170.4721,
+        "y": -66.1042,
+        "width": 13.0558,
+        "height": 12.2084,
+        "rotation": 45.0538
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200,
+          "y": 0
+        },
+        "end": {
+          "x": 200,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": 223.0,
+        "y": -50.0
+      },
+      "rotation": 92.5987,
+      "type": "BP_Tree2_C",
+      "bounds": {
+        "x": 216.4721,
+        "y": -56.1042,
+        "width": 13.0558,
+        "height": 12.2084,
+        "rotation": 92.5987
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200,
+          "y": 0
+        },
+        "end": {
+          "x": 200,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": 177.0,
+        "y": -50.0
+      },
+      "rotation": 92.5987,
+      "type": "BP_Tree2_C",
+      "bounds": {
+        "x": 170.4721,
+        "y": -56.1042,
+        "width": 13.0558,
+        "height": 12.2084,
+        "rotation": 92.5987
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200,
+          "y": 0
+        },
+        "end": {
+          "x": 200,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": 223.0,
+        "y": -40.0
+      },
+      "rotation": 20.4383,
+      "type": "BP_Tree1_C",
+      "bounds": {
+        "x": 216.7263,
+        "y": -46.4626,
+        "width": 12.5474,
+        "height": 12.9252,
+        "rotation": 20.4383
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200,
+          "y": 0
+        },
+        "end": {
+          "x": 200,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": 177.0,
+        "y": -40.0
+      },
+      "rotation": 20.4383,
+      "type": "BP_Tree1_C",
+      "bounds": {
+        "x": 170.7263,
+        "y": -46.4626,
+        "width": 12.5474,
+        "height": 12.9252,
+        "rotation": 20.4383
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200,
+          "y": 0
+        },
+        "end": {
+          "x": 200,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": 223.0,
+        "y": -20.0
+      },
+      "rotation": -162.2942,
+      "type": "BP_Tree5_C",
+      "bounds": {
+        "x": 217.6852,
+        "y": -24.6934,
+        "width": 10.6296,
+        "height": 9.3867,
+        "rotation": -162.2942
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200,
+          "y": 0
+        },
+        "end": {
+          "x": 200,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": 177.0,
+        "y": -20.0
+      },
+      "rotation": -162.2942,
+      "type": "BP_Tree5_C",
+      "bounds": {
+        "x": 171.6852,
+        "y": -24.6934,
+        "width": 10.6296,
+        "height": 9.3867,
+        "rotation": -162.2942
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 200,
+          "y": 0
+        },
+        "end": {
+          "x": 200,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": -140.0,
+        "y": -12.0
+      },
+      "rotation": 142.4402,
+      "type": "BP_Can_C",
+      "bounds": {
+        "x": -141.28,
+        "y": -13.28,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": 142.4402
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": -200,
+          "y": 0
+        },
+        "angle": 180.0
+      }
+    },
+    {
+      "center": {
+        "x": -140.0,
+        "y": 12.0
+      },
+      "rotation": 142.4402,
+      "type": "BP_Can_C",
+      "bounds": {
+        "x": -141.28,
+        "y": 10.72,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": 142.4402
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": -200,
+          "y": 0
+        },
+        "angle": 180.0
+      }
+    },
+    {
+      "center": {
+        "x": -60.0,
+        "y": -12.0
+      },
+      "rotation": 113.1341,
+      "type": "BP_Cart_C",
+      "bounds": {
+        "x": -61.28,
+        "y": -13.28,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": 113.1341
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": -200,
+          "y": 0
+        },
+        "angle": 180.0
+      }
+    },
+    {
+      "center": {
+        "x": -60.0,
+        "y": 12.0
+      },
+      "rotation": 113.1341,
+      "type": "BP_Cart_C",
+      "bounds": {
+        "x": -61.28,
+        "y": 10.72,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": 113.1341
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": -200,
+          "y": 0
+        },
+        "angle": 180.0
+      }
+    },
+    {
+      "center": {
+        "x": -40.0,
+        "y": -12.0
+      },
+      "rotation": 121.4127,
+      "type": "BP_Rabbish_C",
+      "bounds": {
+        "x": -41.28,
+        "y": -13.28,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": 121.4127
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": -200,
+          "y": 0
+        },
+        "angle": 180.0
+      }
+    },
+    {
+      "center": {
+        "x": -40.0,
+        "y": 12.0
+      },
+      "rotation": 121.4127,
+      "type": "BP_Rabbish_C",
+      "bounds": {
+        "x": -41.28,
+        "y": 10.72,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": 121.4127
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": -200,
+          "y": 0
+        },
+        "angle": 180.0
+      }
+    },
+    {
+      "center": {
+        "x": -170.0,
+        "y": -23.0
+      },
+      "rotation": -54.3035,
+      "type": "BP_Tree6_C",
+      "bounds": {
+        "x": -176.5235,
+        "y": -29.1169,
+        "width": 13.0471,
+        "height": 12.2337,
+        "rotation": -54.3035
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": -200,
+          "y": 0
+        },
+        "angle": 180.0
+      }
+    },
+    {
+      "center": {
+        "x": -170.0,
+        "y": 23.0
+      },
+      "rotation": -54.3035,
+      "type": "BP_Tree6_C",
+      "bounds": {
+        "x": -176.5235,
+        "y": 16.8831,
+        "width": 13.0471,
+        "height": 12.2337,
+        "rotation": -54.3035
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": -200,
+          "y": 0
+        },
+        "angle": 180.0
+      }
+    },
+    {
+      "center": {
+        "x": -160.0,
+        "y": -23.0
+      },
+      "rotation": -133.1072,
+      "type": "BP_Tree2_C",
+      "bounds": {
+        "x": -166.5279,
+        "y": -29.1042,
+        "width": 13.0558,
+        "height": 12.2084,
+        "rotation": -133.1072
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": -200,
+          "y": 0
+        },
+        "angle": 180.0
+      }
+    },
+    {
+      "center": {
+        "x": -160.0,
+        "y": 23.0
+      },
+      "rotation": -133.1072,
+      "type": "BP_Tree2_C",
+      "bounds": {
+        "x": -166.5279,
+        "y": 16.8958,
+        "width": 13.0558,
+        "height": 12.2084,
+        "rotation": -133.1072
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": -200,
+          "y": 0
+        },
+        "angle": 180.0
+      }
+    },
+    {
+      "center": {
+        "x": -150.0,
+        "y": -23.0
+      },
+      "rotation": 65.312,
+      "type": "BP_Tree3_C",
+      "bounds": {
+        "x": -154.3043,
+        "y": -27.9896,
+        "width": 8.6087,
+        "height": 9.9792,
+        "rotation": 65.312
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": -200,
+          "y": 0
+        },
+        "angle": 180.0
+      }
+    },
+    {
+      "center": {
+        "x": -150.0,
+        "y": 23.0
+      },
+      "rotation": 65.312,
+      "type": "BP_Tree3_C",
+      "bounds": {
+        "x": -154.3043,
+        "y": 18.0104,
+        "width": 8.6087,
+        "height": 9.9792,
+        "rotation": 65.312
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": -200,
+          "y": 0
+        },
+        "angle": 180.0
+      }
+    },
+    {
+      "center": {
+        "x": -130.0,
+        "y": -23.0
+      },
+      "rotation": -147.53,
+      "type": "BP_Tree1_C",
+      "bounds": {
+        "x": -136.2737,
+        "y": -29.4626,
+        "width": 12.5474,
+        "height": 12.9252,
+        "rotation": -147.53
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": -200,
+          "y": 0
+        },
+        "angle": 180.0
+      }
+    },
+    {
+      "center": {
+        "x": -130.0,
+        "y": 23.0
+      },
+      "rotation": -147.53,
+      "type": "BP_Tree1_C",
+      "bounds": {
+        "x": -136.2737,
+        "y": 16.5374,
+        "width": 12.5474,
+        "height": 12.9252,
+        "rotation": -147.53
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": -200,
+          "y": 0
+        },
+        "angle": 180.0
+      }
+    },
+    {
+      "center": {
+        "x": -110.0,
+        "y": -23.0
+      },
+      "rotation": 43.3386,
+      "type": "BP_Tree4_C",
+      "bounds": {
+        "x": -114.3874,
+        "y": -27.5411,
+        "width": 8.7748,
+        "height": 9.0822,
+        "rotation": 43.3386
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": -200,
+          "y": 0
+        },
+        "angle": 180.0
+      }
+    },
+    {
+      "center": {
+        "x": -110.0,
+        "y": 23.0
+      },
+      "rotation": 43.3386,
+      "type": "BP_Tree4_C",
+      "bounds": {
+        "x": -114.3874,
+        "y": 18.4589,
+        "width": 8.7748,
+        "height": 9.0822,
+        "rotation": 43.3386
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": -200,
+          "y": 0
+        },
+        "angle": 180.0
+      }
+    },
+    {
+      "center": {
+        "x": -100.0,
+        "y": -23.0
+      },
+      "rotation": -25.9485,
+      "type": "BP_Tree3_C",
+      "bounds": {
+        "x": -104.3043,
+        "y": -27.9896,
+        "width": 8.6087,
+        "height": 9.9792,
+        "rotation": -25.9485
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": -200,
+          "y": 0
+        },
+        "angle": 180.0
+      }
+    },
+    {
+      "center": {
+        "x": -100.0,
+        "y": 23.0
+      },
+      "rotation": -25.9485,
+      "type": "BP_Tree3_C",
+      "bounds": {
+        "x": -104.3043,
+        "y": 18.0104,
+        "width": 8.6087,
+        "height": 9.9792,
+        "rotation": -25.9485
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": -200,
+          "y": 0
+        },
+        "angle": 180.0
+      }
+    },
+    {
+      "center": {
+        "x": -80.0,
+        "y": -23.0
+      },
+      "rotation": 14.5491,
+      "type": "BP_Tree1_C",
+      "bounds": {
+        "x": -86.2737,
+        "y": -29.4626,
+        "width": 12.5474,
+        "height": 12.9252,
+        "rotation": 14.5491
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": -200,
+          "y": 0
+        },
+        "angle": 180.0
+      }
+    },
+    {
+      "center": {
+        "x": -80.0,
+        "y": 23.0
+      },
+      "rotation": 14.5491,
+      "type": "BP_Tree1_C",
+      "bounds": {
+        "x": -86.2737,
+        "y": 16.5374,
+        "width": 12.5474,
+        "height": 12.9252,
+        "rotation": 14.5491
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": -200,
+          "y": 0
+        },
+        "angle": 180.0
+      }
+    },
+    {
+      "center": {
+        "x": -50.0,
+        "y": -23.0
+      },
+      "rotation": -111.8057,
+      "type": "BP_Tree3_C",
+      "bounds": {
+        "x": -54.3043,
+        "y": -27.9896,
+        "width": 8.6087,
+        "height": 9.9792,
+        "rotation": -111.8057
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": -200,
+          "y": 0
+        },
+        "angle": 180.0
+      }
+    },
+    {
+      "center": {
+        "x": -50.0,
+        "y": 23.0
+      },
+      "rotation": -111.8057,
+      "type": "BP_Tree3_C",
+      "bounds": {
+        "x": -54.3043,
+        "y": 18.0104,
+        "width": 8.6087,
+        "height": 9.9792,
+        "rotation": -111.8057
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": -200,
+          "y": 0
+        },
+        "angle": 180.0
+      }
+    },
+    {
+      "center": {
+        "x": -40.0,
+        "y": -23.0
+      },
+      "rotation": 112.2263,
+      "type": "BP_Tree1_C",
+      "bounds": {
+        "x": -46.2737,
+        "y": -29.4626,
+        "width": 12.5474,
+        "height": 12.9252,
+        "rotation": 112.2263
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": -200,
+          "y": 0
+        },
+        "angle": 180.0
+      }
+    },
+    {
+      "center": {
+        "x": -40.0,
+        "y": 23.0
+      },
+      "rotation": 112.2263,
+      "type": "BP_Tree1_C",
+      "bounds": {
+        "x": -46.2737,
+        "y": 16.5374,
+        "width": 12.5474,
+        "height": 12.9252,
+        "rotation": 112.2263
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": -200,
+          "y": 0
+        },
+        "angle": 180.0
+      }
+    },
+    {
+      "center": {
+        "x": -30.0,
+        "y": -23.0
+      },
+      "rotation": 149.9351,
+      "type": "BP_Tree5_C",
+      "bounds": {
+        "x": -35.3148,
+        "y": -27.6934,
+        "width": 10.6296,
+        "height": 9.3867,
+        "rotation": 149.9351
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": -200,
+          "y": 0
+        },
+        "angle": 180.0
+      }
+    },
+    {
+      "center": {
+        "x": -30.0,
+        "y": 23.0
+      },
+      "rotation": 149.9351,
+      "type": "BP_Tree5_C",
+      "bounds": {
+        "x": -35.3148,
+        "y": 18.3066,
+        "width": 10.6296,
+        "height": 9.3867,
+        "rotation": 149.9351
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": -200,
+          "y": 0
+        },
+        "angle": 180.0
+      }
+    },
+    {
+      "center": {
+        "x": -20.0,
+        "y": -23.0
+      },
+      "rotation": -50.9379,
+      "type": "BP_Tree2_C",
+      "bounds": {
+        "x": -26.5279,
+        "y": -29.1042,
+        "width": 13.0558,
+        "height": 12.2084,
+        "rotation": -50.9379
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": -200,
+          "y": 0
+        },
+        "angle": 180.0
+      }
+    },
+    {
+      "center": {
+        "x": -20.0,
+        "y": 23.0
+      },
+      "rotation": -50.9379,
+      "type": "BP_Tree2_C",
+      "bounds": {
+        "x": -26.5279,
+        "y": 16.8958,
+        "width": 13.0558,
+        "height": 12.2084,
+        "rotation": -50.9379
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": -200,
+          "y": 0
+        },
+        "angle": 180.0
+      }
+    },
+    {
+      "center": {
+        "x": -188.0,
+        "y": -140.0
+      },
+      "rotation": -71.7086,
+      "type": "BP_RoadCone_C",
+      "bounds": {
+        "x": -189.28,
+        "y": -141.28,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": -71.7086
+      },
+      "segment_assignment": {
+        "start": {
+          "x": -200,
+          "y": 0
+        },
+        "end": {
+          "x": -200,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": -212.0,
+        "y": -140.0
+      },
+      "rotation": -71.7086,
+      "type": "BP_RoadCone_C",
+      "bounds": {
+        "x": -213.28,
+        "y": -141.28,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": -71.7086
+      },
+      "segment_assignment": {
+        "start": {
+          "x": -200,
+          "y": 0
+        },
+        "end": {
+          "x": -200,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": -188.0,
+        "y": -100.0
+      },
+      "rotation": -45.735,
+      "type": "BP_Cart2_C",
+      "bounds": {
+        "x": -189.28,
+        "y": -101.28,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": -45.735
+      },
+      "segment_assignment": {
+        "start": {
+          "x": -200,
+          "y": 0
+        },
+        "end": {
+          "x": -200,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": -212.0,
+        "y": -100.0
+      },
+      "rotation": -45.735,
+      "type": "BP_Cart2_C",
+      "bounds": {
+        "x": -213.28,
+        "y": -101.28,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": -45.735
+      },
+      "segment_assignment": {
+        "start": {
+          "x": -200,
+          "y": 0
+        },
+        "end": {
+          "x": -200,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": -188.0,
+        "y": -40.0
+      },
+      "rotation": -78.3843,
+      "type": "BP_Table2_C",
+      "bounds": {
+        "x": -189.28,
+        "y": -41.28,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": -78.3843
+      },
+      "segment_assignment": {
+        "start": {
+          "x": -200,
+          "y": 0
+        },
+        "end": {
+          "x": -200,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": -212.0,
+        "y": -40.0
+      },
+      "rotation": -78.3843,
+      "type": "BP_Table2_C",
+      "bounds": {
+        "x": -213.28,
+        "y": -41.28,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": -78.3843
+      },
+      "segment_assignment": {
+        "start": {
+          "x": -200,
+          "y": 0
+        },
+        "end": {
+          "x": -200,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": -177.0,
+        "y": -160.0
+      },
+      "rotation": 37.061,
+      "type": "BP_Tree5_C",
+      "bounds": {
+        "x": -182.3148,
+        "y": -164.6934,
+        "width": 10.6296,
+        "height": 9.3867,
+        "rotation": 37.061
+      },
+      "segment_assignment": {
+        "start": {
+          "x": -200,
+          "y": 0
+        },
+        "end": {
+          "x": -200,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": -223.0,
+        "y": -160.0
+      },
+      "rotation": 37.061,
+      "type": "BP_Tree5_C",
+      "bounds": {
+        "x": -228.3148,
+        "y": -164.6934,
+        "width": 10.6296,
+        "height": 9.3867,
+        "rotation": 37.061
+      },
+      "segment_assignment": {
+        "start": {
+          "x": -200,
+          "y": 0
+        },
+        "end": {
+          "x": -200,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": -177.0,
+        "y": -150.0
+      },
+      "rotation": -130.2442,
+      "type": "BP_Tree4_C",
+      "bounds": {
+        "x": -181.3874,
+        "y": -154.5411,
+        "width": 8.7748,
+        "height": 9.0822,
+        "rotation": -130.2442
+      },
+      "segment_assignment": {
+        "start": {
+          "x": -200,
+          "y": 0
+        },
+        "end": {
+          "x": -200,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": -223.0,
+        "y": -150.0
+      },
+      "rotation": -130.2442,
+      "type": "BP_Tree4_C",
+      "bounds": {
+        "x": -227.3874,
+        "y": -154.5411,
+        "width": 8.7748,
+        "height": 9.0822,
+        "rotation": -130.2442
+      },
+      "segment_assignment": {
+        "start": {
+          "x": -200,
+          "y": 0
+        },
+        "end": {
+          "x": -200,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": -177.0,
+        "y": -140.0
+      },
+      "rotation": -9.6904,
+      "type": "BP_Tree1_C",
+      "bounds": {
+        "x": -183.2737,
+        "y": -146.4626,
+        "width": 12.5474,
+        "height": 12.9252,
+        "rotation": -9.6904
+      },
+      "segment_assignment": {
+        "start": {
+          "x": -200,
+          "y": 0
+        },
+        "end": {
+          "x": -200,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": -223.0,
+        "y": -140.0
+      },
+      "rotation": -9.6904,
+      "type": "BP_Tree1_C",
+      "bounds": {
+        "x": -229.2737,
+        "y": -146.4626,
+        "width": 12.5474,
+        "height": 12.9252,
+        "rotation": -9.6904
+      },
+      "segment_assignment": {
+        "start": {
+          "x": -200,
+          "y": 0
+        },
+        "end": {
+          "x": -200,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": -177.0,
+        "y": -130.0
+      },
+      "rotation": -42.3449,
+      "type": "BP_Tree5_C",
+      "bounds": {
+        "x": -182.3148,
+        "y": -134.6934,
+        "width": 10.6296,
+        "height": 9.3867,
+        "rotation": -42.3449
+      },
+      "segment_assignment": {
+        "start": {
+          "x": -200,
+          "y": 0
+        },
+        "end": {
+          "x": -200,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": -223.0,
+        "y": -130.0
+      },
+      "rotation": -42.3449,
+      "type": "BP_Tree5_C",
+      "bounds": {
+        "x": -228.3148,
+        "y": -134.6934,
+        "width": 10.6296,
+        "height": 9.3867,
+        "rotation": -42.3449
+      },
+      "segment_assignment": {
+        "start": {
+          "x": -200,
+          "y": 0
+        },
+        "end": {
+          "x": -200,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": -177.0,
+        "y": -120.0
+      },
+      "rotation": -63.0193,
+      "type": "BP_Tree1_C",
+      "bounds": {
+        "x": -183.2737,
+        "y": -126.4626,
+        "width": 12.5474,
+        "height": 12.9252,
+        "rotation": -63.0193
+      },
+      "segment_assignment": {
+        "start": {
+          "x": -200,
+          "y": 0
+        },
+        "end": {
+          "x": -200,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": -223.0,
+        "y": -120.0
+      },
+      "rotation": -63.0193,
+      "type": "BP_Tree1_C",
+      "bounds": {
+        "x": -229.2737,
+        "y": -126.4626,
+        "width": 12.5474,
+        "height": 12.9252,
+        "rotation": -63.0193
+      },
+      "segment_assignment": {
+        "start": {
+          "x": -200,
+          "y": 0
+        },
+        "end": {
+          "x": -200,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": -177.0,
+        "y": -110.0
+      },
+      "rotation": 173.5671,
+      "type": "BP_Tree3_C",
+      "bounds": {
+        "x": -181.3043,
+        "y": -114.9896,
+        "width": 8.6087,
+        "height": 9.9792,
+        "rotation": 173.5671
+      },
+      "segment_assignment": {
+        "start": {
+          "x": -200,
+          "y": 0
+        },
+        "end": {
+          "x": -200,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": -223.0,
+        "y": -110.0
+      },
+      "rotation": 173.5671,
+      "type": "BP_Tree3_C",
+      "bounds": {
+        "x": -227.3043,
+        "y": -114.9896,
+        "width": 8.6087,
+        "height": 9.9792,
+        "rotation": 173.5671
+      },
+      "segment_assignment": {
+        "start": {
+          "x": -200,
+          "y": 0
+        },
+        "end": {
+          "x": -200,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": -177.0,
+        "y": -100.0
+      },
+      "rotation": -178.2782,
+      "type": "BP_Tree4_C",
+      "bounds": {
+        "x": -181.3874,
+        "y": -104.5411,
+        "width": 8.7748,
+        "height": 9.0822,
+        "rotation": -178.2782
+      },
+      "segment_assignment": {
+        "start": {
+          "x": -200,
+          "y": 0
+        },
+        "end": {
+          "x": -200,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": -223.0,
+        "y": -100.0
+      },
+      "rotation": -178.2782,
+      "type": "BP_Tree4_C",
+      "bounds": {
+        "x": -227.3874,
+        "y": -104.5411,
+        "width": 8.7748,
+        "height": 9.0822,
+        "rotation": -178.2782
+      },
+      "segment_assignment": {
+        "start": {
+          "x": -200,
+          "y": 0
+        },
+        "end": {
+          "x": -200,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": -177.0,
+        "y": -90.0
+      },
+      "rotation": 153.3723,
+      "type": "BP_Tree5_C",
+      "bounds": {
+        "x": -182.3148,
+        "y": -94.6934,
+        "width": 10.6296,
+        "height": 9.3867,
+        "rotation": 153.3723
+      },
+      "segment_assignment": {
+        "start": {
+          "x": -200,
+          "y": 0
+        },
+        "end": {
+          "x": -200,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": -223.0,
+        "y": -90.0
+      },
+      "rotation": 153.3723,
+      "type": "BP_Tree5_C",
+      "bounds": {
+        "x": -228.3148,
+        "y": -94.6934,
+        "width": 10.6296,
+        "height": 9.3867,
+        "rotation": 153.3723
+      },
+      "segment_assignment": {
+        "start": {
+          "x": -200,
+          "y": 0
+        },
+        "end": {
+          "x": -200,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": -177.0,
+        "y": -80.0
+      },
+      "rotation": 99.3457,
+      "type": "BP_Tree5_C",
+      "bounds": {
+        "x": -182.3148,
+        "y": -84.6934,
+        "width": 10.6296,
+        "height": 9.3867,
+        "rotation": 99.3457
+      },
+      "segment_assignment": {
+        "start": {
+          "x": -200,
+          "y": 0
+        },
+        "end": {
+          "x": -200,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": -223.0,
+        "y": -80.0
+      },
+      "rotation": 99.3457,
+      "type": "BP_Tree5_C",
+      "bounds": {
+        "x": -228.3148,
+        "y": -84.6934,
+        "width": 10.6296,
+        "height": 9.3867,
+        "rotation": 99.3457
+      },
+      "segment_assignment": {
+        "start": {
+          "x": -200,
+          "y": 0
+        },
+        "end": {
+          "x": -200,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": -177.0,
+        "y": -70.0
+      },
+      "rotation": -36.0657,
+      "type": "BP_Tree2_C",
+      "bounds": {
+        "x": -183.5279,
+        "y": -76.1042,
+        "width": 13.0558,
+        "height": 12.2084,
+        "rotation": -36.0657
+      },
+      "segment_assignment": {
+        "start": {
+          "x": -200,
+          "y": 0
+        },
+        "end": {
+          "x": -200,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": -223.0,
+        "y": -70.0
+      },
+      "rotation": -36.0657,
+      "type": "BP_Tree2_C",
+      "bounds": {
+        "x": -229.5279,
+        "y": -76.1042,
+        "width": 13.0558,
+        "height": 12.2084,
+        "rotation": -36.0657
+      },
+      "segment_assignment": {
+        "start": {
+          "x": -200,
+          "y": 0
+        },
+        "end": {
+          "x": -200,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": -177.0,
+        "y": -60.0
+      },
+      "rotation": 94.5498,
+      "type": "BP_Tree5_C",
+      "bounds": {
+        "x": -182.3148,
+        "y": -64.6934,
+        "width": 10.6296,
+        "height": 9.3867,
+        "rotation": 94.5498
+      },
+      "segment_assignment": {
+        "start": {
+          "x": -200,
+          "y": 0
+        },
+        "end": {
+          "x": -200,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": -223.0,
+        "y": -60.0
+      },
+      "rotation": 94.5498,
+      "type": "BP_Tree5_C",
+      "bounds": {
+        "x": -228.3148,
+        "y": -64.6934,
+        "width": 10.6296,
+        "height": 9.3867,
+        "rotation": 94.5498
+      },
+      "segment_assignment": {
+        "start": {
+          "x": -200,
+          "y": 0
+        },
+        "end": {
+          "x": -200,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": -177.0,
+        "y": -50.0
+      },
+      "rotation": 26.5174,
+      "type": "BP_Tree4_C",
+      "bounds": {
+        "x": -181.3874,
+        "y": -54.5411,
+        "width": 8.7748,
+        "height": 9.0822,
+        "rotation": 26.5174
+      },
+      "segment_assignment": {
+        "start": {
+          "x": -200,
+          "y": 0
+        },
+        "end": {
+          "x": -200,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": -223.0,
+        "y": -50.0
+      },
+      "rotation": 26.5174,
+      "type": "BP_Tree4_C",
+      "bounds": {
+        "x": -227.3874,
+        "y": -54.5411,
+        "width": 8.7748,
+        "height": 9.0822,
+        "rotation": 26.5174
+      },
+      "segment_assignment": {
+        "start": {
+          "x": -200,
+          "y": 0
+        },
+        "end": {
+          "x": -200,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": -177.0,
+        "y": -40.0
+      },
+      "rotation": 132.2262,
+      "type": "BP_Tree3_C",
+      "bounds": {
+        "x": -181.3043,
+        "y": -44.9896,
+        "width": 8.6087,
+        "height": 9.9792,
+        "rotation": 132.2262
+      },
+      "segment_assignment": {
+        "start": {
+          "x": -200,
+          "y": 0
+        },
+        "end": {
+          "x": -200,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": -223.0,
+        "y": -40.0
+      },
+      "rotation": 132.2262,
+      "type": "BP_Tree3_C",
+      "bounds": {
+        "x": -227.3043,
+        "y": -44.9896,
+        "width": 8.6087,
+        "height": 9.9792,
+        "rotation": 132.2262
+      },
+      "segment_assignment": {
+        "start": {
+          "x": -200,
+          "y": 0
+        },
+        "end": {
+          "x": -200,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": 12.0,
+        "y": -140.0
+      },
+      "rotation": -1.7153,
+      "type": "BP_Soda1_C",
+      "bounds": {
+        "x": 10.72,
+        "y": -141.28,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": -1.7153
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 0,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": -12.0,
+        "y": -140.0
+      },
+      "rotation": -1.7153,
+      "type": "BP_Soda1_C",
+      "bounds": {
+        "x": -13.28,
+        "y": -141.28,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": -1.7153
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 0,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": 12.0,
+        "y": -100.0
+      },
+      "rotation": 114.6127,
+      "type": "BP_Box3_C",
+      "bounds": {
+        "x": 10.72,
+        "y": -101.28,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": 114.6127
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 0,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": -12.0,
+        "y": -100.0
+      },
+      "rotation": 114.6127,
+      "type": "BP_Box3_C",
+      "bounds": {
+        "x": -13.28,
+        "y": -101.28,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": 114.6127
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 0,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": 12.0,
+        "y": -80.0
+      },
+      "rotation": -161.7847,
+      "type": "BP_Soda3_C",
+      "bounds": {
+        "x": 10.72,
+        "y": -81.28,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": -161.7847
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 0,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": -12.0,
+        "y": -80.0
+      },
+      "rotation": -161.7847,
+      "type": "BP_Soda3_C",
+      "bounds": {
+        "x": -13.28,
+        "y": -81.28,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": -161.7847
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 0,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": 12.0,
+        "y": -60.0
+      },
+      "rotation": -20.2494,
+      "type": "BP_Scooter_02_C",
+      "bounds": {
+        "x": 10.72,
+        "y": -61.28,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": -20.2494
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 0,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": -12.0,
+        "y": -60.0
+      },
+      "rotation": -20.2494,
+      "type": "BP_Scooter_02_C",
+      "bounds": {
+        "x": -13.28,
+        "y": -61.28,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": -20.2494
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 0,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": 12.0,
+        "y": -40.0
+      },
+      "rotation": -22.7806,
+      "type": "BP_Cart_C",
+      "bounds": {
+        "x": 10.72,
+        "y": -41.28,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": -22.7806
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 0,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": -12.0,
+        "y": -40.0
+      },
+      "rotation": -22.7806,
+      "type": "BP_Cart_C",
+      "bounds": {
+        "x": -13.28,
+        "y": -41.28,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": -22.7806
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 0,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": 23.0,
+        "y": -170.0
+      },
+      "rotation": 69.5041,
+      "type": "BP_Tree5_C",
+      "bounds": {
+        "x": 17.6852,
+        "y": -174.6934,
+        "width": 10.6296,
+        "height": 9.3867,
+        "rotation": 69.5041
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 0,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": -23.0,
+        "y": -170.0
+      },
+      "rotation": 69.5041,
+      "type": "BP_Tree5_C",
+      "bounds": {
+        "x": -28.3148,
+        "y": -174.6934,
+        "width": 10.6296,
+        "height": 9.3867,
+        "rotation": 69.5041
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 0,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": 23.0,
+        "y": -150.0
+      },
+      "rotation": -28.0089,
+      "type": "BP_Tree3_C",
+      "bounds": {
+        "x": 18.6957,
+        "y": -154.9896,
+        "width": 8.6087,
+        "height": 9.9792,
+        "rotation": -28.0089
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 0,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": -23.0,
+        "y": -150.0
+      },
+      "rotation": -28.0089,
+      "type": "BP_Tree3_C",
+      "bounds": {
+        "x": -27.3043,
+        "y": -154.9896,
+        "width": 8.6087,
+        "height": 9.9792,
+        "rotation": -28.0089
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 0,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": 23.0,
+        "y": -130.0
+      },
+      "rotation": -14.6716,
+      "type": "BP_Tree2_C",
+      "bounds": {
+        "x": 16.4721,
+        "y": -136.1042,
+        "width": 13.0558,
+        "height": 12.2084,
+        "rotation": -14.6716
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 0,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": -23.0,
+        "y": -130.0
+      },
+      "rotation": -14.6716,
+      "type": "BP_Tree2_C",
+      "bounds": {
+        "x": -29.5279,
+        "y": -136.1042,
+        "width": 13.0558,
+        "height": 12.2084,
+        "rotation": -14.6716
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 0,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": 23.0,
+        "y": -110.0
+      },
+      "rotation": -2.0818,
+      "type": "BP_Tree6_C",
+      "bounds": {
+        "x": 16.4765,
+        "y": -116.1169,
+        "width": 13.0471,
+        "height": 12.2337,
+        "rotation": -2.0818
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 0,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": -23.0,
+        "y": -110.0
+      },
+      "rotation": -2.0818,
+      "type": "BP_Tree6_C",
+      "bounds": {
+        "x": -29.5235,
+        "y": -116.1169,
+        "width": 13.0471,
+        "height": 12.2337,
+        "rotation": -2.0818
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 0,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": 23.0,
+        "y": -100.0
+      },
+      "rotation": 65.7395,
+      "type": "BP_Tree1_C",
+      "bounds": {
+        "x": 16.7263,
+        "y": -106.4626,
+        "width": 12.5474,
+        "height": 12.9252,
+        "rotation": 65.7395
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 0,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": -23.0,
+        "y": -100.0
+      },
+      "rotation": 65.7395,
+      "type": "BP_Tree1_C",
+      "bounds": {
+        "x": -29.2737,
+        "y": -106.4626,
+        "width": 12.5474,
+        "height": 12.9252,
+        "rotation": 65.7395
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 0,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": 23.0,
+        "y": -90.0
+      },
+      "rotation": -12.3714,
+      "type": "BP_Tree4_C",
+      "bounds": {
+        "x": 18.6126,
+        "y": -94.5411,
+        "width": 8.7748,
+        "height": 9.0822,
+        "rotation": -12.3714
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 0,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": -23.0,
+        "y": -90.0
+      },
+      "rotation": -12.3714,
+      "type": "BP_Tree4_C",
+      "bounds": {
+        "x": -27.3874,
+        "y": -94.5411,
+        "width": 8.7748,
+        "height": 9.0822,
+        "rotation": -12.3714
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 0,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": 23.0,
+        "y": -80.0
+      },
+      "rotation": -172.7761,
+      "type": "BP_Tree3_C",
+      "bounds": {
+        "x": 18.6957,
+        "y": -84.9896,
+        "width": 8.6087,
+        "height": 9.9792,
+        "rotation": -172.7761
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 0,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": -23.0,
+        "y": -80.0
+      },
+      "rotation": -172.7761,
+      "type": "BP_Tree3_C",
+      "bounds": {
+        "x": -27.3043,
+        "y": -84.9896,
+        "width": 8.6087,
+        "height": 9.9792,
+        "rotation": -172.7761
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 0,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": 23.0,
+        "y": -30.0
+      },
+      "rotation": 108.5777,
+      "type": "BP_Tree5_C",
+      "bounds": {
+        "x": 17.6852,
+        "y": -34.6934,
+        "width": 10.6296,
+        "height": 9.3867,
+        "rotation": 108.5777
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 0,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": -23.0,
+        "y": -30.0
+      },
+      "rotation": 108.5777,
+      "type": "BP_Tree5_C",
+      "bounds": {
+        "x": -28.3148,
+        "y": -34.6934,
+        "width": 10.6296,
+        "height": 9.3867,
+        "rotation": 108.5777
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 0,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": 23.0,
+        "y": -20.0
+      },
+      "rotation": 7.6353,
+      "type": "BP_Tree3_C",
+      "bounds": {
+        "x": 18.6957,
+        "y": -24.9896,
+        "width": 8.6087,
+        "height": 9.9792,
+        "rotation": 7.6353
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 0,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": -23.0,
+        "y": -20.0
+      },
+      "rotation": 7.6353,
+      "type": "BP_Tree3_C",
+      "bounds": {
+        "x": -27.3043,
+        "y": -24.9896,
+        "width": 8.6087,
+        "height": 9.9792,
+        "rotation": 7.6353
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 0,
+          "y": -200
+        },
+        "angle": -90.0
+      }
+    },
+    {
+      "center": {
+        "x": -140.0,
+        "y": -212.0
+      },
+      "rotation": 115.4802,
+      "type": "BP_RoadCone_C",
+      "bounds": {
+        "x": -141.28,
+        "y": -213.28,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": 115.4802
+      },
+      "segment_assignment": {
+        "start": {
+          "x": -200,
+          "y": -200
+        },
+        "end": {
+          "x": 0,
+          "y": -200
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": -140.0,
+        "y": -188.0
+      },
+      "rotation": 115.4802,
+      "type": "BP_RoadCone_C",
+      "bounds": {
+        "x": -141.28,
+        "y": -189.28,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": 115.4802
+      },
+      "segment_assignment": {
+        "start": {
+          "x": -200,
+          "y": -200
+        },
+        "end": {
+          "x": 0,
+          "y": -200
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": -120.0,
+        "y": -212.0
+      },
+      "rotation": 56.7558,
+      "type": "BP_Box2_C",
+      "bounds": {
+        "x": -121.28,
+        "y": -213.28,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": 56.7558
+      },
+      "segment_assignment": {
+        "start": {
+          "x": -200,
+          "y": -200
+        },
+        "end": {
+          "x": 0,
+          "y": -200
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": -120.0,
+        "y": -188.0
+      },
+      "rotation": 56.7558,
+      "type": "BP_Box2_C",
+      "bounds": {
+        "x": -121.28,
+        "y": -189.28,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": 56.7558
+      },
+      "segment_assignment": {
+        "start": {
+          "x": -200,
+          "y": -200
+        },
+        "end": {
+          "x": 0,
+          "y": -200
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": -80.0,
+        "y": -212.0
+      },
+      "rotation": 148.0075,
+      "type": "BP_Box3_C",
+      "bounds": {
+        "x": -81.28,
+        "y": -213.28,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": 148.0075
+      },
+      "segment_assignment": {
+        "start": {
+          "x": -200,
+          "y": -200
+        },
+        "end": {
+          "x": 0,
+          "y": -200
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": -80.0,
+        "y": -188.0
+      },
+      "rotation": 148.0075,
+      "type": "BP_Box3_C",
+      "bounds": {
+        "x": -81.28,
+        "y": -189.28,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": 148.0075
+      },
+      "segment_assignment": {
+        "start": {
+          "x": -200,
+          "y": -200
+        },
+        "end": {
+          "x": 0,
+          "y": -200
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": -150.0,
+        "y": -223.0
+      },
+      "rotation": -45.4766,
+      "type": "BP_Tree5_C",
+      "bounds": {
+        "x": -155.3148,
+        "y": -227.6934,
+        "width": 10.6296,
+        "height": 9.3867,
+        "rotation": -45.4766
+      },
+      "segment_assignment": {
+        "start": {
+          "x": -200,
+          "y": -200
+        },
+        "end": {
+          "x": 0,
+          "y": -200
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": -150.0,
+        "y": -177.0
+      },
+      "rotation": -45.4766,
+      "type": "BP_Tree5_C",
+      "bounds": {
+        "x": -155.3148,
+        "y": -181.6934,
+        "width": 10.6296,
+        "height": 9.3867,
+        "rotation": -45.4766
+      },
+      "segment_assignment": {
+        "start": {
+          "x": -200,
+          "y": -200
+        },
+        "end": {
+          "x": 0,
+          "y": -200
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": -130.0,
+        "y": -223.0
+      },
+      "rotation": -101.7605,
+      "type": "BP_Tree5_C",
+      "bounds": {
+        "x": -135.3148,
+        "y": -227.6934,
+        "width": 10.6296,
+        "height": 9.3867,
+        "rotation": -101.7605
+      },
+      "segment_assignment": {
+        "start": {
+          "x": -200,
+          "y": -200
+        },
+        "end": {
+          "x": 0,
+          "y": -200
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": -130.0,
+        "y": -177.0
+      },
+      "rotation": -101.7605,
+      "type": "BP_Tree5_C",
+      "bounds": {
+        "x": -135.3148,
+        "y": -181.6934,
+        "width": 10.6296,
+        "height": 9.3867,
+        "rotation": -101.7605
+      },
+      "segment_assignment": {
+        "start": {
+          "x": -200,
+          "y": -200
+        },
+        "end": {
+          "x": 0,
+          "y": -200
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": -110.0,
+        "y": -223.0
+      },
+      "rotation": 80.9929,
+      "type": "BP_Tree5_C",
+      "bounds": {
+        "x": -115.3148,
+        "y": -227.6934,
+        "width": 10.6296,
+        "height": 9.3867,
+        "rotation": 80.9929
+      },
+      "segment_assignment": {
+        "start": {
+          "x": -200,
+          "y": -200
+        },
+        "end": {
+          "x": 0,
+          "y": -200
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": -110.0,
+        "y": -177.0
+      },
+      "rotation": 80.9929,
+      "type": "BP_Tree5_C",
+      "bounds": {
+        "x": -115.3148,
+        "y": -181.6934,
+        "width": 10.6296,
+        "height": 9.3867,
+        "rotation": 80.9929
+      },
+      "segment_assignment": {
+        "start": {
+          "x": -200,
+          "y": -200
+        },
+        "end": {
+          "x": 0,
+          "y": -200
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": -100.0,
+        "y": -223.0
+      },
+      "rotation": 16.9774,
+      "type": "BP_Tree5_C",
+      "bounds": {
+        "x": -105.3148,
+        "y": -227.6934,
+        "width": 10.6296,
+        "height": 9.3867,
+        "rotation": 16.9774
+      },
+      "segment_assignment": {
+        "start": {
+          "x": -200,
+          "y": -200
+        },
+        "end": {
+          "x": 0,
+          "y": -200
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": -100.0,
+        "y": -177.0
+      },
+      "rotation": 16.9774,
+      "type": "BP_Tree5_C",
+      "bounds": {
+        "x": -105.3148,
+        "y": -181.6934,
+        "width": 10.6296,
+        "height": 9.3867,
+        "rotation": 16.9774
+      },
+      "segment_assignment": {
+        "start": {
+          "x": -200,
+          "y": -200
+        },
+        "end": {
+          "x": 0,
+          "y": -200
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": -80.0,
+        "y": -223.0
+      },
+      "rotation": 166.7813,
+      "type": "BP_Tree1_C",
+      "bounds": {
+        "x": -86.2737,
+        "y": -229.4626,
+        "width": 12.5474,
+        "height": 12.9252,
+        "rotation": 166.7813
+      },
+      "segment_assignment": {
+        "start": {
+          "x": -200,
+          "y": -200
+        },
+        "end": {
+          "x": 0,
+          "y": -200
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": -80.0,
+        "y": -177.0
+      },
+      "rotation": 166.7813,
+      "type": "BP_Tree1_C",
+      "bounds": {
+        "x": -86.2737,
+        "y": -183.4626,
+        "width": 12.5474,
+        "height": 12.9252,
+        "rotation": 166.7813
+      },
+      "segment_assignment": {
+        "start": {
+          "x": -200,
+          "y": -200
+        },
+        "end": {
+          "x": 0,
+          "y": -200
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": -60.0,
+        "y": -223.0
+      },
+      "rotation": -23.6043,
+      "type": "BP_Tree2_C",
+      "bounds": {
+        "x": -66.5279,
+        "y": -229.1042,
+        "width": 13.0558,
+        "height": 12.2084,
+        "rotation": -23.6043
+      },
+      "segment_assignment": {
+        "start": {
+          "x": -200,
+          "y": -200
+        },
+        "end": {
+          "x": 0,
+          "y": -200
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": -60.0,
+        "y": -177.0
+      },
+      "rotation": -23.6043,
+      "type": "BP_Tree2_C",
+      "bounds": {
+        "x": -66.5279,
+        "y": -183.1042,
+        "width": 13.0558,
+        "height": 12.2084,
+        "rotation": -23.6043
+      },
+      "segment_assignment": {
+        "start": {
+          "x": -200,
+          "y": -200
+        },
+        "end": {
+          "x": 0,
+          "y": -200
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": -50.0,
+        "y": -223.0
+      },
+      "rotation": 122.7021,
+      "type": "BP_Tree5_C",
+      "bounds": {
+        "x": -55.3148,
+        "y": -227.6934,
+        "width": 10.6296,
+        "height": 9.3867,
+        "rotation": 122.7021
+      },
+      "segment_assignment": {
+        "start": {
+          "x": -200,
+          "y": -200
+        },
+        "end": {
+          "x": 0,
+          "y": -200
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": -50.0,
+        "y": -177.0
+      },
+      "rotation": 122.7021,
+      "type": "BP_Tree5_C",
+      "bounds": {
+        "x": -55.3148,
+        "y": -181.6934,
+        "width": 10.6296,
+        "height": 9.3867,
+        "rotation": 122.7021
+      },
+      "segment_assignment": {
+        "start": {
+          "x": -200,
+          "y": -200
+        },
+        "end": {
+          "x": 0,
+          "y": -200
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": -30.0,
+        "y": -223.0
+      },
+      "rotation": 68.3404,
+      "type": "BP_Tree3_C",
+      "bounds": {
+        "x": -34.3043,
+        "y": -227.9896,
+        "width": 8.6087,
+        "height": 9.9792,
+        "rotation": 68.3404
+      },
+      "segment_assignment": {
+        "start": {
+          "x": -200,
+          "y": -200
+        },
+        "end": {
+          "x": 0,
+          "y": -200
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": -30.0,
+        "y": -177.0
+      },
+      "rotation": 68.3404,
+      "type": "BP_Tree3_C",
+      "bounds": {
+        "x": -34.3043,
+        "y": -181.9896,
+        "width": 8.6087,
+        "height": 9.9792,
+        "rotation": 68.3404
+      },
+      "segment_assignment": {
+        "start": {
+          "x": -200,
+          "y": -200
+        },
+        "end": {
+          "x": 0,
+          "y": -200
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": -20.0,
+        "y": -223.0
+      },
+      "rotation": -75.1815,
+      "type": "BP_Tree3_C",
+      "bounds": {
+        "x": -24.3043,
+        "y": -227.9896,
+        "width": 8.6087,
+        "height": 9.9792,
+        "rotation": -75.1815
+      },
+      "segment_assignment": {
+        "start": {
+          "x": -200,
+          "y": -200
+        },
+        "end": {
+          "x": 0,
+          "y": -200
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": -20.0,
+        "y": -177.0
+      },
+      "rotation": -75.1815,
+      "type": "BP_Tree3_C",
+      "bounds": {
+        "x": -24.3043,
+        "y": -181.9896,
+        "width": 8.6087,
+        "height": 9.9792,
+        "rotation": -75.1815
+      },
+      "segment_assignment": {
+        "start": {
+          "x": -200,
+          "y": -200
+        },
+        "end": {
+          "x": 0,
+          "y": -200
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": 60.0,
+        "y": -212.0
+      },
+      "rotation": -40.6246,
+      "type": "BP_Box2_C",
+      "bounds": {
+        "x": 58.72,
+        "y": -213.28,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": -40.6246
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": -200
+        },
+        "end": {
+          "x": 200,
+          "y": -200
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": 60.0,
+        "y": -188.0
+      },
+      "rotation": -40.6246,
+      "type": "BP_Box2_C",
+      "bounds": {
+        "x": 58.72,
+        "y": -189.28,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": -40.6246
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": -200
+        },
+        "end": {
+          "x": 200,
+          "y": -200
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": 120.0,
+        "y": -212.0
+      },
+      "rotation": 44.576,
+      "type": "BP_Can2_C",
+      "bounds": {
+        "x": 118.72,
+        "y": -213.28,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": 44.576
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": -200
+        },
+        "end": {
+          "x": 200,
+          "y": -200
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": 120.0,
+        "y": -188.0
+      },
+      "rotation": 44.576,
+      "type": "BP_Can2_C",
+      "bounds": {
+        "x": 118.72,
+        "y": -189.28,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": 44.576
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": -200
+        },
+        "end": {
+          "x": 200,
+          "y": -200
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": 140.0,
+        "y": -212.0
+      },
+      "rotation": 0.8785,
+      "type": "BP_Scooter_04_C",
+      "bounds": {
+        "x": 138.72,
+        "y": -213.28,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": 0.8785
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": -200
+        },
+        "end": {
+          "x": 200,
+          "y": -200
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": 140.0,
+        "y": -188.0
+      },
+      "rotation": 0.8785,
+      "type": "BP_Scooter_04_C",
+      "bounds": {
+        "x": 138.72,
+        "y": -189.28,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": 0.8785
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": -200
+        },
+        "end": {
+          "x": 200,
+          "y": -200
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": 160.0,
+        "y": -212.0
+      },
+      "rotation": 58.4203,
+      "type": "BP_Can_C",
+      "bounds": {
+        "x": 158.72,
+        "y": -213.28,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": 58.4203
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": -200
+        },
+        "end": {
+          "x": 200,
+          "y": -200
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": 160.0,
+        "y": -188.0
+      },
+      "rotation": 58.4203,
+      "type": "BP_Can_C",
+      "bounds": {
+        "x": 158.72,
+        "y": -189.28,
+        "width": 2.56,
+        "height": 2.56,
+        "rotation": 58.4203
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": -200
+        },
+        "end": {
+          "x": 200,
+          "y": -200
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": 50.0,
+        "y": -223.0
+      },
+      "rotation": 178.2439,
+      "type": "BP_Tree3_C",
+      "bounds": {
+        "x": 45.6957,
+        "y": -227.9896,
+        "width": 8.6087,
+        "height": 9.9792,
+        "rotation": 178.2439
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": -200
+        },
+        "end": {
+          "x": 200,
+          "y": -200
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": 50.0,
+        "y": -177.0
+      },
+      "rotation": 178.2439,
+      "type": "BP_Tree3_C",
+      "bounds": {
+        "x": 45.6957,
+        "y": -181.9896,
+        "width": 8.6087,
+        "height": 9.9792,
+        "rotation": 178.2439
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": -200
+        },
+        "end": {
+          "x": 200,
+          "y": -200
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": 60.0,
+        "y": -223.0
+      },
+      "rotation": 14.141,
+      "type": "BP_Tree2_C",
+      "bounds": {
+        "x": 53.4721,
+        "y": -229.1042,
+        "width": 13.0558,
+        "height": 12.2084,
+        "rotation": 14.141
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": -200
+        },
+        "end": {
+          "x": 200,
+          "y": -200
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": 60.0,
+        "y": -177.0
+      },
+      "rotation": 14.141,
+      "type": "BP_Tree2_C",
+      "bounds": {
+        "x": 53.4721,
+        "y": -183.1042,
+        "width": 13.0558,
+        "height": 12.2084,
+        "rotation": 14.141
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": -200
+        },
+        "end": {
+          "x": 200,
+          "y": -200
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": 70.0,
+        "y": -223.0
+      },
+      "rotation": 59.0375,
+      "type": "BP_Tree3_C",
+      "bounds": {
+        "x": 65.6957,
+        "y": -227.9896,
+        "width": 8.6087,
+        "height": 9.9792,
+        "rotation": 59.0375
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": -200
+        },
+        "end": {
+          "x": 200,
+          "y": -200
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": 70.0,
+        "y": -177.0
+      },
+      "rotation": 59.0375,
+      "type": "BP_Tree3_C",
+      "bounds": {
+        "x": 65.6957,
+        "y": -181.9896,
+        "width": 8.6087,
+        "height": 9.9792,
+        "rotation": 59.0375
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": -200
+        },
+        "end": {
+          "x": 200,
+          "y": -200
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": 80.0,
+        "y": -223.0
+      },
+      "rotation": -152.912,
+      "type": "BP_Tree4_C",
+      "bounds": {
+        "x": 75.6126,
+        "y": -227.5411,
+        "width": 8.7748,
+        "height": 9.0822,
+        "rotation": -152.912
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": -200
+        },
+        "end": {
+          "x": 200,
+          "y": -200
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": 80.0,
+        "y": -177.0
+      },
+      "rotation": -152.912,
+      "type": "BP_Tree4_C",
+      "bounds": {
+        "x": 75.6126,
+        "y": -181.5411,
+        "width": 8.7748,
+        "height": 9.0822,
+        "rotation": -152.912
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": -200
+        },
+        "end": {
+          "x": 200,
+          "y": -200
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": 90.0,
+        "y": -223.0
+      },
+      "rotation": 117.9601,
+      "type": "BP_Tree5_C",
+      "bounds": {
+        "x": 84.6852,
+        "y": -227.6934,
+        "width": 10.6296,
+        "height": 9.3867,
+        "rotation": 117.9601
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": -200
+        },
+        "end": {
+          "x": 200,
+          "y": -200
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": 90.0,
+        "y": -177.0
+      },
+      "rotation": 117.9601,
+      "type": "BP_Tree5_C",
+      "bounds": {
+        "x": 84.6852,
+        "y": -181.6934,
+        "width": 10.6296,
+        "height": 9.3867,
+        "rotation": 117.9601
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": -200
+        },
+        "end": {
+          "x": 200,
+          "y": -200
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": 100.0,
+        "y": -223.0
+      },
+      "rotation": -170.1488,
+      "type": "BP_Tree2_C",
+      "bounds": {
+        "x": 93.4721,
+        "y": -229.1042,
+        "width": 13.0558,
+        "height": 12.2084,
+        "rotation": -170.1488
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": -200
+        },
+        "end": {
+          "x": 200,
+          "y": -200
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": 100.0,
+        "y": -177.0
+      },
+      "rotation": -170.1488,
+      "type": "BP_Tree2_C",
+      "bounds": {
+        "x": 93.4721,
+        "y": -183.1042,
+        "width": 13.0558,
+        "height": 12.2084,
+        "rotation": -170.1488
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": -200
+        },
+        "end": {
+          "x": 200,
+          "y": -200
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": 110.0,
+        "y": -223.0
+      },
+      "rotation": -21.6927,
+      "type": "BP_Tree1_C",
+      "bounds": {
+        "x": 103.7263,
+        "y": -229.4626,
+        "width": 12.5474,
+        "height": 12.9252,
+        "rotation": -21.6927
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": -200
+        },
+        "end": {
+          "x": 200,
+          "y": -200
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": 110.0,
+        "y": -177.0
+      },
+      "rotation": -21.6927,
+      "type": "BP_Tree1_C",
+      "bounds": {
+        "x": 103.7263,
+        "y": -183.4626,
+        "width": 12.5474,
+        "height": 12.9252,
+        "rotation": -21.6927
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": -200
+        },
+        "end": {
+          "x": 200,
+          "y": -200
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": 120.0,
+        "y": -223.0
+      },
+      "rotation": -137.7574,
+      "type": "BP_Tree1_C",
+      "bounds": {
+        "x": 113.7263,
+        "y": -229.4626,
+        "width": 12.5474,
+        "height": 12.9252,
+        "rotation": -137.7574
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": -200
+        },
+        "end": {
+          "x": 200,
+          "y": -200
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": 120.0,
+        "y": -177.0
+      },
+      "rotation": -137.7574,
+      "type": "BP_Tree1_C",
+      "bounds": {
+        "x": 113.7263,
+        "y": -183.4626,
+        "width": 12.5474,
+        "height": 12.9252,
+        "rotation": -137.7574
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": -200
+        },
+        "end": {
+          "x": 200,
+          "y": -200
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": 130.0,
+        "y": -223.0
+      },
+      "rotation": -96.839,
+      "type": "BP_Tree3_C",
+      "bounds": {
+        "x": 125.6957,
+        "y": -227.9896,
+        "width": 8.6087,
+        "height": 9.9792,
+        "rotation": -96.839
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": -200
+        },
+        "end": {
+          "x": 200,
+          "y": -200
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": 130.0,
+        "y": -177.0
+      },
+      "rotation": -96.839,
+      "type": "BP_Tree3_C",
+      "bounds": {
+        "x": 125.6957,
+        "y": -181.9896,
+        "width": 8.6087,
+        "height": 9.9792,
+        "rotation": -96.839
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": -200
+        },
+        "end": {
+          "x": 200,
+          "y": -200
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": 140.0,
+        "y": -223.0
+      },
+      "rotation": -80.9026,
+      "type": "BP_Tree6_C",
+      "bounds": {
+        "x": 133.4765,
+        "y": -229.1169,
+        "width": 13.0471,
+        "height": 12.2337,
+        "rotation": -80.9026
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": -200
+        },
+        "end": {
+          "x": 200,
+          "y": -200
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": 140.0,
+        "y": -177.0
+      },
+      "rotation": -80.9026,
+      "type": "BP_Tree6_C",
+      "bounds": {
+        "x": 133.4765,
+        "y": -183.1169,
+        "width": 13.0471,
+        "height": 12.2337,
+        "rotation": -80.9026
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": -200
+        },
+        "end": {
+          "x": 200,
+          "y": -200
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": 150.0,
+        "y": -223.0
+      },
+      "rotation": -141.6585,
+      "type": "BP_Tree5_C",
+      "bounds": {
+        "x": 144.6852,
+        "y": -227.6934,
+        "width": 10.6296,
+        "height": 9.3867,
+        "rotation": -141.6585
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": -200
+        },
+        "end": {
+          "x": 200,
+          "y": -200
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": 150.0,
+        "y": -177.0
+      },
+      "rotation": -141.6585,
+      "type": "BP_Tree5_C",
+      "bounds": {
+        "x": 144.6852,
+        "y": -181.6934,
+        "width": 10.6296,
+        "height": 9.3867,
+        "rotation": -141.6585
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": -200
+        },
+        "end": {
+          "x": 200,
+          "y": -200
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": 160.0,
+        "y": -223.0
+      },
+      "rotation": 31.3052,
+      "type": "BP_Tree6_C",
+      "bounds": {
+        "x": 153.4765,
+        "y": -229.1169,
+        "width": 13.0471,
+        "height": 12.2337,
+        "rotation": 31.3052
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": -200
+        },
+        "end": {
+          "x": 200,
+          "y": -200
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": 160.0,
+        "y": -177.0
+      },
+      "rotation": 31.3052,
+      "type": "BP_Tree6_C",
+      "bounds": {
+        "x": 153.4765,
+        "y": -183.1169,
+        "width": 13.0471,
+        "height": 12.2337,
+        "rotation": 31.3052
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": -200
+        },
+        "end": {
+          "x": 200,
+          "y": -200
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": 170.0,
+        "y": -223.0
+      },
+      "rotation": 146.0757,
+      "type": "BP_Tree6_C",
+      "bounds": {
+        "x": 163.4765,
+        "y": -229.1169,
+        "width": 13.0471,
+        "height": 12.2337,
+        "rotation": 146.0757
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": -200
+        },
+        "end": {
+          "x": 200,
+          "y": -200
+        },
+        "angle": 0.0
+      }
+    },
+    {
+      "center": {
+        "x": 170.0,
+        "y": -177.0
+      },
+      "rotation": 146.0757,
+      "type": "BP_Tree6_C",
+      "bounds": {
+        "x": 163.4765,
+        "y": -183.1169,
+        "width": 13.0471,
+        "height": 12.2337,
+        "rotation": 146.0757
+      },
+      "segment_assignment": {
+        "start": {
+          "x": 0,
+          "y": -200
+        },
+        "end": {
+          "x": 200,
+          "y": -200
+        },
+        "angle": 0.0
+      }
+    }
+  ]
+}
