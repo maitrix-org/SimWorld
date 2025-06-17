@@ -114,7 +114,7 @@ class LocalPlanner:
             path = self.map.get_shortest_path(self.map.get_closest_node(self.agent.position), self.map.get_closest_node(destination))
             path = [n.position for n in path]
             self.logger.info(f'Agent {self.agent.id} Shortest Path: {path}')
-            for point in path[1:]:
+            for point in path:
                 self.navigate_rule_based(point)
         else:
             self.navigate_vision_based(destination)
