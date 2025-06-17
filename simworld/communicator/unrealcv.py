@@ -26,7 +26,7 @@ class UnrealCV(object):
     including basic operations and traffic system operations.
     """
 
-    def __init__(self, port=9000, ip='127.0.0.1', resolution=(640, 480)):
+    def __init__(self, port=9000, ip='127.0.0.1', resolution=(1280, 720)):
         """Initialize the UnrealCV client.
 
         Args:
@@ -519,6 +519,7 @@ class UnrealCV(object):
         cmd = f'vbp {robot_name} Move_Speed {speed} {duration} {direction}'
         with self.lock:
             self.client.request(cmd)
+        time.sleep(duration)
 
     def dog_rotate(self, robot_name, action):
         """Apply rotation action.
@@ -531,6 +532,7 @@ class UnrealCV(object):
         cmd = f'vbp {robot_name} Rotate_Angle {duration} {angle} {direction}'
         with self.lock:
             self.client.request(cmd)
+        time.sleep(duration)
 
     def dog_look_up(self, robot_name):
         """Apply look up action.
@@ -582,6 +584,7 @@ class UnrealCV(object):
         cmd = f'vbp {object_name} TurnAround {1} {angle} {clockwise}'
         with self.lock:
             self.client.request(cmd)
+        time.sleep(1)
 
     def humanoid_stop(self, object_name):
         """Stop humanoid.

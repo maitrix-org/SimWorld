@@ -33,7 +33,7 @@ class LocalPlanner:
         dt: float = 0.1,
         observation_viewmode: str = 'lit',
         rule_based: bool = True,
-        exit_event: Event = None,
+        exit_event: Event = None
     ):
         """Initialize the Local Planner.
 
@@ -114,7 +114,7 @@ class LocalPlanner:
             path = self.map.get_shortest_path(self.map.get_closest_node(self.agent.position), self.map.get_closest_node(destination))
             path = [n.position for n in path]
             self.logger.info(f'Agent {self.agent.id} Shortest Path: {path}')
-            for point in path[1:]:
+            for point in path:
                 self.navigate_rule_based(point)
         else:
             self.navigate_vision_based(destination)
@@ -126,7 +126,7 @@ class LocalPlanner:
             current_node = self.map.get_closest_node(self.agent.position)
             if current_node.type == 'intersection':
                 traffic_light = None
-                min_distance = self.config['traffic.sidewalk_offset'] * 2
+                min_distance = self.agent.config['traffic.sidewalk_offset'] * 2
                 for signal in self.map.traffic_signals:
                     distance = self.agent.position.distance(signal.position)
                     if distance < min_distance:
@@ -134,7 +134,7 @@ class LocalPlanner:
                         traffic_light = signal
 
                 if traffic_light is not None:
-                    while not self.exit_event.is_set():
+                    while self.exit_event is None or not self.exit_event.is_set():
                         state = traffic_light.get_state()
                         left_time = traffic_light.get_left_time()
                         if state[1] == TrafficSignalState.PEDESTRIAN_GREEN and left_time > min(15, self.agent.config['traffic.traffic_signal.pedestrian_green_light_duration']):
@@ -271,5 +271,5 @@ class LocalPlanner:
 
     def pick_up(self, object_name: str) -> None:
         """Pick up an object."""
-        self.logger.info(f'Agent {self.agent.id} is picking up {object_name}')
-        pass
+        ret = self.communicator.humanoid_pick_up_object(self.agent.id, object_name)
+        self.logger.info(f'Agent {self.agent.id} picked up {object_name}: {ret}')

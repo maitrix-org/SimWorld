@@ -445,3 +445,7 @@ docs/source/_static/
 *.gz
 *.bz2
 *.xz
+
+
+# Output
+output_test/
