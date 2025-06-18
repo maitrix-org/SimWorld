@@ -32,6 +32,29 @@ class BaseAgent:
 ```
 A classic LLM/VLM-driven agent typically consists of three core components: observation, LLMs/VLMs, and memory. SimWorld supports visual observations by utilizing camera actors within Unreal Engine ([Sensors](ue_detail.md#sensors)). For LLM/VLM integration, SimWorld provides a basic LLM interface ([Base LLM](#base-llm)). However, its memory module is currently limited—it simply records the most recent steps along with their corresponding feedback.
 
+## Get Camera Observation
+After initializing the agent, the image observation can be obtained by calling the `get_image(camera_id)` method.
+
+```python
+unrealcv = UnrealCV()
+unrealcv.connect()
+
+agent = Humanoid(position=Vector(0, 0), direction=Vector(0, 1))
+
+observation = unrealcv.get_image(camera_id=agent.camera_id)
+```
+
+`camera_id` refers to the index of the camera associated with an agent. It is typically determined by the order in which cameras are generated, starting from 1 for the first agent that includes a camera. Currently, each vehicle, pedestrian, humanoid, and robot dog is assigned a camera.
+
+```{note}
+Currently, SimWorld only supports one camera per agent.
+```
+
+The resolution of the image is default to (640, 480). To customize, you can use the `set_camera_resolution()` to set the resolution.
+```
+
+Check [UnrealCV](../resources/simworld.communicator.unrealcv.rst) to see more details.
+
 ## Local Planner
 To accommodate diverse research focuses—ranging from text-based LLM agents to vision-based VLM agents—SimWorld introduces a flexible and modular **Local Planner** to bridge high-level reasoning with low-level execution. The core functionality of the Local Planner lies in its ability to decompose abstract plans into concrete, executable actions, enabling seamless integration between language, vision, and simulation.
 
