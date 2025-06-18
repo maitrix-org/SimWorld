@@ -49,10 +49,10 @@ observation = unrealcv.get_image(camera_id=agent.camera_id)
 ```{note}
 Currently, SimWorld only supports one camera per agent.
 
-The image resolution defaults to 640×480. To customize, use `set_camera_resolution()`.
+The resolution of the image is default to (640, 480). To customize, you can use the `set_camera_resolution()` to set the resolution.
 ```
 
-Check [UnrealCV](../resources/simworld.communicator.unrealcv.rst) to see more details.
+Check [UnrealCV](../resources/simworld.communicator.rst#unrealcv) to see more details.
 
 ## Local Planner
 To accommodate diverse research focuses—ranging from text-based LLM agents to vision-based VLM agents—SimWorld introduces a flexible and modular **Local Planner** to bridge high-level reasoning with low-level execution. The core functionality of the Local Planner lies in its ability to decompose abstract plans into concrete, executable actions, enabling seamless integration between language, vision, and simulation.
