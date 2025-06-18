@@ -39,9 +39,9 @@ After initializing the agent, the image observation can be obtained by calling t
 unrealcv = UnrealCV()
 unrealcv.connect()
 
-agent = BaseAgent(position=(0, 0, 0), direction=(0, 0, 1))
+agent = Humanoid(position=Vector(0, 0), direction=Vector(0, 1))
 
-observation = unrealcv.get_image(camera_id=0)
+observation = unrealcv.get_image(camera_id=agent.camera_id)
 ```
 
 `camera_id` is the index of agent, ascending from 0.
@@ -50,18 +50,10 @@ observation = unrealcv.get_image(camera_id=0)
 Currently, SimWorld only supports one camera per agent.
 ```
 
-The resolution of the image is default to (640, 480). To customize, you can run the following command to get the configuration file path (usually .ini file).
-```python
-res = unrealcv.client.request('vget /unrealcv/status')
-print(res)
-```
-Open the .ini file and modify the `Width` and `Hight` parameters:
-```python
-Width=640
-Height=480
+The resolution of the image is default to (640, 480). To customize, you can use the `set_camera_resolution()` to set the resolution.
 ```
 
-Check `\simworld\communicator\unrealcv.py` to see more details.
+Check [UnrealCV](../resources/simworld.communicator.unrealcv.rst) to see more details.
 
 ## Local Planner
 To accommodate diverse research focuses—ranging from text-based LLM agents to vision-based VLM agents—SimWorld introduces a flexible and modular **Local Planner** to bridge high-level reasoning with low-level execution. The core functionality of the Local Planner lies in its ability to decompose abstract plans into concrete, executable actions, enabling seamless integration between language, vision, and simulation.
