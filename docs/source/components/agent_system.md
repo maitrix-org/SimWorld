@@ -44,7 +44,7 @@ agent = Humanoid(position=Vector(0, 0), direction=Vector(0, 1))
 observation = unrealcv.get_image(camera_id=agent.camera_id)
 ```
 
-`camera_id` is the index of the camera of an agent, usually influenced by the generated sequence.
+`camera_id` refers to the index of the camera associated with an agent. It is typically determined by the order in which cameras are generated, starting from 1 for the first agent that includes a camera. Currently, each vehicle, pedestrian, humanoid, and robot dog is assigned a camera.
 
 ```{note}
 Currently, SimWorld only supports one camera per agent.
