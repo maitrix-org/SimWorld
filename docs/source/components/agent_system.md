@@ -49,7 +49,7 @@ observation = unrealcv.get_image(camera_id=agent.camera_id)
 ```{note}
 Currently, SimWorld only supports one camera per agent.
 
-The image resolution defaults to 640×480. To customize, use `set_camera_resolution()`.
+The resolution of the image is default to (640, 480). To customize, you can use the `set_camera_resolution()` to set the resolution.
 ```
 
 Check [UnrealCV](../resources/simworld.communicator.rst#unrealcv) to see more details.
