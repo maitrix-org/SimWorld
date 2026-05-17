@@ -367,3 +367,161 @@ We welcome contributions from the community! Whether you want to report bugs, su
 ## ⭐ Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=SimWorld-AI/SimWorld&type=date&legend=bottom-right)](https://www.star-history.com/#SimWorld-AI/SimWorld&type=date&legend=bottom-right)
+---
+
+## ❓ FAQ
+
+### What is SimWorld?
+
+SimWorld is an open-ended realistic simulator for autonomous agents in physical and social worlds. It provides realistic world simulation with accurate physics, language-based procedural generation, and diverse physical/social reasoning scenarios for training and evaluating LLM/VLM agents.
+
+### How does SimWorld differ from other AI agent simulators?
+
+| Feature | SimWorld | Other Simulators |
+|---------|----------|------------------|
+| **Physics Engine** | Unreal Engine 5 (realistic) | Custom/Simplified |
+| **World Generation** | Procedural + Language-driven | Static maps |
+| **Agent Type** | LLM/VLM multimodal | Mostly LLM-only |
+| **Environments** | 100+ maps + Custom UE import | Limited/Fixed |
+| **Paper Status** | NeurIPS 2025 Spotlight | Various |
+
+### What are the three usage levels?
+
+1. **Base Package**: Two lightweight city scenes + one empty map for quick testing
+2. **Additional Environments**: 100+ pre-built maps for richer scenarios
+3. **Customization**: Import your own UE environments, assets, and agent models
+
+### What LLM/VLM providers are supported?
+
+SimWorld uses a configurable LLM system. The default examples use:
+- **OpenAI**: GPT-4o, GPT-4, GPT-3.5
+- **Custom**: Any LLM via `BaseLLM` class extension
+
+Configure your model in `config/your_config.yaml`:
+```yaml
+llm:
+  model: "gpt-4o"
+  api_key: "YOUR_API_KEY"
+```
+
+### How do I start the UE server?
+
+After downloading the UE server package:
+
+**Windows:**
+```bash
+./SimWorld.exe <MAP_PATH>
+```
+
+**Linux:**
+```bash
+./SimWorld.sh <MAP_PATH>
+```
+
+Default map (`/Game/Maps/demo_1`) loads if `<MAP_PATH>` is not specified.
+
+### What agent types are available?
+
+- **Humanoid**: Pedestrian agents with actions like move, sit, pick up
+- **Vehicle**: Car agents with navigation and driving actions
+- **Robot**: Custom robot agents with specialized actions
+- **Custom**: Import your own agent models via `.pak` files
+
+### What sensors does SimWorld support?
+
+- **RGB Camera**: Standard color images
+- **Depth Sensor**: Depth maps for 3D perception
+- **Segmentation Mask**: Object/category segmentation
+- **Custom**: Additional UE sensors via UnrealCV
+
+Use `communicator.get_camera_observation()` to capture sensor data.
+
+### What are commonly used APIs?
+
+| API | Purpose |
+|-----|---------|
+| `get_camera_observation()` | Get RGB/depth/segmentation images |
+| `spawn_object()` | Place objects in environment |
+| `spawn_agent()` | Create humanoid/vehicle/robot agents |
+| `generate_world()` | Procedural city generation |
+| `clear_env()` | Remove all objects from scene |
+
+### How do I import custom environments?
+
+1. Create your content in Unreal Engine
+2. Package as a `.pak` file
+3. Follow the [Make Your Own Pak Files](https://simworld.readthedocs.io/en/latest/customization/make_your_own_pak.html) guide
+
+### What action space is available for agents?
+
+**Pedestrian/Humanoid:**
+- Move forward/backward/left/right
+- Sit down, stand up
+- Pick up, drop objects
+- Look around, turn
+
+**Vehicle:**
+- Drive forward/backward
+- Turn left/right
+- Stop, park
+
+**Robot:**
+- Custom action sets depending on robot type
+
+### How do I create a custom configuration?
+
+1. Copy the template:
+```bash
+cp config/example.yaml config/your_config.yaml
+```
+
+2. Edit values in `your_config.yaml`
+
+3. Load in your code:
+```python
+from simworld.config import Config
+config = Config('path/to/your_config')
+```
+
+### What are SimWorld's future development plans?
+
+- **Plugin System**: Already shipped (import custom environments)
+- **Comprehensive Agent Framework**: Unified training pipeline
+- **Code Generation for Scenes**: AI-powered scenario generation
+- **Interactive Layout Editor**: Web-based city editor
+- **Natural Language → UE Actions**: Free-form instructions to actions
+- **RL Training Pipeline**: Unified RL interface
+- **City-Scale Multi-Agent**: 1K+ concurrent agents
+- **Video-to-Scene Generation**: Generate scenes from videos
+- **MuJoCo Integration**: Optional physics backend
+
+### Troubleshooting
+
+**UE server won't start:**
+- Check if `<MAP_PATH>` is valid (see [Base Environments](https://simworld.readthedocs.io/en/latest/getting_started/base_environments.html))
+- Verify all dependencies are installed
+
+**Agent actions not executing:**
+- Ensure UE server is running
+- Check `Communicator` connection status
+- Verify action is valid for agent type
+
+**LLM not responding:**
+- Verify API key in configuration
+- Check model availability (some models require special access)
+- Ensure `BaseLLM` class is properly initialized
+
+**Custom `.pak` not loading:**
+- Verify `.pak` file structure
+- Check UE internal paths are correct
+- Follow packaging guide exactly
+
+### Where can I get help?
+
+- **Documentation**: [simworld.readthedocs.io](https://simworld.readthedocs.io)
+- **Paper**: [arXiv:2512.01078](https://arxiv.org/abs/2512.01078)
+- **Slack**: [join.slack.com/t/simworld-ai](https://join.slack.com/t/simworld-ai/shared_invite/zt-3v3xsbroz-ELkLT3rOK1rCStDxRKUYKw)
+- **YouTube**: [@SimWorld-AI](https://www.youtube.com/@SimWorld-AI)
+- **Issues**: [GitHub Issues](https://github.com/SimWorld-AI/SimWorld/issues)
+
+---
