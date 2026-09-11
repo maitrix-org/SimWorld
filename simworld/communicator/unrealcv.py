@@ -1042,6 +1042,9 @@ class UnrealCV(object):
             viewmode: View mode. Possible values are 'lit', 'depth', 'object_mask'.
             mode: Mode.
             img_path: Image path.
+
+        Returns:
+            Image in OpenCV BGR channel order, including colorized depth.
         """
         image = None
         try:
@@ -1110,7 +1113,7 @@ class UnrealCV(object):
         return image
 
     def _decode_png(self, res):
-        """Decode PNG image.
+        """Decode a PNG image into three OpenCV BGR channels.
 
         Args:
             res: PNG image.
@@ -1118,16 +1121,15 @@ class UnrealCV(object):
         Returns:
             Decoded image.
         """
-        img = np.asarray(PIL.Image.open(BytesIO(res)))
-        img = img[:, :, :-1]  # delete alpha channel
-        img = img[:, :, ::-1]  # transpose channel order
-        return img
+        with PIL.Image.open(BytesIO(res)) as png:
+            rgb = np.asarray(png.convert('RGB'))
+        return cv2.cvtColor(rgb, cv2.COLOR_RGB2BGR)
 
     def _decode_bmp(self, res: bytes):
         """Robust BMP decoder.
 
         Parses header, handles row padding and top-down/bottom-up storage.
-        Returns an RGB image of shape (H, W, 3).
+        Returns an OpenCV BGR image of shape (H, W, 3).
         """
         if not isinstance(res, (bytes, bytearray)):
             raise TypeError(f'BMP decoder expects bytes, got {type(res)}')
@@ -1162,9 +1164,8 @@ class UnrealCV(object):
         if height_raw > 0:
             buf = np.flipud(buf)
 
-        # Convert BGR(A) -> RGB and drop alpha if present
-        rgb = buf[:, :, :3][:, :, ::-1]
-        return rgb
+        # BMP already stores BGR(A); drop alpha without swapping red and blue.
+        return np.ascontiguousarray(buf[:, :, :3])
 
     def update_objects(self, object_name):
         """Update objects.
