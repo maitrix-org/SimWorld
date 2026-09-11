@@ -598,6 +598,7 @@ class Communicator:
         self.unrealcv.set_scale((1, 1, 1), object_name)
         self.unrealcv.set_collision(object_name, True)
         self.unrealcv.set_movable(object_name, True)
+        self.unrealcv.set_color(object_name)
 
     # Initialization methods
     def spawn_agent(self, agent, name, position=None, model_path='/Game/TrafficSystem/Pedestrian/Base_User_Agent.Base_User_Agent_C', type='humanoid'):
@@ -643,6 +644,7 @@ class Communicator:
         self.unrealcv.set_scale((1, 1, 1), name)  # Default scale
         self.unrealcv.set_collision(name, True)
         self.unrealcv.set_movable(name, True)
+        self.unrealcv.set_color(name)
 
     def spawn_scooter(self, scooter, model_path):
         """Spawn scooter.
@@ -670,6 +672,7 @@ class Communicator:
         self.unrealcv.set_scale((1, 1, 1), name)  # Default scale
         self.unrealcv.set_collision(name, True)
         self.unrealcv.set_movable(name, True)
+        self.unrealcv.set_color(name)
 
     def spawn_vehicles(self, vehicles):
         """Spawn vehicles.
@@ -697,6 +700,7 @@ class Communicator:
             self.unrealcv.set_scale((1, 1, 1), name)  # Default scale
             self.unrealcv.set_collision(name, True)
             self.unrealcv.set_movable(name, True)
+            self.unrealcv.set_color(name)
 
     def spawn_pedestrians(self, pedestrians, model_path='/Game/TrafficSystem/Pedestrian/Base_Pedestrian.Base_Pedestrian_C'):
         """Spawn pedestrians.
@@ -725,6 +729,7 @@ class Communicator:
             self.unrealcv.set_scale((1, 1, 1), name)  # Default scale
             self.unrealcv.set_collision(name, True)
             self.unrealcv.set_movable(name, True)
+            self.unrealcv.set_color(name)
 
     def spawn_traffic_signals(self, traffic_signals, traffic_light_model_path='/Game/city_props/BP/props/street_light/BP_street_light.BP_street_light_C', pedestrian_light_model_path='/Game/city_props/BP/props/street_light/BP_street_light_ped.BP_street_light_ped_C'):
         """Spawn traffic signals.
@@ -758,6 +763,7 @@ class Communicator:
             self.unrealcv.set_scale((1, 1, 1), name)  # Default scale
             self.unrealcv.set_collision(name, True)
             self.unrealcv.set_movable(name, False)
+            self.unrealcv.set_color(name)
 
     def spawn_intersection(self, intersection_name, model_path):
         """Spawn intersection.
@@ -795,6 +801,7 @@ class Communicator:
             self.unrealcv.set_scale((1, 1, 1), name)
             self.unrealcv.set_collision(name, False)
             self.unrealcv.set_movable(name, False)
+            self.unrealcv.set_color(name)
 
     def spawn_ue_manager(self, ue_manager_path):
         """Spawn UE manager.
@@ -860,8 +867,6 @@ class Communicator:
                 return
             else:
                 self.unrealcv.spawn_bp_asset(instance_ref, id)
-                if run_time:
-                    self.unrealcv.set_color(id, rgb_values)
                 location = node_df.loc[id, ['properties_location_x', 'properties_location_y', 'properties_location_z']].to_list()
                 self.unrealcv.set_location(location, id)
                 orientation = node_df.loc[id, ['properties_orientation_pitch', 'properties_orientation_yaw', 'properties_orientation_roll']].to_list()
@@ -870,6 +875,8 @@ class Communicator:
                 self.unrealcv.set_scale(scale, id)
                 self.unrealcv.set_collision(id, True)
                 self.unrealcv.set_movable(id, False)
+                if run_time:
+                    self.unrealcv.set_color(id, rgb_values)
                 generated_ids.add(id)
 
         node_df.apply(_process_node, axis=1)
