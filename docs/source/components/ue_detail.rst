@@ -76,6 +76,79 @@ How to get images
 
 **Related files:** ``communicator.py``, ``unrealcv.py``.
 
+Panoramic video export
+~~~~~~~~~~~~~~~~~~~~~~
+
+``simworld.utils.panorama`` exports six synchronized square camera views as
+a 2:1 equirectangular projection (ERP) MP4. It covers 360 degrees horizontally
+and 180 degrees vertically. A single perspective recording, even at a 2:1
+resolution, does not contain the views needed to produce a full panorama.
+
+Each input frame is a dictionary of six BGR ``uint8`` images with equal
+dimensions. All six views must use the same camera location, the same
+simulation instant, a square resolution and a 90-degree horizontal FOV.
+The face convention uses Unreal's +X forward, +Y right and +Z up axes:
+
+.. list-table:: Camera rotations (pitch, yaw, roll), in degrees
+   :header-rows: 1
+
+   * - Face
+     - Rotation
+   * - ``front``
+     - ``(0, 0, 0)``
+   * - ``right``
+     - ``(0, 90, 0)``
+   * - ``back``
+     - ``(0, 180, 0)``
+   * - ``left``
+     - ``(0, -90, 0)``
+   * - ``up``
+     - ``(90, 0, 0)``
+   * - ``down``
+     - ``(-90, 0, 0)``
+
+These rotations are also available as ``CUBEMAP_ROTATIONS``. Capture all six
+faces before advancing the simulation. With sequential camera reads, use
+synchronous mode and verify that each captured image reflects the requested
+camera pose in your UE build. Asynchronous captures can introduce moving-object
+seams; projection cannot recover views missing from the input recordings.
+
+For example, export existing recordings stored as
+``recording/front/000000.png``, ``recording/right/000000.png``, etc.:
+
+.. code-block:: python
+
+   from pathlib import Path
+
+   import cv2
+
+   from simworld.utils.panorama import CUBEMAP_ROTATIONS, save_panorama_video
+
+   recording = Path('recording')
+
+   def cubemap_frames():
+       for front_path in sorted((recording / 'front').glob('*.png')):
+           yield {
+               face: cv2.imread(str(recording / face / front_path.name))
+               for face in CUBEMAP_ROTATIONS
+           }
+
+   save_panorama_video(
+       cubemap_frames(), 'panorama.mp4', resolution=(1440, 720), fps=25,
+   )
+
+Frames are projected and written incrementally, so the whole recording does
+not need to fit in memory. The output height must be even to avoid video-codec
+cropping. ``fps`` controls playback speed, independently of capture throughput.
+For a single image, use ``CubemapProjector(face_size, resolution).project(faces)``.
+See :mod:`simworld.utils.panorama` for the API.
+
+The MP4 contains ERP pixels using OpenCV's ``mp4v`` codec. It does not insert
+spherical-video metadata; select equirectangular/360 mode in your player or
+add the metadata required by your publishing platform. Export tests use
+synthetic cubemaps and a real MP4 encode/decode round trip; UE capture and
+player-specific metadata are separate integration steps.
+
 Synchronous and Asynchronous mode
 ---------------------------------
 
