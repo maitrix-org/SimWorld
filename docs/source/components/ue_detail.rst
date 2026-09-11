@@ -55,6 +55,53 @@ Sensors
 
 As illustrated in the figure above, SimWorld supports a variety of sensors, including RGB images, segmentation maps, and depth images, enabling a rich understanding of the surrounding environment.
 
+Runtime actors in depth and segmentation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The ``Communicator`` methods for spawning objects, agents, scooters, vehicles,
+pedestrians, traffic signals, and waypoint marks register their render components
+for ``depth`` and ``object_mask`` after setting the initial transform and mobility.
+In the Base20260201 Windows backend, creating an actor alone makes it visible in
+``lit``, but the color annotation command is also required for these two sensors.
+No Blueprint modification is needed for the bundled box, humanoid, and vehicle
+assets.
+
+Runtime labels default to a stable, nonblack RGB color derived from the actor
+name. These colors are not guaranteed to be globally unique or to match a semantic
+class palette. Use ``ucv.set_color(name, (r, g, b))`` for a dataset's explicit
+labels. This changes the sensor annotation, not the actor's visible material.
+Procedurally generated city assets keep their configured asset-library colors.
+
+For the low-level ``spawn_bp_asset`` API, register explicitly after configuration:
+
+.. code-block:: python
+
+   name = 'my_box'
+   ucv.spawn_bp_asset('/Game/CityDatabase/blueprints/BP_Box.BP_Box_C', name)
+   ucv.set_location((0, 0, 150), name)
+   ucv.set_scale((1, 1, 1), name)
+   ucv.set_movable(name, True)
+   ucv.set_color(name, (251, 13, 107))
+
+Keep moving actors movable so their annotation follows subsequent transforms.
+The spawn and annotation methods raise ``RuntimeError`` if the server does not
+acknowledge the operation, including when an asset path is unavailable.
+
+To verify the behavior on a dedicated server running ``/Game/Maps/empty`` with
+the complete Base20260201 asset package, set its UnrealCV port to 19090 and run
+from the repository root:
+
+.. code-block:: console
+
+   python -m examples.verify_runtime_sensors --port 19090 --output sensor-evidence
+
+The script exercises ``spawn_object``, ``spawn_agent``, and ``spawn_vehicles`` and
+then moves the actors. It writes unmodified RGB/mask PNGs, metric depth NPYs,
+the request transcript, and per-actor statistics to ``sensor-evidence``. It exits
+with an error if an actor is missing from its mask, lacks foreground depth, or
+its mask fails to move. It removes only the actors and capture camera it creates.
+The camera is placed away from the player pawn to avoid capturing its own body.
+
 How to get images
 ~~~~~~~~~~~~~~~~~
 

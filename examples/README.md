@@ -4,6 +4,9 @@ This folder contains example code demonstrating various functionalities of SimWo
 
 ## Example List
 
+### `verify_runtime_sensors.py`
+Verify runtime boxes, humanoids, and vehicles in depth and segmentation on a dedicated Base20260201 `/Game/Maps/empty` server. Run `python -m examples.verify_runtime_sensors --port 19090 --output sensor-evidence` from the repository root. The script saves raw PNG/NPY captures, a command transcript, and measurements before and after moving the actors; it exits nonzero on failure and removes its test actors and camera.
+
 ### `gym_interface_demo.ipynb`
 Minimal demo showing how to create an LLM-based agent with a Gym-like environment interface. Demonstrates Agent-Environment interaction loop and goal-oriented tasks.
 

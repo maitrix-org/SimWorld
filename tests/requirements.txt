@@ -1,0 +1,13 @@
+# Dependencies needed by the regression tests and simworld's package imports.
+# Asset retrieval models are not exercised by this suite.
+pytest
+numpy
+pandas
+pyqtgraph
+PyQt5
+unrealcv
+opencv-python
+Pillow
+openai
+PyYAML
+ipython

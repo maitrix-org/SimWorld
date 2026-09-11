@@ -4,6 +4,7 @@ This module provides a client interface for communicating with Unreal Engine,
 allowing for various operations such as object spawning, movement, and image
 capture.
 """
+import hashlib
 import json
 import os
 import struct
@@ -91,10 +92,15 @@ class UnrealCV(object):
         Args:
             prefab_path: Prefab path.
             name: Object name.
+
+        Raises:
+            RuntimeError: The server rejects the asset or does not acknowledge it.
         """
         cmd = f'vset /objects/spawn_bp_asset {prefab_path} {name}'
         with self.lock:
-            self.client.request(cmd)
+            response = self.client.request(cmd)
+        if response not in ('ok', str(name)):
+            raise RuntimeError(f'Failed to spawn {name!r} from {prefab_path!r}: {response!r}')
 
     def clean_garbage(self):
         """Clean garbage objects."""
@@ -137,17 +143,33 @@ class UnrealCV(object):
         with self.lock:
             self.client.request(cmd)
 
-    def set_color(self, actor_name, color):
-        """Set object color.
+    def set_color(self, actor_name, color=None):
+        """Register an object's render components and set its sensor label color.
+
+        The packaged backend needs this annotation for both depth and object_mask.
+        Call after setting the initial transform and component mobility. This does
+        not change the object's visible material in the lit image.
+
+        Omitted colors use a stable, nonblack label derived from the actor name.
+        Supply an explicit color for a dataset's semantic or instance palette.
 
         Args:
             actor_name: Object name.
-            color: Color in the form [R, G, B].
+            color: Label in the form [R, G, B], or None for an automatic label.
+
+        Raises:
+            RuntimeError: The server does not acknowledge sensor registration.
         """
+        if color is None:
+            color = tuple(hashlib.sha256(str(actor_name).encode('utf-8')).digest()[:3])
+            if color == (0, 0, 0):
+                color = (1, 1, 1)
         [R, G, B] = color
         cmd = f'vset /object/{actor_name}/color {R} {G} {B}'
         with self.lock:
-            self.client.request(cmd)
+            response = self.client.request(cmd)
+        if response != 'ok':
+            raise RuntimeError(f'Failed to register sensor color for {actor_name!r}: {response!r}')
 
     def enable_controller(self, name, enable_controller):
         """Enable or disable controller.
