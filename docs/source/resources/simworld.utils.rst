@@ -108,6 +108,14 @@ simworld.utils.video\_recorder module
    :undoc-members:
    :show-inheritance:
 
+simworld.utils.panorama module
+------------------------------
+
+.. automodule:: simworld.utils.panorama
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 Module contents
 ---------------
 
