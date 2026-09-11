@@ -8,6 +8,46 @@ You can create your own .pak files to extend the environment or agent library of
    - We use Windows for this tutorial, but the steps are similar for Linux.
    - If you are on Windows, you can use cross-compiling to build pak files for Linux by referring to this document: `Unreal Engine Linux Cross-Compilation <https://dev.epicgames.com/documentation/en-us/unreal-engine/linux-development-requirements-for-unreal-engine?application_version=5.3#cross-compiletoolchain>`_.
 
+Runtime plugin compatibility
+----------------------------
+
+Before preparing assets, check that the SimWorld executable includes the
+runtime modules they require. A content ``.pak`` extends the assets available
+to the running executable; it does not enable or compile missing native
+runtime modules. Enabling a plugin in your asset-authoring project alone
+does not enable it in the official SimWorld executable.
+
+In the `maintainer response to issue #80 (February 15, 2026)
+<https://github.com/SimWorld-AI/SimWorld/issues/80#issuecomment-3905109317>`_,
+the following support was confirmed for the official build discussed there:
+
+.. list-table:: Reported runtime support
+   :header-rows: 1
+   :widths: 45 55
+
+   * - System
+     - Status
+   * - Control Rig / Full Body IK / IK Rig
+     - Enabled, confirmed by the maintainer
+   * - Chaos Cloth
+     - Enabled, confirmed by the maintainer
+   * - ML Deformer
+     - Not confirmed in that response
+   * - Physical Animation
+     - Not confirmed in that response; Chaos Cloth support alone does not
+       confirm support for this separate feature
+
+This is a dated confirmation, not an exhaustive plugin manifest for every
+release. For a system not confirmed above, ask the maintainers about the
+specific plugin and SimWorld package version before relying on it. Include
+the required plugin names when requesting support in a future build.
+If a required runtime module is absent, a SimWorld executable built with
+that module is needed; repackaging only the content will not add it.
+
+Once the runtime requirements are met, follow the matching Unreal Engine
+version and packaging steps below. Test the resulting assets in the target
+SimWorld package, including their animation and interaction behavior.
+
 1. Download the Unreal Editor
 -----------------------------
 
@@ -79,7 +119,7 @@ Open the created Data Asset and set the ``ChunkID``. Enable all options under ``
 
 .. important::
 
-   The ``ChunkID`` should be unique and not conflict with existing chunks in SimWorld. You can refer to the :doc:`additional_environments` to avoid conflicts.
+   The ``ChunkID`` should be unique and not conflict with existing chunks in SimWorld. You can refer to the :doc:`../getting_started/additional_environments` to avoid conflicts.
 
 
 6. Build the Pak File
@@ -97,4 +137,4 @@ Finally, package the project by navigating to ``Platforms > Windows > Package Pr
 7. Use the Pak File in SimWorld
 -------------------------------
 
-Copy the generated ``.pak`` file to the ``SimWorld/Content/Paks`` directory of your SimWorld installation. You can now load the new environment or assets in SimWorld by specifying the corresponding Map URI or asset path. Refer to the :doc:`additional_environments` for loading instructions.
+Copy the generated ``.pak`` file to the ``SimWorld/Content/Paks`` directory of your SimWorld installation. You can now load the new environment or assets in SimWorld by specifying the corresponding Map URI or asset path. Refer to the :doc:`../getting_started/additional_environments` for loading instructions.
